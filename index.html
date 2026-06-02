@@ -140,5 +140,72 @@
         loadShortcuts();
     </script>
 
+
+    <!-- ==================== DYNAMIC GREETING (Bottom) ==================== -->
+
+<div id="status" class="neon-greeting-bottom">SYSTEM INITIALIZING...</div>
+
+<style>
+    .neon-greeting-bottom {
+        position: fixed;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 0.95rem;
+        font-weight: 800;
+        letter-spacing: 2px;
+        padding: 10px 25px;
+        border-radius: 50px;
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        background: rgba(0, 0, 0, 0.75);
+        backdrop-filter: blur(10px);
+        display: inline-block;
+        box-shadow: 0 0 15px rgba(0, 242, 255, 0.2);
+        z-index: 9999;
+        text-align: center;
+        white-space: nowrap;
+    }
+</style>
+
+<script>
+    function updateDynamicGreeting() {
+        const statusBox = document.getElementById('status');
+        const now = new Date();
+        const hour = now.getHours();
+        let greeting = "";
+        let neonColor = "";
+
+        if (hour >= 5 && hour < 12) {
+            greeting = "🌅 Good Morning 🌞 ,BAIJID";
+            neonColor = "#39ff14";
+        } 
+        else if (hour >= 12 && hour < 17) {
+            greeting = "☀️ Good Afternoon 🌤️, BAIJID";
+            neonColor = "#00f2ff";
+        } 
+        else if (hour >= 17 && hour < 21) {
+            greeting = "🌆 Good Evening 🌟, BAIJID";
+            neonColor = "#ff00ff";
+        } 
+        else {
+            greeting = "🌙 Good Night🌌, BAIJID";
+            neonColor = "#bc13fe";
+        }
+
+        statusBox.innerText = greeting;
+        statusBox.style.color = neonColor;
+        statusBox.style.borderColor = neonColor;
+        statusBox.style.textShadow = `0 0 12px ${neonColor}`;
+        statusBox.style.boxShadow = `0 0 20px ${neonColor}50`;
+    }
+
+    // পেজ লোড হলেই চালু
+    window.onload = updateDynamicGreeting;
+
+    // প্রতি ১০ মিনিটে আপডেট
+    setInterval(updateDynamicGreeting, 600000);
+</script>
+
+<!-- ==================== END ==================== -->
 </body>
 </html>
