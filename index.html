@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -2120,48 +2120,82 @@
       top:90px; left:40px;
     }
     .spooky-house .door:before {
-      content:""; position:absolute; background:var(--a); border-radius:30px 30px 0 0;
+      content:""; position:absolute; border-radius:30px 30px 0 0;
       box-shadow:inset -5px 2px rgba(0,0,0,0.5), 0 0 10px rgba(0,229,255,0.8);
       width:20px; height:30px; left:-40px; transform:rotate(-3deg);
+      background:
+        linear-gradient(#000,#000) center/2px 100% no-repeat,
+        linear-gradient(#000,#000) center/100% 2px no-repeat,
+        var(--a);
     }
     .spooky-house .door:after {
-      content:""; position:absolute; background:var(--a);
+      content:""; position:absolute;
       box-shadow:inset -5px 2px rgba(0,0,0,0.5), 0 0 10px rgba(0,229,255,0.8);
       border-radius:30px 30px 0 0; width:20px; height:30px; left:45px; transform:rotate(3deg);
+      background:
+        linear-gradient(#000,#000) center/2px 100% no-repeat,
+        linear-gradient(#000,#000) center/100% 2px no-repeat,
+        var(--a);
     }
     .spooky-house .small-windows {
-      position:absolute; background:var(--a); border-radius:30px 30px 0 0;
+      position:absolute; border-radius:30px 30px 0 0;
       width:13px; height:25px; left:100px; top:-20px;
       box-shadow:-19px -40px var(--a), inset -4px 2px rgba(0,0,0,0.5);
+      background:
+        linear-gradient(#000,#000) center/2px 100% no-repeat,
+        linear-gradient(#000,#000) center/100% 2px no-repeat,
+        var(--a);
+    }
+    /* cross only on the box-shadow copy of small-windows (no extra pane) */
+    .spooky-house .small-windows:after {
+      content:""; position:absolute;
+      width:13px; height:25px; left:-19px; top:-40px;
+      background:
+        linear-gradient(#000,#000) center/2px 100% no-repeat,
+        linear-gradient(#000,#000) center/100% 2px no-repeat;
+      pointer-events:none;
     }
     .spooky-house .small-windows:before {
-      content:""; position:absolute; background:var(--a); border-radius:30px 30px 0 0;
+      content:""; position:absolute; border-radius:30px 30px 0 0;
       width:13px; height:25px; transform:rotate(-7deg); left:-60px; top:50px;
       box-shadow:-60px 20px var(--a);
+      background:
+        linear-gradient(#000,#000) center/2px 100% no-repeat,
+        linear-gradient(#000,#000) center/100% 2px no-repeat,
+        var(--a);
     }
     .spooky-house .big-window {
-      position:absolute; background:var(--a); border-radius:30px 30px 0 0;
+      position:absolute; border-radius:30px 30px 0 0;
       transform:rotate(-7deg); width:30px; height:40px; top:-35px; left:10px;
       box-shadow:0 0 15px var(--ab);
+      background:
+        linear-gradient(#000,#000) center/2px 100% no-repeat,
+        linear-gradient(#000,#000) center/100% 2px no-repeat,
+        var(--a);
     }
+    /* black cross bars only (not extra windows) — aligned to original pane positions */
     .spooky-house .big-window:before, .spooky-house .big-window:after {
-      content:""; position:absolute; background:#000;
+      content:""; position:absolute; background:#000; z-index:2;
     }
     .spooky-house .big-window:before {
-      height:40px; width:2px; left:15px;
+      /* vertical bars */
+      height:40px; width:2px; left:14px; top:0;
       box-shadow:13px 55px #000, -47px 80px #000, -32px 120px #000;
     }
     .spooky-house .big-window:after {
-      height:2px; width:40px; top:22px;
-      box-shadow:10px 58px #000, -45px 78px #000, -30px 120px #000;
+      /* horizontal bars — middle of each window */
+      height:2px; width:30px; left:0; top:19px;
+      box-shadow:13px 55px #000, -47px 80px #000, -32px 120px #000;
     }
     .spooky-house .frames {
       position:absolute; width:2px; height:40px; background:#000;
-      top:-65px; left:86.5px; box-shadow:19px 40px #000, 7px 150px #000;
+      top:-65px; left:86.5px;
+      box-shadow:19px 40px #000, 7px 150px #000;
     }
     .spooky-house .frames:before {
-      content:""; position:absolute; height:2px; width:30px; background:#000;
-      top:17px; left:-10px; box-shadow:10px 40px #000, 5px 150px #000;
+      content:""; position:absolute; height:2px; width:28px; background:#000;
+      top:19px; left:-13px;
+      box-shadow:19px 40px #000, 7px 150px #000;
     }
     .spooky-house .moon {
       position:absolute; width:110px; height:110px; border-radius:50%;
@@ -2655,6 +2689,27 @@
       max-width: 118px;
     }
 
+    /* ── PAGE-AWARE SEARCH ── */
+    .search-hidden { display: none !important; }
+    .search-match {
+      border-color: var(--a) !important;
+      box-shadow: 0 0 0 2px var(--ad), 0 0 24px var(--ab) !important;
+    }
+    .search-no-results {
+      display: none;
+      margin: 10px 0 12px;
+      padding: 10px 12px;
+      border: 1px solid var(--brda);
+      border-radius: 10px;
+      background: var(--ad);
+      color: var(--txm);
+      font-family: 'Share Tech Mono', monospace;
+      font-size: .58rem;
+      letter-spacing: 1px;
+      text-align: center;
+    }
+    .search-no-results.show { display: block; }
+
     /* Gallery + custom interface modal (ff-info style) */
     .iface-modal-overlay {
       display: none;
@@ -2702,6 +2757,74 @@
     .iface-modal-body { padding-top: 8px; }
 
   </style>
+
+<style id="baijid-live-weather-style">
+/* ===== LIVE WEATHER + DAY/NIGHT HOUSE SYSTEM ===== */
+.spooky-house .moon.weather-sun{
+  background:radial-gradient(circle at 38% 34%,#fff7c7 0 10%,#ffd95b 32%,#ffb21a 72%,#f08a00 100%) !important;
+  box-shadow:none !important;
+  filter:none !important;
+}
+.spooky-house .moon.weather-sun::before,
+.spooky-house .moon.weather-sun::after{display:none !important;}
+.spooky-house .moon.weather-sun.sun-morning{
+  background:radial-gradient(circle at 40% 38%,#fff7dc 0 12%,#ffe7a1 34%,#ffc45a 72%,#f5a23b 100%) !important;
+}
+.spooky-house .moon.weather-sun.sun-noon{
+  background:radial-gradient(circle at 38% 35%,#fffbe6 0 10%,#ffe46b 34%,#ffc21c 70%,#f59b00 100%) !important;
+}
+.spooky-house .moon.weather-sun.sun-afternoon{
+  background:radial-gradient(circle at 38% 35%,#fff0c9 0 11%,#ffd08a 34%,#f6a34a 70%,#e97b27 100%) !important;
+}
+.spooky-house .moon.weather-moon{box-shadow:inset 7px -7px 0 rgba(0,0,0,.2),0 0 30px var(--ab);}
+.weather-sky-effects{position:absolute;inset:0;z-index:2;pointer-events:none;overflow:hidden;}
+.weather-cloud{position:absolute;width:95px;height:30px;border-radius:40px;background:rgba(220,232,242,.62);filter:blur(.2px);opacity:0;transition:opacity .7s,transform .7s;}
+.weather-cloud::before,.weather-cloud::after{content:"";position:absolute;border-radius:50%;background:inherit;}
+.weather-cloud::before{width:42px;height:42px;left:17px;bottom:6px}.weather-cloud::after{width:54px;height:54px;right:13px;bottom:4px}
+.weather-cloud.c1{top:16%;left:8%;transform:scale(.8)} .weather-cloud.c2{top:24%;right:8%;transform:scale(.65)} .weather-cloud.c3{top:12%;right:25%;transform:scale(.48)}
+.weather-sky-effects.cloud-light .weather-cloud{opacity:.28}.weather-sky-effects.cloud-medium .weather-cloud{opacity:.48}.weather-sky-effects.cloud-heavy .weather-cloud{opacity:.68}
+.weather-sky-effects.cloud-medium .c1{transform:translateX(10px) scale(.95)} .weather-sky-effects.cloud-heavy .c1{transform:translateX(15px) scale(1.05)}
+.weather-sky-effects.cloud-heavy .c2{transform:translateX(-15px) scale(.9)}
+.weather-rain{display:none !important;}
+.weather-stars{position:absolute;inset:0;z-index:4;pointer-events:none;opacity:0;transition:opacity .6s;}
+.weather-stars.show{opacity:1;}
+.weather-star{position:absolute;width:2px;height:2px;border-radius:50%;background:var(--a);box-shadow:0 0 4px var(--a);animation:weatherTwinkle 1.8s ease-in-out infinite alternate;}
+.weather-star:nth-child(1){left:18%;top:8%;animation-delay:.2s}.weather-star:nth-child(2){left:29%;top:14%;animation-delay:1s}.weather-star:nth-child(3){left:42%;top:7%;animation-delay:.6s}.weather-star:nth-child(4){left:54%;top:13%;animation-delay:1.4s}.weather-star:nth-child(5){left:67%;top:7%;animation-delay:.4s}.weather-star:nth-child(6){left:78%;top:16%;animation-delay:1.2s}.weather-star:nth-child(7){left:88%;top:10%;animation-delay:.8s}.weather-star:nth-child(8){left:12%;top:22%;animation-delay:1.6s}.weather-star:nth-child(9){left:35%;top:22%;animation-delay:.9s}.weather-star:nth-child(10){left:61%;top:24%;animation-delay:.3s}.weather-star:nth-child(11){left:82%;top:24%;animation-delay:1.1s}
+@keyframes weatherTwinkle{from{opacity:.25;transform:scale(.7)}to{opacity:1;transform:scale(1.25)}}
+
+#baijidWeatherWidget{position:fixed;left:50%;bottom:82px;transform:translateX(-50%);width:min(365px,calc(100vw - 28px));z-index:45;pointer-events:auto;}
+.bw-card{position:relative;border:1px solid rgba(255,255,255,.12);border-radius:28px;background:linear-gradient(145deg,rgba(20,35,55,.76),rgba(5,12,24,.88));backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);box-shadow:0 16px 42px rgba(0,0,0,.38),0 0 0 1px rgba(var(--primary-rgb),.05) inset;padding:17px 17px 14px;overflow:hidden;}
+.bw-card::before{content:"";position:absolute;inset:-40% 25% 30% -20%;background:radial-gradient(circle,rgba(var(--primary-rgb),.13),transparent 65%);pointer-events:none;}
+.bw-top{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;position:relative;z-index:1}.bw-temp{font:600 3rem/1 'Rajdhani',sans-serif;color:#f7f9ff;letter-spacing:-1px}.bw-temp small{font-size:1.45rem;vertical-align:top;margin-left:2px;color:#fff}.bw-condition{text-align:right;font:700 .72rem/1.2 'Orbitron',monospace;letter-spacing:1.2px;color:var(--a);max-width:125px;text-transform:uppercase;margin-top:7px}.bw-location{display:inline-flex;align-items:center;gap:7px;margin-top:12px;padding:7px 12px;border:1px solid rgba(255,255,255,.1);border-radius:18px;background:rgba(255,255,255,.055);color:#dfe7f1;font:600 .76rem 'Rajdhani',sans-serif;letter-spacing:1px;cursor:pointer;position:relative;z-index:2}.bw-location i{color:var(--a);font-size:15px}.bw-meta{display:grid;grid-template-columns:repeat(3,1fr);margin-top:12px;border:1px solid rgba(255,255,255,.08);border-radius:18px;background:rgba(0,0,0,.17);overflow:hidden;position:relative;z-index:1}.bw-meta-item{padding:9px 6px;text-align:center;border-right:1px solid rgba(255,255,255,.07)}.bw-meta-item:last-child{border-right:0}.bw-meta-label{font:500 .58rem 'Rajdhani',sans-serif;color:#9ca9b9;letter-spacing:.7px}.bw-meta-value{margin-top:2px;font:700 .78rem 'Rajdhani',sans-serif;color:#eef3fa}.bw-update{margin-top:8px;text-align:center;font:500 .53rem 'Share Tech Mono',monospace;color:#6e7d90;letter-spacing:.6px;position:relative;z-index:1}.bw-loading{opacity:.65}.bw-refresh{display:inline-block;animation:bwSpin 1s linear infinite}@keyframes bwSpin{to{transform:rotate(360deg)}}
+#bwDistrictModal{position:fixed;inset:0;z-index:10001;display:none;align-items:flex-end;justify-content:center;background:rgba(0,0,0,.52);backdrop-filter:blur(7px);-webkit-backdrop-filter:blur(7px);padding:0 12px 18px}.bw-district-sheet{width:min(520px,100%);max-height:78vh;border:1px solid rgba(255,255,255,.13);border-radius:28px;background:linear-gradient(160deg,rgba(20,29,43,.96),rgba(5,10,19,.98));box-shadow:0 24px 80px rgba(0,0,0,.55);padding:15px;overflow:hidden}.bw-sheet-head{display:flex;align-items:center;justify-content:space-between;padding:2px 2px 12px}.bw-sheet-title{font:700 .75rem 'Orbitron',monospace;letter-spacing:1.5px;color:var(--a)}.bw-sheet-close{width:32px;height:32px;border-radius:50%;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.05);color:#fff;font-size:20px;line-height:1;cursor:pointer}.bw-district-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;max-height:62vh;overflow:auto;padding:2px}.bw-district-btn{min-height:44px;border:1px solid rgba(255,255,255,.08);border-radius:14px;background:rgba(255,255,255,.035);color:#dce4ee;font:600 .72rem 'Rajdhani',sans-serif;cursor:pointer;transition:.2s}.bw-district-btn:active,.bw-district-btn.selected{border-color:var(--a);color:var(--a);background:rgba(var(--primary-rgb),.09);box-shadow:0 0 14px rgba(var(--primary-rgb),.1)}
+.bw-socials{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:9px}.bw-social{min-height:40px;border:1px solid rgba(var(--primary-rgb),.22);border-radius:14px;background:rgba(255,255,255,.035);color:var(--a);display:flex;align-items:center;justify-content:center;gap:6px;text-decoration:none;font:700 .65rem 'Orbitron',monospace;letter-spacing:.5px;cursor:pointer}.bw-social i{font-size:17px}.bw-social:active{transform:scale(.97);background:rgba(var(--primary-rgb),.1)}
+@media(max-width:390px){#baijidWeatherWidget{bottom:78px;width:calc(100vw - 18px)}.bw-card{padding:14px;border-radius:24px}.bw-temp{font-size:2.7rem}.bw-district-grid{grid-template-columns:repeat(2,1fr)}}
+
+/* ===== COMPACT HOME WEATHER CARD ===== */
+#baijidWeatherWidget{width:min(248px,calc(100vw - 132px));bottom:82px;z-index:45;}
+.bw-card{padding:9px 9px 7px;border-radius:19px;min-height:0;}
+.bw-card-close{position:absolute;right:7px;top:7px;width:23px;height:23px;border-radius:50%;border:1px solid rgba(255,255,255,.13);background:rgba(0,0,0,.28);color:#aeb9c8;font:400 17px/20px Arial,sans-serif;padding:0;display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:8;}
+.bw-card-close:active{transform:scale(.9);color:var(--a);border-color:var(--a);}
+.bw-top{gap:7px;padding-right:18px;}
+.bw-temp{font-size:2.55rem;line-height:.95;letter-spacing:-.8px;}
+.bw-temp small{font-size:1.08rem;}
+.bw-condition{font-size:.57rem;letter-spacing:.8px;max-width:92px;margin-top:5px;}
+.bw-location{margin-top:8px;padding:5px 9px;border-radius:14px;font-size:.67rem;letter-spacing:.6px;gap:5px;}
+.bw-location i{font-size:13px;}
+.bw-meta{margin-top:9px;border-radius:14px;}
+.bw-meta-item{padding:6px 3px;}
+.bw-meta-label{font-size:.48rem;letter-spacing:.45px;}
+.bw-meta-value{font-size:.68rem;margin-top:1px;}
+.bw-socials{gap:6px;margin-top:7px;}
+.bw-social{min-height:32px;height:32px;border-radius:11px;gap:0;}
+.bw-social i{font-size:16px;}
+.bw-update{margin-top:6px;font-size:.45rem;letter-spacing:.4px;}
+@media(max-width:390px){#baijidWeatherWidget{width:248px;max-width:calc(100vw - 132px);bottom:78px}.bw-card{padding:8px 8px 6px;border-radius:18px}.bw-temp{font-size:2.28rem}}
+@media(max-width:330px){#baijidWeatherWidget{width:235px;max-width:calc(100vw - 70px)}}
+
+/* Weather panel is a HOME-only component. */
+#baijidWeatherWidget.bw-hidden{display:none!important;}
+</style>
 </head>
 
 <body>
@@ -2860,6 +2983,7 @@
 
 
     <div class="tab-section" id="tab-platforms">
+      <div class="search-no-results" id="platformSearchEmpty">NO TOOL FOUND</div>
       <div class="platform-grid" style="margin-top:12px;">
           <div id="hardPlatforms"></div>
           <div id="customPlatforms"></div>
@@ -2871,6 +2995,7 @@
     </div>
 
 <div class="tab-section" id="tab-faq">
+      <div class="search-no-results" id="settingsSearchEmpty">NO CARD FOUND</div>
       <div class="card">
         <div class="section-label">Settings</div>
         <div class="settings-row-glass" style="display:flex; align-items:center; justify-content:space-between; padding:12px 14px; margin-bottom:20px;">
@@ -3404,6 +3529,17 @@
         <i class="ti ti-alert-circle"></i>
         <span id="error-msg">Something went wrong.</span>
       </div>
+      <div id="ext-fallback" style="display:none;flex-direction:column;gap:8px;margin-top:10px;">
+        <button type="button" class="dl-btn" style="letter-spacing:1px;font-size:0.6rem;" onclick="openFbAlt('savefrom')">
+          <i class="ti ti-external-link"></i> ১ · Open SaveFrom
+        </button>
+        <button type="button" class="dl-btn" style="letter-spacing:1px;font-size:0.6rem;background:linear-gradient(135deg,#1a1a2e,#333);" onclick="openFbAlt('fdown')">
+          <i class="ti ti-external-link"></i> ২ · Open FDownloader
+        </button>
+        <button type="button" class="dl-btn" style="letter-spacing:1px;font-size:0.6rem;background:linear-gradient(135deg,#2d1b4e,#1a1a2e);" onclick="openFbAlt('snapinsta')">
+          <i class="ti ti-external-link"></i> ৩ · Open SnapInsta
+        </button>
+      </div>
 
       <div class="result-section" id="result-box">
         <div class="result-header">
@@ -3421,16 +3557,17 @@
           <i class="ti ti-chevron-down media-arr" id="vid-q-arr"></i>
         </button>
         <div class="quality-options" id="quality-options">
-          <a class="q-btn" id="q-480" href="#"><span>480p</span> SD · Smaller</a>
-          <a class="q-btn" id="q-720" href="#"><span>720p</span> HD · Balanced</a>
-          <a class="q-btn" id="q-1080" href="#"><span>1080p</span> Full HD · Best</a>
+          <a class="q-btn" id="q-360" href="#"><span>360p</span> Low · <span class="q-size" id="sz-360">~?</span></a>
+          <a class="q-btn" id="q-480" href="#"><span>480p</span> SD · <span class="q-size" id="sz-480">~?</span></a>
+          <a class="q-btn" id="q-720" href="#"><span>720p</span> HD · <span class="q-size" id="sz-720">~?</span></a>
+          <a class="q-btn" id="q-1080" href="#"><span>1080p</span> Full HD · <span class="q-size" id="sz-1080">~?</span></a>
         </div>
 
         <a id="aud-btn" href="#" class="media-btn">
           <div class="media-icon-wrap"><i class="ti ti-music"></i></div>
           <div class="media-info">
             <div class="media-name">AUDIO ONLY</div>
-            <div class="media-meta">MP3 · BAIJID + link id</div>
+            <div class="media-meta" id="aud-meta">MP3 · 128k · <span id="sz-audio">~?</span></div>
           </div>
           <i class="ti ti-arrow-down-circle media-arr"></i>
         </a>
@@ -3478,28 +3615,39 @@
     function extractLinkId(url) {
       if (!url) return '';
       try {
-        const u = new URL(url.trim());
-        const path = u.pathname.replace(/\\/+$/, '');
+        var raw = String(url).trim();
+        if (raw.indexOf('http') !== 0) raw = 'https://' + raw;
+        const u = new URL(raw);
+        var path = u.pathname || '';
+        while (path.length > 1 && path.charAt(path.length - 1) === '/') path = path.slice(0, -1);
         const parts = path.split('/').filter(Boolean);
-        if (/tiktok\\.com$/i.test(u.hostname) || /vt\\.tiktok\\.com|vm\\.tiktok\\.com/i.test(u.hostname)) {
+        const host = (u.hostname || '').toLowerCase();
+        if (host.indexOf('tiktok') >= 0) {
           const vid = parts.indexOf('video');
-          if (vid >= 0 && parts[vid + 1]) return parts[vid + 1].replace(/[^a-zA-Z0-9_-]/g, '');
-          if (parts.length) return parts[parts.length - 1].replace(/[^a-zA-Z0-9_-]/g, '');
+          if (vid >= 0 && parts[vid + 1]) return String(parts[vid + 1]).replace(/[^a-zA-Z0-9_-]/g, '');
+          if (parts.length) return String(parts[parts.length - 1]).replace(/[^a-zA-Z0-9_-]/g, '');
         }
-        if (/facebook\\.com|fb\\.watch|fb\\.com/i.test(u.hostname)) {
-          const shareV = parts.indexOf('v');
-          if (parts.includes('share') && shareV >= 0 && parts[shareV + 1]) {
-            return parts[shareV + 1].replace(/[^a-zA-Z0-9_-]/g, '');
+        if (host.indexOf('facebook') >= 0 || host.indexOf('fb.watch') >= 0 || host.indexOf('fb.com') >= 0) {
+          const si = parts.indexOf('share');
+          if (si >= 0 && parts[si + 1] && parts[si + 2]) {
+            return String(parts[si + 2]).replace(/[^a-zA-Z0-9_-]/g, '');
           }
-          for (const key of ['reel', 'videos', 'watch', 'posts']) {
+          if (si >= 0 && parts[si + 1]) {
+            return String(parts[si + 1]).replace(/[^a-zA-Z0-9_-]/g, '');
+          }
+          for (const key of ['reel', 'videos', 'watch', 'posts', 'v']) {
             const i = parts.indexOf(key);
-            if (i >= 0 && parts[i + 1]) return parts[i + 1].replace(/[^a-zA-Z0-9_-]/g, '');
+            if (i >= 0 && parts[i + 1]) return String(parts[i + 1]).replace(/[^a-zA-Z0-9_-]/g, '');
           }
-          if (u.searchParams.get('v')) return u.searchParams.get('v').replace(/[^a-zA-Z0-9_-]/g, '');
-          if (parts.length) return parts[parts.length - 1].replace(/[^a-zA-Z0-9_-]/g, '');
+          if (u.searchParams.get('v')) return String(u.searchParams.get('v')).replace(/[^a-zA-Z0-9_-]/g, '');
+          if (parts.length) return String(parts[parts.length - 1]).replace(/[^a-zA-Z0-9_-]/g, '');
         }
-        if (parts.length) return parts[parts.length - 1].replace(/[^a-zA-Z0-9_-]/g, '').slice(0, 32);
+        if (parts.length) return String(parts[parts.length - 1]).replace(/[^a-zA-Z0-9_-]/g, '').slice(0, 32);
       } catch (e) {}
+      try {
+        const segs = String(url).split('/').filter(Boolean);
+        if (segs.length) return String(segs[segs.length - 1]).replace(/[^a-zA-Z0-9_-]/g, '').slice(0, 32);
+      } catch (e2) {}
       return '';
     }
 
@@ -3510,11 +3658,13 @@
     }
 
     function makeFileName(quality, ext) {
-      const id = _linkId || extractLinkId(document.getElementById('url').value);
+      const id = _linkId || extractLinkId((document.getElementById('url') || {}).value || '');
+      let q = (quality || '').toString().trim();
+      if (q && !/p$/i.test(q) && /^[0-9]+$/.test(q)) q = q + 'p';
       let name = 'BAIJID';
-      if (quality) name += ' (' + quality + ')';
+      if (q) name += ' (' + q + ')';
       if (id) name += ' ' + id;
-      return name + '.' + ext;
+      return name + '.' + (ext || 'mp4');
     }
 
     function toastMsg(msg, err) {
@@ -3579,6 +3729,21 @@
       if (arr) arr.style.transform = q.classList.contains('show') ? 'rotate(180deg)' : '';
     }
 
+
+    function openFbAlt(kind) {
+      var u = '';
+      try { u = (document.getElementById('url').value || '').trim(); } catch (e) {}
+      try { if (u && navigator.clipboard) navigator.clipboard.writeText(u); } catch (e) {}
+      var map = {
+        fdown: 'https://fdownloader.net/en',
+        savefrom: 'https://en1.savefrom.net/19wr/',
+        snapinsta: 'https://snapinsta.to/en46'
+      };
+      var go = map[kind] || map.fdown;
+      window.open(go, '_blank', 'noopener');
+      try { toastMsg('লিংক কপি হয়েছে — সাইটে পেস্ট করুন'); } catch (e) {}
+    }
+
     function buildForceUrl(mediaUrl, ext, quality) {
       const base = _forceBase || window.__fbBase;
       const path = _forcePath || window.__fbPath;
@@ -3589,24 +3754,56 @@
         '&filename=' + encodeURIComponent(fname);
     }
 
-    function triggerDownload(href, filename) {
-      if (!href) return;
-      const a = document.createElement('a');
-      a.href = href;
-      a.download = filename || 'BAIJID';
-      a.rel = 'noopener';
-      a.target = '_blank';
+    function saveBlobFile(blob, filename) {
+      var name = filename || 'BAIJID.mp4';
+      // never allow proxy default name
+      if (/^FFX/i.test(name)) name = 'BAIJID.mp4';
+      var url = URL.createObjectURL(blob);
+      var a = document.createElement('a');
+      a.href = url;
+      a.download = name;
+      a.style.display = 'none';
       document.body.appendChild(a);
       a.click();
-      setTimeout(() => a.remove(), 500);
+      setTimeout(function () {
+        URL.revokeObjectURL(url);
+        if (a.parentNode) a.parentNode.removeChild(a);
+      }, 4000);
+    }
+    async function triggerDownload(href, filename) {
+      if (!href) return;
+      var name = filename || 'BAIJID.mp4';
+      if (!/\.\w+$/.test(name)) name += '.mp4';
+      try {
+        // Must fetch as blob — cross-origin force URL ignores a.download and uses FFX_Download
+        var res = await fetch(href);
+        if (!res.ok) throw new Error('fail');
+        var blob = await res.blob();
+        var type = blob.type || '';
+        if (!type || type === 'application/octet-stream') {
+          if (/\.mp3$/i.test(name)) blob = new Blob([blob], { type: 'audio/mpeg' });
+          else blob = new Blob([blob], { type: 'video/mp4' });
+        }
+        saveBlobFile(blob, name);
+      } catch (e) {
+        // last resort: open URL (server may name it FFX — avoid when possible)
+        var a = document.createElement('a');
+        a.href = href;
+        a.download = name;
+        a.rel = 'noopener';
+        document.body.appendChild(a);
+        a.click();
+        setTimeout(function () { if (a.parentNode) a.parentNode.removeChild(a); }, 500);
+      }
     }
 
     function normalizeApiData(data) {
       const videoUrl = data.hdplay || data.play || data.video || data.url || data.download_url ||
         (data.medias && data.medias[0] && data.medias[0].url) || null;
       data._q480 = data.sd || data.play || videoUrl;
-      data._q720 = data.hdplay || data.hd || videoUrl;
-      data._q1080 = data.hdplay || data.fullhd || data.hd || videoUrl;
+      data._q720 = data.hd || data.hdplay || videoUrl;
+      data._q1080 = data.fullhd || data.hdplay || data.hd || videoUrl;
+      data._duration = data.duration || data.duration_ms && (data.duration_ms / 1000) || 0;
       if (data.medias && Array.isArray(data.medias)) {
         const byQ = (q) => data.medias.find(m => (m.quality || '').toString().includes(String(q)) || (m.height || 0) === q);
         if (byQ(480) || byQ('480')) data._q480 = (byQ(480) || byQ('480')).url;
@@ -3625,17 +3822,39 @@
     }
 
     async function fetchMainApi(url) {
-      const res = await fetch(window.__fbBase + '/api/download', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ url })
-      });
-      const data = await res.json().catch(() => ({}));
-      if (!res.ok) throw new Error(data.error || data.detail || data.message || 'Request failed');
-      if (data.error) throw new Error(typeof data.error === 'string' ? data.error : (data.error.message || 'Error'));
-      if (data.detail) throw new Error(typeof data.detail === 'string' ? data.detail : 'Error');
-      if (data.message && (data.status === 'error' || data.success === false)) throw new Error(data.message);
-      return normalizeApiData(data);
+      const errors = [];
+      try {
+        const res = await fetch((window.__fbBase || 'https://ff-ii.onrender.com') + '/api/download', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ url })
+        });
+        const txt = await res.text();
+        if (/suspended by its owner/i.test(txt) || res.status === 503) throw new Error('SERVER_SUSPENDED');
+        let data = {};
+        try { data = JSON.parse(txt); } catch (e) { throw new Error('SERVER_SUSPENDED'); }
+        if (!res.ok) throw new Error(data.error || data.detail || data.message || 'Request failed');
+        if (data.error) throw new Error(typeof data.error === 'string' ? data.error : (data.error.message || 'Error'));
+        if (data.detail) throw new Error(typeof data.detail === 'string' ? data.detail : 'Error');
+        if (data.message && (data.status === 'error' || data.success === false)) throw new Error(data.message);
+        return normalizeApiData(data);
+      } catch (e1) {
+        errors.push(e1.message || String(e1));
+      }
+      try {
+        const res = await fetch('https://api.siputzx.my.id/api/d/facebook?url=' + encodeURIComponent(url));
+        const data = await res.json().catch(() => ({}));
+        const payload = data.data || data.result || data;
+        if (payload && (payload.hd || payload.sd || payload.url || payload.medias || payload.video)) {
+          return normalizeApiData(typeof payload === 'object' ? payload : data);
+        }
+      } catch (e2) {
+        errors.push(e2.message || String(e2));
+      }
+      if (errors.some(function (x) { return /SUSPENDED|503|Failed to fetch|NetworkError/i.test(x); })) {
+        throw new Error('SERVER_SUSPENDED');
+      }
+      throw new Error(errors[0] || 'Download service unavailable');
     }
 
     function onDownloadClick() {
@@ -3662,6 +3881,7 @@
       const vidThumb = document.getElementById('vid-thumb');
 
       errorBox.style.display = 'none';
+      try { var _ef = document.getElementById('ext-fallback'); if (_ef) _ef.style.display = 'none'; } catch (e) {}
       resultBox.style.display = 'none';
       vidQBtn.style.display = 'none';
       audBtn.style.display = 'none';
@@ -3692,8 +3912,13 @@
       btn.disabled = true;
       loader.style.display = 'flex';
       setDlLabel('Loading…');
-      _forceBase = window.__fbBase;
-      _forcePath = window.__fbPath;
+      // Use HuggingFace force_download proxy (onrender backend is suspended)
+      _forceBase = window.__ttBase || window.__fbBase;
+      _forcePath = window.__ttPath || '/force_download';
+      if (!window.__ttBase) {
+        _forceBase = 'https://dfdfdsf44-rasiyy66.hf.space';
+        _forcePath = '/force_download';
+      }
 
       try {
         let data = {};
@@ -3703,9 +3928,11 @@
           const responseData = await res.json();
           if (responseData.code !== 0) throw new Error(responseData.msg || 'TikTok request failed');
           data = responseData.data || {};
-          data._q480 = data.play || data.wmplay || null;
+          // play ≈ SD, hdplay ≈ HD (when both exist sizes/quality differ)
+          data._q480 = data.play || data.wmplay || data.hdplay || null;
           data._q720 = data.hdplay || data.play || null;
           data._q1080 = data.hdplay || data.play || null;
+          data._duration = data.duration || 0;
           data._music = data.music || null;
           data._cover = data.cover || data.origin_cover || null;
         } else {
@@ -3722,8 +3949,14 @@
         const musicUrl = data._music || data.music || null;
 
         if (!hasVideo && !musicUrl) {
-          document.getElementById('error-msg').textContent = 'Unable to extract video/audio from this link.';
+          document.getElementById('error-msg').textContent = 'ভিডিও পাওয়া যায়নি। নিচের বিকল্প সাইট চেষ্টা করুন — লিংক কপি করা আছে।';
           errorBox.style.display = 'flex';
+          try {
+            const u = (document.getElementById('url') || {}).value || '';
+            if (u && navigator.clipboard) navigator.clipboard.writeText(u.trim());
+          } catch (c) {}
+          const ext = document.getElementById('ext-fallback');
+          if (ext) ext.style.display = 'flex';
           setDlLabel('Download');
           return;
         }
@@ -3732,6 +3965,12 @@
         _bestQLabel = q1080 ? '1080p' : (q720 ? '720p' : '480p');
         _audioUrl = musicUrl;
         _ready = true;
+        // success → hide error + alternative sites
+        try {
+          errorBox.style.display = 'none';
+          var extOk = document.getElementById('ext-fallback');
+          if (extOk) extOk.style.display = 'none';
+        } catch (h) {}
         setDlLabel('Download ' + _bestQLabel);
 
         resultBox.style.display = 'block';
@@ -3741,20 +3980,319 @@
           const a720 = document.getElementById('q-720');
           const a1080 = document.getElementById('q-1080');
 
+          function fmtBytes(n) {
+            if (!n || n <= 0) return '?';
+            if (n < 100 * 1024) return (n / 1024).toFixed(0) + ' KB';
+            return (n / (1024 * 1024)).toFixed(1) + ' MB';
+          }
+          function setSz(id, label) {
+            const el = document.getElementById(id);
+            if (el) el.textContent = label;
+          }
+          // Probe real Content-Length via force proxy (Range request)
+          async function probeSize(mediaUrl, ext) {
+            if (!mediaUrl) return 0;
+            function fromHeaders(res, ranged) {
+              if (!res) return 0;
+              var cr = res.headers.get('Content-Range') || res.headers.get('content-range') || '';
+              if (cr) {
+                var slash = cr.lastIndexOf('/');
+                if (slash >= 0) {
+                  var n = parseInt(cr.slice(slash + 1), 10);
+                  if (n > 1024) return n; // full file size
+                }
+              }
+              var cl = res.headers.get('Content-Length') || res.headers.get('content-length');
+              if (cl) {
+                var n2 = parseInt(cl, 10) || 0;
+                // Range reply often returns tiny CL (e.g. 280 B) — ignore if ranged or tiny
+                if (ranged && n2 < 50000) return 0;
+                if (n2 > 1024) return n2;
+              }
+              return 0;
+            }
+            // 1) proxy with Range — trust only Content-Range total
+            try {
+              var u = buildForceUrl(mediaUrl, ext || 'mp4', 'probe');
+              var ctrl = new AbortController();
+              var timer = setTimeout(function () { try { ctrl.abort(); } catch (e) {} }, 10000);
+              var res = await fetch(u, { method: 'GET', headers: { 'Range': 'bytes=0-0' }, signal: ctrl.signal });
+              clearTimeout(timer);
+              var n = fromHeaders(res, true);
+              try { res.body && res.body.cancel && res.body.cancel(); } catch (e) {}
+              if (n > 0) return n;
+            } catch (e) {}
+            // 2) direct HEAD on CDN
+            try {
+              var res3 = await fetch(mediaUrl, { method: 'HEAD', mode: 'cors' });
+              var n3 = fromHeaders(res3, false);
+              if (n3 > 0) return n3;
+            } catch (e) {}
+            return 0;
+          }
+          // Fast download with live progress → save as .mp4 / .mp3 to device
+          async function fastDownload(mediaUrl, ext, qLabel, onProg) {
+            const name = makeFileName(qLabel || '', ext || 'mp4');
+            const href = buildForceUrl(mediaUrl, ext || 'mp4', qLabel || '');
+            const res = await fetch(href);
+            if (!res.ok) throw new Error('Download failed (' + res.status + ')');
+            const total = parseInt(res.headers.get('Content-Length') || res.headers.get('content-length') || '0', 10) || 0;
+            if (!res.body || !res.body.getReader) {
+              const blob = await res.blob();
+              if (onProg) onProg(100, blob.size, blob.size);
+              saveBlob(blob, name);
+              return blob.size;
+            }
+            const reader = res.body.getReader();
+            const chunks = [];
+            let received = 0;
+            while (true) {
+              const { done, value } = await reader.read();
+              if (done) break;
+              chunks.push(value);
+              received += value.length;
+              if (onProg) {
+                const pct = total ? Math.min(99, Math.round(received / total * 100)) : Math.min(99, Math.round(received / (1024 * 1024)));
+                onProg(pct, received, total);
+              }
+            }
+            const mime = ext === 'mp3' ? 'audio/mpeg' : 'video/mp4';
+            const blob = new Blob(chunks, { type: mime });
+            if (onProg) onProg(100, received, total || received);
+            saveBlob(blob, name);
+            return received;
+          }
+          function saveBlob(blob, filename) {
+            var name = filename || makeFileName('1080p', 'mp4');
+            if (/^FFX/i.test(name) || !name) name = makeFileName('1080p', 'mp4');
+            if (typeof saveBlobFile === 'function') {
+              saveBlobFile(blob, name);
+              return;
+            }
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = name;
+            a.style.display = 'none';
+            document.body.appendChild(a);
+            a.click();
+            setTimeout(function () {
+              URL.revokeObjectURL(url);
+              if (a.parentNode) a.parentNode.removeChild(a);
+            }, 4000);
+          }
+          function ensureDlProgress() {
+            let box = document.getElementById('dl-progress-box');
+            if (box) return box;
+            box = document.createElement('div');
+            box.id = 'dl-progress-box';
+            box.style.cssText = 'display:none;margin:10px 0;padding:12px;border-radius:10px;background:rgba(255,255,255,0.04);border:1px solid var(--brda);';
+            box.innerHTML = '<div style="font-family:Share Tech Mono,monospace;font-size:0.55rem;letter-spacing:1px;color:var(--a);margin-bottom:6px;" id="dl-prog-label">DOWNLOADING…</div>'
+              + '<div style="height:6px;background:rgba(255,255,255,0.08);border-radius:4px;overflow:hidden;">'
+              + '<div id="dl-prog-fill" style="height:100%;width:0%;background:linear-gradient(90deg,var(--a),#fff);box-shadow:0 0 10px var(--a);transition:width 0.15s;"></div></div>'
+              + '<div id="dl-prog-txt" style="font-family:Share Tech Mono,monospace;font-size:0.5rem;color:var(--txd);margin-top:6px;letter-spacing:1px;">0%</div>';
+            const qOpts = document.getElementById('quality-options');
+            if (qOpts && qOpts.parentNode) qOpts.parentNode.insertBefore(box, qOpts.nextSibling);
+            else document.body.appendChild(box);
+            return box;
+          }
+          function showProg(pct, received, total) {
+            const box = ensureDlProgress();
+            box.style.display = 'block';
+            const fill = document.getElementById('dl-prog-fill');
+            const txt = document.getElementById('dl-prog-txt');
+            const lab = document.getElementById('dl-prog-label');
+            if (fill) fill.style.width = pct + '%';
+            if (txt) {
+              const rs = fmtBytes(received);
+              const ts = total ? fmtBytes(total) : '?';
+              txt.textContent = pct + '% · ' + rs + (total ? ' / ' + ts : '');
+            }
+            if (lab) lab.textContent = pct >= 100 ? 'SAVED TO DEVICE' : 'DOWNLOADING…';
+            if (pct >= 100) setTimeout(function () { box.style.display = 'none'; }, 2500);
+          }
+
+          // All quality options visible; size = real probed MB (same URL → same real size)
+          const lowSrc = q480 || q720 || q1080;
+          const midSrc = q720 || q1080 || q480;
+          const hiSrc = q1080 || q720 || q480;
+          const url360 = lowSrc;
+          const url480 = lowSrc;
+          const url720 = midSrc;
+          const url1080 = hiSrc;
+
+          setSz('sz-360', '…');
+          setSz('sz-480', '…');
+          setSz('sz-720', '…');
+          setSz('sz-1080', '…');
+
+          (async function probeAll() {
+            const cache = {};
+            async function sizeOf(u) {
+              if (!u) return 0;
+              if (cache[u] != null) return cache[u];
+              try { cache[u] = await probeSize(u, 'mp4'); } catch (e) { cache[u] = 0; }
+              return cache[u];
+            }
+            const s360 = await sizeOf(url360);
+            const s480 = await sizeOf(url480);
+            const s720 = await sizeOf(url720);
+            const s1080 = await sizeOf(url1080);
+            const dur = Number(data.duration) || Number(data._duration) || 0;
+            function label(bytes, height) {
+              if (bytes > 0) return fmtBytes(bytes);
+              // fallback estimate only when probe failed
+              if (dur > 0) {
+                var br = height >= 1080 ? 3.5 : height >= 720 ? 2.2 : height >= 480 ? 1.2 : 0.7;
+                return '~' + fmtBytes(Math.round(dur * br * 1000000 / 8));
+              }
+              return '—';
+            }
+            setSz('sz-360', label(s360, 360));
+            setSz('sz-480', label(s480, 480));
+            setSz('sz-720', label(s720, 720));
+            setSz('sz-1080', label(s1080, 1080));
+          })();
+
+          function qHeight(label) {
+            const n = parseInt(String(label || '').replace(/[^0-9]/g, ''), 10);
+            return n || 720;
+          }
+          async function reencodeToHeight(mediaUrl, height, qLabel, onProg) {
+            // Fetch source via force proxy
+            const href = buildForceUrl(mediaUrl, 'mp4', qLabel || '');
+            if (onProg) onProg(2, 0, 0);
+            const res = await fetch(href);
+            if (!res.ok) throw new Error('fetch failed');
+            const total = parseInt(res.headers.get('Content-Length') || '0', 10) || 0;
+            const reader = res.body && res.body.getReader ? res.body.getReader() : null;
+            let blobIn;
+            if (!reader) {
+              blobIn = await res.blob();
+              if (onProg) onProg(30, 0, 0);
+            } else {
+              const chunks = [];
+              let received = 0;
+              while (true) {
+                const { done, value } = await reader.read();
+                if (done) break;
+                chunks.push(value);
+                received += value.length;
+                if (onProg) {
+                  const p = total ? Math.min(35, Math.round(received / total * 35)) : 10;
+                  onProg(p, received, total);
+                }
+              }
+              blobIn = new Blob(chunks, { type: 'video/mp4' });
+            }
+            const vurl = URL.createObjectURL(blobIn);
+            const video = document.createElement('video');
+            video.src = vurl;
+            video.muted = true;
+            video.playsInline = true;
+            video.preload = 'auto';
+            await new Promise((res, rej) => {
+              video.onloadedmetadata = () => res();
+              video.onerror = () => rej(new Error('video load'));
+              setTimeout(() => res(), 8000);
+            });
+            const srcW = video.videoWidth || 640;
+            const srcH = video.videoHeight || 360;
+            // If already at or below target — just save original (real mp4, normal speed)
+            if (srcH > 0 && srcH <= height) {
+              if (onProg) onProg(100, blobIn.size, blobIn.size);
+              saveBlob(blobIn, makeFileName(qLabel, 'mp4'));
+              URL.revokeObjectURL(vurl);
+              return blobIn.size;
+            }
+            const targetH = height;
+            const targetW = Math.max(160, Math.round(srcW * (targetH / srcH) / 2) * 2);
+            const canvas = document.createElement('canvas');
+            canvas.width = targetW;
+            canvas.height = targetH;
+            const ctx = canvas.getContext('2d');
+            try { video.playbackRate = 1; } catch (e) {}
+            const vStream = canvas.captureStream(24);
+            let mixed = vStream;
+            try {
+              const full = video.captureStream ? video.captureStream() : null;
+              if (full && full.getAudioTracks().length) {
+                mixed = new MediaStream([...vStream.getVideoTracks(), full.getAudioTracks()[0]]);
+              }
+            } catch (e) {}
+            const bitrate = targetH >= 720 ? 1400000 : targetH >= 480 ? 800000 : targetH >= 360 ? 450000 : 250000;
+            let mime = '';
+            const tries = ['video/mp4', 'video/webm;codecs=vp8', 'video/webm'];
+            for (const m of tries) {
+              if (typeof MediaRecorder !== 'undefined' && MediaRecorder.isTypeSupported(m)) { mime = m; break; }
+            }
+            if (!mime) mime = 'video/webm';
+            const chunks = [];
+            const rec = new MediaRecorder(mixed, { mimeType: mime, videoBitsPerSecond: bitrate, audioBitsPerSecond: 64000 });
+            rec.ondataavailable = e => { if (e.data && e.data.size) chunks.push(e.data); };
+            const stopped = new Promise(r => { rec.onstop = () => r(); });
+            video.currentTime = 0;
+            await new Promise(r => { video.onseeked = () => r(); setTimeout(r, 400); });
+            await video.play();
+            rec.start(200);
+            const duration = video.duration || 0;
+            await new Promise(res => {
+              let done = false;
+              const finish = () => { if (!done) { done = true; res(); } };
+              const tick = () => {
+                if (done) return;
+                if (video.ended) { finish(); return; }
+                try { ctx.drawImage(video, 0, 0, targetW, targetH); } catch (e) {}
+                if (duration && isFinite(duration)) {
+                  const p = 35 + Math.min(60, (video.currentTime / duration) * 60);
+                  if (onProg) onProg(Math.floor(p), 0, 0);
+                }
+                requestAnimationFrame(tick);
+              };
+              tick();
+              video.onended = () => finish();
+              setTimeout(finish, (duration && isFinite(duration) ? duration + 4 : 45) * 1000);
+            });
+            try { video.pause(); } catch (e) {}
+            if (rec.state !== 'inactive') try { rec.stop(); } catch (e) {}
+            await Promise.race([stopped, new Promise(r => setTimeout(r, 3000))]);
+            URL.revokeObjectURL(vurl);
+            if (!chunks.length) throw new Error('empty encode');
+            const ext = mime.indexOf('mp4') >= 0 ? 'mp4' : 'webm';
+            const out = new Blob(chunks, { type: mime });
+            if (onProg) onProg(100, out.size, out.size);
+            saveBlob(out, makeFileName(qLabel, ext));
+            return out.size;
+          }
+          async function downloadQuality(src, qLabel) {
+            if (!src) { toastMsg('No source', true); return; }
+            try {
+              // Always download real video stream (no client re-encode — that became audio-only)
+              toastMsg(qLabel + ' download started');
+              await fastDownload(src, 'mp4', qLabel, showProg);
+              toastMsg(qLabel + ' saved · ' + makeFileName(qLabel, 'mp4'));
+            } catch (err) {
+              console.error(err);
+              triggerDownload(buildForceUrl(src, 'mp4', qLabel), makeFileName(qLabel, 'mp4'));
+              toastMsg('Opening download…');
+            }
+          }
+
           function bindQ(el, src, qLabel) {
+            if (!el) return;
             if (!src) { el.style.display = 'none'; el.href = '#'; return; }
             el.href = buildForceUrl(src, 'mp4', qLabel);
             el.style.display = 'flex';
             el.onclick = function (e) {
               e.preventDefault();
-              const name = makeFileName(qLabel, 'mp4');
-              triggerDownload(buildForceUrl(src, 'mp4', qLabel), name);
-              toastMsg('Downloading ' + name);
+              downloadQuality(src, qLabel);
             };
           }
-          bindQ(a480, q480, '480p');
-          bindQ(a720, q720, '720p');
-          bindQ(a1080, q1080, '1080p');
+          const a360 = document.getElementById('q-360');
+          bindQ(a360, url360, '360p');
+          bindQ(a480, url480, '480p');
+          bindQ(a720, url720, '720p');
+          bindQ(a1080, url1080, '1080p');
 
           vidQBtn.style.display = 'flex';
 
@@ -3769,11 +4307,66 @@
           const audHref = buildForceUrl(musicUrl, 'mp3', '128k');
           audBtn.href = audHref;
           audBtn.style.display = 'flex';
-          audBtn.onclick = function (e) {
+          const asz = document.getElementById('sz-audio');
+          if (asz) asz.textContent = '…';
+          (async function () {
+            try {
+              const u = buildForceUrl(musicUrl, 'mp3', '128k');
+              const res = await fetch(u, { method: 'GET', headers: { 'Range': 'bytes=0-0' } });
+              const cr = res.headers.get('Content-Range') || res.headers.get('content-range') || '';
+              let n = 0;
+              if (cr) {
+                const slash = cr.lastIndexOf('/');
+                if (slash >= 0) n = parseInt(cr.slice(slash + 1), 10) || 0;
+              }
+              if (!n) n = parseInt(res.headers.get('Content-Length') || '0', 10) || 0;
+              if (asz) {
+                if (n > 0) {
+                  asz.textContent = n < 1024 * 1024 ? Math.round(n / 1024) + ' KB' : (n / (1024 * 1024)).toFixed(1) + ' MB';
+                } else {
+                  const adur = Number(data.duration) || Number(data._duration) || 0;
+                  if (adur > 0) {
+                    const mb = (adur * 128000) / 8 / (1024 * 1024);
+                    asz.textContent = '~' + (mb < 1 ? Math.round(mb * 1024) + ' KB' : mb.toFixed(1) + ' MB');
+                  } else asz.textContent = '128k';
+                }
+              }
+            } catch (e) { if (asz) asz.textContent = '128k'; }
+          })();
+          audBtn.onclick = async function (e) {
             e.preventDefault();
-            const an = makeFileName('128k', 'mp3');
-            triggerDownload(buildForceUrl(musicUrl, 'mp3', '128k'), an);
-            toastMsg('Downloading ' + an);
+            try {
+              toastMsg('Audio download started');
+              const name = makeFileName('128k', 'mp3');
+              const res = await fetch(buildForceUrl(musicUrl, 'mp3', '128k'));
+              if (!res.ok) throw new Error('fail');
+              const total = parseInt(res.headers.get('Content-Length') || '0', 10) || 0;
+              const reader = res.body && res.body.getReader ? res.body.getReader() : null;
+              if (!reader) {
+                const blob = await res.blob();
+                const url = URL.createObjectURL(new Blob([blob], { type: 'audio/mpeg' }));
+                const a = document.createElement('a');
+                a.href = url; a.download = name; document.body.appendChild(a); a.click();
+                setTimeout(function () { URL.revokeObjectURL(url); a.remove(); }, 3000);
+                toastMsg('Audio saved (.mp3)');
+                return;
+              }
+              const chunks = []; let received = 0;
+              while (true) {
+                const { done, value } = await reader.read();
+                if (done) break;
+                chunks.push(value); received += value.length;
+              }
+              const blob = new Blob(chunks, { type: 'audio/mpeg' });
+              const url = URL.createObjectURL(blob);
+              const a = document.createElement('a');
+              a.href = url; a.download = name; document.body.appendChild(a); a.click();
+              setTimeout(function () { URL.revokeObjectURL(url); a.remove(); }, 3000);
+              toastMsg('Audio saved (.mp3) · ' + (received / (1024 * 1024)).toFixed(1) + ' MB');
+            } catch (err) {
+              triggerDownload(buildForceUrl(musicUrl, 'mp3', '128k'), makeFileName('128k', 'mp3'));
+              toastMsg('Opening audio download…');
+            }
           };
         }
 
@@ -3783,7 +4376,28 @@
         btn.disabled = false;
         setDlLabel('Download');
         _ready = false;
-        document.getElementById('error-msg').textContent = e.message || 'Download failed';
+        let msg = e.message || 'Download failed';
+        var showAlt = false;
+        // Only when service is dead / suspended / network fail — NOT when video is ready
+        if (/SERVER_SUSPENDED|suspended by its owner/i.test(msg)) {
+          msg = 'সার্ভার বন্ধ (Suspended)। নিচের বাটন দিয়ে বিকল্প সাইট খুলুন — লিংক কপি করা আছে।';
+          showAlt = true;
+        } else if (/Failed to fetch|NetworkError|Load failed|fetch failed|TikTok request failed|code !== 0/i.test(msg + ' ' + (e.name || ''))) {
+          msg = 'সার্ভার কাজ করছে না। নিচের বিকল্প সাইট ব্যবহার করুন — লিংক কপি করা আছে।';
+          showAlt = true;
+        }
+        try {
+          const u = (document.getElementById('url') || {}).value || '';
+          if (u && navigator.clipboard && showAlt) navigator.clipboard.writeText(u.trim());
+        } catch (c) {}
+        if (showAlt) {
+          const ext = document.getElementById('ext-fallback');
+          if (ext) ext.style.display = 'flex';
+        } else {
+          const ext2 = document.getElementById('ext-fallback');
+          if (ext2) ext2.style.display = 'none';
+        }
+        document.getElementById('error-msg').textContent = msg;
         errorBox.style.display = 'flex';
       }
     }
@@ -4047,6 +4661,17 @@
         <i class="ti ti-alert-circle"></i>
         <span id="error-msg">Something went wrong.</span>
       </div>
+      <div id="ext-fallback" style="display:none;flex-direction:column;gap:8px;margin-top:10px;">
+        <button type="button" class="dl-btn" style="letter-spacing:1px;font-size:0.6rem;" onclick="openFbAlt('savefrom')">
+          <i class="ti ti-external-link"></i> ১ · Open SaveFrom
+        </button>
+        <button type="button" class="dl-btn" style="letter-spacing:1px;font-size:0.6rem;background:linear-gradient(135deg,#1a1a2e,#333);" onclick="openFbAlt('fdown')">
+          <i class="ti ti-external-link"></i> ২ · Open FDownloader
+        </button>
+        <button type="button" class="dl-btn" style="letter-spacing:1px;font-size:0.6rem;background:linear-gradient(135deg,#2d1b4e,#1a1a2e);" onclick="openFbAlt('snapinsta')">
+          <i class="ti ti-external-link"></i> ৩ · Open SnapInsta
+        </button>
+      </div>
 
       <div class="result-section" id="result-box">
         <div class="result-header">
@@ -4064,16 +4689,17 @@
           <i class="ti ti-chevron-down media-arr" id="vid-q-arr"></i>
         </button>
         <div class="quality-options" id="quality-options">
-          <a class="q-btn" id="q-480" href="#"><span>480p</span> SD · Smaller</a>
-          <a class="q-btn" id="q-720" href="#"><span>720p</span> HD · Balanced</a>
-          <a class="q-btn" id="q-1080" href="#"><span>1080p</span> Full HD · Best</a>
+          <a class="q-btn" id="q-360" href="#"><span>360p</span> Low · <span class="q-size" id="sz-360">~?</span></a>
+          <a class="q-btn" id="q-480" href="#"><span>480p</span> SD · <span class="q-size" id="sz-480">~?</span></a>
+          <a class="q-btn" id="q-720" href="#"><span>720p</span> HD · <span class="q-size" id="sz-720">~?</span></a>
+          <a class="q-btn" id="q-1080" href="#"><span>1080p</span> Full HD · <span class="q-size" id="sz-1080">~?</span></a>
         </div>
 
         <a id="aud-btn" href="#" class="media-btn">
           <div class="media-icon-wrap"><i class="ti ti-music"></i></div>
           <div class="media-info">
             <div class="media-name">AUDIO ONLY</div>
-            <div class="media-meta">MP3 · BAIJID + link id</div>
+            <div class="media-meta" id="aud-meta">MP3 · 128k · <span id="sz-audio">~?</span></div>
           </div>
           <i class="ti ti-arrow-down-circle media-arr"></i>
         </a>
@@ -4121,28 +4747,39 @@
     function extractLinkId(url) {
       if (!url) return '';
       try {
-        const u = new URL(url.trim());
-        const path = u.pathname.replace(/\\/+$/, '');
+        var raw = String(url).trim();
+        if (raw.indexOf('http') !== 0) raw = 'https://' + raw;
+        const u = new URL(raw);
+        var path = u.pathname || '';
+        while (path.length > 1 && path.charAt(path.length - 1) === '/') path = path.slice(0, -1);
         const parts = path.split('/').filter(Boolean);
-        if (/tiktok\\.com$/i.test(u.hostname) || /vt\\.tiktok\\.com|vm\\.tiktok\\.com/i.test(u.hostname)) {
+        const host = (u.hostname || '').toLowerCase();
+        if (host.indexOf('tiktok') >= 0) {
           const vid = parts.indexOf('video');
-          if (vid >= 0 && parts[vid + 1]) return parts[vid + 1].replace(/[^a-zA-Z0-9_-]/g, '');
-          if (parts.length) return parts[parts.length - 1].replace(/[^a-zA-Z0-9_-]/g, '');
+          if (vid >= 0 && parts[vid + 1]) return String(parts[vid + 1]).replace(/[^a-zA-Z0-9_-]/g, '');
+          if (parts.length) return String(parts[parts.length - 1]).replace(/[^a-zA-Z0-9_-]/g, '');
         }
-        if (/facebook\\.com|fb\\.watch|fb\\.com/i.test(u.hostname)) {
-          const shareV = parts.indexOf('v');
-          if (parts.includes('share') && shareV >= 0 && parts[shareV + 1]) {
-            return parts[shareV + 1].replace(/[^a-zA-Z0-9_-]/g, '');
+        if (host.indexOf('facebook') >= 0 || host.indexOf('fb.watch') >= 0 || host.indexOf('fb.com') >= 0) {
+          const si = parts.indexOf('share');
+          if (si >= 0 && parts[si + 1] && parts[si + 2]) {
+            return String(parts[si + 2]).replace(/[^a-zA-Z0-9_-]/g, '');
           }
-          for (const key of ['reel', 'videos', 'watch', 'posts']) {
+          if (si >= 0 && parts[si + 1]) {
+            return String(parts[si + 1]).replace(/[^a-zA-Z0-9_-]/g, '');
+          }
+          for (const key of ['reel', 'videos', 'watch', 'posts', 'v']) {
             const i = parts.indexOf(key);
-            if (i >= 0 && parts[i + 1]) return parts[i + 1].replace(/[^a-zA-Z0-9_-]/g, '');
+            if (i >= 0 && parts[i + 1]) return String(parts[i + 1]).replace(/[^a-zA-Z0-9_-]/g, '');
           }
-          if (u.searchParams.get('v')) return u.searchParams.get('v').replace(/[^a-zA-Z0-9_-]/g, '');
-          if (parts.length) return parts[parts.length - 1].replace(/[^a-zA-Z0-9_-]/g, '');
+          if (u.searchParams.get('v')) return String(u.searchParams.get('v')).replace(/[^a-zA-Z0-9_-]/g, '');
+          if (parts.length) return String(parts[parts.length - 1]).replace(/[^a-zA-Z0-9_-]/g, '');
         }
-        if (parts.length) return parts[parts.length - 1].replace(/[^a-zA-Z0-9_-]/g, '').slice(0, 32);
+        if (parts.length) return String(parts[parts.length - 1]).replace(/[^a-zA-Z0-9_-]/g, '').slice(0, 32);
       } catch (e) {}
+      try {
+        const segs = String(url).split('/').filter(Boolean);
+        if (segs.length) return String(segs[segs.length - 1]).replace(/[^a-zA-Z0-9_-]/g, '').slice(0, 32);
+      } catch (e2) {}
       return '';
     }
 
@@ -4153,11 +4790,13 @@
     }
 
     function makeFileName(quality, ext) {
-      const id = _linkId || extractLinkId(document.getElementById('url').value);
+      const id = _linkId || extractLinkId((document.getElementById('url') || {}).value || '');
+      let q = (quality || '').toString().trim();
+      if (q && !/p$/i.test(q) && /^[0-9]+$/.test(q)) q = q + 'p';
       let name = 'BAIJID';
-      if (quality) name += ' (' + quality + ')';
+      if (q) name += ' (' + q + ')';
       if (id) name += ' ' + id;
-      return name + '.' + ext;
+      return name + '.' + (ext || 'mp4');
     }
 
     function toastMsg(msg, err) {
@@ -4222,6 +4861,21 @@
       if (arr) arr.style.transform = q.classList.contains('show') ? 'rotate(180deg)' : '';
     }
 
+
+    function openFbAlt(kind) {
+      var u = '';
+      try { u = (document.getElementById('url').value || '').trim(); } catch (e) {}
+      try { if (u && navigator.clipboard) navigator.clipboard.writeText(u); } catch (e) {}
+      var map = {
+        fdown: 'https://fdownloader.net/en',
+        savefrom: 'https://en1.savefrom.net/19wr/',
+        snapinsta: 'https://snapinsta.to/en46'
+      };
+      var go = map[kind] || map.fdown;
+      window.open(go, '_blank', 'noopener');
+      try { toastMsg('লিংক কপি হয়েছে — সাইটে পেস্ট করুন'); } catch (e) {}
+    }
+
     function buildForceUrl(mediaUrl, ext, quality) {
       const base = _forceBase || window.__fbBase;
       const path = _forcePath || window.__fbPath;
@@ -4232,24 +4886,56 @@
         '&filename=' + encodeURIComponent(fname);
     }
 
-    function triggerDownload(href, filename) {
-      if (!href) return;
-      const a = document.createElement('a');
-      a.href = href;
-      a.download = filename || 'BAIJID';
-      a.rel = 'noopener';
-      a.target = '_blank';
+    function saveBlobFile(blob, filename) {
+      var name = filename || 'BAIJID.mp4';
+      // never allow proxy default name
+      if (/^FFX/i.test(name)) name = 'BAIJID.mp4';
+      var url = URL.createObjectURL(blob);
+      var a = document.createElement('a');
+      a.href = url;
+      a.download = name;
+      a.style.display = 'none';
       document.body.appendChild(a);
       a.click();
-      setTimeout(() => a.remove(), 500);
+      setTimeout(function () {
+        URL.revokeObjectURL(url);
+        if (a.parentNode) a.parentNode.removeChild(a);
+      }, 4000);
+    }
+    async function triggerDownload(href, filename) {
+      if (!href) return;
+      var name = filename || 'BAIJID.mp4';
+      if (!/\.\w+$/.test(name)) name += '.mp4';
+      try {
+        // Must fetch as blob — cross-origin force URL ignores a.download and uses FFX_Download
+        var res = await fetch(href);
+        if (!res.ok) throw new Error('fail');
+        var blob = await res.blob();
+        var type = blob.type || '';
+        if (!type || type === 'application/octet-stream') {
+          if (/\.mp3$/i.test(name)) blob = new Blob([blob], { type: 'audio/mpeg' });
+          else blob = new Blob([blob], { type: 'video/mp4' });
+        }
+        saveBlobFile(blob, name);
+      } catch (e) {
+        // last resort: open URL (server may name it FFX — avoid when possible)
+        var a = document.createElement('a');
+        a.href = href;
+        a.download = name;
+        a.rel = 'noopener';
+        document.body.appendChild(a);
+        a.click();
+        setTimeout(function () { if (a.parentNode) a.parentNode.removeChild(a); }, 500);
+      }
     }
 
     function normalizeApiData(data) {
       const videoUrl = data.hdplay || data.play || data.video || data.url || data.download_url ||
         (data.medias && data.medias[0] && data.medias[0].url) || null;
       data._q480 = data.sd || data.play || videoUrl;
-      data._q720 = data.hdplay || data.hd || videoUrl;
-      data._q1080 = data.hdplay || data.fullhd || data.hd || videoUrl;
+      data._q720 = data.hd || data.hdplay || videoUrl;
+      data._q1080 = data.fullhd || data.hdplay || data.hd || videoUrl;
+      data._duration = data.duration || data.duration_ms && (data.duration_ms / 1000) || 0;
       if (data.medias && Array.isArray(data.medias)) {
         const byQ = (q) => data.medias.find(m => (m.quality || '').toString().includes(String(q)) || (m.height || 0) === q);
         if (byQ(480) || byQ('480')) data._q480 = (byQ(480) || byQ('480')).url;
@@ -4268,17 +4954,39 @@
     }
 
     async function fetchMainApi(url) {
-      const res = await fetch(window.__fbBase + '/api/download', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ url })
-      });
-      const data = await res.json().catch(() => ({}));
-      if (!res.ok) throw new Error(data.error || data.detail || data.message || 'Request failed');
-      if (data.error) throw new Error(typeof data.error === 'string' ? data.error : (data.error.message || 'Error'));
-      if (data.detail) throw new Error(typeof data.detail === 'string' ? data.detail : 'Error');
-      if (data.message && (data.status === 'error' || data.success === false)) throw new Error(data.message);
-      return normalizeApiData(data);
+      const errors = [];
+      try {
+        const res = await fetch((window.__fbBase || 'https://ff-ii.onrender.com') + '/api/download', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ url })
+        });
+        const txt = await res.text();
+        if (/suspended by its owner/i.test(txt) || res.status === 503) throw new Error('SERVER_SUSPENDED');
+        let data = {};
+        try { data = JSON.parse(txt); } catch (e) { throw new Error('SERVER_SUSPENDED'); }
+        if (!res.ok) throw new Error(data.error || data.detail || data.message || 'Request failed');
+        if (data.error) throw new Error(typeof data.error === 'string' ? data.error : (data.error.message || 'Error'));
+        if (data.detail) throw new Error(typeof data.detail === 'string' ? data.detail : 'Error');
+        if (data.message && (data.status === 'error' || data.success === false)) throw new Error(data.message);
+        return normalizeApiData(data);
+      } catch (e1) {
+        errors.push(e1.message || String(e1));
+      }
+      try {
+        const res = await fetch('https://api.siputzx.my.id/api/d/facebook?url=' + encodeURIComponent(url));
+        const data = await res.json().catch(() => ({}));
+        const payload = data.data || data.result || data;
+        if (payload && (payload.hd || payload.sd || payload.url || payload.medias || payload.video)) {
+          return normalizeApiData(typeof payload === 'object' ? payload : data);
+        }
+      } catch (e2) {
+        errors.push(e2.message || String(e2));
+      }
+      if (errors.some(function (x) { return /SUSPENDED|503|Failed to fetch|NetworkError/i.test(x); })) {
+        throw new Error('SERVER_SUSPENDED');
+      }
+      throw new Error(errors[0] || 'Download service unavailable');
     }
 
     function onDownloadClick() {
@@ -4305,6 +5013,7 @@
       const vidThumb = document.getElementById('vid-thumb');
 
       errorBox.style.display = 'none';
+      try { var _ef = document.getElementById('ext-fallback'); if (_ef) _ef.style.display = 'none'; } catch (e) {}
       resultBox.style.display = 'none';
       vidQBtn.style.display = 'none';
       audBtn.style.display = 'none';
@@ -4335,8 +5044,13 @@
       btn.disabled = true;
       loader.style.display = 'flex';
       setDlLabel('Loading…');
-      _forceBase = window.__fbBase;
-      _forcePath = window.__fbPath;
+      // Use HuggingFace force_download proxy (onrender backend is suspended)
+      _forceBase = window.__ttBase || window.__fbBase;
+      _forcePath = window.__ttPath || '/force_download';
+      if (!window.__ttBase) {
+        _forceBase = 'https://dfdfdsf44-rasiyy66.hf.space';
+        _forcePath = '/force_download';
+      }
 
       try {
         let data = {};
@@ -4346,9 +5060,11 @@
           const responseData = await res.json();
           if (responseData.code !== 0) throw new Error(responseData.msg || 'TikTok request failed');
           data = responseData.data || {};
-          data._q480 = data.play || data.wmplay || null;
+          // play ≈ SD, hdplay ≈ HD (when both exist sizes/quality differ)
+          data._q480 = data.play || data.wmplay || data.hdplay || null;
           data._q720 = data.hdplay || data.play || null;
           data._q1080 = data.hdplay || data.play || null;
+          data._duration = data.duration || 0;
           data._music = data.music || null;
           data._cover = data.cover || data.origin_cover || null;
         } else {
@@ -4365,8 +5081,14 @@
         const musicUrl = data._music || data.music || null;
 
         if (!hasVideo && !musicUrl) {
-          document.getElementById('error-msg').textContent = 'Unable to extract video/audio from this link.';
+          document.getElementById('error-msg').textContent = 'ভিডিও পাওয়া যায়নি। নিচের বিকল্প সাইট চেষ্টা করুন — লিংক কপি করা আছে।';
           errorBox.style.display = 'flex';
+          try {
+            const u = (document.getElementById('url') || {}).value || '';
+            if (u && navigator.clipboard) navigator.clipboard.writeText(u.trim());
+          } catch (c) {}
+          const ext = document.getElementById('ext-fallback');
+          if (ext) ext.style.display = 'flex';
           setDlLabel('Download');
           return;
         }
@@ -4375,6 +5097,12 @@
         _bestQLabel = q1080 ? '1080p' : (q720 ? '720p' : '480p');
         _audioUrl = musicUrl;
         _ready = true;
+        // success → hide error + alternative sites
+        try {
+          errorBox.style.display = 'none';
+          var extOk = document.getElementById('ext-fallback');
+          if (extOk) extOk.style.display = 'none';
+        } catch (h) {}
         setDlLabel('Download ' + _bestQLabel);
 
         resultBox.style.display = 'block';
@@ -4384,20 +5112,319 @@
           const a720 = document.getElementById('q-720');
           const a1080 = document.getElementById('q-1080');
 
+          function fmtBytes(n) {
+            if (!n || n <= 0) return '?';
+            if (n < 100 * 1024) return (n / 1024).toFixed(0) + ' KB';
+            return (n / (1024 * 1024)).toFixed(1) + ' MB';
+          }
+          function setSz(id, label) {
+            const el = document.getElementById(id);
+            if (el) el.textContent = label;
+          }
+          // Probe real Content-Length via force proxy (Range request)
+          async function probeSize(mediaUrl, ext) {
+            if (!mediaUrl) return 0;
+            function fromHeaders(res, ranged) {
+              if (!res) return 0;
+              var cr = res.headers.get('Content-Range') || res.headers.get('content-range') || '';
+              if (cr) {
+                var slash = cr.lastIndexOf('/');
+                if (slash >= 0) {
+                  var n = parseInt(cr.slice(slash + 1), 10);
+                  if (n > 1024) return n; // full file size
+                }
+              }
+              var cl = res.headers.get('Content-Length') || res.headers.get('content-length');
+              if (cl) {
+                var n2 = parseInt(cl, 10) || 0;
+                // Range reply often returns tiny CL (e.g. 280 B) — ignore if ranged or tiny
+                if (ranged && n2 < 50000) return 0;
+                if (n2 > 1024) return n2;
+              }
+              return 0;
+            }
+            // 1) proxy with Range — trust only Content-Range total
+            try {
+              var u = buildForceUrl(mediaUrl, ext || 'mp4', 'probe');
+              var ctrl = new AbortController();
+              var timer = setTimeout(function () { try { ctrl.abort(); } catch (e) {} }, 10000);
+              var res = await fetch(u, { method: 'GET', headers: { 'Range': 'bytes=0-0' }, signal: ctrl.signal });
+              clearTimeout(timer);
+              var n = fromHeaders(res, true);
+              try { res.body && res.body.cancel && res.body.cancel(); } catch (e) {}
+              if (n > 0) return n;
+            } catch (e) {}
+            // 2) direct HEAD on CDN
+            try {
+              var res3 = await fetch(mediaUrl, { method: 'HEAD', mode: 'cors' });
+              var n3 = fromHeaders(res3, false);
+              if (n3 > 0) return n3;
+            } catch (e) {}
+            return 0;
+          }
+          // Fast download with live progress → save as .mp4 / .mp3 to device
+          async function fastDownload(mediaUrl, ext, qLabel, onProg) {
+            const name = makeFileName(qLabel || '', ext || 'mp4');
+            const href = buildForceUrl(mediaUrl, ext || 'mp4', qLabel || '');
+            const res = await fetch(href);
+            if (!res.ok) throw new Error('Download failed (' + res.status + ')');
+            const total = parseInt(res.headers.get('Content-Length') || res.headers.get('content-length') || '0', 10) || 0;
+            if (!res.body || !res.body.getReader) {
+              const blob = await res.blob();
+              if (onProg) onProg(100, blob.size, blob.size);
+              saveBlob(blob, name);
+              return blob.size;
+            }
+            const reader = res.body.getReader();
+            const chunks = [];
+            let received = 0;
+            while (true) {
+              const { done, value } = await reader.read();
+              if (done) break;
+              chunks.push(value);
+              received += value.length;
+              if (onProg) {
+                const pct = total ? Math.min(99, Math.round(received / total * 100)) : Math.min(99, Math.round(received / (1024 * 1024)));
+                onProg(pct, received, total);
+              }
+            }
+            const mime = ext === 'mp3' ? 'audio/mpeg' : 'video/mp4';
+            const blob = new Blob(chunks, { type: mime });
+            if (onProg) onProg(100, received, total || received);
+            saveBlob(blob, name);
+            return received;
+          }
+          function saveBlob(blob, filename) {
+            var name = filename || makeFileName('1080p', 'mp4');
+            if (/^FFX/i.test(name) || !name) name = makeFileName('1080p', 'mp4');
+            if (typeof saveBlobFile === 'function') {
+              saveBlobFile(blob, name);
+              return;
+            }
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = name;
+            a.style.display = 'none';
+            document.body.appendChild(a);
+            a.click();
+            setTimeout(function () {
+              URL.revokeObjectURL(url);
+              if (a.parentNode) a.parentNode.removeChild(a);
+            }, 4000);
+          }
+          function ensureDlProgress() {
+            let box = document.getElementById('dl-progress-box');
+            if (box) return box;
+            box = document.createElement('div');
+            box.id = 'dl-progress-box';
+            box.style.cssText = 'display:none;margin:10px 0;padding:12px;border-radius:10px;background:rgba(255,255,255,0.04);border:1px solid var(--brda);';
+            box.innerHTML = '<div style="font-family:Share Tech Mono,monospace;font-size:0.55rem;letter-spacing:1px;color:var(--a);margin-bottom:6px;" id="dl-prog-label">DOWNLOADING…</div>'
+              + '<div style="height:6px;background:rgba(255,255,255,0.08);border-radius:4px;overflow:hidden;">'
+              + '<div id="dl-prog-fill" style="height:100%;width:0%;background:linear-gradient(90deg,var(--a),#fff);box-shadow:0 0 10px var(--a);transition:width 0.15s;"></div></div>'
+              + '<div id="dl-prog-txt" style="font-family:Share Tech Mono,monospace;font-size:0.5rem;color:var(--txd);margin-top:6px;letter-spacing:1px;">0%</div>';
+            const qOpts = document.getElementById('quality-options');
+            if (qOpts && qOpts.parentNode) qOpts.parentNode.insertBefore(box, qOpts.nextSibling);
+            else document.body.appendChild(box);
+            return box;
+          }
+          function showProg(pct, received, total) {
+            const box = ensureDlProgress();
+            box.style.display = 'block';
+            const fill = document.getElementById('dl-prog-fill');
+            const txt = document.getElementById('dl-prog-txt');
+            const lab = document.getElementById('dl-prog-label');
+            if (fill) fill.style.width = pct + '%';
+            if (txt) {
+              const rs = fmtBytes(received);
+              const ts = total ? fmtBytes(total) : '?';
+              txt.textContent = pct + '% · ' + rs + (total ? ' / ' + ts : '');
+            }
+            if (lab) lab.textContent = pct >= 100 ? 'SAVED TO DEVICE' : 'DOWNLOADING…';
+            if (pct >= 100) setTimeout(function () { box.style.display = 'none'; }, 2500);
+          }
+
+          // All quality options visible; size = real probed MB (same URL → same real size)
+          const lowSrc = q480 || q720 || q1080;
+          const midSrc = q720 || q1080 || q480;
+          const hiSrc = q1080 || q720 || q480;
+          const url360 = lowSrc;
+          const url480 = lowSrc;
+          const url720 = midSrc;
+          const url1080 = hiSrc;
+
+          setSz('sz-360', '…');
+          setSz('sz-480', '…');
+          setSz('sz-720', '…');
+          setSz('sz-1080', '…');
+
+          (async function probeAll() {
+            const cache = {};
+            async function sizeOf(u) {
+              if (!u) return 0;
+              if (cache[u] != null) return cache[u];
+              try { cache[u] = await probeSize(u, 'mp4'); } catch (e) { cache[u] = 0; }
+              return cache[u];
+            }
+            const s360 = await sizeOf(url360);
+            const s480 = await sizeOf(url480);
+            const s720 = await sizeOf(url720);
+            const s1080 = await sizeOf(url1080);
+            const dur = Number(data.duration) || Number(data._duration) || 0;
+            function label(bytes, height) {
+              if (bytes > 0) return fmtBytes(bytes);
+              // fallback estimate only when probe failed
+              if (dur > 0) {
+                var br = height >= 1080 ? 3.5 : height >= 720 ? 2.2 : height >= 480 ? 1.2 : 0.7;
+                return '~' + fmtBytes(Math.round(dur * br * 1000000 / 8));
+              }
+              return '—';
+            }
+            setSz('sz-360', label(s360, 360));
+            setSz('sz-480', label(s480, 480));
+            setSz('sz-720', label(s720, 720));
+            setSz('sz-1080', label(s1080, 1080));
+          })();
+
+          function qHeight(label) {
+            const n = parseInt(String(label || '').replace(/[^0-9]/g, ''), 10);
+            return n || 720;
+          }
+          async function reencodeToHeight(mediaUrl, height, qLabel, onProg) {
+            // Fetch source via force proxy
+            const href = buildForceUrl(mediaUrl, 'mp4', qLabel || '');
+            if (onProg) onProg(2, 0, 0);
+            const res = await fetch(href);
+            if (!res.ok) throw new Error('fetch failed');
+            const total = parseInt(res.headers.get('Content-Length') || '0', 10) || 0;
+            const reader = res.body && res.body.getReader ? res.body.getReader() : null;
+            let blobIn;
+            if (!reader) {
+              blobIn = await res.blob();
+              if (onProg) onProg(30, 0, 0);
+            } else {
+              const chunks = [];
+              let received = 0;
+              while (true) {
+                const { done, value } = await reader.read();
+                if (done) break;
+                chunks.push(value);
+                received += value.length;
+                if (onProg) {
+                  const p = total ? Math.min(35, Math.round(received / total * 35)) : 10;
+                  onProg(p, received, total);
+                }
+              }
+              blobIn = new Blob(chunks, { type: 'video/mp4' });
+            }
+            const vurl = URL.createObjectURL(blobIn);
+            const video = document.createElement('video');
+            video.src = vurl;
+            video.muted = true;
+            video.playsInline = true;
+            video.preload = 'auto';
+            await new Promise((res, rej) => {
+              video.onloadedmetadata = () => res();
+              video.onerror = () => rej(new Error('video load'));
+              setTimeout(() => res(), 8000);
+            });
+            const srcW = video.videoWidth || 640;
+            const srcH = video.videoHeight || 360;
+            // If already at or below target — just save original (real mp4, normal speed)
+            if (srcH > 0 && srcH <= height) {
+              if (onProg) onProg(100, blobIn.size, blobIn.size);
+              saveBlob(blobIn, makeFileName(qLabel, 'mp4'));
+              URL.revokeObjectURL(vurl);
+              return blobIn.size;
+            }
+            const targetH = height;
+            const targetW = Math.max(160, Math.round(srcW * (targetH / srcH) / 2) * 2);
+            const canvas = document.createElement('canvas');
+            canvas.width = targetW;
+            canvas.height = targetH;
+            const ctx = canvas.getContext('2d');
+            try { video.playbackRate = 1; } catch (e) {}
+            const vStream = canvas.captureStream(24);
+            let mixed = vStream;
+            try {
+              const full = video.captureStream ? video.captureStream() : null;
+              if (full && full.getAudioTracks().length) {
+                mixed = new MediaStream([...vStream.getVideoTracks(), full.getAudioTracks()[0]]);
+              }
+            } catch (e) {}
+            const bitrate = targetH >= 720 ? 1400000 : targetH >= 480 ? 800000 : targetH >= 360 ? 450000 : 250000;
+            let mime = '';
+            const tries = ['video/mp4', 'video/webm;codecs=vp8', 'video/webm'];
+            for (const m of tries) {
+              if (typeof MediaRecorder !== 'undefined' && MediaRecorder.isTypeSupported(m)) { mime = m; break; }
+            }
+            if (!mime) mime = 'video/webm';
+            const chunks = [];
+            const rec = new MediaRecorder(mixed, { mimeType: mime, videoBitsPerSecond: bitrate, audioBitsPerSecond: 64000 });
+            rec.ondataavailable = e => { if (e.data && e.data.size) chunks.push(e.data); };
+            const stopped = new Promise(r => { rec.onstop = () => r(); });
+            video.currentTime = 0;
+            await new Promise(r => { video.onseeked = () => r(); setTimeout(r, 400); });
+            await video.play();
+            rec.start(200);
+            const duration = video.duration || 0;
+            await new Promise(res => {
+              let done = false;
+              const finish = () => { if (!done) { done = true; res(); } };
+              const tick = () => {
+                if (done) return;
+                if (video.ended) { finish(); return; }
+                try { ctx.drawImage(video, 0, 0, targetW, targetH); } catch (e) {}
+                if (duration && isFinite(duration)) {
+                  const p = 35 + Math.min(60, (video.currentTime / duration) * 60);
+                  if (onProg) onProg(Math.floor(p), 0, 0);
+                }
+                requestAnimationFrame(tick);
+              };
+              tick();
+              video.onended = () => finish();
+              setTimeout(finish, (duration && isFinite(duration) ? duration + 4 : 45) * 1000);
+            });
+            try { video.pause(); } catch (e) {}
+            if (rec.state !== 'inactive') try { rec.stop(); } catch (e) {}
+            await Promise.race([stopped, new Promise(r => setTimeout(r, 3000))]);
+            URL.revokeObjectURL(vurl);
+            if (!chunks.length) throw new Error('empty encode');
+            const ext = mime.indexOf('mp4') >= 0 ? 'mp4' : 'webm';
+            const out = new Blob(chunks, { type: mime });
+            if (onProg) onProg(100, out.size, out.size);
+            saveBlob(out, makeFileName(qLabel, ext));
+            return out.size;
+          }
+          async function downloadQuality(src, qLabel) {
+            if (!src) { toastMsg('No source', true); return; }
+            try {
+              // Always download real video stream (no client re-encode — that became audio-only)
+              toastMsg(qLabel + ' download started');
+              await fastDownload(src, 'mp4', qLabel, showProg);
+              toastMsg(qLabel + ' saved · ' + makeFileName(qLabel, 'mp4'));
+            } catch (err) {
+              console.error(err);
+              triggerDownload(buildForceUrl(src, 'mp4', qLabel), makeFileName(qLabel, 'mp4'));
+              toastMsg('Opening download…');
+            }
+          }
+
           function bindQ(el, src, qLabel) {
+            if (!el) return;
             if (!src) { el.style.display = 'none'; el.href = '#'; return; }
             el.href = buildForceUrl(src, 'mp4', qLabel);
             el.style.display = 'flex';
             el.onclick = function (e) {
               e.preventDefault();
-              const name = makeFileName(qLabel, 'mp4');
-              triggerDownload(buildForceUrl(src, 'mp4', qLabel), name);
-              toastMsg('Downloading ' + name);
+              downloadQuality(src, qLabel);
             };
           }
-          bindQ(a480, q480, '480p');
-          bindQ(a720, q720, '720p');
-          bindQ(a1080, q1080, '1080p');
+          const a360 = document.getElementById('q-360');
+          bindQ(a360, url360, '360p');
+          bindQ(a480, url480, '480p');
+          bindQ(a720, url720, '720p');
+          bindQ(a1080, url1080, '1080p');
 
           vidQBtn.style.display = 'flex';
 
@@ -4412,11 +5439,66 @@
           const audHref = buildForceUrl(musicUrl, 'mp3', '128k');
           audBtn.href = audHref;
           audBtn.style.display = 'flex';
-          audBtn.onclick = function (e) {
+          const asz = document.getElementById('sz-audio');
+          if (asz) asz.textContent = '…';
+          (async function () {
+            try {
+              const u = buildForceUrl(musicUrl, 'mp3', '128k');
+              const res = await fetch(u, { method: 'GET', headers: { 'Range': 'bytes=0-0' } });
+              const cr = res.headers.get('Content-Range') || res.headers.get('content-range') || '';
+              let n = 0;
+              if (cr) {
+                const slash = cr.lastIndexOf('/');
+                if (slash >= 0) n = parseInt(cr.slice(slash + 1), 10) || 0;
+              }
+              if (!n) n = parseInt(res.headers.get('Content-Length') || '0', 10) || 0;
+              if (asz) {
+                if (n > 0) {
+                  asz.textContent = n < 1024 * 1024 ? Math.round(n / 1024) + ' KB' : (n / (1024 * 1024)).toFixed(1) + ' MB';
+                } else {
+                  const adur = Number(data.duration) || Number(data._duration) || 0;
+                  if (adur > 0) {
+                    const mb = (adur * 128000) / 8 / (1024 * 1024);
+                    asz.textContent = '~' + (mb < 1 ? Math.round(mb * 1024) + ' KB' : mb.toFixed(1) + ' MB');
+                  } else asz.textContent = '128k';
+                }
+              }
+            } catch (e) { if (asz) asz.textContent = '128k'; }
+          })();
+          audBtn.onclick = async function (e) {
             e.preventDefault();
-            const an = makeFileName('128k', 'mp3');
-            triggerDownload(buildForceUrl(musicUrl, 'mp3', '128k'), an);
-            toastMsg('Downloading ' + an);
+            try {
+              toastMsg('Audio download started');
+              const name = makeFileName('128k', 'mp3');
+              const res = await fetch(buildForceUrl(musicUrl, 'mp3', '128k'));
+              if (!res.ok) throw new Error('fail');
+              const total = parseInt(res.headers.get('Content-Length') || '0', 10) || 0;
+              const reader = res.body && res.body.getReader ? res.body.getReader() : null;
+              if (!reader) {
+                const blob = await res.blob();
+                const url = URL.createObjectURL(new Blob([blob], { type: 'audio/mpeg' }));
+                const a = document.createElement('a');
+                a.href = url; a.download = name; document.body.appendChild(a); a.click();
+                setTimeout(function () { URL.revokeObjectURL(url); a.remove(); }, 3000);
+                toastMsg('Audio saved (.mp3)');
+                return;
+              }
+              const chunks = []; let received = 0;
+              while (true) {
+                const { done, value } = await reader.read();
+                if (done) break;
+                chunks.push(value); received += value.length;
+              }
+              const blob = new Blob(chunks, { type: 'audio/mpeg' });
+              const url = URL.createObjectURL(blob);
+              const a = document.createElement('a');
+              a.href = url; a.download = name; document.body.appendChild(a); a.click();
+              setTimeout(function () { URL.revokeObjectURL(url); a.remove(); }, 3000);
+              toastMsg('Audio saved (.mp3) · ' + (received / (1024 * 1024)).toFixed(1) + ' MB');
+            } catch (err) {
+              triggerDownload(buildForceUrl(musicUrl, 'mp3', '128k'), makeFileName('128k', 'mp3'));
+              toastMsg('Opening audio download…');
+            }
           };
         }
 
@@ -4426,7 +5508,28 @@
         btn.disabled = false;
         setDlLabel('Download');
         _ready = false;
-        document.getElementById('error-msg').textContent = e.message || 'Download failed';
+        let msg = e.message || 'Download failed';
+        var showAlt = false;
+        // Only when service is dead / suspended / network fail — NOT when video is ready
+        if (/SERVER_SUSPENDED|suspended by its owner/i.test(msg)) {
+          msg = 'সার্ভার বন্ধ (Suspended)। নিচের বাটন দিয়ে বিকল্প সাইট খুলুন — লিংক কপি করা আছে।';
+          showAlt = true;
+        } else if (/Failed to fetch|NetworkError|Load failed|fetch failed|TikTok request failed|code !== 0/i.test(msg + ' ' + (e.name || ''))) {
+          msg = 'সার্ভার কাজ করছে না। নিচের বিকল্প সাইট ব্যবহার করুন — লিংক কপি করা আছে।';
+          showAlt = true;
+        }
+        try {
+          const u = (document.getElementById('url') || {}).value || '';
+          if (u && navigator.clipboard && showAlt) navigator.clipboard.writeText(u.trim());
+        } catch (c) {}
+        if (showAlt) {
+          const ext = document.getElementById('ext-fallback');
+          if (ext) ext.style.display = 'flex';
+        } else {
+          const ext2 = document.getElementById('ext-fallback');
+          if (ext2) ext2.style.display = 'none';
+        }
+        document.getElementById('error-msg').textContent = msg;
         errorBox.style.display = 'flex';
       }
     }
@@ -4435,7 +5538,7 @@
 </html>
 ` }, // #5
       { name: "GALLERY", special: "gallery", icon: "ti ti-photo" }, // #6
-      { name: "REPETAR", logo: "https://i.postimg.cc/mDJCrZxm/IMG-6403-3.jpg", html: `<!DOCTYPE html>
+      { name: "REPETAR", logo: "", html: `<!DOCTYPE html>
 <html lang="bn">
 <head>
 <meta charset="UTF-8">
@@ -4495,22 +5598,93 @@ function copyTxt(){
 }
 <\/script>
 </body>
-</html>`, icon: "ti ti-typography" }, // #7
-      { name: "QR", logo: "https://i.postimg.cc/HWrrLCkK/IMG-20260531-173744-515-PORTRAIT-3.jpg", html: `<!DOCTYPE html>
+</html>`, icon: "ti ti-copy" }, // #7
+      { name: "QR", icon: "ti ti-qrcode", html: `<!DOCTYPE html>
 <html lang="bn">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>QR</title>
+<title>QR Share - BAIJID</title>
 <style>
-body{margin:0;padding:16px;background:#0f172a;display:flex;align-items:center;justify-content:center;min-height:100vh;}
-img{max-width:100%;height:auto;border-radius:12px;}
+body { background: #050505; color: #00ff41; font-family: 'Segoe UI', sans-serif; padding: 20px; text-align: center; margin: 0; }
+.qr-card {
+  background: #111; border: 2px solid #00ff41; padding: 25px;
+  border-radius: 20px; max-width: 380px; margin: auto;
+  box-shadow: 0 0 20px rgba(0, 255, 65, 0.1);
+}
+h2 { color: #fff; font-size: 20px; margin-bottom: 20px; letter-spacing: 1px; }
+input {
+  width: 100%; padding: 12px; background: #000; border: 1px solid #333;
+  color: #00ff41; border-radius: 10px; margin-bottom: 15px; outline: none;
+  box-sizing: border-box; text-align: center;
+}
+.qr-output {
+  background: #fff; padding: 10px; border-radius: 12px;
+  display: inline-block; margin: 15px 0; min-height: 160px;
+}
+#qrImage { width: 160px; height: 160px; display: none; }
+#placeholder { color: #000; font-size: 12px; padding: 60px 20px; display: block; }
+.btn {
+  width: 100%; padding: 14px; border: none; border-radius: 10px;
+  font-weight: bold; cursor: pointer; text-transform: uppercase;
+  transition: 0.3s; margin-bottom: 10px;
+}
+.gen-btn { background: #00ff41; color: #000; }
+.share-btn {
+  background: transparent; color: #00ff41;
+  border: 1px solid #00ff41; display: none;
+}
 </style>
 </head>
 <body>
-<img src="https://i.postimg.cc/HWrrLCkK/IMG-20260531-173744-515-PORTRAIT-3.jpg" alt="QR">
+<div class="qr-card">
+  <h2>🔳 BAIJID QR SHARE</h2>
+  <input type="text" id="qrInput" placeholder="লিঙ্ক বা টেক্সট দিন...">
+  <div class="qr-output" id="qrContainer">
+    <span id="placeholder">QR Preview</span>
+    <img src="" id="qrImage" alt="QR">
+  </div>
+  <button class="btn gen-btn" type="button" onclick="generateQR()">⚡ GENERATE QR</button>
+  <button class="btn share-btn" type="button" id="shareBtn" onclick="shareQR()">📤 SHARE CODE</button>
+</div>
+<script>
+var currentQRUrl = "";
+function generateQR() {
+  var text = document.getElementById('qrInput').value;
+  var img = document.getElementById('qrImage');
+  var placeholder = document.getElementById('placeholder');
+  var shareBtn = document.getElementById('shareBtn');
+  if (!text) { alert("কিছু লিখুন!"); return; }
+  currentQRUrl = "https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=" + encodeURIComponent(text);
+  img.src = currentQRUrl;
+  img.onload = function () {
+    placeholder.style.display = "none";
+    img.style.display = "block";
+    shareBtn.style.display = "block";
+  };
+}
+async function shareQR() {
+  if (!currentQRUrl) return;
+  if (navigator.share) {
+    try {
+      await navigator.share({
+        title: "BAIJID QR CODE",
+        text: "আমার তৈরি QR কোড",
+        url: currentQRUrl
+      });
+    } catch (err) { console.log(err); }
+  } else {
+    try {
+      await navigator.clipboard.writeText(currentQRUrl);
+      alert("শেয়ার নেই — লিঙ্ক কপি হয়েছে!");
+    } catch (e2) {
+      prompt("লিঙ্ক কপি করুন:", currentQRUrl);
+    }
+  }
+}
+<\\/script>
 </body>
-</html>`, icon: "ti ti-qrcode" }, // #8
+</html>` }, // #8
     ];
 
     function renderHardPlatforms() {
@@ -4590,7 +5764,7 @@ img{max-width:100%;height:auto;border-radius:12px;}
       { name: "Instagram", link: "https://www.instagram.com", icon: "ti ti-brand-instagram" }, // #2
       { name: "GitHub", link: "https://github.com", icon: "ti ti-brand-github" }, // #3
       { name: "YouTube", link: "https://www.youtube.com", icon: "ti ti-brand-youtube" }, // #4
-      { name: "repetar", logo: "https://i.postimg.cc/mDJCrZxm/IMG-6403-3.jpg", html: `<!DOCTYPE html>
+      { name: "repetar", logo: "", html: `<!DOCTYPE html>
 <html lang="bn">
 <head>
 <meta charset="UTF-8">
@@ -4650,13 +5824,13 @@ function copyTxt(){
 }
 <\/script>
 </body>
-</html>`, icon: "ti ti-typography" }, // #5
-      { name: "qr", logo: "https://i.postimg.cc/HWrrLCkK/IMG-20260531-173744-515-PORTRAIT-3.jpg", html: `<!DOCTYPE html>
+</html>`, icon: "ti ti-copy" }, // #5
+      { name: "qr", logo: "", html: `<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>QR Share - MI TEAM</title>
+<title>QR Share - DARK CYBER TEAM</title>
 <style>
 body{background:#050505;color:#00ff41;font-family:'Segoe UI',sans-serif;padding:20px;text-align:center;}
 .qr-card{background:#111;border:2px solid #00ff41;padding:25px;border-radius:20px;max-width:380px;margin:auto;box-shadow:0 0 20px rgba(0,255,65,0.1);}
@@ -4672,7 +5846,7 @@ input{width:100%;padding:12px;background:#000;border:1px solid #333;color:#00ff4
 </head>
 <body>
 <div class="qr-card">
-<h2>🔳 QR MASTER SHARE</h2>
+<h2>🔳 BAIJID QR SHARE</h2>
 <input type="text" id="qrInput" placeholder="লিঙ্ক বা টেক্সট দিন...">
 <div class="qr-output" id="qrContainer">
 <span id="placeholder">QR Preview</span>
@@ -4701,7 +5875,7 @@ async function shareQR() {
   if (!currentQRUrl) return;
   if (navigator.share) {
     try {
-      await navigator.share({ title: 'MI TEAM QR CODE', text: 'সখা, আমার তৈরি করা QR কোডটি দেখো!', url: currentQRUrl });
+      await navigator.share({ title: 'BAIJID QR CODE', text: 'সখা, আমার তৈরি করা QR কোডটি দেখো!', url: currentQRUrl });
     } catch (err) { console.log('Error sharing:', err); }
   } else {
     navigator.clipboard.writeText(currentQRUrl);
@@ -4746,9 +5920,28 @@ async function shareQR() {
       return 'ti ti-world';
     }
 
+    function isTablerIconInput(s) {
+      s = String(s || '').trim();
+      if (!s) return false;
+      if (/^https?:\/\//i.test(s) || /^data:image\//i.test(s) || /\.(png|jpe?g|gif|webp|svg|ico)(\?|$)/i.test(s)) return false;
+      if (/^ti(\s+ti)?-[\w-]+$/i.test(s)) return true;
+      if (/^ti\s+[\w-]+$/i.test(s) && /ti-/i.test(s)) return true;
+      if (/^ti-[\w-]+$/i.test(s)) return true;
+      return false;
+    }
+    function normalizeTablerIcon(s) {
+      s = String(s || '').trim().replace(/\s+/g, ' ');
+      if (/^ti-[\w-]+$/i.test(s)) return 'ti ' + s;
+      if (/^ti\s+ti-[\w-]+$/i.test(s)) return s;
+      return s;
+    }
     function pinIconHtml(p) {
-      if (p.logo) return '<img src="' + String(p.logo).replace(/"/g, '&quot;') + '" alt="">';
-      const ic = p.icon || autoIconFromName(p.name);
+      if (p.logo && !isTablerIconInput(p.logo)) {
+        return '<img src="' + String(p.logo).replace(/"/g, '&quot;') + '" alt="">';
+      }
+      var ic = p.icon || '';
+      if (!ic && p.logo && isTablerIconInput(p.logo)) ic = normalizeTablerIcon(p.logo);
+      if (!ic) ic = autoIconFromName(p.name);
       return '<i class="' + ic + '"></i>';
     }
 
@@ -4973,12 +6166,20 @@ async function shareQR() {
       var link = ((document.getElementById('apLink') || {}).value || '').trim();
       var logoUrlEl = document.getElementById('apLogoUrl');
       var logoUrl = logoUrlEl ? (logoUrlEl.value || '').trim() : '';
-      var logo = _pendingLogoData || logoUrl || '';
+      var logo = _pendingLogoData || '';
+      var iconCls = autoIconFromName(name);
+      if (!logo && logoUrl) {
+        if (isTablerIconInput(logoUrl)) {
+          iconCls = normalizeTablerIcon(logoUrl);
+        } else {
+          logo = logoUrl;
+        }
+      }
       if (!name) { toastMsg('Name required', true); return; }
       if (mode === 'home') {
         if (!link && !_pendingHtml) { toastMsg('Link or HTML required', true); return; }
         var arr = getLocalHomePins();
-        arr.push({ id: 'h' + Date.now(), name: name, link: link || '', html: _pendingHtml || '', logo: logo, icon: autoIconFromName(name) });
+        arr.push({ id: 'h' + Date.now(), name: name, link: link || '', html: _pendingHtml || '', logo: logo, icon: iconCls });
         setLocalHomePins(arr);
         closeAddPlatformModal();
         if (modal) { modal.dataset.mode = ''; var t = modal.querySelector('h3'); if (t) t.textContent = 'ADD PLATFORM'; }
@@ -4988,7 +6189,7 @@ async function shareQR() {
       }
       if (!link && !_pendingHtml) { toastMsg('Link or HTML required', true); return; }
       var parr = getPlatforms();
-      parr.push({ id: 'p' + Date.now(), name: name, link: link || '', html: _pendingHtml || '', logo: logo, icon: autoIconFromName(name) });
+      parr.push({ id: 'p' + Date.now(), name: name, link: link || '', html: _pendingHtml || '', logo: logo, icon: iconCls });
       setPlatforms(parr);
       closeAddPlatformModal();
       renderCustomPlatforms();
@@ -5170,9 +6371,13 @@ async function shareQR() {
       const arr = getPlatforms();
       var base = (typeof DEFAULT_PLATFORMS !== 'undefined') ? DEFAULT_PLATFORMS.length : 0;
       box.innerHTML = arr.map(function (p, i) {
-        var icon = p.logo
-          ? '<img src="' + String(p.logo).replace(/"/g, '&quot;') + '" alt="">'
-          : '<i class="' + (p.icon || 'ti ti-apps') + ' plat-icon"></i>';
+        var icon;
+        if (p.logo && !isTablerIconInput(p.logo)) {
+          icon = '<img src="' + String(p.logo).replace(/"/g, '&quot;') + '" alt="">';
+        } else {
+          var icn = p.icon || (p.logo && isTablerIconInput(p.logo) ? normalizeTablerIcon(p.logo) : 'ti ti-apps');
+          icon = '<i class="' + icn + ' plat-icon"></i>';
+        }
         var num = base + i + 1;
         return '<div class="plat-card custom-plat-card" data-id="' + p.id + '" data-name="' + escapeHome(p.name) + '"'
           + ' onclick="openCustomPlatform(\'' + p.id + '\')">'
@@ -5255,10 +6460,12 @@ async function shareQR() {
     setTimeout(function(){ bindApHtmlFile(); bindHomeLogoFile && bindHomeLogoFile(); renderCustomPlatforms(); renderCustomFaqs(); renderHomePins && renderHomePins(); renderHardPlatforms && renderHardPlatforms(); renderHardFaqs && renderHardFaqs(); }, 400);
 
     function showTab(id, btn) {
+      setSearchPlaceholder(id);
       document.querySelectorAll('.tab-section').forEach(s => s.classList.remove('active'));
       document.getElementById('tab-' + id).classList.add('active');
       document.querySelectorAll('.bnav-btn').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
+      window.dispatchEvent(new CustomEvent('baijid:tabchange',{detail:id}));
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
@@ -5443,17 +6650,49 @@ async function shareQR() {
     }
 
     async function fetchMainApi(url) {
-      const res = await fetch(window.__fbBase + '/api/download', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ url })
-      });
-      const data = await res.json().catch(() => ({}));
-      if (!res.ok) throw new Error(data.error || data.detail || data.message || 'Request failed.');
-      if (data.error) throw new Error(typeof data.error === 'string' ? data.error : (data.error.message || JSON.stringify(data.error)));
-      if (data.detail) throw new Error(typeof data.detail === 'string' ? data.detail : JSON.stringify(data.detail));
-      if (data.message && (data.status === 'error' || data.success === false)) throw new Error(data.message);
-      return normalizeApiData(data);
+      const errors = [];
+      // Backend 1: legacy onrender (may be suspended)
+      try {
+        const res = await fetch((window.__fbBase || 'https://ff-ii.onrender.com') + '/api/download', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ url })
+        });
+        const txt = await res.text();
+        if (/suspended by its owner/i.test(txt)) {
+          throw new Error('SERVER_SUSPENDED');
+        }
+        let data = {};
+        try { data = JSON.parse(txt); } catch (e) { throw new Error('SERVER_SUSPENDED'); }
+        if (!res.ok) throw new Error(data.error || data.detail || data.message || 'Request failed.');
+        if (data.error) throw new Error(typeof data.error === 'string' ? data.error : (data.error.message || JSON.stringify(data.error)));
+        if (data.detail) throw new Error(typeof data.detail === 'string' ? data.detail : JSON.stringify(data.detail));
+        if (data.message && (data.status === 'error' || data.success === false)) throw new Error(data.message);
+        return normalizeApiData(data);
+      } catch (e1) {
+        errors.push(e1.message || String(e1));
+      }
+      // Backend 2: try generic social APIs (best-effort)
+      const alts = [
+        'https://api.siputzx.my.id/api/d/facebook?url=' + encodeURIComponent(url),
+      ];
+      for (const apiUrl of alts) {
+        try {
+          const res = await fetch(apiUrl);
+          const data = await res.json().catch(() => ({}));
+          if (data && (data.data || data.result || data.hd || data.sd || data.url || data.medias)) {
+            const payload = data.data || data.result || data;
+            return normalizeApiData(typeof payload === 'object' ? payload : data);
+          }
+        } catch (e2) {
+          errors.push(e2.message || String(e2));
+        }
+      }
+      // All failed
+      if (errors.some(x => /SUSPENDED|503|Failed to fetch|NetworkError/i.test(x))) {
+        throw new Error('SERVER_SUSPENDED');
+      }
+      throw new Error(errors[0] || 'Download service unavailable');
     }
 
     async function downloadVideo() {
@@ -5491,17 +6730,19 @@ async function shareQR() {
 
       try {
         let data = {};
-        _forceBase = window.__fbBase;
-        _forcePath = window.__fbPath;
+        _forceBase = window.__ttBase || 'https://dfdfdsf44-rasiyy66.hf.space';
+      _forcePath = window.__ttPath || '/force_download';
 
         if (isTikTok) {
           const res = await fetch("https://www.tikwm.com/api/?url=" + encodeURIComponent(url));
           const responseData = await res.json();
           if (responseData.code !== 0) throw new Error(responseData.msg || "Request failed");
           data = responseData.data || {};
-          data._q480 = data.play || data.wmplay || null;
+          // play ≈ SD, hdplay ≈ HD (when both exist sizes/quality differ)
+          data._q480 = data.play || data.wmplay || data.hdplay || null;
           data._q720 = data.hdplay || data.play || null;
           data._q1080 = data.hdplay || data.play || null;
+          data._duration = data.duration || 0;
           data._music = data.music || null;
           data._cover = data.cover || data.origin_cover || null;
           data._images = data.images || null;
@@ -5670,7 +6911,7 @@ async function shareQR() {
         notif.classList.add('show');
         notif.classList.remove('hide');
         if (wantAutoPlay && !playing) tryPlay();
-        autoHideTimer = setTimeout(hideNotifOnly, 50000);
+        autoHideTimer = setTimeout(hideNotifOnly, 10000);
       }
 
       // ★ পেজে প্রথম ট্যাপ/ক্লিক হলে মিউজিক আনলক + প্লে (ব্রাউজার পলিসি বাইপাস)
@@ -5879,12 +7120,26 @@ async function shareQR() {
       }
 
       function downloadBlob(blob, filename) {
-        const a = document.createElement('a');
-        a.href = URL.createObjectURL(blob);
-        a.download = filename;
-        document.body.appendChild(a);
-        a.click();
-        setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 2000);
+        try {
+          const url = URL.createObjectURL(blob);
+          const a = document.createElement('a');
+          a.href = url;
+          a.download = filename || 'BAIJID.bin';
+          a.style.display = 'none';
+          a.rel = 'noopener';
+          document.body.appendChild(a);
+          // iOS / some WebViews need short delay
+          setTimeout(function () {
+            a.click();
+            setTimeout(function () {
+              URL.revokeObjectURL(url);
+              if (a.parentNode) a.parentNode.removeChild(a);
+            }, 4000);
+          }, 50);
+        } catch (e) {
+          console.error(e);
+          toastMsg('Download failed — try again', true);
+        }
       }
 
       // ── IMAGE: target file size via binary-search JPEG quality ──
@@ -5938,19 +7193,33 @@ async function shareQR() {
         await new Promise((res, rej) => {
           video.onloadedmetadata = res;
           video.onerror = rej;
+          setTimeout(res, 5000);
         });
 
         const srcW = video.videoWidth || 640;
         const srcH = video.videoHeight || 360;
         const targetH = gcVideoH;
-        const targetW = Math.max(160, Math.round(srcW * (targetH / srcH) / 2) * 2);
+        const targetW = Math.max(160, Math.round(srcW * (targetH / Math.max(srcH, 1)) / 2) * 2);
+
+        // If source already smaller/equal — skip re-encode, return original (fast)
+        if (srcH > 0 && srcH <= targetH && gcFile) {
+          const _e = gcEls();
+          if (_e.progressFill) _e.progressFill.style.width = '100%';
+          if (_e.progressTxt) _e.progressTxt.textContent = 'Already at target · saving…';
+          return gcFile;
+        }
 
         const canvas = document.createElement('canvas');
         canvas.width = targetW;
         canvas.height = targetH;
         const ctx = canvas.getContext('2d');
 
-        const vStream = canvas.captureStream(24);
+        // Normal playback speed (1x) — only lower resolution/bitrate for quality
+        const speed = 1;
+        const fps = targetH >= 720 ? 24 : targetH >= 480 ? 20 : 15;
+        try { video.playbackRate = 1; } catch (e) {}
+
+        const vStream = canvas.captureStream(fps);
         let mixed = vStream;
         try {
           const full = video.captureStream ? video.captureStream() : null;
@@ -5965,11 +7234,13 @@ async function shareQR() {
           }
         } catch (e) { /* no audio track */ }
 
-        const bitrate = targetH >= 720 ? 1400000 : targetH >= 480 ? 800000 : targetH >= 360 ? 500000 : targetH >= 240 ? 280000 : 150000;
-        let mime = 'video/webm;codecs=vp9';
-        if (!MediaRecorder.isTypeSupported(mime)) mime = 'video/webm;codecs=vp8';
-        if (!MediaRecorder.isTypeSupported(mime)) mime = 'video/webm';
-        if (!MediaRecorder.isTypeSupported(mime)) mime = 'video/mp4';
+        const bitrate = targetH >= 1080 ? 2500000 : targetH >= 720 ? 1400000 : targetH >= 480 ? 700000 : targetH >= 360 ? 400000 : 180000;
+        let mime = '';
+        const mimeTry = ['video/mp4', 'video/webm;codecs=vp8', 'video/webm'];
+        for (const m of mimeTry) {
+          if (typeof MediaRecorder !== 'undefined' && MediaRecorder.isTypeSupported(m)) { mime = m; break; }
+        }
+        if (!mime) mime = 'video/webm';
 
         const chunks = [];
         const rec = new MediaRecorder(mixed, {
@@ -5979,35 +7250,51 @@ async function shareQR() {
         });
         rec.ondataavailable = e => { if (e.data && e.data.size) chunks.push(e.data); };
 
-        const done = new Promise(res => { rec.onstop = () => res(); });
+        let stopped = false;
+        const done = new Promise(res => {
+          rec.onstop = () => { stopped = true; res(); };
+        });
 
         video.currentTime = 0;
-        await video.play();
-        rec.start(200);
+        await new Promise(r => { video.onseeked = () => r(); setTimeout(r, 400); });
+        try { await video.play(); } catch (e) { throw new Error('Play blocked — tap Convert again'); }
+        rec.start(250);
 
         const duration = video.duration || 0;
         await new Promise(res => {
+          let finished = false;
+          const finish = () => { if (!finished) { finished = true; res(); } };
           const tick = () => {
-            if (video.ended || video.paused) { res(); return; }
-            ctx.drawImage(video, 0, 0, targetW, targetH);
-            if (duration) {
+            if (finished) return;
+            if (video.ended) { finish(); return; }
+            try { ctx.drawImage(video, 0, 0, targetW, targetH); } catch (e) {}
+            if (duration && isFinite(duration) && duration > 0) {
               const p = Math.min(99, (video.currentTime / duration) * 100);
               const _e = gcEls();
               if (_e.progressFill) _e.progressFill.style.width = p + '%';
-              if (_e.progressTxt) _e.progressTxt.textContent = 'Encoding… ' + Math.floor(p) + '%';
+              if (_e.progressTxt) _e.progressTxt.textContent = 'Encoding ' + targetH + 'p… ' + Math.floor(p) + '%';
             }
             requestAnimationFrame(tick);
           };
           tick();
-          video.onended = () => res();
+          video.onended = () => finish();
+          // safety: duration/speed + 3s buffer
+          const waitMs = (duration && isFinite(duration) ? (duration / speed) + 3 : 30) * 1000;
+          setTimeout(finish, waitMs);
         });
 
-        if (rec.state !== 'inactive') rec.stop();
-        await done;
-        video.pause();
+        try { video.pause(); } catch (e) {}
+        if (rec.state !== 'inactive') {
+          try { rec.stop(); } catch (e) {}
+        }
+        // wait for onstop, max 3s
+        await Promise.race([done, new Promise(r => setTimeout(r, 3000))]);
 
-        const ext = mime.includes('mp4') ? 'mp4' : 'webm';
-        return new Blob(chunks, { type: mime }) ;
+        if (!chunks.length) throw new Error('Encode produced empty file');
+        const _e2 = gcEls();
+        if (_e2.progressFill) _e2.progressFill.style.width = '100%';
+        if (_e2.progressTxt) _e2.progressTxt.textContent = 'Finishing… 100%';
+        return new Blob(chunks, { type: mime });
       }
 
       // ── AUDIO only extract (reliable) ──
@@ -6169,8 +7456,11 @@ async function shareQR() {
             if (el.progressTxt) el.progressTxt.textContent = 'Encoding video (keep screen on)…';
             const blob = await compressVideo();
             if (el.progressFill) el.progressFill.style.width = '100%';
-            downloadBlob(blob, 'BAIJID.mp4');
-            toastMsg('Video ready · ' + fmtSize(blob.size));
+            const isMp4 = (blob.type || '').includes('mp4');
+            const vext = isMp4 ? 'mp4' : 'webm';
+            const vname = 'BAIJID_' + (gcVideoH || 480) + 'p.' + vext;
+            downloadBlob(blob, vname);
+            toastMsg((gcVideoH || 480) + 'p · ' + fmtSize(blob.size) + (isMp4 ? ' · MP4' : ' · WEBM (browser limit)'));
           }
         } catch (e) {
           toastMsg(e.message || 'Convert failed', true);
@@ -6190,7 +7480,8 @@ async function shareQR() {
         try {
           const { audio, ext, kb } = await extractAudioOnly();
           if (el.progressFill) el.progressFill.style.width = '100%';
-          downloadBlob(audio, 'BAIJID.mp3');
+          const aname = 'BAIJID_128k.' + (ext || 'webm');
+          downloadBlob(audio, aname);
           toastMsg('Audio ' + (kb || 128) + 'k ready · ' + fmtSize(audio.size));
         } catch (e) {
           console.error(e);
@@ -6208,8 +7499,23 @@ async function shareQR() {
       const inp = document.getElementById('headerSearchInput');
       const q = (inp && inp.value) ? inp.value.trim() : '';
       if (!q) return;
+
+      // The same header search box changes its job with the active page.
+      const active = document.querySelector('.tab-section.active');
+      const id = active ? active.id : 'tab-home';
+
+      if (id === 'tab-platforms') {
+        searchPlatformTools(q);
+        return;
+      }
+      if (id === 'tab-faq') {
+        searchSettingsCards(q);
+        return;
+      }
+
+      // HOME: Google search.
       window.open('https://www.google.com/search?q=' + encodeURIComponent(q), '_blank', 'noopener');
-      if (inp) inp.value = '';
+      inp.value = '';
     }
     function updateHeaderClock() {
       const el = document.getElementById('headerClock');
@@ -6227,7 +7533,128 @@ async function shareQR() {
     updateHeaderClock();
     setInterval(updateHeaderClock, 1000);
 
-    // ═══════════════════════════
+    function normalizeSearchText(v) {
+      return String(v || '').toLowerCase().replace(/\s+/g, ' ').trim();
+    }
+
+    function setSearchPlaceholder(tab) {
+      const inp = document.getElementById('headerSearchInput');
+      if (!inp) return;
+      inp.placeholder = tab === 'home' ? 'google search'
+        : tab === 'platforms' ? 'tool search'
+        : 'find card';
+      inp.setAttribute('aria-label', inp.placeholder);
+      inp.value = '';
+      clearPageSearch();
+    }
+
+    function clearPageSearch() {
+      document.querySelectorAll('.search-match').forEach(el => el.classList.remove('search-match'));
+      document.querySelectorAll('.search-hidden').forEach(el => el.classList.remove('search-hidden'));
+      const p = document.getElementById('platformSearchEmpty');
+      const s = document.getElementById('settingsSearchEmpty');
+      if (p) p.classList.remove('show');
+      if (s) s.classList.remove('show');
+    }
+
+    function searchPlatformTools(query) {
+      const q = normalizeSearchText(query);
+
+      const roots = [
+        document.getElementById('hardPlatforms'),
+        document.getElementById('customPlatforms')
+      ];
+      const cards = [];
+      roots.forEach(root => {
+        if (root) root.querySelectorAll('.plat-card').forEach(c => cards.push(c));
+      });
+
+      let found = 0;
+
+      // Live filtering: results update on every character, without Enter.
+      cards.forEach(card => {
+        const hay = normalizeSearchText(
+          card.innerText + ' ' + (card.getAttribute('data-search') || '')
+        );
+        const match = !q || hay.includes(q);
+
+        card.classList.toggle('search-hidden', !match);
+        card.classList.toggle('search-match', !!q && match);
+
+        if (match) found++;
+      });
+
+      // Hide ADD while a search is active, restore it when search is cleared.
+      const plus = document.querySelector('#tab-platforms .plat-plus-btn');
+      if (plus) plus.classList.toggle('search-hidden', !!q);
+
+      const empty = document.getElementById('platformSearchEmpty');
+      if (empty) {
+        empty.textContent = found ? '' : 'NO TOOL FOUND FOR "' + query + '"';
+        empty.classList.toggle('show', !!q && found === 0);
+      }
+    }
+    function searchSettingsCards(query) {
+      const q = normalizeSearchText(query);
+      const section = document.getElementById('tab-faq');
+      if (!section) return;
+
+      // SETTINGS LIVE SEARCH:
+      // Match ONLY each card/box title/name, never its inner answer/content.
+      const faqCards = Array.from(section.querySelectorAll('.faq-item'));
+      const settingRows = Array.from(section.querySelectorAll('.settings-row-glass'));
+
+      let found = 0;
+
+      faqCards.forEach(card => {
+        const titleEl = card.querySelector('.faq-q-txt');
+        const title = titleEl
+          ? titleEl.innerText
+          : (card.getAttribute('data-name') || '');
+
+        const match = !q || normalizeSearchText(title).includes(q);
+        card.classList.toggle('search-hidden', !match);
+        card.classList.toggle('search-match', !!q && match);
+        if (match) found++;
+      });
+
+      settingRows.forEach(row => {
+        // Search only the setting's visible name/label.
+        const label = row.firstElementChild
+          ? row.firstElementChild.innerText
+          : '';
+
+        const match = !q || normalizeSearchText(label).includes(q);
+        row.classList.toggle('search-hidden', !match);
+        row.classList.toggle('search-match', !!q && match);
+        if (match) found++;
+      });
+
+      const empty = document.getElementById('settingsSearchEmpty');
+      if (empty) {
+        empty.textContent = found ? '' : 'NO CARD FOUND FOR "' + query + '"';
+        empty.classList.toggle('show', !!q && found === 0);
+      }
+    }
+
+    // Live input listener for PLATFORMS + SETTINGS.
+    // HOME is intentionally left as the original Google-search behavior.
+    document.addEventListener('input', function (event) {
+      const inp = event.target;
+      if (!inp || inp.id !== 'headerSearchInput') return;
+
+      const active = document.querySelector('.tab-section.active');
+      const id = active ? active.id : 'tab-home';
+      const q = inp.value.trim();
+
+      if (id === 'tab-platforms') {
+        searchPlatformTools(q);
+      } else if (id === 'tab-faq') {
+        searchSettingsCards(q);
+      }
+    });
+
+        // ═══════════════════════════
     // TOAST
     // ═══════════════════════════
     function toastMsg(msg, err = false) {
@@ -6260,18 +7687,19 @@ async function shareQR() {
         <div class="gc-preview" id="gcPreview"></div>
         <div class="gc-meta" id="gcMeta"></div>
         <div class="gc-opts" id="gcOptsVideo">
-          <div class="gc-opt-label">Video quality</div>
+          <div class="gc-opt-label">Video quality (size depends on length)</div>
           <div class="gc-opt-row">
-            <button type="button" class="gc-chip" data-vq="720" onclick="gcSelectChip(this,'video')">720p</button>
-            <button type="button" class="gc-chip on" data-vq="480" onclick="gcSelectChip(this,'video')">480p</button>
-            <button type="button" class="gc-chip" data-vq="360" onclick="gcSelectChip(this,'video')">360p</button>
-            <button type="button" class="gc-chip" data-vq="180" onclick="gcSelectChip(this,'video')">180p</button>
+            <button type="button" class="gc-chip" data-vq="1080" onclick="gcSelectChip(this,'video')">1080p · larger</button>
+            <button type="button" class="gc-chip" data-vq="720" onclick="gcSelectChip(this,'video')">720p · ~5Mbps</button>
+            <button type="button" class="gc-chip on" data-vq="480" onclick="gcSelectChip(this,'video')">480p · ~2.5Mbps</button>
+            <button type="button" class="gc-chip" data-vq="360" onclick="gcSelectChip(this,'video')">360p · ~1Mbps</button>
+            <button type="button" class="gc-chip" data-vq="180" onclick="gcSelectChip(this,'video')">180p · smallest</button>
           </div>
         </div>
         <div class="gc-opts" id="gcOptsAudio">
           <div class="gc-opt-label">Audio only (from video)</div>
           <div class="gc-opt-row">
-            <button type="button" class="gc-chip on" data-abit="128000" onclick="gcSelectChip(this,'audio')">128k</button>
+            <button type="button" class="gc-chip on" data-abit="128000" onclick="gcSelectChip(this,'audio')">128k · ~1MB / min</button>
           </div>
         </div>
         <div class="gc-opts" id="gcOptsImage">
@@ -6336,8 +7764,9 @@ async function shareQR() {
       <label>Link (optional)</label>
       <input type="url" id="apLink" placeholder="https://example.com">
       <div class="hint">Example: https://snapinsta.to/en46</div>
-      <label>Logo image URL (optional)</label>
-      <input type="url" id="apLogoUrl" placeholder="https://example.com/logo.png">
+      <label>Logo URL or Tabler icon (optional)</label>
+      <input type="text" id="apLogoUrl" placeholder="https://… or ti ti-brand-twitter">
+      <div class="hint">Image link অথবা আইকন: ti ti-brand-youtube · ti-brand-instagram · ti ti-search · ti-trash</div>
       <label>Or logo from gallery</label>
       <label class="file-btn" for="apLogoFile">🖼️ Upload logo image</label>
       <input type="file" id="apLogoFile" accept="image/*" style="display:none">
@@ -6708,6 +8137,133 @@ async function shareQR() {
 })();
 </script>
 
+
+<!-- ===== LIVE WEATHER UI ===== -->
+<div id="baijidWeatherWidget" aria-live="polite">
+  <div class="bw-card">
+    <button class="bw-card-close" type="button" onclick="bwCloseWidget()" aria-label="Close weather">×</button>
+    <div class="bw-top">
+      <div><div class="bw-temp" id="bwTemp">--.-<small>°C</small></div><div class="bw-location" onclick="bwOpenDistricts()"><i class="ti ti-map-pin"></i><span id="bwLocation">বাংলাদেশ</span></div></div>
+      <div class="bw-condition" id="bwCondition">LOADING</div>
+    </div>
+    <div class="bw-meta">
+      <div class="bw-meta-item"><div class="bw-meta-label">WIND</div><div class="bw-meta-value" id="bwWind">-- km/h</div></div>
+      <div class="bw-meta-item"><div class="bw-meta-label">HUMIDITY</div><div class="bw-meta-value" id="bwHumidity">--%</div></div>
+      <div class="bw-meta-item"><div class="bw-meta-label">RAIN CHANCE</div><div class="bw-meta-value" id="bwRain">--%</div></div>
+    </div>
+    <div class="bw-socials">
+      <a class="bw-social" id="bwTelegram" href="https://t.me/" target="_blank" rel="noopener" aria-label="Telegram"><i class="ti ti-brand-telegram"></i></a>
+      <a class="bw-social" id="bwFacebook" href="https://facebook.com/" target="_blank" rel="noopener" aria-label="Facebook"><i class="ti ti-brand-facebook"></i></a>
+      <a class="bw-social" id="bwMessenger" href="https://m.me/" target="_blank" rel="noopener" aria-label="Messenger"><i class="ti ti-brand-messenger"></i></a>
+    </div>
+    <div class="bw-update" id="bwUpdate">LIVE WEATHER · --</div>
+  </div>
+</div>
+
+<div id="bwDistrictModal" onclick="if(event.target===this)bwCloseDistricts()">
+  <div class="bw-district-sheet">
+    <div class="bw-sheet-head"><div class="bw-sheet-title">SELECT DISTRICT · BANGLADESH</div><button class="bw-sheet-close" onclick="bwCloseDistricts()" aria-label="Close">×</button></div>
+    <div class="bw-district-grid" id="bwDistrictGrid"></div>
+  </div>
+</div>
+
+<script id="baijid-live-weather-script">
+(function(){
+  'use strict';
+  const districts = [
+    ['ঢাকা','Dhaka',23.8103,90.4125],['গাজীপুর','Gazipur',24.0023,90.4264],['নারায়ণগঞ্জ','Narayanganj',23.6238,90.5000],['নরসিংদী','Narsingdi',23.9322,90.7151],['মুন্সীগঞ্জ','Munshiganj',23.5422,90.5305],['মানিকগঞ্জ','Manikganj',23.8617,90.0003],['টাঙ্গাইল','Tangail',24.2513,89.9167],['কিশোরগঞ্জ','Kishoreganj',24.4449,90.7766],
+    ['নেত্রকোনা','Netrokona',24.8700,90.7270],['ময়মনসিংহ','Mymensingh',24.7471,90.4203],['জামালপুর','Jamalpur',24.9375,89.9370],['শেরপুর','Sherpur',25.0205,90.0153],
+    ['ফরিদপুর','Faridpur',23.6070,89.8429],['গোপালগঞ্জ','Gopalganj',23.0051,89.8266],['মাদারীপুর','Madaripur',23.1641,90.1897],['রাজবাড়ী','Rajbari',23.7574,89.6445],['শরীয়তপুর','Shariatpur',23.2423,90.4348],
+    ['চট্টগ্রাম','Chattogram',22.3569,91.7832],['কক্সবাজার','Coxs Bazar',21.4272,92.0058],['কুমিল্লা','Cumilla',23.4607,91.1809],['ব্রাহ্মণবাড়িয়া','Brahmanbaria',23.9571,91.1119],['চাঁদপুর','Chandpur',23.2333,90.6712],['ফেনী','Feni',22.9409,91.4067],['লক্ষ্মীপুর','Lakshmipur',22.9447,90.8412],['নোয়াখালী','Noakhali',22.8696,91.0994],['খাগড়াছড়ি','Khagrachhari',23.1193,91.9847],['রাঙ্গামাটি','Rangamati',22.7324,92.2985],['বান্দরবান','Bandarban',22.1953,92.2184],
+    ['রাজশাহী','Rajshahi',24.3745,88.6042],['নাটোর','Natore',24.4206,89.0000],['নওগাঁ','Naogaon',24.7936,88.9318],['চাঁপাইনবাবগঞ্জ','Chapainawabganj',24.5965,88.2775],['পাবনা','Pabna',24.0064,89.2372],['সিরাজগঞ্জ','Sirajganj',24.4534,89.7007],['বগুড়া','Bogura',24.8481,89.3730],['জয়পুরহাট','Joypurhat',25.0968,89.0227],
+    ['রংপুর','Rangpur',25.7439,89.2752],['দিনাজপুর','Dinajpur',25.6279,88.6332],['ঠাকুরগাঁও','Thakurgaon',26.0336,88.4616],['পঞ্চগড়','Panchagarh',26.3411,88.5542],['নীলফামারী','Nilphamari',25.9318,88.8560],['লালমনিরহাট','Lalmonirhat',25.9167,89.4500],['কুড়িগ্রাম','Kurigram',25.8054,89.6362],['গাইবান্ধা','Gaibandha',25.3288,89.5280],
+    ['খুলনা','Khulna',22.8456,89.5403],['বাগেরহাট','Bagerhat',22.6516,89.7859],['সাতক্ষীরা','Satkhira',22.7185,89.0705],['যশোর','Jashore',23.1664,89.2081],['ঝিনাইদহ','Jhenaidah',23.5450,89.1726],['মাগুরা','Magura',23.4873,89.4190],['নড়াইল','Narail',23.1725,89.5127],['কুষ্টিয়া','Kushtia',23.9013,89.1200],['চুয়াডাঙ্গা','Chuadanga',23.6402,88.8418],['মেহেরপুর','Meherpur',23.7622,88.6318],
+    ['বরিশাল','Barishal',22.7010,90.3535],['ভোলা','Bhola',22.6859,90.6482],['পটুয়াখালী','Patuakhali',22.3596,90.3299],['বরগুনা','Barguna',22.0953,90.1121],['ঝালকাঠি','Jhalokathi',22.6406,90.1987],['পিরোজপুর','Pirojpur',22.5841,89.9720],
+    ['সিলেট','Sylhet',24.8949,91.8687],['মৌলভীবাজার','Moulvibazar',24.4829,91.7774],['হবিগঞ্জ','Habiganj',24.3745,91.4155],['সুনামগঞ্জ','Sunamganj',25.0658,91.3950]
+  ];
+  let selected = JSON.parse(localStorage.getItem('baijid_weather_district') || 'null') || districts[0];
+  let lastDaily = null;
+  let busy = false;
+  const $=id=>document.getElementById(id);
+  function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+  function renderDistricts(){
+    const g=$('bwDistrictGrid'); if(!g)return;
+    g.innerHTML=districts.map((d,i)=>'<button class="bw-district-btn '+(selected[1]===d[1]?'selected':'')+'" onclick="bwSelectDistrict('+i+')">'+esc(d[0])+'</button>').join('');
+  }
+  window.bwOpenDistricts=function(){renderDistricts();$('bwDistrictModal').style.display='flex';document.body.style.overflow='hidden';};
+  window.bwCloseDistricts=function(){const m=$('bwDistrictModal');if(m)m.style.display='none';document.body.style.overflow='';};
+  window.bwSelectDistrict=function(i){selected=districts[i];localStorage.setItem('baijid_weather_district',JSON.stringify(selected));$('bwLocation').textContent=selected[0];bwCloseDistricts();fetchWeather(true);};
+  function condition(code,rain,cloud){
+    if(rain>0.5 || [51,53,55,56,57,61,63,65,66,67,80,81,82,95,96,99].includes(code)){
+      if(rain>=5)return 'HEAVY RAIN'; if(rain>=1)return 'MODERATE RAIN'; return 'LIGHT RAIN';
+    }
+    if(code===0)return 'CLEAR SKY'; if([1,2].includes(code))return 'PARTLY CLOUDY'; if(code===3 || cloud>=75)return 'CLOUDY';
+    if([45,48].includes(code))return 'FOGGY'; return 'CLOUDY';
+  }
+  function cloudLevel(code,cloud){if([3,45,48].includes(code)||cloud>=80)return 'heavy';if([2].includes(code)||cloud>=45)return 'medium';if([1].includes(code)||cloud>=15)return 'light';return 'clear';}
+  function rainLevel(rain,code){if(rain>=5||[65,67,82,95,96,99].includes(code))return 'heavy';if(rain>=1||[53,55,57,63,66,81].includes(code))return 'medium';if(rain>0||[51,56,61,80].includes(code))return 'light';return 'none';}
+  function updateSky(now,code,cloud,rain,sunrise,sunset){
+    const moon=document.querySelector('.spooky-house .moon'); if(!moon)return;
+    const effects=document.querySelector('.weather-sky-effects'); const stars=document.querySelector('.weather-stars');
+    if(!effects)return;
+    const ms=now.getTime(), sr=new Date(sunrise).getTime(), ss=new Date(sunset).getTime();
+    const isDay=ms>=sr && ms<ss;
+    moon.classList.remove('weather-sun','weather-moon','sun-morning','sun-noon','sun-afternoon');
+    effects.className='weather-sky-effects';
+    document.querySelectorAll('.weather-rain').forEach(e=>e.className='weather-rain');
+    if(isDay){
+      moon.classList.add('weather-sun');
+      const h=now.getHours()+now.getMinutes()/60;
+      if(h<12)moon.classList.add('sun-morning'); else if(h<15)moon.classList.add('sun-noon'); else moon.classList.add('sun-afternoon');
+      effects.classList.add('day');
+    }else{
+      moon.classList.add('weather-moon');
+      stars.classList.add('show');
+    }
+    const cl=cloudLevel(code,cloud); if(cl!=='clear')effects.classList.add('cloud-'+cl);
+    // Rain data remains available in the weather card; no page-wide rain animation is shown.
+  }
+  async function fetchWeather(force){
+    if(busy)return; busy=true;
+    try{
+      const url='https://api.open-meteo.com/v1/forecast?latitude='+selected[2]+'&longitude='+selected[3]+'&current=temperature_2m,relative_humidity_2m,precipitation,rain,weather_code,cloud_cover,wind_speed_10m&daily=sunrise,sunset&timezone=Asia%2FDhaka&forecast_days=1';
+      const res=await fetch(url,{cache:'no-store'}); if(!res.ok)throw new Error('weather'); const d=await res.json();
+      const c=d.current||{}, daily=d.daily||{}; lastDaily=daily;
+      $('bwTemp').innerHTML=(Number(c.temperature_2m)||0).toFixed(1)+'<small>°C</small>';
+      $('bwLocation').textContent=selected[0];
+      $('bwCondition').textContent=condition(c.weather_code||0,Number(c.rain||c.precipitation||0),Number(c.cloud_cover||0));
+      $('bwWind').textContent=Math.round(Number(c.wind_speed_10m)||0)+' km/h';
+      $('bwHumidity').textContent=Math.round(Number(c.relative_humidity_2m)||0)+'%';
+      // Open-Meteo's daily precipitation probability is not requested here; use current rain/cloud as live state and request hourly probability separately.
+      let rainProb='--';
+      try{
+        const hurl='https://api.open-meteo.com/v1/forecast?latitude='+selected[2]+'&longitude='+selected[3]+'&hourly=precipitation_probability&timezone=Asia%2FDhaka&forecast_days=1';
+        const hr=await fetch(hurl,{cache:'no-store'}); if(hr.ok){const hd=await hr.json(); const idx=new Date().getHours(); rainProb=hd.hourly&&hd.hourly.precipitation_probability?hd.hourly.precipitation_probability[idx]:'--';}
+      }catch(e){}
+      $('bwRain').textContent=(rainProb==='--'?'--':Math.round(Number(rainProb))+'%');
+      $('bwUpdate').textContent='LIVE WEATHER · UPDATED '+new Date().toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit',second:'2-digit'});
+      if(daily.sunrise&&daily.sunset)updateSky(new Date(),c.weather_code||0,Number(c.cloud_cover||0),Number(c.rain||c.precipitation||0),daily.sunrise[0],daily.sunset[0]);
+    }catch(e){$('bwCondition').textContent='WEATHER UNAVAILABLE';$('bwUpdate').textContent='LIVE WEATHER · RETRYING';}
+    finally{busy=false;}
+  }
+  function injectSky(){
+    const circle=document.querySelector('.spooky-house .content-circle');if(!circle||document.querySelector('.weather-sky-effects'))return;
+    const fx=document.createElement('div');fx.className='weather-sky-effects';fx.innerHTML='<div class="weather-cloud c1"></div><div class="weather-cloud c2"></div><div class="weather-cloud c3"></div><div class="weather-rain"></div>';
+    const stars=document.createElement('div');stars.className='weather-stars';for(let i=0;i<11;i++){const s=document.createElement('span');s.className='weather-star';stars.appendChild(s);}circle.appendChild(fx);circle.appendChild(stars);
+  }
+  let weatherClosed=false;
+  window.bwCloseWidget=function(){weatherClosed=true;const w=$('baijidWeatherWidget');if(w)w.classList.add('bw-hidden');};
+  window.bwShowWidget=function(){weatherClosed=false;const w=$('baijidWeatherWidget');if(w)w.classList.remove('bw-hidden');};
+  function setup(){injectSky();$('bwLocation').textContent=selected[0];fetchWeather(true);setInterval(()=>fetchWeather(false),60000);}
+  // Keep the weather card visible only on HOME. The main showTab() below also calls this.
+  window.addEventListener('baijid:tabchange',function(e){
+    const w=$('baijidWeatherWidget'); if(!w)return;
+    if(e.detail==='home'){if(!weatherClosed)w.classList.remove('bw-hidden');}
+    else w.classList.add('bw-hidden');
+  });
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',function(){setup();window.dispatchEvent(new CustomEvent('baijid:tabchange',{detail:'home'}));});else {setup();window.dispatchEvent(new CustomEvent('baijid:tabchange',{detail:'home'}));}
+})();
+</script>
 </body>
 
 </html>
