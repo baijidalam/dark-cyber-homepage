@@ -1519,7 +1519,9 @@
     }
 
     .plat-card {
-      background: var(--bg1);
+      background: color-mix(in srgb, var(--a) 14%, transparent);
+      backdrop-filter: blur(5px);
+      -webkit-backdrop-filter: blur(5px);
       border: 1px solid var(--brda);
       border-radius: 16px;
       padding: 16px 10px 14px;
@@ -2293,7 +2295,9 @@
   
     /* Plus buttons */
     #hardPlatforms,
-    #customPlatforms { display: contents; }
+    #customPlatforms,
+    #hardApps,
+    #customApps { display: contents; }
 
     /* iOS-style remove sheet */
     .ios-rm-overlay {
@@ -2663,8 +2667,7 @@
       flex-shrink: 0;
       margin-left: auto;
     }
-    .header-search-input {
-      width: 96px;
+    .header-search-input { color: #ff0033; caret-color: #ff0033;
       max-width: 96px;
       padding: 4px 10px;
       border-radius: 12px;
@@ -2677,9 +2680,7 @@
       letter-spacing: 0.3px;
       outline: none;
       transition: border-color 0.2s, width 0.2s;
-    }
-    .header-search-input::placeholder {
-      color: var(--txd);
+    } .header-search-input::placeholder { color: #ff0033; opacity: 1;
       font-size: 0.58rem;
       font-weight: 600;
     }
@@ -2828,8 +2829,7 @@
 </head>
 
 <body>
-
-  <!-- SPOOKY HOUSE + BAIJID PAGE -->
+<!-- SPOOKY HOUSE + BAIJID PAGE -->
   <div class="spooky-house">
     <div class="content-circle">
       <div class="moon"></div>
@@ -2948,6 +2948,10 @@
         <i class="ti ti-apps bnav-icon"></i>
         <span class="bnav-lbl">PLATFORMS</span>
       </div>
+      <div class="bnav-btn" onclick="showTab('apps',this)">
+        <i class="ti ti-tool bnav-icon"></i>
+        <span class="bnav-lbl">APP</span>
+      </div>
       <div class="bnav-btn" onclick="showTab('faq',this)">
         <i class="ti ti-settings bnav-icon"></i>
         <span class="bnav-lbl">SETTINGS</span>
@@ -2994,7 +2998,19 @@
       </div>
     </div>
 
-<div class="tab-section" id="tab-faq">
+<div class="tab-section" id="tab-apps">
+      <div class="search-no-results" id="appSearchEmpty">NO APP FOUND</div>
+      <div class="platform-grid" style="margin-top:12px;">
+          <div id="hardApps"></div>
+          <div id="customApps"></div>
+          <button type="button" class="plat-plus-btn app-plus-btn" onclick="openAddAppModal()">
+            <i class="ti ti-plus"></i>
+            <span>ADD</span>
+          </button>
+      </div>
+    </div>
+
+    <div class="tab-section" id="tab-faq">
       <div class="search-no-results" id="settingsSearchEmpty">NO CARD FOUND</div>
       <div class="card">
         <div class="section-label">Settings</div>
@@ -3108,34 +3124,47 @@
 
     (function () {
       const chk = document.getElementById('checkboxInput');
+      const pl = document.getElementById('preloader');
+      const pct = document.getElementById('plPct');
+
       if (chk) {
-        if (localStorage.getItem('baijid_hide_preloader') === 'true') {
-          chk.checked = false;
-        } else {
-          chk.checked = true;
-        }
+        chk.checked = localStorage.getItem('baijid_hide_preloader') !== 'true';
       }
 
-      if (localStorage.getItem('baijid_hide_preloader') === 'true') {
-        const pl = document.getElementById('preloader');
-        if (pl) pl.style.display = 'none';
-        return;
-      }
-      let p = 0;
-      const pct = document.getElementById('plPct');
-      const totalMs = 3000;
-      const stepMs = 50;
-      const steps = totalMs / stepMs;
-      let step = 0;
-      const iv = setInterval(() => {
-        step++;
-        p = Math.min(100, (step / steps) * 100);
-        pct.textContent = Math.floor(p) + '%';
-        if (p >= 100) {
-          clearInterval(iv);
-          setTimeout(() => { document.getElementById('preloader').classList.add('out'); }, 300);
+      function startMainPreloader() {
+        if (!pl || !pct) return;
+        if (localStorage.getItem('baijid_hide_preloader') === 'true') {
+          pl.style.display = 'none';
+          return;
         }
-      }, stepMs);
+
+        pl.style.display = 'flex';
+        pl.classList.remove('out');
+        pct.textContent = '0%';
+
+        const totalMs = 3000;
+        const stepMs = 50;
+        const steps = totalMs / stepMs;
+        let step = 0;
+        const iv = setInterval(() => {
+          step++;
+          const p = Math.min(100, (step / steps) * 100);
+          pct.textContent = Math.floor(p) + '%';
+          if (p >= 100) {
+            clearInterval(iv);
+            setTimeout(() => {
+              if (pl) pl.classList.add('out');
+            }, 300);
+          }
+        }, stepMs);
+      }
+
+      // Do not consume the Main Page's 3-second loading screen behind the Login Page.
+      // It starts only after a successful online login.
+      window.baijidStartMainPreloader = startMainPreloader;
+
+      // Login Page removed: Main Page preloader starts directly.
+      startMainPreloader();
     })();
 
     // ═══════════════════════════
@@ -3266,10 +3295,10 @@
       document.body.style.overflow = '';
     }
 
-    // DEFAULT_PLATFORMS
+    // DEFAULT_PLATFORMS_ADD
     // { name: "name", logo: "https://logo.jpg", link: "https://site.com", icon: "ti ti-world" }, // #9
     // { name: "name", logo: "https://logo.jpg", html: `HTML`, icon: "ti ti-world" }, // #9
-    const DEFAULT_PLATFORMS = [
+    const DEFAULT_PLATFORMS_ADD = [
       { name: "OUR WEBSITE", special: "ourweb", link: "https://baijidalam.github.io/my-contac-details/", emoji: "🧑‍💻" }, // #1
       { name: "age-pro", link: "https://baijidalam.github.io/age-calculate-pro/", icon: "ti ti-old" }, // #2
       { name: "INSTAGRAM", link: "https://snapinsta.to/en46", icon: "ti ti-brand-instagram" }, // #2
@@ -5692,7 +5721,7 @@ async function shareQR() {
       const box = document.getElementById('hardPlatforms');
       if (!box) return;
       let html = '';
-      DEFAULT_PLATFORMS.forEach(function (p, i) {
+      DEFAULT_PLATFORMS_ADD.forEach(function (p, i) {
         const num = i + 1;
         const badge = '<span class="plat-badge live">#' + num + '</span>';
         let iconHtml = '';
@@ -5724,7 +5753,7 @@ async function shareQR() {
     }
 
     function openHardPlatform(idx) {
-      const p = DEFAULT_PLATFORMS[idx];
+      const p = DEFAULT_PLATFORMS_ADD[idx];
       if (!p) return;
       if (p.html) {
         if (typeof openHtmlInModal === 'function') openHtmlInModal(p.name, p.html);
@@ -5737,7 +5766,7 @@ async function shareQR() {
     // backward compat for any old onclick
     function openPlatformInterface(num) {
       const idx = (parseInt(num, 10) || 0) - 1;
-      if (idx >= 0 && DEFAULT_PLATFORMS[idx] && DEFAULT_PLATFORMS[idx].html) {
+      if (idx >= 0 && DEFAULT_PLATFORMS_ADD[idx] && DEFAULT_PLATFORMS_ADD[idx].html) {
         openHardPlatform(idx);
         return;
       }
@@ -5757,10 +5786,17 @@ async function shareQR() {
 
     
 
-        // DEFAULT_HOME_PINS
+        // ══════════════════════════════════════════════════════════════
+// MAIN CODE ADD POINTS — SEARCH THESE NAMES TO ADD YOUR OWN ITEMS
+// DEFAULT_PINS_ADD      = Home Pins
+// DEFAULT_PLATFORMS_ADD = Platform / Tools
+// DEFAULT_APP_ADD       = Apps
+// DEFAULT_CARD_ADD      = Settings Cards
+// ══════════════════════════════════════════════════════════════
+// DEFAULT_PINS_ADD
     // { name: "name", logo: "https://logo.jpg", link: "https://site.com", icon: "ti ti-world" }, // #7
     // { name: "name", logo: "https://logo.jpg", html: `HTML`, icon: "ti ti-world" }, // #7
-    const DEFAULT_HOME_PINS = [
+    const DEFAULT_PINS_ADD = [
       { name: "Facebook", link: "https://www.facebook.com", icon: "ti ti-brand-facebook" }, // #1
       { name: "Instagram", link: "https://www.instagram.com", icon: "ti ti-brand-instagram" }, // #2
       { name: "GitHub", link: "https://github.com", icon: "ti ti-brand-github" }, // #3
@@ -5901,7 +5937,7 @@ async function shareQR() {
       localStorage.setItem(LS_HOME, JSON.stringify(arr));
     }
     function allHomePins() {
-      return DEFAULT_HOME_PINS.map((p, i) => Object.assign({}, p, { _src: 'default', id: 'd' + i }))
+      return DEFAULT_PINS_ADD.map((p, i) => Object.assign({}, p, { _src: 'default', id: 'd' + i }))
         .concat(getLocalHomePins().map(p => Object.assign({}, p, { _src: 'local' })));
     }
 
@@ -6203,7 +6239,7 @@ async function shareQR() {
       var box = document.getElementById('customPlatforms');
       if (!box) return;
       var arr = getPlatforms();
-      var base = (typeof DEFAULT_PLATFORMS !== 'undefined') ? DEFAULT_PLATFORMS.length : 0;
+      var base = (typeof DEFAULT_PLATFORMS_ADD !== 'undefined') ? DEFAULT_PLATFORMS_ADD.length : 0;
       box.innerHTML = arr.map(function (p, i) {
         var icon = p.logo
           ? '<img src="' + String(p.logo).replace(/"/g, '&quot;') + '" alt="">'
@@ -6251,7 +6287,7 @@ async function shareQR() {
       var title = document.getElementById('iosRmTitle');
       var sub = document.getElementById('iosRmSub');
       if (title) title.textContent = 'Remove “' + (name || 'item') + '”?';
-      if (sub) sub.textContent = kind === 'pin' ? 'This pin will be removed from this device' : 'This platform will be removed from this device';
+      if (sub) sub.textContent = kind === 'pin' ? 'This pin will be removed from this device' : kind === 'app' ? 'This app will be removed from this device' : 'This platform will be removed from this device';
       var ov = document.getElementById('iosRmOverlay');
       if (ov) ov.classList.add('open');
       document.body.style.overflow = 'hidden';
@@ -6270,6 +6306,8 @@ async function shareQR() {
         if (typeof removeLocalHomePin === 'function') removeLocalHomePin(id);
       } else if (kind === 'plat') {
         if (typeof removePlatform === 'function') removePlatform(id);
+      } else if (kind === 'app') {
+        if (typeof removeApp === 'function') removeApp(id);
       } else if (kind === 'faq') {
         if (typeof removeFaq === 'function') removeFaq(id);
       }
@@ -6280,10 +6318,190 @@ async function shareQR() {
     window.bindLongPress = bindLongPress;
 
     // ═══════════════════════════
+    // APPS — same card system as PLATFORM, with APK upload
+    // ═══════════════════════════
+    const LS_APPS = (document.title || 'BAIJID') + '_custom_apps';
+    const APP_APK_DB = (document.title || 'BAIJID') + '_apk_files';
+
+    // DEFAULT_APP-ADD
+    // Main-code APPs live here. এগুলো ইউজার long-press করে remove করতে পারবে না।
+    // { name: "name", logo: "https://logo.jpg", link: "https://site.com", icon: "ti ti-world" }, // #1
+    // { name: "name", logo: "https://logo.jpg", link: "https://site.com", icon: "ti ti-world" }, // #2
+    const DEFAULT_APP_ADD = [
+      { name: "CALCULATOR", link: "https://www.google.com/search?q=calculator", icon: "ti ti-calculator" }, // #1
+      { name: "GITHUB", link: "https://github.com/", icon: "ti ti-brand-github" }, // #2
+      { name: "YOUTUBE", link: "https://www.youtube.com/", icon: "ti ti-brand-youtube" }, // #3
+      { name: "GOOGLE", link: "https://www.google.com/", icon: "ti ti-brand-google" } // #4
+    ];
+
+    // Backward-compatible alias used internally for numbering/old code.
+    const DEFAULT_APPS = DEFAULT_APP_ADD;
+    let _pendingAppApk = null;
+    let _pendingAppLogoData = null;
+    let _appDbPromise = null;
+
+    function openAppApkDB(){
+      if(_appDbPromise) return _appDbPromise;
+      _appDbPromise=new Promise(function(resolve,reject){
+        if(!window.indexedDB){resolve(null);return;}
+        var req=indexedDB.open(APP_APK_DB,1);
+        req.onupgradeneeded=function(){
+          var db=req.result;
+          if(!db.objectStoreNames.contains('files')) db.createObjectStore('files');
+        };
+        req.onsuccess=function(){resolve(req.result);};
+        req.onerror=function(){resolve(null);};
+      });
+      return _appDbPromise;
+    }
+    async function saveAppApk(id,file){
+      var db=await openAppApkDB();
+      if(!db) throw new Error('APK storage unavailable');
+      return new Promise(function(resolve,reject){
+        var tx=db.transaction('files','readwrite');
+        tx.objectStore('files').put(file,id);
+        tx.oncomplete=function(){resolve(true);};
+        tx.onerror=function(){reject(tx.error||new Error('APK save failed'));};
+      });
+    }
+    async function getAppApk(id){
+      var db=await openAppApkDB();
+      if(!db) return null;
+      return new Promise(function(resolve){
+        var tx=db.transaction('files','readonly');
+        var req=tx.objectStore('files').get(id);
+        req.onsuccess=function(){resolve(req.result||null);};
+        req.onerror=function(){resolve(null);};
+      });
+    }
+    async function deleteAppApk(id){
+      var db=await openAppApkDB();
+      if(!db) return;
+      try{
+        var tx=db.transaction('files','readwrite');
+        tx.objectStore('files').delete(id);
+      }catch(e){}
+    }
+
+    function seedDemoAppsOnce(){
+      // আগের ভার্সনে demo app-গুলো custom storage-এ যেত।
+      // এখন এগুলো main-code DEFAULT_APP_ADD, তাই পুরোনো demo IDs থাকলে শুধু সেগুলো পরিষ্কার করি।
+      try{
+        var arr=getApps();
+        var oldDemo=/^demo-app-[1-4]$/;
+        var cleaned=arr.filter(function(a){return !oldDemo.test(String(a&&a.id||''));});
+        if(cleaned.length!==arr.length) setApps(cleaned);
+      }catch(e){}
+    }
+    function openAddAppModal(){
+      _pendingAppApk=null;
+      _pendingAppLogoData=null;
+      var n=document.getElementById('aaName'); if(n)n.value='';
+      var l=document.getElementById('aaLink'); if(l)l.value='';
+      var lu=document.getElementById('aaLogoUrl'); if(lu)lu.value='';
+      var lh=document.getElementById('aaLogoHint'); if(lh)lh.textContent='No logo — auto icon from name';
+      var ah=document.getElementById('aaApkHint'); if(ah)ah.textContent='No APK selected';
+      var lf=document.getElementById('aaLogoFile'); if(lf)lf.value='';
+      var af=document.getElementById('aaApkFile'); if(af)af.value='';
+      var m=document.getElementById('addAppModal'); if(m)m.classList.add('open');
+    }
+    function closeAddAppModal(){var m=document.getElementById('addAppModal');if(m)m.classList.remove('open');}
+    function bindAppFiles(){
+      var li=document.getElementById('aaLogoFile');
+      if(li&&!li._bound){
+        li._bound=true;
+        li.addEventListener('change',function(e){
+          var f=e.target.files&&e.target.files[0];if(!f)return;
+          var r=new FileReader();
+          r.onload=function(){_pendingAppLogoData=r.result;var h=document.getElementById('aaLogoHint');if(h)h.textContent=f.name+' · ready';};
+          r.readAsDataURL(f);
+        });
+      }
+      var ai=document.getElementById('aaApkFile');
+      if(ai&&!ai._bound){
+        ai._bound=true;
+        ai.addEventListener('change',function(e){
+          var f=e.target.files&&e.target.files[0];if(!f)return;
+          var name=(f.name||'').toLowerCase();
+          if(!/\.apk$/.test(name)){
+            ai.value='';_pendingAppApk=null;
+            toastMsg('Please select an APK file',true);return;
+          }
+          _pendingAppApk=f;
+          var h=document.getElementById('aaApkHint');
+          if(h)h.textContent=f.name+' · '+(Math.max(1,f.size/1024/1024).toFixed(2))+' MB · ready';
+        });
+      }
+    }
+    function getApps(){try{return JSON.parse(localStorage.getItem(LS_APPS)||'[]');}catch(e){return[];}}
+    function setApps(arr){localStorage.setItem(LS_APPS,JSON.stringify(arr));}
+    async function saveNewApp(){
+      var name=(document.getElementById('aaName').value||'').trim();
+      var link=(document.getElementById('aaLink').value||'').trim();
+      var logoUrl=(document.getElementById('aaLogoUrl').value||'').trim();
+      if(!name){toastMsg('App name required',true);return;}
+      if(!link&&!_pendingAppApk){toastMsg('Link or APK required',true);return;}
+      var logo=_pendingAppLogoData||'';var iconCls=autoIconFromName(name);
+      if(!logo&&logoUrl){if(isTablerIconInput(logoUrl))iconCls=normalizeTablerIcon(logoUrl);else logo=logoUrl;}
+      var id='a'+Date.now();
+      try{
+        if(_pendingAppApk) await saveAppApk(id,_pendingAppApk);
+        var arr=getApps();
+        arr.push({id:id,name:name,link:link||'',logo:logo,icon:iconCls,apk:_pendingAppApk?true:false,apkName:_pendingAppApk?_pendingAppApk.name:''});
+        setApps(arr);closeAddAppModal();renderCustomApps();toastMsg('App added');
+        _pendingAppApk=null;_pendingAppLogoData=null;
+      }catch(e){toastMsg('Could not save APK',true);}
+    }
+    async function openCustomApp(id){
+      var a=getApps().find(function(x){return x.id===id;});if(!a)return;
+      if(a.apk){
+        var file=await getAppApk(id);
+        if(!file){toastMsg('APK file not found',true);return;}
+        var url=URL.createObjectURL(file);
+        var dl=document.createElement('a');dl.href=url;dl.download=a.apkName||((a.name||'app').replace(/[^\w.-]+/g,'_')+'.apk');
+        document.body.appendChild(dl);dl.click();dl.remove();
+        setTimeout(function(){URL.revokeObjectURL(url);},1500);
+        return;
+      }
+      if(a.link)window.open(a.link,'_blank','noopener');
+    }
+    function renderHardApps(){
+      var box=document.getElementById('hardApps');if(!box)return;
+      box.innerHTML=DEFAULT_APP_ADD.map(function(a,i){
+        var iconHtml='';
+        if(a.logo){
+          iconHtml='<img src="'+String(a.logo).replace(/"/g,'&quot;')+'" style="width:36px;height:36px;border-radius:10px;object-fit:cover;" alt="">';
+        }else{
+          iconHtml='<i class="'+(a.icon||'ti ti-tool')+' plat-icon"></i>';
+        }
+        var num=i+1;
+        return '<div class="plat-card hard-app-card" data-name="'+escapeHome(a.name||'')+'" onclick="openHardApp('+i+')">'
+          +iconHtml+'<span class="plat-name">'+escapeHome(a.name||'')+'</span>'
+          +'<span class="plat-badge live">#'+num+'</span></div>';
+      }).join('');
+    }
+    function openHardApp(idx){
+      var a=DEFAULT_APP_ADD[idx];if(!a)return;
+      if(a.link)window.open(a.link,'_blank','noopener');
+    }
+    function renderCustomApps(){
+      var box=document.getElementById('customApps');if(!box)return;
+      var arr=getApps(),base=DEFAULT_APP_ADD.length;
+      box.innerHTML=arr.map(function(a,i){
+        var icon;
+        if(a.logo&&!isTablerIconInput(a.logo)) icon='<img src="'+String(a.logo).replace(/"/g,'&quot;')+'" alt="">';
+        else {var icn=a.icon||(a.logo&&isTablerIconInput(a.logo)?normalizeTablerIcon(a.logo):'ti ti-tool');icon='<i class="'+icn+' plat-icon"></i>';}
+        var num=base+i+1;
+        return '<div class="plat-card custom-app-card" data-id="'+a.id+'" data-name="'+escapeHome(a.name)+'" onclick="openCustomApp(\''+a.id+'\')">'+icon+'<span class="plat-name">'+escapeHome(a.name)+'</span><span class="plat-badge live">#'+num+'</span></div>';
+      }).join('');
+      box.querySelectorAll('.custom-app-card').forEach(function(el){bindLongPress(el,function(){openIosRemove('app',el.getAttribute('data-id'),el.getAttribute('data-name')||'App');});});
+    }
+
+    // ═══════════════════════════
     // CUSTOM PLATFORMS + FAQ (localStorage)
     // ═══════════════════════════
     const LS_PLAT = (document.title || 'BAIJID') + '_custom_platforms';
-    const LS_FAQ = (document.title || 'BAIJID') + '_custom_faqs';
+    const LS_FAQ = (document.title || 'BAIJID') + '_custom_faqs'; // Plus-button cards are stored here and can be removed.
     let _pendingHtml = null;
 
     function openAddPlatformModal() {
@@ -6346,6 +6564,12 @@ async function shareQR() {
       renderCustomPlatforms();
       toastMsg('Removed');
     }
+    async function removeApp(id) {
+      setApps(getApps().filter(a => a.id !== id));
+      await deleteAppApk(id);
+      renderCustomApps();
+      toastMsg('App removed');
+    }
     function openCustomPlatform(id) {
       const p = getPlatforms().find(x => x.id === id);
       if (!p) return;
@@ -6371,7 +6595,7 @@ async function shareQR() {
       const box = document.getElementById('customPlatforms');
       if (!box) return;
       const arr = getPlatforms();
-      var base = (typeof DEFAULT_PLATFORMS !== 'undefined') ? DEFAULT_PLATFORMS.length : 0;
+      var base = (typeof DEFAULT_PLATFORMS_ADD !== 'undefined') ? DEFAULT_PLATFORMS_ADD.length : 0;
       box.innerHTML = arr.map(function (p, i) {
         var icon;
         if (p.logo && !isTablerIconInput(p.logo)) {
@@ -6429,7 +6653,7 @@ async function shareQR() {
     function renderCustomFaqs() {
       const box = document.getElementById('customFaqList');
       if (!box) return;
-      var base = (typeof DEFAULT_FAQS !== 'undefined') ? DEFAULT_FAQS.length : 0;
+      var base = (typeof DEFAULT_CARD_ADD !== 'undefined') ? DEFAULT_CARD_ADD.length : 0;
       box.innerHTML = getFaqs().map(function (f, i) {
         var num = base + i + 1;
         return '<div class="faq-item" data-id="' + f.id + '" data-name="' + escapeHtml(f.name) + '">'
@@ -6455,11 +6679,15 @@ async function shareQR() {
     }
 
     document.addEventListener('DOMContentLoaded', function () {
+      seedDemoAppsOnce();
+      bindAppFiles();
       bindApHtmlFile();
       renderCustomPlatforms();
+      renderHardApps();
+      renderCustomApps();
       renderCustomFaqs();
     });
-    setTimeout(function(){ bindApHtmlFile(); bindHomeLogoFile && bindHomeLogoFile(); renderCustomPlatforms(); renderCustomFaqs(); renderHomePins && renderHomePins(); renderHardPlatforms && renderHardPlatforms(); renderHardFaqs && renderHardFaqs(); }, 400);
+    setTimeout(function(){ seedDemoAppsOnce(); bindApHtmlFile(); bindHomeLogoFile && bindHomeLogoFile(); bindAppFiles(); renderCustomPlatforms(); renderCustomApps(); renderCustomFaqs(); renderHomePins && renderHomePins(); renderHardPlatforms && renderHardPlatforms(); renderHardApps && renderHardApps(); renderHardFaqs && renderHardFaqs(); }, 400);
 
     function showTab(id, btn) {
       setSearchPlaceholder(id);
@@ -6473,9 +6701,11 @@ async function shareQR() {
 
     // ═══════════════════════════
 
-    // DEFAULT_FAQS
-    // { q: "Question?", a: "Answer." }, // #8
-    const DEFAULT_FAQS = [
+    // DEFAULT_CARD_ADD
+    // Settings-এর main-code cards এখানে যোগ করুন। ইউজার এগুলো remove করতে পারবে না।
+    // { q: "Question?", a: "Answer." }, // #1
+    // { q: "Question?", a: "Answer." }, // #2
+    const DEFAULT_CARD_ADD = [
       { q: "completely free to use?", a: "Yes! BAIJID is 100% free. No registration, no subscription, no hidden fees. Just paste your link and download." }, // #1
       { q: "Will the video have a watermark?", a: "No watermarks at all. BAIJID downloads the original clean HD video directly without platform watermarks." }, // #2
       { q: "Why is my download failing?", a: "Make sure the account is public (not private). Also check your internet connection and try copying the link again. Private content cannot be accessed." }, // #3
@@ -6490,7 +6720,7 @@ async function shareQR() {
     function renderHardFaqs() {
       const box = document.getElementById('hardFaqList');
       if (!box) return;
-      box.innerHTML = DEFAULT_FAQS.map(function (f, i) {
+      box.innerHTML = DEFAULT_CARD_ADD.map(function (f, i) {
         const num = i + 1;
         const q = escapeHtml(f.q || '');
         const a = escapeHtml(f.a || '');
@@ -6847,7 +7077,7 @@ async function shareQR() {
       let dismissed = false;
       let userUnlocked = false;
       let autoHideTimer = null;
-      let wantAutoPlay = true;
+      let wantAutoPlay = false;
 
       const notif = document.getElementById('musicNotif');
       const inner = document.getElementById('mnInner');
@@ -6912,22 +7142,12 @@ async function shareQR() {
         if (dismissed) return;
         notif.classList.add('show');
         notif.classList.remove('hide');
-        if (wantAutoPlay && !playing) tryPlay();
+        // No autoplay on the Main Page.
         autoHideTimer = setTimeout(hideNotifOnly, 10000);
       }
 
-      // ★ পেজে প্রথম ট্যাপ/ক্লিক হলে মিউজিক আনলক + প্লে (ব্রাউজার পলিসি বাইপাস)
-      function unlockAndPlay() {
-        if (dismissed || userUnlocked) return;
-        userUnlocked = true;
-        if (wantAutoPlay && !playing) tryPlay();
-        document.removeEventListener('pointerdown', unlockAndPlay, true);
-        document.removeEventListener('touchstart', unlockAndPlay, true);
-        document.removeEventListener('click', unlockAndPlay, true);
-      }
-      document.addEventListener('pointerdown', unlockAndPlay, true);
-      document.addEventListener('touchstart', unlockAndPlay, true);
-      document.addEventListener('click', unlockAndPlay, true);
+      // Main Page music is intentionally MANUAL.
+      // It must start only when the user presses the music play button.
 
       const preloaderObs = new MutationObserver((muts) => {
         for (let m of muts) {
@@ -7510,6 +7730,10 @@ async function shareQR() {
         searchPlatformTools(q);
         return;
       }
+      if (id === 'tab-apps') {
+        searchApps(q);
+        return;
+      }
       if (id === 'tab-faq') {
         searchSettingsCards(q);
         return;
@@ -7544,6 +7768,7 @@ async function shareQR() {
       if (!inp) return;
       inp.placeholder = tab === 'home' ? 'google search'
         : tab === 'platforms' ? 'tool search'
+        : tab === 'apps' ? 'app search'
         : 'find card';
       inp.setAttribute('aria-label', inp.placeholder);
       inp.value = '';
@@ -7554,8 +7779,10 @@ async function shareQR() {
       document.querySelectorAll('.search-match').forEach(el => el.classList.remove('search-match'));
       document.querySelectorAll('.search-hidden').forEach(el => el.classList.remove('search-hidden'));
       const p = document.getElementById('platformSearchEmpty');
+      const a = document.getElementById('appSearchEmpty');
       const s = document.getElementById('settingsSearchEmpty');
       if (p) p.classList.remove('show');
+      if (a) a.classList.remove('show');
       if (s) s.classList.remove('show');
     }
 
@@ -7595,6 +7822,14 @@ async function shareQR() {
         empty.textContent = found ? '' : 'NO TOOL FOUND FOR "' + query + '"';
         empty.classList.toggle('show', !!q && found === 0);
       }
+    }
+    function searchApps(query) {
+      const q = normalizeSearchText(query);
+      const roots = [document.getElementById('hardApps'), document.getElementById('customApps')];
+      const cards=[]; roots.forEach(function(root){if(root)root.querySelectorAll('.plat-card').forEach(function(c){cards.push(c);});});
+      let found=0; cards.forEach(function(card){const hay=normalizeSearchText(card.innerText+' '+(card.getAttribute('data-search')||''));const match=!q||hay.includes(q);card.classList.toggle('search-hidden',!match);card.classList.toggle('search-match',!!q&&match);if(match)found++;});
+      const plus=document.querySelector('#tab-apps .app-plus-btn'); if(plus)plus.classList.toggle('search-hidden',!!q);
+      const empty=document.getElementById('appSearchEmpty'); if(empty){empty.textContent=found?'':'NO APP FOUND FOR "'+query+'"';empty.classList.toggle('show',!!q&&found===0);}
     }
     function searchSettingsCards(query) {
       const q = normalizeSearchText(query);
@@ -7651,6 +7886,8 @@ async function shareQR() {
 
       if (id === 'tab-platforms') {
         searchPlatformTools(q);
+      } else if (id === 'tab-apps') {
+        searchApps(q);
       } else if (id === 'tab-faq') {
         searchSettingsCards(q);
       }
@@ -7780,6 +8017,33 @@ async function shareQR() {
       <div class="row-btns">
         <button type="button" class="btn-cancel" onclick="closeAddPlatformModal()">CANCEL</button>
         <button type="button" class="btn-save" onclick="saveNewPlatform()">SAVE</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ADD APP MODAL -->
+  <div class="glass-modal-overlay" id="addAppModal">
+    <div class="glass-modal">
+      <h3>ADD APP</h3>
+      <label>App name</label>
+      <input type="text" id="aaName" placeholder="e.g. Calculator">
+      <label>Link (optional)</label>
+      <input type="url" id="aaLink" placeholder="https://example.com">
+      <div class="hint">Example: https://example.com</div>
+      <label>Logo URL or Tabler icon (optional)</label>
+      <input type="text" id="aaLogoUrl" placeholder="https://… or ti ti-tool">
+      <div class="hint">Image link অথবা আইকন: ti ti-tool · ti ti-calculator · ti ti-device-mobile</div>
+      <label>Or logo from gallery</label>
+      <label class="file-btn" for="aaLogoFile">🖼️ Upload logo image</label>
+      <input type="file" id="aaLogoFile" accept="image/*" style="display:none">
+      <div class="hint" id="aaLogoHint">No logo — auto icon from name</div>
+      <label>Or upload APK</label>
+      <label class="file-btn" for="aaApkFile">📦 Upload APK</label>
+      <input type="file" id="aaApkFile" accept=".apk,application/vnd.android.package-archive" style="display:none">
+      <div class="hint" id="aaApkHint">No APK selected</div>
+      <div class="row-btns">
+        <button type="button" class="btn-cancel" onclick="closeAddAppModal()">CANCEL</button>
+        <button type="button" class="btn-save" onclick="saveNewApp()">SAVE</button>
       </div>
     </div>
   </div>
@@ -7939,8 +8203,11 @@ let resizeTimer;window.addEventListener('resize',()=>{clearTimeout(resizeTimer);
   }
   function boot() {
     updateDynamicGreeting();
+    if (typeof seedDemoAppsOnce === 'function') seedDemoAppsOnce();
     if (typeof renderHomePins === 'function') renderHomePins();
     if (typeof renderHardPlatforms === 'function') renderHardPlatforms();
+    if (typeof renderHardApps === 'function') renderHardApps();
+    if (typeof renderCustomApps === 'function') renderCustomApps();
     if (typeof renderHardFaqs === 'function') renderHardFaqs();
     if (typeof bindHomeLogoFile === 'function') bindHomeLogoFile();
   }
