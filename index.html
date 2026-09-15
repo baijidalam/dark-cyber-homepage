@@ -3272,12 +3272,10 @@
     }
     // Page load এ saved theme apply করো
     (function () {
-      const themeKey = (document.title || 'BAIJID DOWNLOADER') + '_theme';
-      const saved = localStorage.getItem(themeKey);
-      // First visit: default to cyan (#00e5ff). After the user changes it,
-      // their selected theme is remembered for future visits.
+      const saved = localStorage.getItem((document.title || 'BAIJID DOWNLOADER') + '_theme');
       if (saved) applyTheme(saved, false);
-      else applyTheme('#00e5ff', false);
+      else if (window._initialThemeColor) applyTheme(window._initialThemeColor, false);
+      else applyTheme('#ff0033', false);
     })();
 
     // ═══════════════════════════
@@ -5682,18 +5680,35 @@ input {
 <script>
 var currentQRUrl = "";
 function generateQR() {
-  var text = document.getElementById('qrInput').value;
+  var text = (document.getElementById('qrInput').value || '').trim();
   var img = document.getElementById('qrImage');
   var placeholder = document.getElementById('placeholder');
   var shareBtn = document.getElementById('shareBtn');
   if (!text) { alert("কিছু লিখুন!"); return; }
-  currentQRUrl = "https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=" + encodeURIComponent(text);
-  img.src = currentQRUrl;
-  img.onload = function () {
-    placeholder.style.display = "none";
-    img.style.display = "block";
-    shareBtn.style.display = "block";
-  };
+  placeholder.style.display = "block";
+  placeholder.textContent = "লোড হচ্ছে...";
+  img.style.display = "none";
+  if (shareBtn) shareBtn.style.display = "none";
+  var apis = [
+    "https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=" + encodeURIComponent(text),
+    "https://quickchart.io/qr?size=220&text=" + encodeURIComponent(text)
+  ];
+  var tryIdx = 0;
+  function tryNext() {
+    if (tryIdx >= apis.length) {
+      placeholder.textContent = "QR লোড ব্যর্থ — নেট চেক করুন";
+      return;
+    }
+    currentQRUrl = apis[tryIdx++];
+    img.onload = function () {
+      placeholder.style.display = "none";
+      img.style.display = "block";
+      if (shareBtn) shareBtn.style.display = "block";
+    };
+    img.onerror = function () { tryNext(); };
+    img.src = currentQRUrl;
+  }
+  tryNext();
 }
 async function shareQR() {
   if (!currentQRUrl) return;
@@ -5714,7 +5729,7 @@ async function shareQR() {
     }
   }
 }
-<\\/script>
+<\/script>
 </body>
 </html>` }, // #8
     ];
@@ -5898,18 +5913,35 @@ input{width:100%;padding:12px;background:#000;border:1px solid #333;color:#00ff4
 <script>
 var currentQRUrl = '';
 function generateQR() {
-  var text = document.getElementById('qrInput').value;
+  var text = (document.getElementById('qrInput').value || '').trim();
   var img = document.getElementById('qrImage');
   var placeholder = document.getElementById('placeholder');
   var shareBtn = document.getElementById('shareBtn');
   if (!text) { alert('সখা, কিছু তো লিখো!'); return; }
-  currentQRUrl = 'https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=' + encodeURIComponent(text);
-  img.src = currentQRUrl;
-  img.onload = function () {
-    placeholder.style.display = 'none';
-    img.style.display = 'block';
-    shareBtn.style.display = 'block';
-  };
+  placeholder.style.display = 'block';
+  placeholder.textContent = 'লোড হচ্ছে...';
+  img.style.display = 'none';
+  if (shareBtn) shareBtn.style.display = 'none';
+  var apis = [
+    'https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=' + encodeURIComponent(text),
+    'https://quickchart.io/qr?size=220&text=' + encodeURIComponent(text)
+  ];
+  var tryIdx = 0;
+  function tryNext() {
+    if (tryIdx >= apis.length) {
+      placeholder.textContent = 'QR লোড ব্যর্থ — নেট চেক করুন';
+      return;
+    }
+    currentQRUrl = apis[tryIdx++];
+    img.onload = function () {
+      placeholder.style.display = 'none';
+      img.style.display = 'block';
+      if (shareBtn) shareBtn.style.display = 'block';
+    };
+    img.onerror = function () { tryNext(); };
+    img.src = currentQRUrl;
+  }
+  tryNext();
 }
 async function shareQR() {
   if (!currentQRUrl) return;
@@ -5918,8 +5950,12 @@ async function shareQR() {
       await navigator.share({ title: 'BAIJID QR CODE', text: 'সখা, আমার তৈরি করা QR কোডটি দেখো!', url: currentQRUrl });
     } catch (err) { console.log('Error sharing:', err); }
   } else {
-    navigator.clipboard.writeText(currentQRUrl);
-    alert('শেয়ার অপশন নেই, লিঙ্ক কপি করা হয়েছে!');
+    try {
+      await navigator.clipboard.writeText(currentQRUrl);
+      alert('শেয়ার অপশন নেই, লিঙ্ক কপি করা হয়েছে!');
+    } catch (e) {
+      prompt('লিঙ্ক কপি করুন:', currentQRUrl);
+    }
   }
 }
 <\/script>
@@ -7345,21 +7381,25 @@ async function shareQR() {
 
       function downloadBlob(blob, filename) {
         try {
+          filename = filename || 'BAIJID.jpg';
+          // Prefer msSaveOrOpenBlob (old Edge) 
+          if (navigator.msSaveOrOpenBlob) {
+            navigator.msSaveOrOpenBlob(blob, filename);
+            return;
+          }
           const url = URL.createObjectURL(blob);
           const a = document.createElement('a');
           a.href = url;
-          a.download = filename || 'BAIJID.bin';
+          a.download = filename;
           a.style.display = 'none';
-          a.rel = 'noopener';
+          a.setAttribute('download', filename);
           document.body.appendChild(a);
-          // iOS / some WebViews need short delay
+          a.click();
+          // Keep URL alive briefly so download can start
           setTimeout(function () {
-            a.click();
-            setTimeout(function () {
-              URL.revokeObjectURL(url);
-              if (a.parentNode) a.parentNode.removeChild(a);
-            }, 4000);
-          }, 50);
+            try { URL.revokeObjectURL(url); } catch (e) {}
+            if (a.parentNode) a.parentNode.removeChild(a);
+          }, 6000);
         } catch (e) {
           console.error(e);
           toastMsg('Download failed — try again', true);
@@ -7367,43 +7407,189 @@ async function shareQR() {
       }
 
       // ── IMAGE: target file size via binary-search JPEG quality ──
-      async function compressImage() {
-        const img = new Image();
-        img.src = gcObjectUrl;
-        await new Promise((res, rej) => { img.onload = res; img.onerror = rej; });
+      function toBlobTimeout(canvas, type, quality, ms) {
+        return new Promise(function (resolve, reject) {
+          var done = false;
+          var timer = setTimeout(function () {
+            if (!done) { done = true; reject(new Error('encode timeout')); }
+          }, ms || 10000);
+          try {
+            if (!canvas.toBlob) {
+              // Fallback dataURL for old webviews
+              try {
+                var dataUrl = canvas.toDataURL(type || 'image/jpeg', quality);
+                var bin = atob(dataUrl.split(',')[1]);
+                var arr = new Uint8Array(bin.length);
+                for (var i = 0; i < bin.length; i++) arr[i] = bin.charCodeAt(i);
+                done = true; clearTimeout(timer);
+                resolve(new Blob([arr], { type: type || 'image/jpeg' }));
+              } catch (e2) {
+                done = true; clearTimeout(timer); reject(e2);
+              }
+              return;
+            }
+            canvas.toBlob(function (blob) {
+              if (done) return;
+              done = true;
+              clearTimeout(timer);
+              if (blob && blob.size > 0) resolve(blob);
+              else reject(new Error('encode empty'));
+            }, type || 'image/jpeg', quality);
+          } catch (e) {
+            if (!done) { done = true; clearTimeout(timer); reject(e); }
+          }
+        });
+      }
 
-        const maxSide = 1280;
-        let w = img.naturalWidth, h = img.naturalHeight;
+      function getSelectedImageTargetKB() {
+        // Always read live selection from UI
+        var on = document.querySelector('#gcOptsImage .gc-chip.on');
+        if (on) {
+          var v = parseInt(on.getAttribute('data-isize'), 10);
+          if (v > 0) return v;
+        }
+        return gcImgTargetKB || 40;
+      }
+
+      // Fast + accurate: hit selected target size, max 2 encodes
+      async function compressImage() {
+        const el = gcEls();
+        const targetKB = getSelectedImageTargetKB();
+        gcImgTargetKB = targetKB;
+        const targetBytes = targetKB * 1024;
+
+        if (el.progressTxt) el.progressTxt.textContent = 'ছবি লোড (' + targetKB + ' KB)…';
+        if (el.progressFill) el.progressFill.style.width = '10%';
+
+        const img = new Image();
+        img.decoding = 'async';
+        await new Promise(function (res, rej) {
+          var settled = false;
+          var t = setTimeout(function () {
+            if (!settled) { settled = true; rej(new Error('ছবি লোড টাইমআউট')); }
+          }, 10000);
+          img.onload = function () {
+            if (settled) return;
+            settled = true; clearTimeout(t); res();
+          };
+          img.onerror = function () {
+            if (settled) return;
+            settled = true; clearTimeout(t);
+            rej(new Error('ছবি লোড ব্যর্থ (HEIC হলে JPG করুন)'));
+          };
+          img.src = gcObjectUrl;
+        });
+
+        var srcW = img.naturalWidth || img.width || 0;
+        var srcH = img.naturalHeight || img.height || 0;
+        if (srcW < 2 || srcH < 2) throw new Error('ছবির সাইজ পাওয়া যায়নি');
+
+        if (el.progressTxt) el.progressTxt.textContent = 'রিসাইজ…';
+        if (el.progressFill) el.progressFill.style.width = '30%';
+
+        // Aim ~targetBytes: bpp depends on quality we'll use
+        // Higher bpp = more pixels kept = larger file
+        var bpp;
+        if (targetKB >= 2048) bpp = 0.42;
+        else if (targetKB >= 1024) bpp = 0.38;
+        else if (targetKB >= 500) bpp = 0.34;
+        else if (targetKB >= 200) bpp = 0.30;
+        else if (targetKB >= 100) bpp = 0.28;
+        else if (targetKB >= 60) bpp = 0.26;
+        else bpp = 0.24;
+
+        var estPixels = Math.max(48 * 48, targetBytes / bpp);
+        var srcPixels = srcW * srcH;
+        var scale = srcPixels > estPixels ? Math.sqrt(estPixels / srcPixels) : 1;
+
+        // Memory/speed caps (still allow enough pixels to hit small targets)
+        var maxSide;
+        if (targetKB >= 4096) maxSide = 3600;
+        else if (targetKB >= 2048) maxSide = 2800;
+        else if (targetKB >= 1024) maxSide = 2200;
+        else if (targetKB >= 500) maxSide = 1800;
+        else if (targetKB >= 200) maxSide = 1400;
+        else if (targetKB >= 80) maxSide = 1100;
+        else maxSide = 900;
+
+        var w = Math.round(srcW * scale);
+        var h = Math.round(srcH * scale);
         if (w > maxSide || h > maxSide) {
-          const r = Math.min(maxSide / w, maxSide / h);
+          var r = Math.min(maxSide / w, maxSide / h);
           w = Math.round(w * r);
           h = Math.round(h * r);
         }
+        w = Math.max(48, w - (w % 2));
+        h = Math.max(48, h - (h % 2));
 
-        const canvas = document.createElement('canvas');
+        var canvas = document.createElement('canvas');
         canvas.width = w;
         canvas.height = h;
-        const ctx = canvas.getContext('2d');
+        var ctx = canvas.getContext('2d', { alpha: false, willReadFrequently: false });
+        if (!ctx) throw new Error('Canvas নেই');
+        ctx.fillStyle = '#fff';
+        ctx.fillRect(0, 0, w, h);
         ctx.drawImage(img, 0, 0, w, h);
 
-        const target = gcImgTargetKB * 1024;
-        let lo = 0.08, hi = 0.92, best = null;
-        for (let i = 0; i < 10; i++) {
-          const q = (lo + hi) / 2;
-          const blob = await new Promise(r => canvas.toBlob(r, 'image/jpeg', q));
-          if (!blob) break;
-          best = blob;
-          if (blob.size > target) hi = q;
-          else lo = q;
+        // JPEG quality — keep moderate so size tracks resolution
+        var q;
+        if (targetKB >= 2048) q = 0.88;
+        else if (targetKB >= 1024) q = 0.84;
+        else if (targetKB >= 500) q = 0.78;
+        else if (targetKB >= 200) q = 0.72;
+        else if (targetKB >= 100) q = 0.68;
+        else if (targetKB >= 60) q = 0.64;
+        else q = 0.60;
+
+        if (el.progressTxt) el.progressTxt.textContent = 'এনকোড ' + targetKB + 'KB…';
+        if (el.progressFill) el.progressFill.style.width = '55%';
+
+        var best = await toBlobTimeout(canvas, 'image/jpeg', q, 10000);
+
+        // Pass 2: if too big, scale down; if too small (and we downscaled), scale up a bit
+        if (best && best.size > targetBytes * 1.25) {
+          if (el.progressTxt) el.progressTxt.textContent = 'সাইজ মিলানো…';
+          if (el.progressFill) el.progressFill.style.width = '78%';
+          // Aim slightly under target to avoid overshoot
+          var s = Math.sqrt((targetBytes * 0.92) / best.size);
+          var w2 = Math.max(48, Math.round(w * s));
+          var h2 = Math.max(48, Math.round(h * s));
+          w2 -= w2 % 2; h2 -= h2 % 2;
+          canvas.width = w2; canvas.height = h2;
+          ctx = canvas.getContext('2d', { alpha: false });
+          ctx.fillStyle = '#fff';
+          ctx.fillRect(0, 0, w2, h2);
+          ctx.drawImage(img, 0, 0, w2, h2);
+          best = await toBlobTimeout(canvas, 'image/jpeg', Math.max(0.38, q * 0.9), 10000);
+        } else if (best && best.size < targetBytes * 0.55) {
+          // Undershoot: try higher quality and/or slightly larger canvas
+          if (el.progressTxt) el.progressTxt.textContent = 'কোয়ালিটি বাড়ানো…';
+          if (el.progressFill) el.progressFill.style.width = '78%';
+          if (scale < 0.98) {
+            // We had downscaled — give more pixels
+            var sUp = Math.min(1 / scale, Math.sqrt(targetBytes / Math.max(best.size, 1)));
+            sUp = Math.min(sUp, 1.6);
+            var w3 = Math.min(srcW, Math.round(w * sUp));
+            var h3 = Math.min(srcH, Math.round(h * sUp));
+            if (w3 > maxSide || h3 > maxSide) {
+              var rr = Math.min(maxSide / w3, maxSide / h3);
+              w3 = Math.round(w3 * rr); h3 = Math.round(h3 * rr);
+            }
+            w3 -= w3 % 2; h3 -= h3 % 2;
+            canvas.width = w3; canvas.height = h3;
+            ctx = canvas.getContext('2d', { alpha: false });
+            ctx.fillStyle = '#fff';
+            ctx.fillRect(0, 0, w3, h3);
+            ctx.drawImage(img, 0, 0, w3, h3);
+            best = await toBlobTimeout(canvas, 'image/jpeg', Math.min(0.92, q + 0.12), 10000);
+          } else {
+            best = await toBlobTimeout(canvas, 'image/jpeg', Math.min(0.95, q + 0.2), 10000);
+          }
         }
-        // if still too big, scale down more
-        if (best && best.size > target * 1.35) {
-          const scale = Math.sqrt(target / best.size);
-          canvas.width = Math.max(80, Math.round(w * scale));
-          canvas.height = Math.max(80, Math.round(h * scale));
-          ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-          best = await new Promise(r => canvas.toBlob(r, 'image/jpeg', 0.75));
-        }
+
+        if (!best || !best.size) throw new Error('কম্প্রেস ব্যর্থ');
+        if (el.progressFill) el.progressFill.style.width = '100%';
+        if (el.progressTxt) el.progressTxt.textContent = 'রেডি ' + (best.size / 1024).toFixed(1) + ' KB';
         return best;
       }
 
@@ -7666,16 +7852,14 @@ async function shareQR() {
         if (el.progressTxt) el.progressTxt.textContent = 'Processing…';
         try {
           if (gcType === 'image') {
-            if (el.progressTxt) el.progressTxt.textContent = 'Compressing image…';
+            if (el.progressTxt) el.progressTxt.textContent = 'কম্প্রেস হচ্ছে…';
             const blob = await compressImage();
-            if (!blob) throw new Error('Failed');
+            if (!blob) throw new Error('কম্প্রেস ব্যর্থ');
             if (el.progressFill) el.progressFill.style.width = '100%';
-            let imgExt = 'jpg';
-            if (gcFile && /png/i.test(gcFile.type || '') || /\.png$/i.test(gcFile.name || '')) imgExt = 'png';
-            else if (/webp/i.test(gcFile.type || '') || /\.webp$/i.test(gcFile.name || '')) imgExt = 'webp';
-            else if (/jpe?g/i.test(gcFile.type || '') || /\.jpe?g$/i.test(gcFile.name || '')) imgExt = 'jpg';
-            downloadBlob(blob, 'BAIJID.' + imgExt);
-            toastMsg('Image ready · ' + fmtSize(blob.size));
+            if (el.progressTxt) el.progressTxt.textContent = 'ডাউনলোড…';
+            var tkb = (typeof getSelectedImageTargetKB === 'function') ? getSelectedImageTargetKB() : (gcImgTargetKB || 40);
+            downloadBlob(blob, 'BAIJID_' + tkb + 'kb.jpg');
+            toastMsg('✓ ' + tkb + 'KB টার্গেট → ' + fmtSize(blob.size));
           } else {
             if (el.progressTxt) el.progressTxt.textContent = 'Encoding video (keep screen on)…';
             const blob = await compressVideo();
