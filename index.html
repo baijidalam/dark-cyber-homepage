@@ -3127,14 +3127,28 @@
       const pl = document.getElementById('preloader');
       const pct = document.getElementById('plPct');
 
+      // Main-page return memory: normal navigation restores the last place;
+      // a real browser reload starts fresh and keeps the normal 3-second loader.
+      const BAJID_RETURN_KEY = 'baijid_main_return_state_v1';
+      const navEntry = (performance.getEntriesByType && performance.getEntriesByType('navigation')[0]) || null;
+      const navType = navEntry ? navEntry.type : 'navigate';
+      window.__baijidFreshReload = (navType === 'reload');
+      if (window.__baijidFreshReload) {
+        try { localStorage.removeItem(BAJID_RETURN_KEY); } catch (e) {}
+      }
+      window.__baijidRestoreReturn = !window.__baijidFreshReload && !!(function () {
+        try { return localStorage.getItem(BAJID_RETURN_KEY); } catch (e) { return null; }
+      })();
+
       if (chk) {
         chk.checked = localStorage.getItem('baijid_hide_preloader') !== 'true';
       }
 
       function startMainPreloader() {
         if (!pl || !pct) return;
-        if (localStorage.getItem('baijid_hide_preloader') === 'true') {
+        if (window.__baijidRestoreReturn || localStorage.getItem('baijid_hide_preloader') === 'true') {
           pl.style.display = 'none';
+          pl.classList.add('out');
           return;
         }
 
@@ -8507,6 +8521,123 @@ let resizeTimer;window.addEventListener('resize',()=>{clearTimeout(resizeTimer);
     else w.classList.add('bw-hidden');
   });
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',function(){setup();window.dispatchEvent(new CustomEvent('baijid:tabchange',{detail:'home'}));});else {setup();window.dispatchEvent(new CustomEvent('baijid:tabchange',{detail:'home'}));}
+})();
+</script>
+<script>
+(function () {
+  'use strict';
+
+  // ═══════════════════════════════════════════════════════════════
+  // BAIJID RETURN MEMORY
+  // Remembers the last tab + exact scroll position when leaving
+  // the main page. Returning through the same hosted URL restores
+  // that state without showing the 3-second preloader.
+  // A real browser reload is intentionally treated as a fresh start.
+  // ═══════════════════════════════════════════════════════════════
+  const KEY = 'baijid_main_return_state_v1';
+  let restoring = false;
+  let saveTimer = null;
+
+  function getNavType() {
+    try {
+      const e = performance.getEntriesByType && performance.getEntriesByType('navigation')[0];
+      return e && e.type ? e.type : 'navigate';
+    } catch (e) { return 'navigate'; }
+  }
+
+  function readState() {
+    try {
+      const raw = localStorage.getItem(KEY);
+      if (!raw) return null;
+      const st = JSON.parse(raw);
+      if (!st || typeof st !== 'object') return null;
+      return st;
+    } catch (e) { return null; }
+  }
+
+  function currentTab() {
+    const active = document.querySelector('.tab-section.active');
+    return active ? active.id.replace(/^tab-/, '') : 'home';
+  }
+
+  function saveState() {
+    if (restoring) return;
+    try {
+      localStorage.setItem(KEY, JSON.stringify({
+        tab: currentTab(),
+        scrollY: Math.max(0, Math.round(window.scrollY || window.pageYOffset || 0)),
+        savedAt: Date.now()
+      }));
+    } catch (e) {}
+  }
+
+  function saveSoon() {
+    if (saveTimer) return;
+    saveTimer = setTimeout(function () {
+      saveTimer = null;
+      saveState();
+    }, 120);
+  }
+
+  function findTabButton(id) {
+    const section = document.getElementById('tab-' + id);
+    if (!section) return null;
+    const buttons = Array.from(document.querySelectorAll('.bnav-btn'));
+    return buttons.find(function (b) {
+      const attr = b.getAttribute('onclick') || '';
+      return attr.indexOf("showTab('" + id + "'") !== -1 || attr.indexOf('showTab("' + id + '"') !== -1;
+    }) || null;
+  }
+
+  function restoreScroll(y) {
+    const target = Math.max(0, Number(y) || 0);
+    let tries = 0;
+    function apply() {
+      tries++;
+      try { window.scrollTo(0, target); } catch (e) {}
+      // Dynamic cards/content can change page height after startup, so retry.
+      if (tries < 12) setTimeout(apply, 80);
+    }
+    requestAnimationFrame(function () {
+      requestAnimationFrame(apply);
+    });
+  }
+
+  function restoreState() {
+    if (getNavType() === 'reload') return;
+    const state = readState();
+    if (!state) return;
+
+    restoring = true;
+    const id = state.tab || 'home';
+    const btn = findTabButton(id);
+    if (btn && typeof window.showTab === 'function') {
+      try { window.showTab(id, btn); } catch (e) {}
+    } else if (id && document.getElementById('tab-' + id)) {
+      document.querySelectorAll('.tab-section').forEach(function (s) { s.classList.remove('active'); });
+      document.getElementById('tab-' + id).classList.add('active');
+    }
+
+    restoreScroll(state.scrollY);
+    setTimeout(function () { restoring = false; saveState(); }, 1200);
+  }
+
+  // Keep the latest tab and scroll position updated while the user is on the page.
+  window.addEventListener('scroll', saveSoon, { passive: true });
+  window.addEventListener('pagehide', saveState);
+  window.addEventListener('beforeunload', saveState);
+  window.addEventListener('visibilitychange', function () {
+    if (document.visibilityState === 'hidden') saveState();
+  });
+  window.addEventListener('baijid:tabchange', function () {
+    setTimeout(saveState, 30);
+  });
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', restoreState, { once: true });
+  } else {
+    restoreState();
+  }
 })();
 </script>
 </body>
