@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -2604,7 +2604,7 @@
       font-family: 'Rajdhani', sans-serif;
       font-size: 0.62rem;
       font-weight: 700;
-      color: var(--a);
+      color: #ff0033 !important; /* always red — theme change না হলেও */
       text-align: center;
       max-width: 58px;
       overflow: hidden;
@@ -5814,154 +5814,31 @@ async function shareQR() {
     // { name: "name", logo: "https://logo.jpg", link: "https://site.com", icon: "ti ti-world" }, // #7
     // { name: "name", logo: "https://logo.jpg", html: `HTML`, icon: "ti ti-world" }, // #7
     const DEFAULT_PINS_ADD = [
-      { name: "Facebook", link: "https://www.facebook.com", icon: "ti ti-brand-facebook" }, // #1
-      { name: "Instagram", link: "https://www.instagram.com", icon: "ti ti-brand-instagram" }, // #2
-      { name: "GitHub", link: "https://github.com", icon: "ti ti-brand-github" }, // #3
-      { name: "YouTube", link: "https://www.youtube.com", icon: "ti ti-brand-youtube" }, // #4
-      { name: "age-pro", link: "https://baijidalam.github.io/age-calculate-pro/", icon: "ti ti-old" }, // #4
-      { name: "repetar", logo: "", html: `<!DOCTYPE html>
-<html lang="bn">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pro Text Repeater</title>
-<style>
-:root{--bg:#0f172a;--card:#1e293b;--primary:#f59e0b;--text:#f8fafc;--input:#334155;--border:#475569;}
-body{font-family:'Segoe UI',sans-serif;background:var(--bg);color:var(--text);display:flex;justify-content:center;padding:20px;margin:0;}
-.container{width:100%;max-width:450px;background:var(--card);padding:25px;border-radius:20px;box-shadow:0 10px 30px rgba(0,0,0,0.5);}
-h2{text-align:center;color:var(--primary);margin-bottom:20px;}
-.box{margin-bottom:15px;}
-label{display:block;font-size:14px;margin-bottom:5px;color:#94a3b8;}
-textarea,input{width:100%;padding:12px;background:var(--input);border:1px solid var(--border);border-radius:10px;color:white;font-size:16px;box-sizing:border-box;}
-.options{display:flex;gap:15px;margin:15px 0;background:rgba(255,255,255,0.05);padding:10px;border-radius:10px;}
-.check-item{display:flex;align-items:center;gap:5px;font-size:14px;}
-.btn-group{display:flex;flex-direction:column;gap:10px;}
-button{width:100%;padding:15px;border-radius:10px;border:none;font-weight:bold;cursor:pointer;font-size:16px;}
-.btn-main{background:var(--primary);color:#000;}
-.btn-copy{background:#30363d;color:#fff;border:1px solid var(--border);}
-.btn-clear{background:transparent;color:#ff4444;text-decoration:underline;font-size:13px;}
-#output{margin-top:20px;background:#000;border-color:var(--primary);}
-</style>
-</head>
-<body>
-<div class="container">
-<h2>BAIJID Repeater</h2>
-<div class="box"><label>আপনার টেক্সট:</label><textarea id="txt" rows="4" placeholder="এখানে কিছু লিখুন..."></textarea></div>
-<div class="box"><label>কতবার (Number):</label><input type="number" id="count" value="10"></div>
-<div class="options">
-<div class="check-item"><input type="checkbox" id="newLine" checked> New Line</div>
-<div class="check-item"><input type="checkbox" id="space"> Space</div>
-</div>
-<div class="btn-group">
-<button class="btn-main" onclick="startRepeat()">REPEAT TEXT</button>
-<button class="btn-copy" onclick="copyTxt()">Copy Result</button>
-<button class="btn-clear" onclick="document.getElementById('txt').value='';document.getElementById('output').value=''">Clear All</button>
-</div>
-<div class="box"><label>ফলাফল:</label><textarea id="output" rows="6" readonly placeholder="ফলাফল এখানে আসবে..."></textarea></div>
-</div>
-<script>
-function startRepeat(){
-  var val=document.getElementById('txt').value;
-  var num=parseInt(document.getElementById('count').value)||0;
-  var isNewLine=document.getElementById('newLine').checked;
-  var isSpace=document.getElementById('space').checked;
-  if(!val){alert('দয়া করে টেক্সট বক্সে কিছু লিখুন!');return;}
-  var result='';
-  for(var i=0;i<num;i++){result+=val;if(isSpace)result+=' ';if(isNewLine)result+='\\n';}
-  document.getElementById('output').value=result;
-}
-function copyTxt(){
-  var c=document.getElementById('output');
-  if(!c.value)return;
-  c.select();c.setSelectionRange(0,99999);
-  document.execCommand('copy');
-  alert('কপি হয়েছে!');
-}
-<\/script>
-</body>
-</html>`, icon: "ti ti-copy" }, // #5
-      { name: "qr", logo: "", html: `<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>QR Share - DARK CYBER TEAM</title>
-<style>
-body{background:#050505;color:#00ff41;font-family:'Segoe UI',sans-serif;padding:20px;text-align:center;}
-.qr-card{background:#111;border:2px solid #00ff41;padding:25px;border-radius:20px;max-width:380px;margin:auto;box-shadow:0 0 20px rgba(0,255,65,0.1);}
-h2{color:#fff;font-size:20px;margin-bottom:20px;letter-spacing:1px;}
-input{width:100%;padding:12px;background:#000;border:1px solid #333;color:#00ff41;border-radius:10px;margin-bottom:15px;outline:none;box-sizing:border-box;text-align:center;}
-.qr-output{background:#fff;padding:10px;border-radius:12px;display:inline-block;margin:15px 0;min-height:160px;}
-#qrImage{width:160px;height:160px;display:none;}
-#placeholder{color:#000;font-size:12px;padding:60px 20px;display:block;}
-.btn{width:100%;padding:14px;border:none;border-radius:10px;font-weight:bold;cursor:pointer;text-transform:uppercase;margin-bottom:10px;}
-.gen-btn{background:#00ff41;color:#000;}
-.share-btn{background:transparent;color:#00ff41;border:1px solid #00ff41;display:none;}
-</style>
-</head>
-<body>
-<div class="qr-card">
-<h2>🔳 BAIJID QR SHARE</h2>
-<input type="text" id="qrInput" placeholder="লিঙ্ক বা টেক্সট দিন...">
-<div class="qr-output" id="qrContainer">
-<span id="placeholder">QR Preview</span>
-<img src="" id="qrImage">
-</div>
-<button class="btn gen-btn" onclick="generateQR()">⚡ GENERATE QR</button>
-<button class="btn share-btn" id="shareBtn" onclick="shareQR()">📤 SHARE CODE</button>
-</div>
-<script>
-var currentQRUrl = '';
-function generateQR() {
-  var text = (document.getElementById('qrInput').value || '').trim();
-  var img = document.getElementById('qrImage');
-  var placeholder = document.getElementById('placeholder');
-  var shareBtn = document.getElementById('shareBtn');
-  if (!text) { alert('সখা, কিছু তো লিখো!'); return; }
-  placeholder.style.display = 'block';
-  placeholder.textContent = 'লোড হচ্ছে...';
-  img.style.display = 'none';
-  if (shareBtn) shareBtn.style.display = 'none';
-  var apis = [
-    'https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=' + encodeURIComponent(text),
-    'https://quickchart.io/qr?size=220&text=' + encodeURIComponent(text)
-  ];
-  var tryIdx = 0;
-  function tryNext() {
-    if (tryIdx >= apis.length) {
-      placeholder.textContent = 'QR লোড ব্যর্থ — নেট চেক করুন';
-      return;
-    }
-    currentQRUrl = apis[tryIdx++];
-    img.onload = function () {
-      placeholder.style.display = 'none';
-      img.style.display = 'block';
-      if (shareBtn) shareBtn.style.display = 'block';
-    };
-    img.onerror = function () { tryNext(); };
-    img.src = currentQRUrl;
-  }
-  tryNext();
-}
-async function shareQR() {
-  if (!currentQRUrl) return;
-  if (navigator.share) {
-    try {
-      await navigator.share({ title: 'BAIJID QR CODE', text: 'সখা, আমার তৈরি করা QR কোডটি দেখো!', url: currentQRUrl });
-    } catch (err) { console.log('Error sharing:', err); }
-  } else {
-    try {
-      await navigator.clipboard.writeText(currentQRUrl);
-      alert('শেয়ার অপশন নেই, লিঙ্ক কপি করা হয়েছে!');
-    } catch (e) {
-      prompt('লিঙ্ক কপি করুন:', currentQRUrl);
-    }
-  }
-}
-<\/script>
-</body>
-</html>`, icon: "ti ti-qrcode" }, // #6
-
+      { name: "wifi", link: "http://192.168.0.1/#networkMap", icon: "ti ti-wifi" }, // #1
+      { name: "GitHub", link: "https://github.com", icon: "ti ti-brand-github" }, // #2
+      { name: "GitLab", link: "https://gitlab.com/users/sign_up", icon: "ti ti-brand-gitlab" }, // #3
+      { name: "Netlify", link: "https://app.netlify.com/signup", icon: "ti ti-device-desktop-code" }, // #4
+      { name: "Vercel", link: "https://vercel.com/signup", icon: "ti ti-folder-code" }, // #5
+      { name: "mediafire", link: "https://app.mediafire.com/", icon: "ti ti-flame" }, // #6
+      { name: "movi", link: "https://fojik.site/", icon: "ti ti-device-tv" }, // #7
+      { name: "movi", link: "https://new6.hdhub4u.cl/?utm=mn1", icon: "ti ti-badge-hd" }, // #8
+      { name: "natok", link: "https://cinekhor.site/", icon: "ti ti-movie" }, // #9
+      { name: "Cloudflare", link: "https://dash.cloudflare.com/sign-up", icon: "ti ti-brand-cloudflare" }, // #10
+      { name: "Render", link: "https://dashboard.render.com/register", icon: "ti ti-cloud-upload" }, // #11
+      { name: "Firebase", link: "https://console.firebase.google.com/", icon: "ti ti-flame" }, // #12
+      { name: "Surge", link: "https://surge.sh/", icon: "ti ti-terminal-2" }, // #13
+      { name: "icon", link: "https://tabler.io/icons", icon: "ti ti-eye-exclamation" }, // #14
+      { name: "image", link: "https://postimages.org/", icon: "ti ti-brand-google-photos" }, // #15
+      { name: "OnBrith", link: "https://everify.bdris.gov.bd/", icon: "ti ti-user-hexagon" }, // #14
+      { name: "SAVEDLY", link: "https://savedly.net/files", icon: "ti ti-cloud-upload" }, // #15
+      { name: "FileUp", link: "https://fileup.to/", icon: "ti ti-file-upload" }, // #16
+      { name: "Ayanami", link: "https://ayanami.app", icon: "ti ti-cloud-upload" }, // #17
+      { name: "Imgg", link: " ", icon: "ti ti-photo" }, // #18
+      { name: "Image2URL", link: "https://www.image2url.com/hosting", icon: "ti ti-link" }, // #19
+      { name: "Media2URL", link: "https://media2url.com/", icon: "ti ti-device-tv" }, // #20
+      { name: "UploadTheFile", link: "https://uploadthefile.com/", icon: "ti ti-upload" }, // #20
+      { name: "FalcoDisk", link: "https://falcodisk.com/", icon: "ti ti-cloud" }, // #21
+      { name: "SourceMirrors", link: "https://www.sourcemirrors.org/", icon: "ti ti-files" }, // #22
     ];
 
     const LS_HOME = (document.title || 'BAIJID') + '_home_pins';
@@ -6778,6 +6655,102 @@ async function shareQR() {
       document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
       if (!isOpen) item.classList.add('open');
     }
+
+    // ══════════════════════════════════════════════════════════════
+    // UI CLICK SOUNDS
+    // Sounds are loaded from the user's Oudio GitHub repository.
+    // Delegated click handling keeps this working for dynamically-added
+    // pins, platform boxes, app boxes, and settings cards.
+    // ══════════════════════════════════════════════════════════════
+    (function initUiClickSounds() {
+      const UI_SOUND_BASE = 'https://raw.githubusercontent.com/baijidalam/Oudio/main/';
+
+      const UI_SOUNDS = {
+        nav: UI_SOUND_BASE + 'select-platfrom-click-sound.mp3',
+        homePin: UI_SOUND_BASE + 'click-pin-side-sound.m4a',
+        platformBox: UI_SOUND_BASE + 'click-plartfrom-box-sound.mp3',
+        appBox: UI_SOUND_BASE + 'clic-app-box-sound.m4a',
+        settingsCard: UI_SOUND_BASE + 'click-card-box-sound.mp3'
+      };
+
+      const audioCache = {};
+
+      function playUiSound(type) {
+        const src = UI_SOUNDS[type];
+        if (!src) return;
+
+        try {
+          let audio = audioCache[type];
+
+          if (!audio) {
+            audio = new Audio(src);
+            audio.preload = 'auto';
+            audioCache[type] = audio;
+          }
+
+          // Always restart from the beginning so every click gets the
+          // complete click effect, including rapid repeated taps.
+          audio.currentTime = 0;
+
+          const promise = audio.play();
+          if (promise && typeof promise.catch === 'function') {
+            promise.catch(function () {
+              // Ignore autoplay/network errors so UI functionality is never
+              // interrupted if an audio file is temporarily unavailable.
+            });
+          }
+        } catch (e) {
+          // Audio must never break the existing page functionality.
+        }
+      }
+
+      document.addEventListener('click', function (event) {
+        const target = event.target;
+        if (!target || !target.closest) return;
+
+        // 1) HOME / PLATFORMS / APP / SETTINGS bottom navigation
+        const navButton = target.closest('.bnav-btn');
+        if (navButton) {
+          playUiSound('nav');
+          return;
+        }
+
+        // 2) HOME pins — data-id is present on every real pin and is
+        // generated again whenever more pins are added.
+        const homePin = target.closest('#tab-home .home-pin[data-id]');
+        if (homePin) {
+          playUiSound('homePin');
+          return;
+        }
+
+        // 3) PLATFORM page boxes — covers both hard-coded and dynamically
+        // added .plat-card elements.
+        const platformBox = target.closest('#tab-platforms .plat-card');
+        if (platformBox) {
+          playUiSound('platformBox');
+          return;
+        }
+
+        // 4) APP page boxes — covers both hard-coded and dynamically added
+        // app cards.
+        const appBox = target.closest('#tab-apps .plat-card');
+        if (appBox) {
+          playUiSound('appBox');
+          return;
+        }
+
+        // 5) SETTINGS FAQ/card boxes — covers both default and newly added
+        // FAQ cards because both use .faq-item.
+        const settingsCard = target.closest('#tab-faq .faq-item');
+        if (settingsCard) {
+          playUiSound('settingsCard');
+        }
+      }, false);
+
+      // Expose a small helper only for future code that may need to trigger
+      // one of these same UI sounds programmatically.
+      window.playUiClickSound = playUiSound;
+    })();
 
     // ═══════════════════════════
     // DOWNLOAD LOGIC
