@@ -7,7 +7,7 @@
   <meta name="theme-color" content="#030407">
   <meta name="referrer" content="no-referrer">
   <title>BAIJID</title>
-  <!-- THEME_COLOR: 181, 0, 0 -->
+  <!-- THEME_COLOR: 0, 229, 255 -->
   <!-- TIKTOK_LINK: tiktok -->
   <!-- FB_LINK: facebook -->
   <!-- IG_LINK: https://snapinsta.to/en46 -->
@@ -2890,9 +2890,9 @@
     <div style="width:14px; height:14px; border-radius:50%; background:var(--a); box-shadow:0 0 10px var(--a);"></div>
   </div>
   <div class="mob-theme-panel" id="mobThemePanel">
-    <div class="thDot" style="background:#ff0033;color:#ff0033" data-c="#ff0033" onclick="setTheme('#ff0033',this)">
-    </div>
     <div class="thDot" style="background:#00e5ff;color:#00e5ff" data-c="#00e5ff" onclick="setTheme('#00e5ff',this)">
+    </div>
+    <div class="thDot" style="background:#ff0033;color:#ff0033" data-c="#ff0033" onclick="setTheme('#ff0033',this)">
     </div>
     <div class="thDot" style="background:#00cc55;color:#00cc55" data-c="#00cc55" onclick="setTheme('#00cc55',this)">
     </div>
@@ -3174,7 +3174,7 @@
       const c = document.getElementById('pCanvas');
       const ctx = c.getContext('2d');
       let W, H, columns, drops, speeds, fontSize = 16;
-      let accentColor = '#ff0033';
+      let accentColor = '#00e5ff';
       // cleaner character set — fewer noisy glyphs
       const chars = '01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン';
       const charArr = chars.split('');
@@ -3275,7 +3275,7 @@
       const saved = localStorage.getItem((document.title || 'BAIJID DOWNLOADER') + '_theme');
       if (saved) applyTheme(saved, false);
       else if (window._initialThemeColor) applyTheme(window._initialThemeColor, false);
-      else applyTheme('#ff0033', false);
+      else applyTheme('#00e5ff', false);
     })();
 
     // ═══════════════════════════
@@ -6657,10 +6657,52 @@ async function shareQR() {
     // ═══════════════════════════
     function toggleFaq(el) {
       const item = el.closest('.faq-item');
+      if (!item) return;
       const isOpen = item.classList.contains('open');
       document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
-      if (!isOpen) item.classList.add('open');
+      if (!isOpen) {
+        item.classList.add('open');
+        playFaqTyping(item);
+      }
     }
+
+    // Keep each Settings card title fixed; animate only the answer text.
+    const faqTypingTimers = new WeakMap();
+    function playFaqTyping(item) {
+      if (!item) return;
+      const answer = item.querySelector('.faq-a');
+      if (!answer) return;
+
+      // FAQ answers are plain text in the generated cards. Animate their text nodes
+      // without touching the question/title, number, arrow, or card styling.
+      const targets = Array.from(answer.childNodes).filter(node =>
+        node.nodeType === Node.TEXT_NODE && node.textContent.length > 0
+      );
+      targets.forEach(node => {
+        const oldTimer = faqTypingTimers.get(node);
+        if (oldTimer) clearInterval(oldTimer);
+        const fullText = node.textContent;
+        node.textContent = '';
+        let index = 0;
+        const timer = setInterval(() => {
+          if (!node.isConnected || index >= fullText.length) {
+            clearInterval(timer);
+            return;
+          }
+          node.textContent += fullText.charAt(index++);
+          if (index >= fullText.length) clearInterval(timer);
+        }, 18);
+        faqTypingTimers.set(node, timer);
+      });
+    }
+
+    // Let tapping anywhere on a Settings FAQ card open it and start its text animation.
+    document.addEventListener('click', function(event) {
+      const item = event.target.closest('#tab-faq .faq-item');
+      if (!item || event.target.closest('.faq-q')) return;
+      const question = item.querySelector('.faq-q');
+      if (question) toggleFaq(question);
+    });
 
     // ══════════════════════════════════════════════════════════════
     // UI CLICK SOUNDS
@@ -8288,6 +8330,13 @@ async function shareQR() {
 #baijid-modal .social-icons a:hover{color:#00eaff;transform:rotate(360deg) scale(1.15);text-shadow:0 0 12px #00eaff;}
 #baijid-modal footer{margin-top:28px;color:#00ff88;font-size:12px;letter-spacing:1px;opacity:.85;}
 @media(max-width:480px){#baijid-modal{padding:12px;}#baijid-modal .card{max-width:360px;padding:35px 16px 25px;}#baijid-modal h1{font-size:20px;}#baijid-modal p.bio{font-size:12px;}#baijid-modal .link-item{padding:12px 8px;font-size:13px;}#baijid-modal .name{font-size:17px;}}
+
+    /* Requested polish: slightly stronger glass blur for Platform cards only. */
+    #tab-platforms .plat-card {
+      backdrop-filter: blur(9px);
+      -webkit-backdrop-filter: blur(9px);
+    }
+    /* Settings card text typing is handled by the existing FAQ toggle logic. */
 </style>
 <div id="baijid-modal">
 <div id="matrix"></div>
