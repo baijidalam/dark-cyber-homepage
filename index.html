@@ -3624,11 +3624,11 @@
     // { name: "name", logo: "https://logo.jpg", link: "https://site.com", icon: "ti ti-world" }, // #9
     // { name: "name", logo: "https://logo.jpg", html: `HTML`, icon: "ti ti-world" }, // #9
     const DEFAULT_PLATFORMS_ADD = [
-      { name: "DARK WORLD", special: "ourweb", link: "https://baijidalam.github.io/bs-poratl-login/", emoji: "🧑‍💻" }, // #1
+      { name: "DARK WORLD", special: "ourweb", link: "https://baijidalam.github.io/bs-poratl-login/", icon: "ti ti-device-imac-x" }, // #1
       { name: "giteye", link: "https://giteye-search-v30.vercel.app/", icon: "ti ti-brand-github" }, // #2
       { name: "repo-explor", link: "https://baijid-github-explore-v3.vercel.app/", icon: "ti ti-brand-github" }, // #3
       { name: "age-pro", link: "https://baijidalam.github.io/age-calculate-pro/", icon: "ti ti-old" }, // #4
-      { name: "eiin-school", link: "https://eiin-number-to-info.netlify.app/", icon: "ti ti-school" }, // #5
+      { name: "eiin-school", link: "https://eiin-number-to-info.netlify.app/", icon: "ti ti-home-search" }, // #5
       { name: "Weather", link: "https://baijidalam.github.io/all-country-live-weather-explore/", icon: "ti ti-cloud-rain" }, // #6
       { name: "encod&decod", link: "https://baijidalam.github.io/code-encoder-decoder/", icon: "ti ti-code-off" }, // #7
             { name: "secret Pixel", link: "https://baijidalam.github.io/image-to-encod-decod/", icon: "ti ti-lock-access-off" }, // #8
@@ -4909,6 +4909,44 @@
   }
 </style>
 
+
+<style id="v3015-fixed-header-layout">
+/* Keep the complete clock/profile/title/search row fixed and visible. */
+html, body { min-height: 100%; }
+body { padding-top: 88px !important; box-sizing: border-box !important; }
+.baijid-page-header {
+  position: fixed !important;
+  top: 0 !important; left: 0 !important; right: 0 !important;
+  z-index: 10050 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  min-height: 88px !important;
+  padding: 8px 10px 6px !important;
+  box-sizing: border-box !important;
+  background: rgba(0, 0, 0, 0.84) !important;
+  background-color: rgba(0, 0, 0, 0.84) !important;
+  -webkit-backdrop-filter: blur(16px) saturate(125%) !important;
+  backdrop-filter: blur(16px) saturate(125%) !important;
+  border-bottom: 1px solid rgba(255,255,255,.10) !important;
+  box-shadow: 0 5px 20px rgba(0,0,0,.58) !important;
+}
+.baijid-page-header .header-row {
+  width: 100% !important; max-width: 480px !important;
+  min-height: 34px !important; margin: 0 auto !important;
+}
+.baijid-page-header .header-line { flex-shrink: 0 !important; }
+.baijid-page-header #status { flex-shrink: 0 !important; }
+/* All page content scrolls naturally underneath the fixed header. */
+body > .wrap { padding-top: 0 !important; }
+.bw-temp { font-size: 2.25rem !important; }
+.bw-temp small { font-size: 1rem !important; }
+@media (max-width:390px) {
+  .bw-temp { font-size: 2.05rem !important; }
+  .bw-temp small { font-size: .92rem !important; }
+}
+</style>
 </body>
 </html>
 ` }, // #8
@@ -6693,8 +6731,12 @@ async function shareQR() {
     }
 
     function brandIconFromName(name, link) {
-      const n = String(name || '').toLowerCase();
+      const n = String(name || '').toLowerCase().trim();
       const u = String(link || '').toLowerCase();
+      // Explicit project-specific icon overrides requested by the user.
+      if (n === 'dark world' || n === 'dark-world') return 'ti ti-device-imac-x';
+      if (n === 'eiin-school' || n === 'eiin school') return 'ti ti-home-search';
+      if (n === 'netlify' || /netlify\.com/.test(u)) return 'ti ti-device-desktop-code';
       const rules = [
         [/facebook|\bfb\b|facebook\.com/, 'ti ti-brand-facebook'],
         [/youtube|\byt\b|youtu\.be|youtube\.com/, 'ti ti-brand-youtube'],
