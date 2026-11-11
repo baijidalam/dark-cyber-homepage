@@ -7,13 +7,24 @@
   <meta name="theme-color" content="#030407">
   <meta name="referrer" content="no-referrer">
   <title>BAIJID</title>
+  <!-- ==========================================================
+       BAIJID ASSET LINKS — সব লিংক এক জায়গায় পরিবর্তন করুন
+       MUSIC_SRC: ব্যাকগ্রাউন্ড গান | PROFILE_PIC: প্রোফাইল ছবি
+       UI_SOUND_BASE + UI_SOUND_*: ন্যাভিগেশন ও ক্লিক সাউন্ড
+       ========================================================== -->
+  <!-- MUSIC_SRC: https://files.catbox.moe/28jjdk.m4a -->
+  <!-- PROFILE_PIC: https://i.postimg.cc/mDJCrZxm/IMG-6403-3.jpg -->
+  <!-- UI_SOUND_BASE: https://raw.githubusercontent.com/baijidalam/Oudio/main/ -->
+  <!-- UI_SOUND_NAV: select-platfrom-click-sound.mp3 -->
+  <!-- UI_SOUND_HOME: click-pin-side-sound.m4a -->
+  <!-- UI_SOUND_PLATFORM: click-plartfrom-box-sound.mp3 -->
+  <!-- UI_SOUND_APP: clic-app-box-sound.m4a -->
+  <!-- UI_SOUND_SETTINGS: click-card-box-sound.mp3 -->
   <!-- THEME_COLOR: 0, 229, 255 -->
   <!-- TIKTOK_LINK: tiktok -->
   <!-- FB_LINK: facebook -->
   <!-- IG_LINK: https://snapinsta.to/en46 -->
   <!-- YT_LINK: https://en1.savefrom.net/19wr/ -->
-  <!-- MUSIC_SRC: https://files.catbox.moe/28jjdk.m4a -->
-  <!-- PROFILE_PIC: https://i.postimg.cc/mDJCrZxm/IMG-6403-3.jpg-->
   <!-- NOTIF_SRC:https://i.postimg.cc/HWrrLCkK/IMG-20260531-173744-515-PORTRAIT-3.jpg-->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link
@@ -2757,7 +2768,321 @@
     .iface-modal-close:active { transform: scale(0.9); background: var(--a); }
     .iface-modal-body { padding-top: 8px; }
 
-  </style>
+  
+/* ===== X TOUCH + HOME MULTI-TOOL (HOME PINS ONLY) ===== */
+#xTouchLayer{position:fixed;inset:0;pointer-events:none;z-index:99990;overflow:hidden}
+.x-touch-mark{position:absolute;width:18px;height:18px;margin:-9px 0 0 -9px;pointer-events:none;
+  animation:xTouchPop .38s cubic-bezier(.2,.8,.2,1) forwards}
+.x-touch-mark svg{width:100%;height:100%;filter:drop-shadow(0 0 4px var(--a)) drop-shadow(0 0 8px var(--ab))}
+.x-touch-mark line{stroke:var(--a);stroke-width:2.2;stroke-linecap:round}
+@keyframes xTouchPop{0%{opacity:0;transform:scale(.4)}40%{opacity:1;transform:scale(1.05)}100%{opacity:0;transform:scale(.75)}}
+
+.home-pin.dragging{opacity:.3!important;z-index:40}
+.home-pin.drag-over{outline:2px solid var(--a);outline-offset:2px;box-shadow:0 0 16px var(--ab)}
+.home-pin.folder-target{outline:2px dashed var(--a);outline-offset:3px;background:var(--ad)!important;transform:scale(1.06)}
+
+/* Closed folder look — mini icon grid like Android */
+.home-pin.is-folder .home-pin-icon{
+  position:relative;
+  background:rgba(255,255,255,.08)!important;
+  border:1px solid var(--brda)!important;
+  padding:4px!important;
+  display:grid!important;
+  grid-template-columns:1fr 1fr;
+  grid-template-rows:1fr 1fr;
+  gap:2px;
+  overflow:hidden;
+}
+.home-pin.is-folder .home-pin-icon > i,
+.home-pin.is-folder .home-pin-icon > img{display:none!important}
+.home-pin.is-folder .home-pin-icon .hf-mini{
+  width:100%;height:100%;border-radius:5px;overflow:hidden;
+  background:rgba(255,255,255,.1);
+  display:flex;align-items:center;justify-content:center;
+  color:var(--a);font-size:11px;
+}
+.home-pin.is-folder .home-pin-icon .hf-mini img{width:100%;height:100%;object-fit:cover;display:block}
+.home-pin-folder-badge{display:none!important}
+
+.drag-ghost{position:fixed;pointer-events:none;z-index:99950;opacity:.95;transform:scale(1.08);
+  filter:drop-shadow(0 8px 20px rgba(0,0,0,.55))}
+.jiggle .home-pin:not(.dragging){animation:pinJiggle .28s ease-in-out infinite alternate}
+@keyframes pinJiggle{from{transform:rotate(-1deg)}to{transform:rotate(1deg)}}
+
+/* Open multi-tool panel — Android folder style */
+#multiToolOverlay{display:none;position:fixed;inset:0;z-index:96000;
+  background:rgba(0,0,0,.45);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  align-items:flex-start;justify-content:center;padding:18vh 16px 24px}
+#multiToolOverlay.open{display:flex}
+
+.plat-tool-card .plat-tool-icon{
+  width:52px;height:52px;border-radius:14px;
+  display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:2px;
+  padding:4px;background:rgba(255,255,255,.08);border:1px solid var(--brda);
+  box-sizing:border-box;
+}
+.plat-tool-mini{
+  border-radius:5px;overflow:hidden;background:rgba(255,255,255,.1);
+  display:flex;align-items:center;justify-content:center;
+  color:var(--a);font-size:12px;
+}
+.plat-tool-mini img{width:100%;height:100%;object-fit:cover;display:block}
+.plat-tool-mini i{font-size:12px}
+
+
+.mt-panel{
+  background:rgba(20,22,32,.42)!important;
+  border:1px solid color-mix(in srgb, var(--a) 35%, rgba(255,255,255,.12))!important;
+  box-shadow:0 20px 50px rgba(0,0,0,.45),0 0 40px color-mix(in srgb, var(--a) 25%, transparent)!important;
+  backdrop-filter:blur(32px) saturate(180%)!important;
+  -webkit-backdrop-filter:blur(32px) saturate(180%)!important;
+}
+#multiToolOverlay{
+  background:color-mix(in srgb, var(--a) 8%, rgba(0,0,0,.5))!important;
+}
+
+.mt-panel{
+  position:relative;width:min(320px,90vw);
+  background:rgba(40,42,52,.55);
+  border:1px solid rgba(255,255,255,.14);
+  border-radius:28px;
+  backdrop-filter:blur(28px) saturate(160%);
+  -webkit-backdrop-filter:blur(28px) saturate(160%);
+  box-shadow:0 20px 50px rgba(0,0,0,.4),0 0 30px var(--ad);
+  padding:16px 14px 18px;
+}
+.mt-title-row{
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  margin-bottom:14px;position:relative;padding:0 28px;
+}
+.mt-title-text{
+  font-family:'Rajdhani',sans-serif;font-size:1.15rem;font-weight:700;
+  color:#fff;text-align:center;border:none;background:transparent;
+  outline:none;max-width:70%;caret-color:var(--a);
+}
+.mt-title-text:focus{border-bottom:1px solid var(--a)}
+.mt-dots{
+  position:absolute;right:0;top:50%;transform:translateY(-50%);
+  width:28px;height:28px;border-radius:50%;
+  background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.14);
+  display:flex;align-items:center;justify-content:center;
+  color:var(--a);font-size:15px;cursor:pointer;
+}
+.mt-dots:active{background:var(--ad)}
+.mt-menu{
+  display:none;position:absolute;top:36px;right:0;z-index:12;
+  background:rgba(22,24,36,.9);border:1px solid var(--brda);border-radius:14px;overflow:hidden;
+  backdrop-filter:blur(18px);box-shadow:0 12px 32px rgba(0,0,0,.45);min-width:168px;
+}
+.mt-menu.open{display:block}
+.mt-menu button{
+  display:block;width:100%;text-align:left;padding:12px 14px;border:none;background:transparent;
+  color:#fff;font-family:'Orbitron',monospace;font-size:.52rem;letter-spacing:1px;cursor:pointer;
+  border-bottom:1px solid rgba(255,255,255,.06);
+}
+.mt-menu button:last-child{border-bottom:none}
+.mt-menu button:active{background:var(--ad);color:var(--a)}
+.mt-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:12px 8px;
+  max-height:50vh;overflow:auto;padding:2px;
+}
+.mt-item{display:flex;flex-direction:column;align-items:center;gap:4px;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.mt-item-icon{
+  width:52px;height:52px;border-radius:14px;
+  background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.1);
+  display:flex;align-items:center;justify-content:center;overflow:hidden;
+  color:var(--a);font-size:24px;box-shadow:0 4px 12px rgba(0,0,0,.25);
+}
+.mt-item-icon img{width:100%;height:100%;object-fit:cover}
+.mt-item-name{
+  font-family:'Rajdhani',sans-serif;font-size:.62rem;font-weight:700;
+  color:rgba(255,255,255,.9);text-align:center;max-width:64px;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap;line-height:1.15;
+}
+.mt-add-btn .mt-item-icon{
+  background:rgba(255,255,255,.12);border:1px dashed var(--brda);color:var(--a);font-size:26px;
+}
+
+/* Pick list overlay for Add into folder */
+#mtPickOverlay{display:none;position:fixed;inset:0;z-index:97000;
+  background:rgba(0,0,0,.55);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  flex-direction:column;align-items:center;justify-content:flex-end;padding:0}
+#mtPickOverlay.open{display:flex}
+
+/* remove chip inside open tool */
+.mt-item{position:relative}
+.mt-rm-btn{display:none!important;}
+
+/* custom folder icon on home (user image/url) — not mini grid */
+.home-pin.is-folder.has-custom-icon .home-pin-icon{
+  display:flex!important;
+  grid-template-columns:unset!important;
+  grid-template-rows:unset!important;
+  padding:0!important;
+  align-items:center;justify-content:center;
+}
+.home-pin.is-folder.has-custom-icon .home-pin-icon > img{
+  display:block!important;width:100%;height:100%;object-fit:cover;border-radius:inherit;
+}
+.home-pin.is-folder.has-custom-icon .home-pin-icon > i{
+  display:flex!important;font-size:26px;color:var(--a);
+}
+.home-pin.is-folder.has-custom-icon .hf-mini{display:none!important}
+
+  display:none;position:absolute;top:-6px;right:2px;z-index:5;
+  width:22px;height:22px;border-radius:50%;border:none;
+  background:#ff3355;color:#fff;font-size:14px;line-height:22px;
+  box-shadow:0 2px 10px rgba(255,51,85,.5);cursor:pointer;
+}
+.mt-item.show-rm 
+/* custom folder icon on home (user image/url) — not mini grid */
+.home-pin.is-folder.has-custom-icon .home-pin-icon{
+  display:flex!important;
+  grid-template-columns:unset!important;
+  grid-template-rows:unset!important;
+  padding:0!important;
+  align-items:center;justify-content:center;
+}
+.home-pin.is-folder.has-custom-icon .home-pin-icon > img{
+  display:block!important;width:100%;height:100%;object-fit:cover;border-radius:inherit;
+}
+.home-pin.is-folder.has-custom-icon .home-pin-icon > i{
+  display:flex!important;font-size:26px;color:var(--a);
+}
+.home-pin.is-folder.has-custom-icon .hf-mini{display:none!important}
+
+.mt-item.mt-dragging{opacity:.35}
+.mt-item.mt-drag-over{outline:2px solid var(--a);outline-offset:2px;border-radius:12px}
+
+.mt-pick-sheet{
+  width:100%;max-width:430px;max-height:78vh;
+  background:rgba(14,16,26,.96);border:1px solid rgba(255,255,255,.1);
+  border-radius:22px 22px 0 0;padding:14px 12px 20px;
+  box-shadow:0 -10px 40px rgba(0,0,0,.5);display:flex;flex-direction:column;
+}
+.mt-pick-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;padding:0 4px}
+.mt-pick-title{font-family:'Orbitron',monospace;font-size:.68rem;letter-spacing:1.5px;color:var(--a)}
+.mt-pick-save{
+  padding:8px 16px;border-radius:12px;border:none;background:var(--a);color:#fff;
+  font-family:'Orbitron',monospace;font-size:.55rem;letter-spacing:1px;font-weight:700;
+  box-shadow:0 0 16px var(--ab);cursor:pointer;
+}
+.mt-pick-save:disabled{opacity:.35;box-shadow:none}
+.mt-pick-list{overflow:auto;flex:1;display:flex;flex-direction:column;gap:6px}
+.mt-pick-row{
+  display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:14px;
+  background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);cursor:pointer;
+}
+.mt-pick-row.on{border-color:var(--a);background:var(--ad)}
+.mt-pick-ico{
+  width:40px;height:40px;border-radius:10px;overflow:hidden;flex-shrink:0;
+  background:rgba(255,255,255,.06);display:flex;align-items:center;justify-content:center;
+  color:var(--a);font-size:20px;
+}
+.mt-pick-ico img{width:100%;height:100%;object-fit:cover}
+.mt-pick-name{flex:1;font-family:'Rajdhani',sans-serif;font-size:.9rem;font-weight:700;color:#fff}
+.mt-pick-check{
+  width:22px;height:22px;border-radius:50%;border:2px solid rgba(255,255,255,.25);
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;
+}
+.mt-pick-row.on .mt-pick-check{background:var(--a);border-color:var(--a);color:#fff;font-size:12px}
+
+
+.plat-tool-icon{
+  width:52px;height:52px;border-radius:14px;
+  display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:2px;
+  padding:4px;background:rgba(255,255,255,.08);border:1px solid var(--brda);
+  box-sizing:border-box;
+}
+.plat-tool-mini{
+  border-radius:5px;overflow:hidden;background:rgba(255,255,255,.1);
+  display:flex;align-items:center;justify-content:center;
+  color:var(--a);font-size:12px;
+}
+.plat-tool-mini img{width:100%;height:100%;object-fit:cover;display:block}
+.plat-tool-mini i{font-size:12px}
+#editMtModal{z-index:98000!important;}
+.glass-modal-overlay {
+      display: none; position: fixed; inset: 0; z-index: 90000;
+      background: rgba(0,0,0,0.55); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+      align-items: center; justify-content: center; padding: 20px;
+    }
+.glass-modal-overlay.open { display: flex; }
+.glass-modal {
+      width: 100%; max-width: 360px;
+      background: rgba(25, 28, 40, 0.55);
+      backdrop-filter: blur(28px) saturate(180%);
+      -webkit-backdrop-filter: blur(28px) saturate(180%);
+      border: 1px solid rgba(255,255,255,0.18);
+      border-radius: 22px;
+      padding: 22px 18px 18px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.12);
+      position: relative;
+    }
+.glass-modal h3 {
+      font-family: 'Orbitron', monospace; font-size: 0.75rem; letter-spacing: 2px;
+      color: #fff; margin-bottom: 16px; text-align: center;
+    }
+.glass-modal label {
+      display: block; font-family: 'Rajdhani', sans-serif; font-size: 0.8rem;
+      color: var(--txm); margin: 10px 0 4px; font-weight: 600;
+    }
+.glass-modal input, .glass-modal textarea {
+      width: 100%; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 12px; padding: 11px 12px; color: #fff; font-family: 'Rajdhani', sans-serif;
+      font-size: 0.95rem; outline: none;
+    }
+.glass-modal input:focus, .glass-modal textarea:focus { border-color: var(--a); }
+.glass-modal .hint { font-size: 0.72rem; color: var(--txd); margin-top: 4px; }
+.glass-modal .row-btns { display: flex; gap: 10px; margin-top: 18px; }
+.glass-modal .btn-cancel, .glass-modal .btn-save {
+      flex: 1; padding: 12px; border-radius: 12px; border: none; cursor: pointer;
+      font-family: 'Orbitron', monospace; font-size: 0.6rem; letter-spacing: 1.5px;
+    }
+.glass-modal .btn-cancel { background: rgba(255,255,255,0.08); color: var(--txm); }
+.glass-modal .btn-save { background: var(--a); color: #fff; box-shadow: 0 0 16px var(--ab); }
+.glass-modal .file-btn {
+      display: block; width: 100%; text-align: center; padding: 12px;
+      border-radius: 12px; border: 1px dashed var(--brda); background: rgba(255,255,255,0.04);
+      color: var(--a); cursor: pointer; font-family: 'Rajdhani', sans-serif; font-weight: 600; margin-top: 4px;
+    }
+.glass-modal .btn-save {
+      flex: 1; padding: 12px; border-radius: 12px; border: none; cursor: pointer;
+      font-family: 'Orbitron', monospace; font-size: 0.6rem; letter-spacing: 1.5px;
+    }
+.plat-card.drag-over').forEach(function(n){ n.classList.remove('drag-over'); }
+</style>
+
+<style id="baijid-live-weather-style">
+/* ===== LIVE WEATHER + DAY/NIGHT HOUSE SYSTEM ===== */
+.spooky-house .moon.weather-sun{
+  background:radial-gradient(circle at 38% 34%,#fff7c7 0 10%,#ffd95b 32%,#ffb21a 72%,#f08a00 100%) !important;
+  box-shadow:none !important;
+  filter:none !important;
+}
+.spooky-house .moon.weather-sun::before,
+.spooky-house .moon.weather-sun::after{display:none !important;}
+.spooky-house .moon.weather-sun.sun-morning{
+  background:radial-gradient(circle at 40% 38%,#fff7dc 0 12%,#ffe7a1 34%,#ffc45a 72%,#f5a23b 100%) !important;
+}
+.spooky-house .moon.weather-sun.sun-noon{
+  background:radial-gradient(circle at 38% 35%,#fffbe6 0 10%,#ffe46b 34%,#ffc21c 70%,#f59b00 100%) !important;
+}
+.spooky-house .moon.weather-sun.sun-afternoon{
+  background:radial-gradient(circle at 38% 35%,#fff0c9 0 11%,#ffd08a 34%,#f6a34a 70%,#e97b27 100%) !important;
+}
+.spooky-house .moon.weather-moon{box-shadow:inset 7px -7px 0 rgba(0,0,0,.2),0 0 30px var(--ab);}
+.weather-sky-effects{position:absolute;inset:0;z-index:2;pointer-events:none;overflow:hidden;}
+.weather-cloud{position:absolute;width:95px;height:30px;border-radius:40px;background:rgba(220,232,242,.62);filter:blur(.2px);opacity:0;transition:opacity .7s,transform .7s;}
+.weather-cloud::before,.weather-cloud::after{content:"";position:absolute;border-radius:50%;background:inherit;}
+.weather-cloud::before{width:42px;height:42px;left:17px;bottom:6px}.weather-cloud::after{width:54px;height:54px;right:13px;bottom:4px}
+.weather-cloud.c1{top:16%;left:8%;transform:scale(.8)} .weather-cloud.c2{top:24%;right:8%;transform:scale(.65)} .weather-cloud.c3{top:12%;right:25%;transform:scale(.48)}
+.weather-sky-effects.cloud-light .weather-cloud{opacity:.28}.weather-sky-effects.cloud-medium .weather-cloud{opacity:.48}.weather-sky-effects.cloud-heavy .weather-cloud{opacity:.68}
+.weather-sky-effects.cloud-medium .c1{transform:translateX(10px) scale(.95)} .weather-sky-effects.cloud-heavy .c1{transform:translateX(15px) scale(1.05)}
+.weather-sky-effects.cloud-heavy .c2{transform:translateX(-15px) scale(.9)}
+.weather-rain{display:none !important;}
+.weather-stars{position:absolute;
+</style>
 
 <style id="baijid-live-weather-style">
 /* ===== LIVE WEATHER + DAY/NIGHT HOUSE SYSTEM ===== */
@@ -4438,6 +4763,152 @@
       }
     }
   <\/script>
+
+<!-- BRAND ICON + LIVE THEME ACCENT PATCH -->
+<style id="brand-theme-icon-patch">
+  .plat-icon,
+  .feat-icon,
+  .logo-icon,
+  .home-pin-icon > i,
+  .home-pin-icon .hf-mini,
+  .hf-mini i,
+  .plat-tool-mini i,
+  .mt-item-icon i,
+  .mt-pick-ico i,
+  .mt-pick-row i,
+  .v3007-choice i,
+  .plat-card > i,
+  .plat-card .plat-icon {
+    color: var(--a) !important;
+    text-shadow: 0 0 12px var(--ag);
+  }
+  .mt-item-icon,
+  .mt-pick-ico,
+  .plat-tool-mini,
+  .home-pin.is-folder .home-pin-icon .hf-mini {
+    color: var(--a) !important;
+  }
+</style>
+\n
+
+<!-- V3011: Keep dynamically-added cards/icons identical to their page's native layout + active nav state -->
+<style id="v3011-page-native-sizing-nav">
+  /* PLATFORM + APP: every default, custom, loose and newly-created card uses the same native tile size. */
+  #tab-platforms .plat-card,
+  #tab-apps .plat-card {
+    min-height:132px !important;
+    height:132px !important;
+    box-sizing:border-box !important;
+    padding:16px 10px 14px !important;
+    display:flex !important;
+    flex-direction:column !important;
+    align-items:center !important;
+    justify-content:center !important;
+    gap:8px !important;
+  }
+  #tab-platforms .plat-card > i,
+  #tab-apps .plat-card > i,
+  #tab-platforms .plat-card > .plat-icon,
+  #tab-apps .plat-card > .plat-icon,
+  #tab-platforms .v3007-loose-item > i,
+  #tab-apps .v3007-loose-item > i {
+    width:auto !important;
+    height:auto !important;
+    font-size:30px !important;
+    line-height:1 !important;
+    flex:0 0 auto !important;
+    color:var(--a) !important;
+    text-shadow:0 0 16px var(--ag) !important;
+  }
+  #tab-platforms .plat-tool-card .plat-tool-icon,
+  #tab-apps .plat-tool-card .plat-tool-icon {
+    width:52px !important;
+    height:52px !important;
+    flex:0 0 52px !important;
+  }
+  /* HOME: added pins retain the exact same 58px tile / 52px icon footprint as existing pins. */
+  #tab-home .home-pin { width:58px !important; }
+  #tab-home .home-pin-icon {
+    width:52px !important;
+    height:52px !important;
+    min-width:52px !important;
+    min-height:52px !important;
+    box-sizing:border-box !important;
+  }
+  #tab-home .home-pin-icon > i { font-size:26px !important; line-height:1 !important; }
+  /* Bottom navigation: ONLY the selected page label and its icon turn red. */
+  .bnav-btn {
+    transform:none !important;
+    z-index:auto !important;
+    transition:color .2s ease !important;
+  }
+  .bnav-btn .bnav-icon,
+  .bnav-btn .bnav-lbl {
+    color:var(--a) !important;
+    text-shadow:none !important;
+    transition:color .2s ease,text-shadow .2s ease !important;
+  }
+  .bnav-btn.active {
+    transform:none !important;
+    z-index:auto !important;
+  }
+  .bnav-btn.active .bnav-icon,
+  .bnav-btn.active .bnav-lbl {
+    color:#ff0033 !important;
+    text-shadow:0 0 9px rgba(255,0,51,.45) !important;
+  }
+  .bnav-btn.active .bnav-icon { font-size:22px !important; }
+  .bnav-btn.active .bnav-lbl { font-weight:700 !important; }
+</style>
+
+
+
+<!-- V3013: Bottom navigation active state (selected = red + slightly larger; others = theme color) -->
+<style id="v3013-bottom-nav-active-state">
+  /* Keep this rule last: the global Tabler icon theme rule must not override nav state. */
+  html body .bnav-tabs .bnav-btn {
+    transform: scale(1) !important;
+    transform-origin: center center !important;
+    transition: transform .18s ease !important;
+    position: relative !important;
+    z-index: 1 !important;
+  }
+  html body .bnav-tabs .bnav-btn:not(.active) .bnav-icon,
+  html body .bnav-tabs .bnav-btn:not(.active) .bnav-icon::before,
+  html body .bnav-tabs .bnav-btn:not(.active) .bnav-lbl {
+    color: var(--a, #00e5ff) !important;
+    -webkit-text-fill-color: var(--a, #00e5ff) !important;
+    text-shadow: 0 0 8px var(--ag, rgba(0,229,255,.45)) !important;
+  }
+  html body .bnav-tabs .bnav-btn:not(.active) .bnav-icon {
+    font-size: 21px !important;
+    line-height: 1 !important;
+  }
+  html body .bnav-tabs .bnav-btn:not(.active) .bnav-lbl {
+    font-size: .55rem !important;
+    font-weight: 500 !important;
+  }
+  html body .bnav-tabs .bnav-btn.active {
+    transform: scale(1.09) !important;
+    z-index: 3 !important;
+  }
+  html body .bnav-tabs .bnav-btn.active .bnav-icon,
+  html body .bnav-tabs .bnav-btn.active .bnav-icon::before,
+  html body .bnav-tabs .bnav-btn.active .bnav-lbl {
+    color: #ff0033 !important;
+    -webkit-text-fill-color: #ff0033 !important;
+    text-shadow: 0 0 10px rgba(255,0,51,.62) !important;
+  }
+  html body .bnav-tabs .bnav-btn.active .bnav-icon {
+    font-size: 24px !important;
+    line-height: 1 !important;
+  }
+  html body .bnav-tabs .bnav-btn.active .bnav-lbl {
+    font-size: .60rem !important;
+    font-weight: 800 !important;
+  }
+</style>
+
 </body>
 </html>
 ` }, // #8
@@ -5570,6 +6041,125 @@
       }
     }
   <\/script>
+
+
+<!-- V3011: Keep dynamically-added cards/icons identical to their page's native layout + active nav state -->
+<style id="v3011-page-native-sizing-nav">
+  /* PLATFORM + APP: every default, custom, loose and newly-created card uses the same native tile size. */
+  #tab-platforms .plat-card,
+  #tab-apps .plat-card {
+    min-height:132px !important;
+    height:132px !important;
+    box-sizing:border-box !important;
+    padding:16px 10px 14px !important;
+    display:flex !important;
+    flex-direction:column !important;
+    align-items:center !important;
+    justify-content:center !important;
+    gap:8px !important;
+  }
+  #tab-platforms .plat-card > i,
+  #tab-apps .plat-card > i,
+  #tab-platforms .plat-card > .plat-icon,
+  #tab-apps .plat-card > .plat-icon,
+  #tab-platforms .v3007-loose-item > i,
+  #tab-apps .v3007-loose-item > i {
+    width:auto !important;
+    height:auto !important;
+    font-size:30px !important;
+    line-height:1 !important;
+    flex:0 0 auto !important;
+    color:var(--a) !important;
+    text-shadow:0 0 16px var(--ag) !important;
+  }
+  #tab-platforms .plat-tool-card .plat-tool-icon,
+  #tab-apps .plat-tool-card .plat-tool-icon {
+    width:52px !important;
+    height:52px !important;
+    flex:0 0 52px !important;
+  }
+  /* HOME: added pins retain the exact same 58px tile / 52px icon footprint as existing pins. */
+  #tab-home .home-pin { width:58px !important; }
+  #tab-home .home-pin-icon {
+    width:52px !important;
+    height:52px !important;
+    min-width:52px !important;
+    min-height:52px !important;
+    box-sizing:border-box !important;
+  }
+  #tab-home .home-pin-icon > i { font-size:26px !important; line-height:1 !important; }
+  /* Bottom navigation: selected page is red and slightly larger; others remain at normal size. */
+  .bnav-btn {
+    transform:scale(1) !important;
+    transform-origin:center center !important;
+    transition:transform .2s ease,color .2s ease !important;
+  }
+  .bnav-btn .bnav-icon,
+  .bnav-btn .bnav-lbl {
+    color:var(--a) !important;
+    transition:color .2s ease,font-size .2s ease,text-shadow .2s ease !important;
+  }
+  .bnav-btn.active {
+    transform:scale(1.10) !important;
+    z-index:2 !important;
+  }
+  .bnav-btn.active .bnav-icon,
+  .bnav-btn.active .bnav-lbl {
+    color:#ff0033 !important;
+    text-shadow:0 0 10px rgba(255,0,51,.55) !important;
+  }
+  .bnav-btn.active .bnav-icon { font-size:24px !important; }
+  .bnav-btn.active .bnav-lbl { font-weight:900 !important; }
+</style>
+
+
+
+<!-- V3013: Bottom navigation active state (selected = red + slightly larger; others = theme color) -->
+<style id="v3013-bottom-nav-active-state">
+  /* Keep this rule last: the global Tabler icon theme rule must not override nav state. */
+  html body .bnav-tabs .bnav-btn {
+    transform: scale(1) !important;
+    transform-origin: center center !important;
+    transition: transform .18s ease !important;
+    position: relative !important;
+    z-index: 1 !important;
+  }
+  html body .bnav-tabs .bnav-btn:not(.active) .bnav-icon,
+  html body .bnav-tabs .bnav-btn:not(.active) .bnav-icon::before,
+  html body .bnav-tabs .bnav-btn:not(.active) .bnav-lbl {
+    color: var(--a, #00e5ff) !important;
+    -webkit-text-fill-color: var(--a, #00e5ff) !important;
+    text-shadow: 0 0 8px var(--ag, rgba(0,229,255,.45)) !important;
+  }
+  html body .bnav-tabs .bnav-btn:not(.active) .bnav-icon {
+    font-size: 21px !important;
+    line-height: 1 !important;
+  }
+  html body .bnav-tabs .bnav-btn:not(.active) .bnav-lbl {
+    font-size: .55rem !important;
+    font-weight: 500 !important;
+  }
+  html body .bnav-tabs .bnav-btn.active {
+    transform: scale(1.09) !important;
+    z-index: 3 !important;
+  }
+  html body .bnav-tabs .bnav-btn.active .bnav-icon,
+  html body .bnav-tabs .bnav-btn.active .bnav-icon::before,
+  html body .bnav-tabs .bnav-btn.active .bnav-lbl {
+    color: #ff0033 !important;
+    -webkit-text-fill-color: #ff0033 !important;
+    text-shadow: 0 0 10px rgba(255,0,51,.62) !important;
+  }
+  html body .bnav-tabs .bnav-btn.active .bnav-icon {
+    font-size: 24px !important;
+    line-height: 1 !important;
+  }
+  html body .bnav-tabs .bnav-btn.active .bnav-lbl {
+    font-size: .60rem !important;
+    font-weight: 800 !important;
+  }
+</style>
+
 </body>
 </html>
 ` }, // #9
@@ -5633,6 +6223,125 @@ function copyTxt(){
   alert('কপি হয়েছে!');
 }
 <\/script>
+
+
+<!-- V3011: Keep dynamically-added cards/icons identical to their page's native layout + active nav state -->
+<style id="v3011-page-native-sizing-nav">
+  /* PLATFORM + APP: every default, custom, loose and newly-created card uses the same native tile size. */
+  #tab-platforms .plat-card,
+  #tab-apps .plat-card {
+    min-height:132px !important;
+    height:132px !important;
+    box-sizing:border-box !important;
+    padding:16px 10px 14px !important;
+    display:flex !important;
+    flex-direction:column !important;
+    align-items:center !important;
+    justify-content:center !important;
+    gap:8px !important;
+  }
+  #tab-platforms .plat-card > i,
+  #tab-apps .plat-card > i,
+  #tab-platforms .plat-card > .plat-icon,
+  #tab-apps .plat-card > .plat-icon,
+  #tab-platforms .v3007-loose-item > i,
+  #tab-apps .v3007-loose-item > i {
+    width:auto !important;
+    height:auto !important;
+    font-size:30px !important;
+    line-height:1 !important;
+    flex:0 0 auto !important;
+    color:var(--a) !important;
+    text-shadow:0 0 16px var(--ag) !important;
+  }
+  #tab-platforms .plat-tool-card .plat-tool-icon,
+  #tab-apps .plat-tool-card .plat-tool-icon {
+    width:52px !important;
+    height:52px !important;
+    flex:0 0 52px !important;
+  }
+  /* HOME: added pins retain the exact same 58px tile / 52px icon footprint as existing pins. */
+  #tab-home .home-pin { width:58px !important; }
+  #tab-home .home-pin-icon {
+    width:52px !important;
+    height:52px !important;
+    min-width:52px !important;
+    min-height:52px !important;
+    box-sizing:border-box !important;
+  }
+  #tab-home .home-pin-icon > i { font-size:26px !important; line-height:1 !important; }
+  /* Bottom navigation: selected page is red and slightly larger; others remain at normal size. */
+  .bnav-btn {
+    transform:scale(1) !important;
+    transform-origin:center center !important;
+    transition:transform .2s ease,color .2s ease !important;
+  }
+  .bnav-btn .bnav-icon,
+  .bnav-btn .bnav-lbl {
+    color:var(--a) !important;
+    transition:color .2s ease,font-size .2s ease,text-shadow .2s ease !important;
+  }
+  .bnav-btn.active {
+    transform:scale(1.10) !important;
+    z-index:2 !important;
+  }
+  .bnav-btn.active .bnav-icon,
+  .bnav-btn.active .bnav-lbl {
+    color:#ff0033 !important;
+    text-shadow:0 0 10px rgba(255,0,51,.55) !important;
+  }
+  .bnav-btn.active .bnav-icon { font-size:24px !important; }
+  .bnav-btn.active .bnav-lbl { font-weight:900 !important; }
+</style>
+
+
+
+<!-- V3013: Bottom navigation active state (selected = red + slightly larger; others = theme color) -->
+<style id="v3013-bottom-nav-active-state">
+  /* Keep this rule last: the global Tabler icon theme rule must not override nav state. */
+  html body .bnav-tabs .bnav-btn {
+    transform: scale(1) !important;
+    transform-origin: center center !important;
+    transition: transform .18s ease !important;
+    position: relative !important;
+    z-index: 1 !important;
+  }
+  html body .bnav-tabs .bnav-btn:not(.active) .bnav-icon,
+  html body .bnav-tabs .bnav-btn:not(.active) .bnav-icon::before,
+  html body .bnav-tabs .bnav-btn:not(.active) .bnav-lbl {
+    color: var(--a, #00e5ff) !important;
+    -webkit-text-fill-color: var(--a, #00e5ff) !important;
+    text-shadow: 0 0 8px var(--ag, rgba(0,229,255,.45)) !important;
+  }
+  html body .bnav-tabs .bnav-btn:not(.active) .bnav-icon {
+    font-size: 21px !important;
+    line-height: 1 !important;
+  }
+  html body .bnav-tabs .bnav-btn:not(.active) .bnav-lbl {
+    font-size: .55rem !important;
+    font-weight: 500 !important;
+  }
+  html body .bnav-tabs .bnav-btn.active {
+    transform: scale(1.09) !important;
+    z-index: 3 !important;
+  }
+  html body .bnav-tabs .bnav-btn.active .bnav-icon,
+  html body .bnav-tabs .bnav-btn.active .bnav-icon::before,
+  html body .bnav-tabs .bnav-btn.active .bnav-lbl {
+    color: #ff0033 !important;
+    -webkit-text-fill-color: #ff0033 !important;
+    text-shadow: 0 0 10px rgba(255,0,51,.62) !important;
+  }
+  html body .bnav-tabs .bnav-btn.active .bnav-icon {
+    font-size: 24px !important;
+    line-height: 1 !important;
+  }
+  html body .bnav-tabs .bnav-btn.active .bnav-lbl {
+    font-size: .60rem !important;
+    font-weight: 800 !important;
+  }
+</style>
+
 </body>
 </html>`, icon: "ti ti-copy" }, // #11
       { name: "QR", icon: "ti ti-qrcode", html: `<!DOCTYPE html>
@@ -5736,6 +6445,125 @@ async function shareQR() {
   }
 }
 <\/script>
+
+
+<!-- V3011: Keep dynamically-added cards/icons identical to their page's native layout + active nav state -->
+<style id="v3011-page-native-sizing-nav">
+  /* PLATFORM + APP: every default, custom, loose and newly-created card uses the same native tile size. */
+  #tab-platforms .plat-card,
+  #tab-apps .plat-card {
+    min-height:132px !important;
+    height:132px !important;
+    box-sizing:border-box !important;
+    padding:16px 10px 14px !important;
+    display:flex !important;
+    flex-direction:column !important;
+    align-items:center !important;
+    justify-content:center !important;
+    gap:8px !important;
+  }
+  #tab-platforms .plat-card > i,
+  #tab-apps .plat-card > i,
+  #tab-platforms .plat-card > .plat-icon,
+  #tab-apps .plat-card > .plat-icon,
+  #tab-platforms .v3007-loose-item > i,
+  #tab-apps .v3007-loose-item > i {
+    width:auto !important;
+    height:auto !important;
+    font-size:30px !important;
+    line-height:1 !important;
+    flex:0 0 auto !important;
+    color:var(--a) !important;
+    text-shadow:0 0 16px var(--ag) !important;
+  }
+  #tab-platforms .plat-tool-card .plat-tool-icon,
+  #tab-apps .plat-tool-card .plat-tool-icon {
+    width:52px !important;
+    height:52px !important;
+    flex:0 0 52px !important;
+  }
+  /* HOME: added pins retain the exact same 58px tile / 52px icon footprint as existing pins. */
+  #tab-home .home-pin { width:58px !important; }
+  #tab-home .home-pin-icon {
+    width:52px !important;
+    height:52px !important;
+    min-width:52px !important;
+    min-height:52px !important;
+    box-sizing:border-box !important;
+  }
+  #tab-home .home-pin-icon > i { font-size:26px !important; line-height:1 !important; }
+  /* Bottom navigation: selected page is red and slightly larger; others remain at normal size. */
+  .bnav-btn {
+    transform:scale(1) !important;
+    transform-origin:center center !important;
+    transition:transform .2s ease,color .2s ease !important;
+  }
+  .bnav-btn .bnav-icon,
+  .bnav-btn .bnav-lbl {
+    color:var(--a) !important;
+    transition:color .2s ease,font-size .2s ease,text-shadow .2s ease !important;
+  }
+  .bnav-btn.active {
+    transform:scale(1.10) !important;
+    z-index:2 !important;
+  }
+  .bnav-btn.active .bnav-icon,
+  .bnav-btn.active .bnav-lbl {
+    color:#ff0033 !important;
+    text-shadow:0 0 10px rgba(255,0,51,.55) !important;
+  }
+  .bnav-btn.active .bnav-icon { font-size:24px !important; }
+  .bnav-btn.active .bnav-lbl { font-weight:900 !important; }
+</style>
+
+
+
+<!-- V3013: Bottom navigation active state (selected = red + slightly larger; others = theme color) -->
+<style id="v3013-bottom-nav-active-state">
+  /* Keep this rule last: the global Tabler icon theme rule must not override nav state. */
+  html body .bnav-tabs .bnav-btn {
+    transform: scale(1) !important;
+    transform-origin: center center !important;
+    transition: transform .18s ease !important;
+    position: relative !important;
+    z-index: 1 !important;
+  }
+  html body .bnav-tabs .bnav-btn:not(.active) .bnav-icon,
+  html body .bnav-tabs .bnav-btn:not(.active) .bnav-icon::before,
+  html body .bnav-tabs .bnav-btn:not(.active) .bnav-lbl {
+    color: var(--a, #00e5ff) !important;
+    -webkit-text-fill-color: var(--a, #00e5ff) !important;
+    text-shadow: 0 0 8px var(--ag, rgba(0,229,255,.45)) !important;
+  }
+  html body .bnav-tabs .bnav-btn:not(.active) .bnav-icon {
+    font-size: 21px !important;
+    line-height: 1 !important;
+  }
+  html body .bnav-tabs .bnav-btn:not(.active) .bnav-lbl {
+    font-size: .55rem !important;
+    font-weight: 500 !important;
+  }
+  html body .bnav-tabs .bnav-btn.active {
+    transform: scale(1.09) !important;
+    z-index: 3 !important;
+  }
+  html body .bnav-tabs .bnav-btn.active .bnav-icon,
+  html body .bnav-tabs .bnav-btn.active .bnav-icon::before,
+  html body .bnav-tabs .bnav-btn.active .bnav-lbl {
+    color: #ff0033 !important;
+    -webkit-text-fill-color: #ff0033 !important;
+    text-shadow: 0 0 10px rgba(255,0,51,.62) !important;
+  }
+  html body .bnav-tabs .bnav-btn.active .bnav-icon {
+    font-size: 24px !important;
+    line-height: 1 !important;
+  }
+  html body .bnav-tabs .bnav-btn.active .bnav-lbl {
+    font-size: .60rem !important;
+    font-weight: 800 !important;
+  }
+</style>
+
 </body>
 </html>` }, // #12
     ];
@@ -5750,6 +6578,8 @@ async function shareQR() {
         let iconHtml = '';
         if (p.logo) {
           iconHtml = '<img src="' + String(p.logo).replace(/"/g, '&quot;') + '" style="width:36px;height:36px;border-radius:10px;object-fit:cover;" alt="">';
+        } else if (typeof brandIconFromName === 'function' && brandIconFromName(p.name, p.link)) {
+          iconHtml = '<i class="' + brandIconFromName(p.name, p.link) + ' plat-icon"></i>';
         } else if (p.emoji) {
           iconHtml = '<span class="plat-icon" style="font-size:34px;line-height:1;filter:drop-shadow(0 0 10px var(--a));">' + p.emoji + '</span>';
         } else {
@@ -5827,7 +6657,7 @@ async function shareQR() {
       { name: "Vercel", link: "https://vercel.com/signup", icon: "ti ti-folder-code" }, // #5
       { name: "mediafire", link: "https://app.mediafire.com/", icon: "ti ti-flame" }, // #6
       { name: "movi", link: "https://fojik.site/", icon: "ti ti-device-tv" }, // #7
-      { name: "movi", link: "https://new9.hdhub4u.cl/?utm=mn1", icon: "ti ti-badge-hd" }, // #8
+      { name: "movi", link: "https://new6.hdhub4u.cl/?utm=mn1", icon: "ti ti-badge-hd" }, // #8
       { name: "natok", link: "https://cinekhor.site/", icon: "ti ti-movie" }, // #9
       { name: "Cloudflare", link: "https://dash.cloudflare.com/sign-up", icon: "ti ti-brand-cloudflare" }, // #10
       { name: "Render", link: "https://dashboard.render.com/register", icon: "ti ti-cloud-upload" }, // #11
@@ -5862,21 +6692,37 @@ async function shareQR() {
         .concat(getLocalHomePins().map(p => Object.assign({}, p, { _src: 'local' })));
     }
 
+    function brandIconFromName(name, link) {
+      const n = String(name || '').toLowerCase();
+      const u = String(link || '').toLowerCase();
+      const rules = [
+        [/facebook|\bfb\b|facebook\.com/, 'ti ti-brand-facebook'],
+        [/youtube|\byt\b|youtu\.be|youtube\.com/, 'ti ti-brand-youtube'],
+        [/instagram|\big\b|insta|instagram\.com/, 'ti ti-brand-instagram'],
+        [/tiktok|\btt\b|tiktok\.com/, 'ti ti-brand-tiktok'],
+        [/telegram|\btg\b|t\.me|telegram\.org/, 'ti ti-brand-telegram'],
+        [/whatsapp|\bwa\b|whatsapp\.com|wa\.me/, 'ti ti-brand-whatsapp'],
+        [/github|github\.com/, 'ti ti-brand-github'],
+        [/gitlab|gitlab\.com/, 'ti ti-brand-gitlab'],
+        [/google|gmail|chrome|drive|play store|google\./, 'ti ti-brand-google'],
+        [/twitter|\bx\b|x\.com/, 'ti ti-brand-x'],
+        [/linkedin|linkedin\.com/, 'ti ti-brand-linkedin'],
+        [/reddit|reddit\.com/, 'ti ti-brand-reddit'],
+        [/discord|discord\.com/, 'ti ti-brand-discord'],
+        [/cloudflare|cloudflare\.com/, 'ti ti-brand-cloudflare'],
+        [/netlify|netlify\.com/, 'ti ti-brand-netlify'],
+        [/vercel|vercel\.com/, 'ti ti-brand-vercel'],
+        [/pinterest|pinterest\.com/, 'ti ti-brand-pinterest'],
+        [/snapchat|snapchat\.com/, 'ti ti-brand-snapchat'],
+        [/spotify|spotify\.com/, 'ti ti-brand-spotify'],
+        [/zoom|zoom\.us/, 'ti ti-brand-zoom'],
+        [/microsoft|outlook|office|teams/, 'ti ti-brand-windows']
+      ];
+      for (const pair of rules) if (pair[0].test(n) || pair[0].test(u)) return pair[1];
+      return '';
+    }
     function autoIconFromName(name) {
-      const n = (name || '').toLowerCase();
-      if (/fb|facebook/.test(n)) return 'ti ti-brand-facebook';
-      if (/yt|youtube/.test(n)) return 'ti ti-brand-youtube';
-      if (/ig|insta/.test(n)) return 'ti ti-brand-instagram';
-      if (/git/.test(n)) return 'ti ti-brand-github';
-      if (/tiktok|tt\b/.test(n)) return 'ti ti-brand-tiktok';
-      if (/tw(itter)?|\bx\b/.test(n)) return 'ti ti-brand-x';
-      if (/whatsapp|wa\b/.test(n)) return 'ti ti-brand-whatsapp';
-      if (/telegram|tg\b/.test(n)) return 'ti ti-brand-telegram';
-      if (/video|download|dl\b/.test(n)) return 'ti ti-download';
-      if (/music|audio|mp3/.test(n)) return 'ti ti-music';
-      if (/game|ff\b|free.?fire/.test(n)) return 'ti ti-device-gamepad-2';
-      if (/info|bio|profile/.test(n)) return 'ti ti-user';
-      return 'ti ti-world';
+      return brandIconFromName(name) || 'ti ti-world';
     }
 
     function isTablerIconInput(s) {
@@ -6393,7 +7239,7 @@ async function shareQR() {
         if(a.logo){
           iconHtml='<img src="'+String(a.logo).replace(/"/g,'&quot;')+'" style="width:36px;height:36px;border-radius:10px;object-fit:cover;" alt="">';
         }else{
-          iconHtml='<i class="'+(a.icon||'ti ti-tool')+' plat-icon"></i>';
+          iconHtml='<i class="'+((typeof brandIconFromName==='function'&&brandIconFromName(a.name,a.link))||a.icon||'ti ti-tool')+' plat-icon"></i>';
         }
         var num=i+1;
         return '<div class="plat-card hard-app-card" data-name="'+escapeHome(a.name||'')+'" onclick="openHardApp('+i+')">'
@@ -6411,7 +7257,7 @@ async function shareQR() {
       box.innerHTML=arr.map(function(a,i){
         var icon;
         if(a.logo&&!isTablerIconInput(a.logo)) icon='<img src="'+String(a.logo).replace(/"/g,'&quot;')+'" alt="">';
-        else {var icn=a.icon||(a.logo&&isTablerIconInput(a.logo)?normalizeTablerIcon(a.logo):'ti ti-tool');icon='<i class="'+icn+' plat-icon"></i>';}
+        else {var icn=(typeof brandIconFromName==='function'&&brandIconFromName(a.name,a.link))||a.icon||(a.logo&&isTablerIconInput(a.logo)?normalizeTablerIcon(a.logo):'ti ti-tool');icon='<i class="'+icn+' plat-icon"></i>';}
         var num=base+i+1;
         return '<div class="plat-card custom-app-card" data-id="'+a.id+'" data-name="'+escapeHome(a.name)+'" onclick="openCustomApp(\''+a.id+'\')">'+icon+'<span class="plat-name">'+escapeHome(a.name)+'</span><span class="plat-badge live">#'+num+'</span></div>';
       }).join('');
@@ -6468,6 +7314,12 @@ async function shareQR() {
     function setPlatforms(arr) {
       localStorage.setItem(LS_PLAT, JSON.stringify(arr));
     }
+    // Expose only this page's own interfaces to the page-tool picker.
+    window.__getScopedPageInterfaces = function (page) {
+      if (page === 'platform') return DEFAULT_PLATFORMS_ADD.map(function (x) { return Object.assign({}, x); }).concat(getPlatforms().map(function (x) { return Object.assign({}, x); }));
+      if (page === 'app') return DEFAULT_APP_ADD.map(function (x) { return Object.assign({}, x); }).concat(getApps().map(function (x) { return Object.assign({}, x); }));
+      return [];
+    };
     function saveNewPlatform() {
       const name = (document.getElementById('apName').value || '').trim();
       const link = (document.getElementById('apLink').value || '').trim();
@@ -6522,7 +7374,7 @@ async function shareQR() {
         if (p.logo && !isTablerIconInput(p.logo)) {
           icon = '<img src="' + String(p.logo).replace(/"/g, '&quot;') + '" alt="">';
         } else {
-          var icn = p.icon || (p.logo && isTablerIconInput(p.logo) ? normalizeTablerIcon(p.logo) : 'ti ti-apps');
+          var icn = (typeof brandIconFromName === 'function' && brandIconFromName(p.name, p.link)) || p.icon || (p.logo && isTablerIconInput(p.logo) ? normalizeTablerIcon(p.logo) : 'ti ti-apps');
           icon = '<i class="' + icn + ' plat-icon"></i>';
         }
         var num = base + i + 1;
@@ -6711,14 +7563,15 @@ async function shareQR() {
     // pins, platform boxes, app boxes, and settings cards.
     // ══════════════════════════════════════════════════════════════
     (function initUiClickSounds() {
-      const UI_SOUND_BASE = 'https://raw.githubusercontent.com/baijidalam/Oudio/main/';
-
+      const assetComments = Array.from(document.head.childNodes).filter(n=>n.nodeType===8).map(n=>n.textContent.trim());
+      function asset(name, fallback){ const c=assetComments.find(x=>x.startsWith(name+':')); return c?c.slice(name.length+1).trim():fallback; }
+      const UI_SOUND_BASE = asset('UI_SOUND_BASE','https://raw.githubusercontent.com/baijidalam/Oudio/main/');
       const UI_SOUNDS = {
-        nav: UI_SOUND_BASE + 'select-platfrom-click-sound.mp3',
-        homePin: UI_SOUND_BASE + 'click-pin-side-sound.m4a',
-        platformBox: UI_SOUND_BASE + 'click-plartfrom-box-sound.mp3',
-        appBox: UI_SOUND_BASE + 'clic-app-box-sound.m4a',
-        settingsCard: UI_SOUND_BASE + 'click-card-box-sound.mp3'
+        nav: UI_SOUND_BASE + asset('UI_SOUND_NAV','select-platfrom-click-sound.mp3'),
+        homePin: UI_SOUND_BASE + asset('UI_SOUND_HOME','click-pin-side-sound.m4a'),
+        platformBox: UI_SOUND_BASE + asset('UI_SOUND_PLATFORM','click-plartfrom-box-sound.mp3'),
+        appBox: UI_SOUND_BASE + asset('UI_SOUND_APP','clic-app-box-sound.m4a'),
+        settingsCard: UI_SOUND_BASE + asset('UI_SOUND_SETTINGS','click-card-box-sound.mp3')
       };
 
       const audioCache = {};
@@ -8561,6 +9414,1669 @@ let resizeTimer;window.addEventListener('resize',()=>{clearTimeout(resizeTimer);
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',function(){setup();window.dispatchEvent(new CustomEvent('baijid:tabchange',{detail:'home'}));});else {setup();window.dispatchEvent(new CustomEvent('baijid:tabchange',{detail:'home'}));}
 })();
 </script>
+
+<div id="xTouchLayer" aria-hidden="true"></div>
+<div id="multiToolOverlay" onclick="if(event.target===this)closeMultiTool()">
+  <div class="mt-panel" id="mtPanel" onclick="event.stopPropagation()">
+    <div class="mt-title-row">
+      <input type="text" class="mt-title-text" id="mtTitle" value="tool" onchange="mtSaveTitle()" onblur="mtSaveTitle()" onclick="this.select()">
+      <button type="button" class="mt-dots" id="mtDotsBtn" onclick="event.stopPropagation();mtEditIcon()"><i class="ti ti-dots"></i></button>
+      <div class="mt-menu" id="mtMenu" style="display:none"></div>
+    </div>
+    <div class="mt-grid" id="mtGrid"></div>
+  </div>
+</div>
+<div id="mtPickOverlay" onclick="if(event.target===this)closeMtPick()">
+  <div class="mt-pick-sheet" onclick="event.stopPropagation()">
+    <div class="mt-pick-head">
+      <div class="mt-pick-title">ADD TO TOOL</div>
+      <button type="button" class="mt-pick-save" id="mtPickSave" disabled onclick="saveMtPick()">SAVE</button>
+    </div>
+    <div class="mt-pick-list" id="mtPickList"></div>
+  </div>
+</div>
+<div class="glass-modal-overlay" id="editMtModal">
+  <div class="glass-modal">
+    <h3 id="editMtTitle">EDIT TOOL</h3>
+    <div id="editMtNameBlock">
+      <label>Tool name</label>
+      <input type="text" id="editMtNameInput" placeholder="Folder name">
+    </div>
+    <div id="editMtIconBlock" style="display:none">
+      <label>Icon (ti ti-brand-... or image URL)</label>
+      <input type="text" id="editMtIconInput" placeholder="ti ti-apps or https://...">
+      <label>Or upload image</label>
+      <label class="file-btn" for="editMtIconFile">🖼️ Upload icon</label>
+      <input type="file" id="editMtIconFile" accept="image/*" style="display:none">
+      <div class="hint" id="editMtIconHint">No file</div>
+    </div>
+    <button type="button" class="btn-cancel" style="width:100%;margin-top:10px;margin-bottom:4px;" onclick="resetToolIcon()">RESET ICON</button>
+    <div class="row-btns">
+      <button type="button" class="btn-cancel" onclick="closeEditMtModal()">CANCEL</button>
+      <button type="button" class="btn-save" onclick="saveEditMt()">SAVE</button>
+    </div>
+  </div>
+</div>
+<script id="default-tools-data">
+const DEFAULT_HOME_TOOL_1 = [
+  { name: "GitHub", link: "https://github.com", icon: "ti ti-brand-github" },
+  { name: "YouTube", link: "https://youtube.com", icon: "ti ti-brand-youtube" },
+  { name: "Google", link: "https://google.com", icon: "ti ti-brand-google" },
+  { name: "Facebook", link: "https://facebook.com", icon: "ti ti-brand-facebook" },
+  { name: "Telegram", link: "https://telegram.org", icon: "ti ti-brand-telegram" },
+  { name: "WhatsApp", link: "https://whatsapp.com", icon: "ti ti-brand-whatsapp" }
+]; // TOOL #1
+const DEFAULT_HOME_TOOL_2 = [
+  { name: "GitHub", link: "https://github.com", icon: "ti ti-brand-github" },
+  { name: "GitLab", link: "https://gitlab.com", icon: "ti ti-brand-gitlab" },
+  { name: "Netlify", link: "https://app.netlify.com", icon: "ti ti-device-desktop-code" },
+  { name: "Vercel", link: "https://vercel.com", icon: "ti ti-folder-code" },
+  { name: "Cloudflare", link: "https://dash.cloudflare.com", icon: "ti ti-brand-cloudflare" },
+  { name: "Firebase", link: "https://console.firebase.google.com", icon: "ti ti-flame" }
+]; // TOOL #2
+const DEFAULT_PLATFORM_TOOL_1 = [
+  { name: "GitHub", link: "https://github.com", icon: "ti ti-brand-github" },
+  { name: "YouTube", link: "https://youtube.com", icon: "ti ti-brand-youtube" },
+  { name: "Google", link: "https://google.com", icon: "ti ti-brand-google" },
+  { name: "Facebook", link: "https://facebook.com", icon: "ti ti-brand-facebook" },
+  { name: "Telegram", link: "https://telegram.org", icon: "ti ti-brand-telegram" },
+  { name: "WhatsApp", link: "https://whatsapp.com", icon: "ti ti-brand-whatsapp" }
+]; // TOOL #1
+const DEFAULT_PLATFORM_TOOL_2 = [
+  { name: "TikTok", link: "https://tiktok.com", icon: "ti ti-brand-tiktok" },
+  { name: "Instagram", link: "https://instagram.com", icon: "ti ti-brand-instagram" },
+  { name: "Twitter", link: "https://x.com", icon: "ti ti-brand-x" },
+  { name: "LinkedIn", link: "https://linkedin.com", icon: "ti ti-brand-linkedin" },
+  { name: "Reddit", link: "https://reddit.com", icon: "ti ti-brand-reddit" },
+  { name: "Discord", link: "https://discord.com", icon: "ti ti-brand-discord" }
+]; // TOOL #2
+const DEFAULT_APP_TOOL_1 = [
+  { name: "GitHub", link: "https://github.com", icon: "ti ti-brand-github" },
+  { name: "YouTube", link: "https://youtube.com", icon: "ti ti-brand-youtube" },
+  { name: "Google", link: "https://google.com", icon: "ti ti-brand-google" },
+  { name: "Facebook", link: "https://facebook.com", icon: "ti ti-brand-facebook" },
+  { name: "Telegram", link: "https://telegram.org", icon: "ti ti-brand-telegram" },
+  { name: "WhatsApp", link: "https://whatsapp.com", icon: "ti ti-brand-whatsapp" }
+]; // TOOL #1
+const DEFAULT_APP_TOOL_2 = [
+  { name: "Calculator", link: "https://www.google.com/search?q=calculator", icon: "ti ti-calculator" },
+  { name: "Gmail", link: "https://mail.google.com", icon: "ti ti-mail" },
+  { name: "Maps", link: "https://maps.google.com", icon: "ti ti-map" },
+  { name: "Drive", link: "https://drive.google.com", icon: "ti ti-brand-google-drive" },
+  { name: "Play Store", link: "https://play.google.com", icon: "ti ti-brand-google-play" },
+  { name: "Chrome", link: "https://google.com/chrome", icon: "ti ti-brand-chrome" }
+]; // TOOL #2
+
+try{window.DEFAULT_HOME_TOOL_1=DEFAULT_HOME_TOOL_1;window.DEFAULT_HOME_TOOL_2=DEFAULT_HOME_TOOL_2;}catch(e){}
+try{window.DEFAULT_PLATFORM_TOOL_1=DEFAULT_PLATFORM_TOOL_1;window.DEFAULT_PLATFORM_TOOL_2=DEFAULT_PLATFORM_TOOL_2;}catch(e){}
+try{window.DEFAULT_APP_TOOL_1=DEFAULT_APP_TOOL_1;window.DEFAULT_APP_TOOL_2=DEFAULT_APP_TOOL_2;}catch(e){}
+
+</script>
+<script id="open-page-tool-script">
+window.openPageTool = function (page, num) {
+      var prefix = page === 'platform' ? 'DEFAULT_PLATFORM_TOOL_' : (page === 'app' ? 'DEFAULT_APP_TOOL_' : 'DEFAULT_HOME_TOOL_');
+      var arr = null;
+      arr = window[prefix + num] || null; if (!arr) { try { arr = eval('typeof ' + prefix + num + ' !== "undefined" ? ' + prefix + num + ' : null'); } catch (e) { arr = null; } }
+      if (!arr || !arr.length) {
+        if (typeof toastMsg === 'function') toastMsg('Tool not found', true);
+        return;
+      }
+      // use multi-tool overlay (same glass UI)
+      var grid = document.getElementById('mtGrid');
+      var title = document.getElementById('mtTitle');
+      var overlay = document.getElementById('multiToolOverlay');
+      var menu = document.getElementById('mtMenu');
+      if (menu) menu.classList.remove('open');
+      if (title) {
+        title.value = 'tool';
+        title.readOnly = true;
+      }
+      window._openFolderId = null; // default tools are not editable folders
+      window._pageToolItems = arr;
+      if (grid) {
+        var html = arr.map(function (it, i) {
+          var icon = '';
+          if (it.logo && !/^ti(\s|-)/i.test(String(it.logo))) {
+            icon = '<img src="' + String(it.logo).replace(/"/g, '&quot;') + '" alt="">';
+          } else {
+            var ic = (typeof brandIconFromName === 'function' && brandIconFromName(it.name, it.link)) || it.icon || 'ti ti-world';
+            if (/^ti-/.test(ic) && ic.indexOf(' ') < 0) ic = 'ti ' + ic;
+            icon = '<i class="' + ic + '"></i>';
+          }
+          return '<div class="mt-item" onclick="openPageToolItem(' + i + ')">' +
+            '<div class="mt-item-icon">' + icon + '</div>' +
+            '<div class="mt-item-name">' + String(it.name || '').replace(/</g, '&lt;') + '</div></div>';
+        }).join('');
+        grid.innerHTML = html;
+      }
+      // hide dots for default page tools (no edit)
+      var dots = document.getElementById('mtDotsBtn');
+      if (dots) dots.style.display = '';
+      if (overlay) overlay.classList.add('open');
+    };
+    window.openPageToolItem = function (i) {
+      var arr = window._pageToolItems || [];
+      var it = arr[i];
+      if (!it) return;
+      if (typeof closeMultiTool === 'function') closeMultiTool();
+      var dots = document.getElementById('mtDotsBtn');
+      if (dots) dots.style.display = '';
+      if (it.link) window.open(it.link, '_blank', 'noopener');
+      else if (typeof toastMsg === 'function') toastMsg(it.name || 'Opened');
+    };
+</script>
+<script id="baijid-xtouch-drag-script">
+(function () {
+  'use strict';
+
+  function spawnXTouch(x, y) {
+    var layer = document.getElementById('xTouchLayer');
+    if (!layer) return;
+    var el = document.createElement('div');
+    el.className = 'x-touch-mark';
+    el.style.left = x + 'px';
+    el.style.top = y + 'px';
+    el.innerHTML = '<svg viewBox="0 0 36 36" fill="none"><line x1="8" y1="8" x2="28" y2="28"/><line x1="28" y1="8" x2="8" y2="28"/></svg>';
+    layer.appendChild(el);
+    setTimeout(function () { if (el.parentNode) el.parentNode.removeChild(el); }, 400);
+  }
+  document.addEventListener('touchstart', function (e) {
+    if (e.changedTouches) { for (var i = 0; i < e.changedTouches.length; i++) spawnXTouch(e.changedTouches[i].clientX, e.changedTouches[i].clientY); }
+  }, { passive: true });
+  document.addEventListener('mousedown', function (e) {
+    if (e.button === 0) spawnXTouch(e.clientX, e.clientY);
+  }, true);
+
+  var LS_FOLDERS = (document.title || 'BAIJID') + '_home_folders_v2';
+  var LS_ORDER = (document.title || 'BAIJID') + '_home_order_v2';
+
+  function loadJSON(k, fb) {
+    try { return JSON.parse(localStorage.getItem(k) || 'null') || fb; } catch (e) { return fb; }
+  }
+  function saveJSON(k, v) { localStorage.setItem(k, JSON.stringify(v)); }
+  function getFolders() { return loadJSON(LS_FOLDERS, []); }
+  function setFolders(a) { saveJSON(LS_FOLDERS, a); }
+  function getOrder() { return loadJSON(LS_ORDER, null); }
+  function setOrder(a) { saveJSON(LS_ORDER, a); }
+
+  function pinIconInner(p) {
+    if (p && p.logo && !/^ti(\s|-)/i.test(String(p.logo))) {
+      return '<img src="' + String(p.logo).replace(/"/g, '&quot;') + '" alt="">';
+    }
+    var brand = typeof brandIconFromName === 'function' ? brandIconFromName(p && p.name, p && p.link) : '';
+    var ic = brand || (p && p.icon) || '';
+    if (!ic && p && p.logo && /^ti(\s|-)/i.test(String(p.logo))) ic = p.logo;
+    if (!ic && typeof autoIconFromName === 'function') ic = autoIconFromName(p && p.name);
+    if (!ic) ic = 'ti ti-world';
+    if (/^ti-/.test(ic) && ic.indexOf(' ') < 0) ic = 'ti ' + ic;
+    return '<i class="' + ic + '"></i>';
+  }
+
+  function hasCustomFolderIcon(f) {
+    if (!f) return false;
+    if (f.logo && String(f.logo).length > 2) return true;
+    if (f.icon && f.icon !== 'ti ti-apps' && f._iconCustom) return true;
+    if (f.icon && f.icon !== 'ti ti-apps' && f.customIcon) return true;
+    // any non-default icon set by user
+    if (f.customIcon) return true;
+    if (f.logo) return true;
+    return false;
+  }
+
+  function idsInsideFolders() {
+    var set = {};
+    getFolders().forEach(function (f) {
+      (f.items || []).forEach(function (it) { if (it && it.id) set[it.id] = true; });
+    });
+    return set;
+  }
+  function idsInFolder(fid) {
+    var set = {};
+    var f = getFolders().find(function (x) { return x.id === fid; });
+    if (f) (f.items || []).forEach(function (it) { if (it && it.id) set[it.id] = true; });
+    return set;
+  }
+
+  var _origAllHomePins = typeof allHomePins === 'function' ? allHomePins : null;
+
+  window.allHomePins = function () {
+    var base = _origAllHomePins ? _origAllHomePins() : [];
+    var folders = getFolders();
+    var map = {};
+    base.forEach(function (p) { map[p.id] = p; });
+    folders.forEach(function (f) {
+      map[f.id] = {
+        id: f.id, name: f.name || 'tool', icon: f.icon || 'ti ti-apps', logo: f.logo || '',
+        link: '', _src: 'folder', _folder: true, _items: f.items || [],
+        _count: (f.items || []).length, customIcon: !!f.customIcon, _iconCustom: !!f.customIcon
+      };
+    });
+    var inside = idsInsideFolders();
+    var order = getOrder();
+    var ids = order && order.length ? order.slice() : Object.keys(map);
+    Object.keys(map).forEach(function (id) { if (ids.indexOf(id) < 0) ids.push(id); });
+    var out = [];
+    ids.forEach(function (id) {
+      if (inside[id]) return;
+      if (map[id]) out.push(map[id]);
+    });
+    return out;
+  };
+
+  var _origRenderHomePins = typeof renderHomePins === 'function' ? renderHomePins : null;
+
+  function folderMiniHtml(items) {
+    var list = (items || []).slice(0, 4);
+    while (list.length < 4) list.push(null);
+    return list.map(function (it) {
+      if (!it) return '<div class="hf-mini"></div>';
+      return '<div class="hf-mini">' + pinIconInner(it) + '</div>';
+    }).join('');
+  }
+
+  function folderIconHtml(f) {
+    // user set custom image or icon → single icon
+    if (f.logo && !/^ti(\s|-)/i.test(String(f.logo))) {
+      return '<img src="' + String(f.logo).replace(/"/g, '&quot;') + '" alt="">';
+    }
+    if (f.customIcon && f.icon) {
+      var ic = f.icon;
+      if (/^ti-/.test(ic) && ic.indexOf(' ') < 0) ic = 'ti ' + ic;
+      return '<i class="' + ic + '"></i>';
+    }
+    if (f.logo && /^ti(\s|-)/i.test(String(f.logo))) {
+      var ic2 = f.logo;
+      if (/^ti-/.test(ic2) && ic2.indexOf(' ') < 0) ic2 = 'ti ' + ic2;
+      return '<i class="' + ic2 + '"></i>';
+    }
+    // default: mini grid of children
+    return folderMiniHtml(f._items || f.items || []);
+  }
+
+  window.renderHomePins = function () {
+    if (_origRenderHomePins) _origRenderHomePins();
+    var track = document.getElementById('homePinTrack');
+    if (!track) return;
+    var pins = allHomePins();
+    var byId = {};
+    pins.forEach(function (p) { byId[p.id] = p; });
+    var folders = getFolders();
+    var fMap = {};
+    folders.forEach(function (f) { fMap[f.id] = f; });
+
+    track.querySelectorAll('.home-pin[data-id]').forEach(function (el) {
+      var id = el.getAttribute('data-id');
+      var p = byId[id];
+      if (!p) return;
+      if (p._folder) {
+        el.classList.add('is-folder');
+        el.setAttribute('data-folder', '1');
+        var raw = fMap[id] || p;
+        var custom = !!(raw.customIcon || (raw.logo && String(raw.logo).length > 2));
+        el.classList.toggle('has-custom-icon', custom);
+        var icon = el.querySelector('.home-pin-icon');
+        if (icon) icon.innerHTML = folderIconHtml(Object.assign({}, p, raw));
+        el.onclick = function (e) {
+          e.preventDefault(); e.stopPropagation();
+          if (_justDragged) return;
+          openMultiTool(id);
+        };
+      }
+      bindHomePinDrag(el);
+    });
+  };
+
+  var drag = { active: false, id: null, el: null, ghost: null, startX: 0, startY: 0 };
+  var _justDragged = false;
+
+  function makeGhost(el, x, y) {
+    var g = el.cloneNode(true);
+    g.classList.add('drag-ghost');
+    g.style.pointerEvents = 'none';
+    g.style.width = el.offsetWidth + 'px';
+    g.style.left = (x - el.offsetWidth / 2) + 'px';
+    g.style.top = (y - el.offsetHeight / 2) + 'px';
+    g.style.opacity = '0.95';
+    g.style.zIndex = '99950';
+    document.body.appendChild(g);
+    return g;
+  }
+  function moveGhost(x, y) {
+    if (!drag.ghost) return;
+    drag.ghost.style.left = (x - drag.ghost.offsetWidth / 2) + 'px';
+    drag.ghost.style.top = (y - drag.ghost.offsetHeight / 2) + 'px';
+  }
+  function endGhost() {
+    if (drag.ghost && drag.ghost.parentNode) drag.ghost.parentNode.removeChild(drag.ghost);
+    drag.ghost = null;
+  }
+  function resetDragUI() {
+    document.querySelectorAll('.home-pin.dragging,.home-pin.drag-over,.home-pin.folder-target').forEach(function (n) {
+      n.classList.remove('dragging', 'drag-over', 'folder-target');
+      n.style.opacity = '';
+    });
+    document.body.classList.remove('jiggle');
+    endGhost();
+    clearEdgeScroll();
+    lockPageScroll(false);
+    drag.active = false; drag.id = null; drag.el = null;
+  }
+
+
+  var _scrollLock = false;
+  function lockPageScroll(on) {
+    _scrollLock = !!on;
+    if (on) {
+      document.body.style.overflow = 'hidden';
+      document.documentElement.style.overflow = 'hidden';
+      document.body.style.touchAction = 'none';
+    } else {
+      document.body.style.overflow = '';
+      document.documentElement.style.overflow = '';
+      document.body.style.touchAction = '';
+    }
+  }
+
+  var _edgeTimer = null;
+  function clearEdgeScroll() {
+    if (_edgeTimer) { clearInterval(_edgeTimer); _edgeTimer = null; }
+  }
+  function edgeScrollHome(x, y) {
+    clearEdgeScroll();
+    var vw = window.innerWidth, vh = window.innerHeight;
+    var edge = 48;
+    // horizontal page flip on home track
+    var dirX = 0;
+    if (x > vw - edge) dirX = 1;
+    else if (x < edge) dirX = -1;
+    if (dirX && typeof goHomePinPage === 'function') {
+      _edgeTimer = setInterval(function () {
+        goHomePinPage(dirX);
+      }, 650);
+      return;
+    }
+    // vertical if track overflows (rare on home)
+    var dirY = 0;
+    if (y > vh - edge) dirY = 18;
+    else if (y < edge + 40) dirY = -18;
+    if (dirY) {
+      _edgeTimer = setInterval(function () {
+        window.scrollBy(0, dirY);
+      }, 16);
+    }
+  }
+  function edgeScrollVertical(x, y) {
+    clearEdgeScroll();
+    var vh = window.innerHeight;
+    var edge = 56;
+    var dirY = 0;
+    if (y > vh - edge) dirY = 22;
+    else if (y < edge + 48) dirY = -22;
+    if (!dirY) return;
+    _edgeTimer = setInterval(function () {
+      window.scrollBy(0, dirY);
+    }, 16);
+  }
+
+  function bindHomePinDrag(el) {
+    if (!el || el._dragBound || el.classList.contains('home-pin-plus')) return;
+    el._dragBound = true;
+    var id = el.getAttribute('data-id');
+    if (!id) return;
+    var longTimer = null;
+
+    el.addEventListener('touchstart', function (e) {
+      if (!e.touches[0]) return;
+      var t = e.touches[0];
+      drag.startX = t.clientX; drag.startY = t.clientY;
+      drag.id = id; drag.el = el;
+      longTimer = setTimeout(function () {
+        longTimer = null;
+        drag.active = true;
+        el.classList.add('dragging');
+        el.style.opacity = '0.2';
+        document.body.classList.add('jiggle');
+        drag.ghost = makeGhost(el, t.clientX, t.clientY);
+        try { navigator.vibrate && navigator.vibrate(18); } catch (err) {}
+      }, 450);
+    }, { passive: true });
+
+    el.addEventListener('touchmove', function (e) {
+      if (!e.touches[0]) return;
+      var t = e.touches[0];
+      if (!drag.active) {
+        if (Math.abs(t.clientX - drag.startX) > 12 || Math.abs(t.clientY - drag.startY) > 12) {
+          if (longTimer) { clearTimeout(longTimer); longTimer = null; }
+        }
+        return;
+      }
+      e.preventDefault();
+      moveGhost(t.clientX, t.clientY);
+      highlightHomeDrop(t.clientX, t.clientY, id);
+      edgeScrollHome(t.clientX, t.clientY);
+    }, { passive: false });
+
+    el.addEventListener('touchend', function (e) {
+      if (longTimer) { clearTimeout(longTimer); longTimer = null; }
+      if (!drag.active) { drag.id = null; return; }
+      var t = e.changedTouches[0];
+      _justDragged = true;
+      setTimeout(function () { _justDragged = false; }, 400);
+      finishHomeDrag(id, t.clientX, t.clientY);
+      resetDragUI();
+    });
+    el.addEventListener('touchcancel', function () {
+      if (longTimer) { clearTimeout(longTimer); longTimer = null; }
+      resetDragUI();
+    });
+  }
+
+  function highlightHomeDrop(x, y, selfId) {
+    document.querySelectorAll('.home-pin.drag-over,.home-pin.folder-target').forEach(function (n) {
+      n.classList.remove('drag-over', 'folder-target');
+    });
+    var el = document.elementFromPoint(x, y);
+    if (!el) return;
+    var pin = el.closest('.home-pin[data-id]');
+    if (!pin || pin.getAttribute('data-id') === selfId) return;
+    var rect = pin.getBoundingClientRect();
+    var cx = rect.left + rect.width / 2, cy = rect.top + rect.height / 2;
+    var dist = Math.hypot(x - cx, y - cy);
+    if (dist < 20) pin.classList.add('folder-target');
+    else pin.classList.add('drag-over');
+  }
+
+  function getOrderedIds() {
+    return allHomePins().map(function (p) { return p.id; });
+  }
+
+  /* Insert before target so target shifts right/down in the flow */
+  function moveOneWay(fromId, toId) {
+    var order = getOrderedIds();
+    var fi = order.indexOf(fromId), ti = order.indexOf(toId);
+    if (fi < 0 || ti < 0 || fromId === toId) return;
+    order.splice(fi, 1);
+    ti = order.indexOf(toId);
+    if (ti < 0) { order.push(fromId); setOrder(order); return; }
+    order.splice(ti, 0, fromId);
+    setOrder(order);
+    if (typeof toastMsg === 'function') toastMsg('Moved');
+  }
+
+  function finishHomeDrag(fromId, x, y) {
+    var el = document.elementFromPoint(x, y);
+    var pin = el && el.closest('.home-pin[data-id]');
+    if (pin && pin.getAttribute('data-id') !== fromId) {
+      var tid = pin.getAttribute('data-id');
+      var rect = pin.getBoundingClientRect();
+      var cx = rect.left + rect.width / 2, cy = rect.top + rect.height / 2;
+      var dist = Math.hypot(x - cx, y - cy);
+      if (dist < 20) {
+        mergeIntoFolder(fromId, tid);
+        renderHomePins();
+        return;
+      }
+      moveOneWay(fromId, tid);
+      renderHomePins();
+      return;
+    }
+    var track = document.getElementById('homePinTrack');
+    if (!track) return;
+    var pins = Array.prototype.slice.call(track.querySelectorAll('.home-pin[data-id]'));
+    var best = null, bestD = 1e9;
+    pins.forEach(function (p) {
+      if (p.getAttribute('data-id') === fromId) return;
+      var r = p.getBoundingClientRect();
+      var d = Math.hypot(x - (r.left + r.width / 2), y - (r.top + r.height / 2));
+      if (d < bestD) { bestD = d; best = p.getAttribute('data-id'); }
+    });
+    if (best) moveOneWay(fromId, best);
+    renderHomePins();
+  }
+
+  function snapshotPin(p) {
+    return { id: p.id, name: p.name, link: p.link || '', icon: p.icon || '', logo: p.logo || '', _src: p._src };
+  }
+
+  function mergeIntoFolder(fromId, toId) {
+    var folders = getFolders();
+    var map = {};
+    if (_origAllHomePins) _origAllHomePins().forEach(function (p) { map[p.id] = p; });
+    folders.forEach(function (f) {
+      map[f.id] = Object.assign({ _folder: true, items: f.items }, f);
+      (f.items || []).forEach(function (it) { map[it.id] = it; });
+    });
+    var fromPin = map[fromId], toPin = map[toId];
+    if (!fromPin || !toPin) return;
+
+    var folder = null;
+    if (String(toId).indexOf('fld') === 0 || toPin._folder) {
+      folder = folders.find(function (f) { return f.id === toId; });
+    }
+
+    if (!folder) {
+      folder = { id: 'fld' + Date.now(), name: 'tool', icon: 'ti ti-apps', logo: '', customIcon: false, items: [] };
+      if (!toPin._folder) folder.items.push(snapshotPin(toPin));
+      folders.push(folder);
+      var oldOrder = getOrderedIds();
+      var ti = oldOrder.indexOf(toId);
+      var order = oldOrder.filter(function (id) { return id !== fromId && id !== toId; });
+      if (ti < 0) order.push(folder.id);
+      else order.splice(Math.min(ti, order.length), 0, folder.id);
+      setOrder(order);
+    } else {
+      setOrder(getOrderedIds().filter(function (id) { return id !== fromId; }));
+    }
+
+    if (fromPin._folder || String(fromId).indexOf('fld') === 0) {
+      var src = folders.find(function (f) { return f.id === fromId; });
+      if (src) {
+        (src.items || []).forEach(function (it) { folder.items.push(it); });
+        folders = folders.filter(function (f) { return f.id !== fromId; });
+      }
+    } else {
+      folder.items.push(snapshotPin(fromPin));
+    }
+
+    folders = folders.map(function (f) { return f.id === folder.id ? folder : f; });
+    var seen = {};
+    folders = folders.filter(function (f) {
+      if (seen[f.id]) return false;
+      seen[f.id] = true;
+      return true;
+    });
+    setFolders(folders);
+    if (typeof toastMsg === 'function') toastMsg('tool · ' + folder.items.length);
+  }
+
+  var _openFolderId = null;
+
+  window.openMultiTool = function (folderId) {
+    var f = getFolders().find(function (x) { return x.id === folderId; });
+    if (!f) return;
+    _openFolderId = folderId;
+    var overlay = document.getElementById('multiToolOverlay');
+    var title = document.getElementById('mtTitle');
+    var menu = document.getElementById('mtMenu');
+    if (menu) menu.classList.remove('open');
+    if (title) title.value = f.name || 'tool';
+    renderMtGrid(f);
+    if (overlay) overlay.classList.add('open');
+  };
+
+  function renderMtGrid(f) {
+    var grid = document.getElementById('mtGrid');
+    if (!grid) return;
+    var html = (f.items || []).map(function (it) {
+      return '<div class="mt-item" data-id="' + String(it.id).replace(/"/g, '') + '">'
+        + '<div class="mt-item-icon">' + pinIconInner(it) + '</div>'
+        + '<div class="mt-item-name">' + String(it.name || '').replace(/</g, '&lt;') + '</div></div>';
+    }).join('');
+    html += '<div class="mt-item mt-add-btn" onclick="openMtPick()">'
+      + '<div class="mt-item-icon"><i class="ti ti-plus"></i></div>'
+      + '<div class="mt-item-name">Add</div></div>';
+    grid.innerHTML = html;
+    grid.querySelectorAll('.mt-item[data-id]').forEach(bindMtItemGestures);
+  }
+
+  window.closeMultiTool = function () {
+    var overlay = document.getElementById('multiToolOverlay');
+    if (overlay) overlay.classList.remove('open');
+    var menu = document.getElementById('mtMenu');
+    if (menu) menu.classList.remove('open');
+  };
+
+  window.openMtItem = function (itemId) {
+    var f = getFolders().find(function (x) { return x.id === _openFolderId; });
+    if (!f) return;
+    var it = (f.items || []).find(function (x) { return x.id === itemId; });
+    if (!it) return;
+    closeMultiTool();
+    if (it.link) window.open(it.link, '_blank', 'noopener');
+    else if (typeof toastMsg === 'function') toastMsg(it.name || 'Opened');
+  };
+
+  window.removeFromTool = function (itemId) {
+    if (!_openFolderId) return;
+    var folders = getFolders();
+    var idx = folders.findIndex(function (x) { return x.id === _openFolderId; });
+    if (idx < 0) return;
+    var removed = null;
+    folders[idx].items = (folders[idx].items || []).filter(function (it) {
+      if (it.id === itemId) { removed = it; return false; }
+      return true;
+    });
+    setFolders(folders);
+    if (removed) {
+      var order = getOrderedIds();
+      if (order.indexOf(itemId) < 0) { order.push(itemId); setOrder(order); }
+    }
+    if (!folders[idx].items.length) {
+      var fid = folders[idx].id;
+      folders.splice(idx, 1);
+      setFolders(folders);
+      setOrder(getOrderedIds().filter(function (id) { return id !== fid; }));
+      closeMultiTool();
+      renderHomePins();
+      if (typeof toastMsg === 'function') toastMsg('Removed · tool closed');
+      return;
+    }
+    openMultiTool(_openFolderId);
+    renderHomePins();
+    if (typeof toastMsg === 'function') toastMsg('Removed to home');
+  };
+
+  function bindMtItemGestures(el) {
+    if (!el || el._mtBound) return;
+    el._mtBound = true;
+    var id = el.getAttribute('data-id');
+    var longT = null, active = false, moved = false, sx = 0, sy = 0, ghost = null;
+
+    el.addEventListener('touchstart', function (e) {
+      if (!e.touches[0]) return;
+      var t = e.touches[0];
+      sx = t.clientX; sy = t.clientY; moved = false; active = false;
+      document.querySelectorAll('.mt-item.show-rm').forEach(function (n) { n.classList.remove('show-rm'); });
+      longT = setTimeout(function () {
+        longT = null;
+        active = true;
+        /* no cross */;
+        try { navigator.vibrate && navigator.vibrate(15); } catch (err) {}
+      }, 480);
+    }, { passive: true });
+
+    el.addEventListener('touchmove', function (e) {
+      if (!e.touches[0]) return;
+      var t = e.touches[0];
+      var dx = t.clientX - sx, dy = t.clientY - sy;
+      if (!active && (Math.abs(dx) > 10 || Math.abs(dy) > 10)) {
+        if (longT) { clearTimeout(longT); longT = null; }
+        active = true;
+        moved = true;
+        ;
+        el.classList.add('mt-dragging');
+        el.style.opacity = '0.25';
+        ghost = makeGhost(el, t.clientX, t.clientY);
+      }
+      if (!active) return;
+      if (Math.abs(dx) > 6 || Math.abs(dy) > 6) {
+        moved = true;
+        ;
+        if (!ghost) {
+          el.classList.add('mt-dragging');
+          el.style.opacity = '0.25';
+          ghost = makeGhost(el, t.clientX, t.clientY);
+        }
+        e.preventDefault();
+        if (ghost) {
+          ghost.style.left = (t.clientX - ghost.offsetWidth / 2) + 'px';
+          ghost.style.top = (t.clientY - ghost.offsetHeight / 2) + 'px';
+        }
+        document.querySelectorAll('.mt-item.mt-drag-over').forEach(function (n) { n.classList.remove('mt-drag-over'); });
+        var under = document.elementFromPoint(t.clientX, t.clientY);
+        var other = under && under.closest('.mt-item[data-id]');
+        if (other && other !== el) other.classList.add('mt-drag-over');
+      }
+    }, { passive: false });
+
+    el.addEventListener('touchend', function (e) {
+      if (longT) { clearTimeout(longT); longT = null; }
+      var t = e.changedTouches[0];
+      if (ghost && ghost.parentNode) ghost.parentNode.removeChild(ghost);
+      ghost = null;
+      el.classList.remove('mt-dragging');
+      el.style.opacity = '';
+      document.querySelectorAll('.mt-item.mt-drag-over').forEach(function (n) { n.classList.remove('mt-drag-over'); });
+      if (!active) return;
+      active = false;
+
+      if (!moved) {
+        if (!false) openMtItem(id);
+        return;
+      }
+
+      var panel = document.getElementById('mtPanel');
+      var outside = true;
+      if (panel) {
+        var r = panel.getBoundingClientRect();
+        if (t.clientX >= r.left && t.clientX <= r.right && t.clientY >= r.top && t.clientY <= r.bottom) outside = false;
+      }
+      if (outside) {
+        removeFromTool(id);
+        return;
+      }
+      var under = document.elementFromPoint(t.clientX, t.clientY);
+      var other = under && under.closest('.mt-item[data-id]');
+      if (other && other.getAttribute('data-id') !== id) {
+        reorderInsideTool(id, other.getAttribute('data-id'));
+      }
+    });
+    el.addEventListener('touchcancel', function () {
+      if (longT) { clearTimeout(longT); longT = null; }
+      if (ghost && ghost.parentNode) ghost.parentNode.removeChild(ghost);
+      el.classList.remove('mt-dragging', 'show-rm');
+      el.style.opacity = '';
+    });
+  }
+
+  function reorderInsideTool(fromId, toId) {
+    if (!_openFolderId) return;
+    var folders = getFolders();
+    var idx = folders.findIndex(function (x) { return x.id === _openFolderId; });
+    if (idx < 0) return;
+    var items = folders[idx].items || [];
+    var fi = items.findIndex(function (it) { return it.id === fromId; });
+    var ti = items.findIndex(function (it) { return it.id === toId; });
+    if (fi < 0 || ti < 0) return;
+    var item = items.splice(fi, 1)[0];
+    ti = items.findIndex(function (it) { return it.id === toId; });
+    items.splice(ti < 0 ? items.length : ti, 0, item);
+    folders[idx].items = items;
+    setFolders(folders);
+    openMultiTool(_openFolderId);
+    renderHomePins();
+  }
+
+  window.toggleMtMenu = function (e) {
+    if (e) e.stopPropagation();
+    var menu = document.getElementById('mtMenu');
+    if (menu) menu.classList.toggle('open');
+  };
+
+  window.mtSaveTitle = function () {
+    if (!_openFolderId) return;
+    var title = document.getElementById('mtTitle');
+    var n = (title && title.value || '').trim() || 'tool';
+    var folders = getFolders();
+    var idx = folders.findIndex(function (x) { return x.id === _openFolderId; });
+    if (idx < 0) return;
+    folders[idx].name = n;
+    setFolders(folders);
+    renderHomePins();
+  };
+
+  /* Change icon → glass modal only */
+  window.mtEditIcon = function () {
+    try {
+      var menu = document.getElementById('mtMenu');
+      if (menu) menu.classList.remove('open');
+      if (!_openFolderId && !window._pageToolCtx) return;
+      var f = null;
+      if (_openFolderId) {
+        f = getFolders().find(function (x) { return x.id === _openFolderId; });
+      } else if (window._pageToolCtx) {
+        var metaKey = (document.title || 'BAIJID') + '_page_tool_meta';
+        var metaAll = {};
+        try { metaAll = JSON.parse(localStorage.getItem(metaKey) || '{}'); } catch (e) {}
+        f = metaAll[window._pageToolCtx.key] || { name: 'tool', icon: '', logo: '' };
+      }
+      if (!f) return;
+      var modal = document.getElementById('editMtModal');
+      if (!modal) {
+        if (typeof toastMsg === 'function') toastMsg('Icon editor missing', true);
+        return;
+      }
+      var nb = document.getElementById('editMtNameBlock');
+      var ib = document.getElementById('editMtIconBlock');
+      if (nb) nb.style.display = 'none';
+      if (ib) ib.style.display = 'block';
+      var tt = document.getElementById('editMtTitle');
+      if (tt) tt.textContent = 'CHANGE ICON';
+      var inp = document.getElementById('editMtIconInput');
+      if (inp) {
+        if (f.logo && !String(f.logo).startsWith('data:')) inp.value = f.logo;
+        else if (f.customIcon && f.icon) inp.value = f.icon;
+        else inp.value = '';
+      }
+      var h = document.getElementById('editMtIconHint');
+      if (h) h.textContent = (f.logo && String(f.logo).startsWith('data:')) ? 'Custom image set' : 'ti icon · URL · or upload below';
+      window._pendingMtIconData = null;
+      // open immediately
+      modal.style.display = 'flex';
+      modal.classList.add('open');
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  window.resetToolIcon = function () {
+    if (!_openFolderId && window._pageToolCtx) {
+      var metaKey = (document.title || 'BAIJID') + '_page_tool_meta';
+      var metaAll = {};
+      try { metaAll = JSON.parse(localStorage.getItem(metaKey) || '{}'); } catch (e) {}
+      var key = window._pageToolCtx.key;
+      var cur = metaAll[key] || {};
+      cur.logo = ''; cur.icon = ''; cur.customIcon = false;
+      metaAll[key] = cur;
+      localStorage.setItem(metaKey, JSON.stringify(metaAll));
+      window._pendingMtIconData = null;
+      closeEditMtModal();
+      if (typeof renderHardPlatforms === 'function') renderHardPlatforms();
+      if (typeof renderHardApps === 'function') renderHardApps();
+      if (typeof toastMsg === 'function') toastMsg('Icon reset · 4 mini pins');
+      return;
+    }
+    if (!_openFolderId) return;
+    var folders = getFolders();
+    var idx = folders.findIndex(function (x) { return x.id === _openFolderId; });
+    if (idx < 0) return;
+    folders[idx].logo = '';
+    folders[idx].icon = 'ti ti-apps';
+    folders[idx].customIcon = false;
+    setFolders(folders);
+    window._pendingMtIconData = null;
+    closeEditMtModal();
+    renderHomePins();
+    if (typeof toastMsg === 'function') toastMsg('Icon reset · 4 mini pins');
+  };
+
+  window.closeEditMtModal = function () {
+    var modal = document.getElementById('editMtModal');
+    if (modal) { modal.classList.remove('open'); modal.style.display = ''; }
+  };
+
+  window.saveEditMt = function () {
+    var titleInp = document.getElementById('editMtIconInput');
+    var pending = window._pendingMtIconData;
+    if (!_openFolderId && window._pageToolCtx) {
+      var metaKey = (document.title || 'BAIJID') + '_page_tool_meta';
+      var metaAll = {};
+      try { metaAll = JSON.parse(localStorage.getItem(metaKey) || '{}'); } catch (e) {}
+      var key = window._pageToolCtx.key;
+      var cur = metaAll[key] || {};
+      if (pending) {
+        cur.logo = pending; cur.icon = ''; cur.customIcon = true;
+      } else {
+        var v = (titleInp && titleInp.value || '').trim();
+        if (!v) { if (typeof toastMsg === 'function') toastMsg('Enter icon or upload', true); return; }
+        if (/^ti(\s|-)/i.test(v) || /^ti-/.test(v)) {
+          cur.icon = (typeof normalizeTablerIcon === 'function' ? normalizeTablerIcon(v) : v);
+          cur.logo = ''; cur.customIcon = true;
+        } else {
+          cur.logo = v; cur.icon = ''; cur.customIcon = true;
+        }
+      }
+      metaAll[key] = cur;
+      localStorage.setItem(metaKey, JSON.stringify(metaAll));
+      closeEditMtModal();
+      if (typeof renderHardPlatforms === 'function') renderHardPlatforms();
+      if (typeof renderHardApps === 'function') renderHardApps();
+      if (typeof toastMsg === 'function') toastMsg('Tool icon saved');
+      return;
+    }
+    if (!_openFolderId) return;
+    var folders = getFolders();
+    var idx = folders.findIndex(function (x) { return x.id === _openFolderId; });
+    if (idx < 0) return;
+    if (window._pendingMtIconData) {
+      folders[idx].logo = window._pendingMtIconData;
+      folders[idx].icon = '';
+      folders[idx].customIcon = true;
+    } else {
+      var v = (document.getElementById('editMtIconInput').value || '').trim();
+      if (!v) {
+        if (typeof toastMsg === 'function') toastMsg('Enter icon or upload image', true);
+        return;
+      }
+      if (/^ti(\s|-)/i.test(v) || /^ti-/.test(v)) {
+        folders[idx].icon = (typeof normalizeTablerIcon === 'function' ? normalizeTablerIcon(v) : v);
+        folders[idx].logo = '';
+        folders[idx].customIcon = true;
+      } else {
+        folders[idx].logo = v;
+        folders[idx].icon = '';
+        folders[idx].customIcon = true;
+      }
+    }
+    setFolders(folders);
+    closeEditMtModal();
+    renderHomePins();
+    if (typeof toastMsg === 'function') toastMsg('Tool icon saved');
+  };
+
+  document.addEventListener('change', function (e) {
+    if (!e.target || e.target.id !== 'editMtIconFile') return;
+    var file = e.target.files && e.target.files[0];
+    if (!file) return;
+    var reader = new FileReader();
+    reader.onload = function () {
+      window._pendingMtIconData = reader.result;
+      var h = document.getElementById('editMtIconHint');
+      if (h) h.textContent = file.name + ' ready — press SAVE';
+      var inp = document.getElementById('editMtIconInput');
+      if (inp) inp.value = '';
+    };
+    reader.readAsDataURL(file);
+    e.target.value = '';
+  });
+
+  var _pickSelected = {};
+
+  window.openMtPick = function () {
+    if (!_openFolderId) return;
+    _pickSelected = {};
+    var list = document.getElementById('mtPickList');
+    var saveBtn = document.getElementById('mtPickSave');
+    if (saveBtn) saveBtn.disabled = false;
+    var inThis = idsInFolder(_openFolderId);
+    var insideAny = idsInsideFolders();
+    var base = _origAllHomePins ? _origAllHomePins() : [];
+    getFolders().forEach(function (f) { insideAny[f.id] = true; });
+    var rows = [];
+    base.forEach(function (p) {
+      if (!p || !p.id) return;
+      if (inThis[p.id]) { rows.push({ p: p, checked: true }); _pickSelected[p.id] = true; }
+      else if (!insideAny[p.id]) rows.push({ p: p, checked: false });
+    });
+    if (!list) return;
+    if (!rows.length) {
+      list.innerHTML = '<div style="padding:20px;text-align:center;color:var(--txm);font-family:Rajdhani,sans-serif;">No pins available</div>';
+    } else {
+      list.innerHTML = rows.map(function (r) {
+        var p = r.p;
+        return '<div class="mt-pick-row' + (r.checked ? ' on' : '') + '" data-id="' + String(p.id).replace(/"/g, '') + '" onclick="toggleMtPick(this)">'
+          + '<div class="mt-pick-ico">' + pinIconInner(p) + '</div>'
+          + '<div class="mt-pick-name">' + String(p.name || '').replace(/</g, '&lt;') + '</div>'
+          + '<div class="mt-pick-check">' + (r.checked ? '✓' : '') + '</div></div>';
+      }).join('');
+    }
+    var ov = document.getElementById('mtPickOverlay');
+    if (ov) ov.classList.add('open');
+  };
+
+  window.closeMtPick = function () {
+    var ov = document.getElementById('mtPickOverlay');
+    if (ov) ov.classList.remove('open');
+  };
+
+  window.toggleMtPick = function (row) {
+    if (!row) return;
+    var id = row.getAttribute('data-id');
+    if (_pickSelected[id]) {
+      delete _pickSelected[id];
+      row.classList.remove('on');
+      var c = row.querySelector('.mt-pick-check'); if (c) c.innerHTML = '';
+    } else {
+      _pickSelected[id] = true;
+      row.classList.add('on');
+      var c2 = row.querySelector('.mt-pick-check'); if (c2) c2.innerHTML = '✓';
+    }
+  };
+
+  window.saveMtPick = function () {
+    if (!_openFolderId) return;
+    var folders = getFolders();
+    var idx = folders.findIndex(function (x) { return x.id === _openFolderId; });
+    if (idx < 0) return;
+    var base = _origAllHomePins ? _origAllHomePins() : [];
+    var map = {};
+    base.forEach(function (p) { map[p.id] = p; });
+    (folders[idx].items || []).forEach(function (it) { map[it.id] = it; });
+    var oldIds = (folders[idx].items || []).map(function (it) { return it.id; });
+    var newIds = Object.keys(_pickSelected);
+    var removed = oldIds.filter(function (id) { return newIds.indexOf(id) < 0; });
+    var added = newIds.filter(function (id) { return oldIds.indexOf(id) < 0; });
+    folders[idx].items = newIds.map(function (id) { return map[id] ? snapshotPin(map[id]) : null; }).filter(Boolean);
+    setFolders(folders);
+    var order = getOrderedIds().filter(function (id) { return added.indexOf(id) < 0; });
+    removed.forEach(function (id) { if (order.indexOf(id) < 0) order.push(id); });
+    setOrder(order);
+    if (!folders[idx].items.length) {
+      var fid = folders[idx].id;
+      folders.splice(idx, 1);
+      setFolders(folders);
+      setOrder(order.filter(function (id) { return id !== fid; }));
+      closeMtPick(); closeMultiTool(); renderHomePins();
+      if (typeof toastMsg === 'function') toastMsg('Tool empty · closed');
+      return;
+    }
+    closeMtPick();
+    openMultiTool(_openFolderId);
+    renderHomePins();
+    if (typeof toastMsg === 'function') toastMsg('Tool updated');
+  };
+
+  var _origOpenHomePin = window.openHomePin;
+  window.openHomePin = function (el) {
+    if (_justDragged || drag.active) return;
+    if (el && el.getAttribute && el.getAttribute('data-folder') === '1') {
+      openMultiTool(el.getAttribute('data-id'));
+      return;
+    }
+    if (typeof _origOpenHomePin === 'function') return _origOpenHomePin(el);
+  };
+
+
+  /* seed DEFAULT_HOME_TOOL_1, _2, ... into home folders */
+  function seedDefaultTools() {
+    try {
+      var folders = getFolders();
+      var changed = false;
+      for (var i = 1; i <= 30; i++) {
+        var arr = null;
+        try { arr = eval('typeof DEFAULT_HOME_TOOL_' + i + ' !== "undefined" ? DEFAULT_HOME_TOOL_' + i + ' : null'); } catch (e) { arr = null; }
+        if (!arr || !arr.length) continue;
+        var id = 'deftool_home_' + i;
+        if (folders.some(function (f) { return f.id === id || f._defaultKey === id; })) continue;
+        var items = arr.map(function (it, j) {
+          return {
+            id: id + '_i' + j,
+            name: it.name || 'Site',
+            link: it.link || '',
+            icon: it.icon || 'ti ti-world',
+            logo: it.logo || '',
+            _src: 'default-tool'
+          };
+        });
+        folders.push({
+          id: id,
+          name: 'tool',
+          icon: 'ti ti-apps',
+          logo: '',
+          customIcon: false,
+          items: items,
+          _defaultKey: id
+        });
+        changed = true;
+        var order = getOrder() || getOrderedIds();
+        if (order.indexOf(id) < 0) { order.push(id); setOrder(order); }
+      }
+      if (changed) setFolders(folders);
+    } catch (e) { console.warn(e); }
+  }
+  seedDefaultTools();
+
+  setTimeout(function () {
+    if (typeof renderHomePins === 'function') renderHomePins();
+  }, 700);
+})();
+</script>
+<script id="plat-app-drag-script">
+(function(){
+  var LS_PLAT_ORDER = (document.title||'BAIJID')+'_plat_order_v1';
+  var LS_APP_ORDER = (document.title||'BAIJID')+'_app_order_v1';
+  function loadO(k){ try{return JSON.parse(localStorage.getItem(k)||'null');}catch(e){return null;} }
+  function saveO(k,v){ localStorage.setItem(k, JSON.stringify(v)); }
+
+  var edgeTimer = null;
+  function clearEdge(){ if(edgeTimer){ clearInterval(edgeTimer); edgeTimer=null; } }
+  function lockScroll(on){
+    if(on){
+      document.body.style.overflow='hidden';
+      document.documentElement.style.overflow='hidden';
+      document.body.style.touchAction='none';
+    } else {
+      document.body.style.overflow='';
+      document.documentElement.style.overflow='';
+      document.body.style.touchAction='';
+    }
+  }
+  function edgeVert(y){
+    clearEdge();
+    var vh = window.innerHeight, edge = 56, dir = 0;
+    if(y > vh - edge) dir = 24;
+    else if(y < edge + 48) dir = -24;
+    if(!dir) return;
+    edgeTimer = setInterval(function(){ window.scrollBy(0, dir); }, 16);
+  }
+
+  function openCard(card){
+    if(!card || card.getAttribute('data-just-dragged')==='1') return;
+    if(card.classList.contains('plat-tool-card')){
+      var m = (card.getAttribute('onclick')||'').match(/openPageTool\('(\w+)',\s*(\d+)\)/);
+      if(m && typeof openPageTool === 'function'){ openPageTool(m[1], parseInt(m[2],10)); return; }
+      return;
+    }
+    var oc = card.getAttribute('onclick');
+    if(oc && oc.indexOf('openPageTool') < 0){
+      try { (new Function(oc))(); return; } catch(e) {}
+    }
+    if(oc && oc.indexOf('openGalleryPanel') >= 0){ try{ openGalleryPanel(); }catch(e){} return; }
+    if(oc && oc.indexOf('openHardPlatform') >= 0){ try{ (new Function(oc))(); }catch(e){} return; }
+    var link = card.getAttribute('data-link') || '';
+    if(link) window.open(link, '_blank', 'noopener');
+  }
+
+  function bindRoot(root, orderKey){
+    if(!root || root._dragBound5) return;
+    root._dragBound5 = true;
+    var drag = {active:false, el:null, ghost:null, sx:0, sy:0, timer:null, moved:false};
+
+    root.addEventListener('contextmenu', function(e){
+      if(e.target.closest('.plat-card')){ e.preventDefault(); e.stopPropagation(); }
+    }, true);
+
+    root.addEventListener('touchstart', function(e){
+      var card = e.target.closest('.plat-card');
+      if(!card || card.classList.contains('plat-plus-btn')) return;
+      // skip OPEN button inside card
+      if(e.target.closest('.plat-open-btn')) return;
+      var t = e.touches[0];
+      drag.sx = t.clientX; drag.sy = t.clientY;
+      drag.el = card;
+      drag.moved = false;
+      drag.timer = setTimeout(function(){
+        drag.timer = null;
+        drag.active = true;
+        lockScroll(true);
+        card.style.opacity = '0.25';
+        var g = card.cloneNode(true);
+        g.style.cssText = 'position:fixed;pointer-events:none;z-index:99950;opacity:.95;transform:scale(1.05);box-shadow:0 12px 28px rgba(0,0,0,.45);width:'+card.offsetWidth+'px;left:'+(t.clientX-card.offsetWidth/2)+'px;top:'+(t.clientY-card.offsetHeight/2)+'px;';
+        document.body.appendChild(g);
+        drag.ghost = g;
+        try{ navigator.vibrate && navigator.vibrate(15); }catch(err){}
+      }, 420);
+    }, {passive:true});
+
+    root.addEventListener('touchmove', function(e){
+      if(!drag.el) return;
+      var t = e.touches[0];
+      if(!drag.active){
+        if(Math.abs(t.clientX-drag.sx)>9 || Math.abs(t.clientY-drag.sy)>9){
+          // Any real finger movement is a scroll/gesture, never a tap-to-open.
+          drag.moved = true;
+          if(drag.timer){ clearTimeout(drag.timer); drag.timer=null; }
+        }
+        return;
+      }
+      drag.moved = true;
+      e.preventDefault();
+      if(drag.ghost){
+        drag.ghost.style.left = (t.clientX - drag.ghost.offsetWidth/2)+'px';
+        drag.ghost.style.top = (t.clientY - drag.ghost.offsetHeight/2)+'px';
+      }
+      document.querySelectorAll('.plat-card.drag-over').forEach(function(n){ n.classList.remove('drag-over'); });
+      var under = document.elementFromPoint(t.clientX, t.clientY);
+      var other = under && under.closest('.plat-card');
+      if(other && other !== drag.el) other.classList.add('drag-over');
+      edgeVert(t.clientY);
+    }, {passive:false});
+
+    root.addEventListener('touchend', function(e){
+      if(drag.timer){ clearTimeout(drag.timer); drag.timer=null; }
+      clearEdge();
+      lockScroll(false);
+      var card = drag.el;
+      var wasActive = drag.active;
+      var wasMoved = drag.moved;
+      if(drag.ghost && drag.ghost.parentNode) drag.ghost.parentNode.removeChild(drag.ghost);
+      if(card) card.style.opacity = '';
+      document.querySelectorAll('.plat-card.drag-over').forEach(function(n){ n.classList.remove('drag-over'); });
+
+      if(wasActive && wasMoved && card){
+        var t = e.changedTouches[0];
+        var under = document.elementFromPoint(t.clientX, t.clientY);
+        var other = under && under.closest('.plat-card');
+        if(other && other !== card && other.parentNode === card.parentNode){
+          card.parentNode.insertBefore(card, other);
+          var ids = Array.prototype.slice.call(card.parentNode.querySelectorAll('.plat-card')).map(function(c,i){
+            if(!c.getAttribute('data-order-id')) c.setAttribute('data-order-id', 'x'+i);
+            return c.getAttribute('data-order-id');
+          });
+          saveO(orderKey, ids);
+          if(typeof toastMsg==='function') toastMsg('Moved');
+        }
+        card.setAttribute('data-just-dragged','1');
+        setTimeout(function(){ card.removeAttribute('data-just-dragged'); }, 450);
+      } else if(!wasActive && card && !wasMoved){
+        // short tap → open link / tool
+        openCard(card);
+      }
+
+      drag.active=false; drag.el=null; drag.ghost=null; drag.moved=false;
+    });
+
+    root.addEventListener('touchcancel', function(){
+      if(drag.timer){ clearTimeout(drag.timer); drag.timer=null; }
+      clearEdge(); lockScroll(false);
+      if(drag.ghost && drag.ghost.parentNode) drag.ghost.parentNode.removeChild(drag.ghost);
+      if(drag.el) drag.el.style.opacity = '';
+      drag.active=false; drag.el=null; drag.ghost=null; drag.moved=false;
+    });
+
+    // block ghost clicks after drag; allow normal click for desktop
+    root.addEventListener('click', function(e){
+      var card = e.target.closest('.plat-card');
+      if(!card) return;
+      if(card.getAttribute('data-just-dragged')==='1'){
+        e.preventDefault(); e.stopPropagation(); return;
+      }
+      // mobile already handled on touchend; desktop click:
+      if(e.pointerType === 'mouse' || e.detail > 0){
+        if(card.getAttribute('data-link') || card.classList.contains('plat-tool-card') || card.getAttribute('onclick')){
+          // if touch devices also fire click after touchend open, skip duplicate
+          if(card._openedByTouch){ card._openedByTouch=false; e.preventDefault(); e.stopPropagation(); return; }
+        }
+      }
+    }, true);
+  }
+
+  function applyOrder(box, orderKey){
+    if(!box) return;
+    var order = loadO(orderKey);
+    if(!order || !order.length) return;
+    var map = {};
+    Array.prototype.forEach.call(box.querySelectorAll('.plat-card'), function(c,i){
+      if(!c.getAttribute('data-order-id')) c.setAttribute('data-order-id','x'+i);
+      map[c.getAttribute('data-order-id')] = c;
+    });
+    order.forEach(function(id){ if(map[id]) box.appendChild(map[id]); });
+  }
+
+  function setup(){
+    var hp = document.getElementById('hardPlatforms');
+    var ha = document.getElementById('hardApps');
+    var ca = document.getElementById('customApps');
+    if(hp){ Array.prototype.forEach.call(hp.querySelectorAll('.plat-card'), function(c,i){ if(!c.getAttribute('data-order-id')) c.setAttribute('data-order-id','p'+i); }); applyOrder(hp, LS_PLAT_ORDER); bindRoot(hp, LS_PLAT_ORDER); }
+    if(ha){ Array.prototype.forEach.call(ha.querySelectorAll('.plat-card'), function(c,i){ if(!c.getAttribute('data-order-id')) c.setAttribute('data-order-id','a'+i); }); applyOrder(ha, LS_APP_ORDER); bindRoot(ha, LS_APP_ORDER); }
+    if(ca){ bindRoot(ca, LS_APP_ORDER+'_c'); }
+  }
+
+  var _rp = window.renderHardPlatforms;
+  if(typeof _rp==='function'){ window.renderHardPlatforms=function(){ _rp.apply(this,arguments); setTimeout(setup,40); }; }
+  var _ra = window.renderHardApps;
+  if(typeof _ra==='function'){ window.renderHardApps=function(){ _ra.apply(this,arguments); setTimeout(setup,40); }; }
+  setTimeout(setup, 1000);
+})();
+</script>
+
+<script id="feature-bridge">
+(function(){
+  function buildToolCard(page, ti, tarr){
+    var mini = '';
+    for (var m = 0; m < 4; m++) {
+      var it = tarr[m];
+      if (!it) { mini += '<span class="plat-tool-mini"></span>'; continue; }
+      if (it.logo && !/^ti[ -]/i.test(String(it.logo))) mini += '<span class="plat-tool-mini"><img src="' + String(it.logo).replace(/"/g, '&quot;') + '" alt=""></span>';
+      else mini += '<span class="plat-tool-mini"><i class="' + ((typeof brandIconFromName==='function'&&brandIconFromName(it.name,it.link)) || (it.logo && /^ti[ -]/i.test(String(it.logo)) ? it.logo : it.icon) || 'ti ti-world') + '"></i></span>';
+    }
+    return '<div class="plat-card plat-tool-card" data-tool-page="' + page + '" data-tool-num="' + ti + '" style="cursor:pointer;">' +
+      '<div class="plat-tool-icon">' + mini + '</div>' +
+      '<span class="plat-name">tool</span>' +
+      '<span class="plat-badge live">T' + ti + '</span></div>';
+  }
+  function injectPlatformTools(){
+    var box = document.getElementById('hardPlatforms');
+    if (!box) return;
+    // remove previous tool cards we added
+    box.querySelectorAll('.plat-tool-card[data-tool-page="platform"]').forEach(function(n){ n.remove(); });
+    for (var ti = 1; ti <= 30; ti++) {
+      var tarr = window['DEFAULT_PLATFORM_TOOL_' + ti];
+      if (!tarr || !tarr.length) continue;
+      box.insertAdjacentHTML('beforeend', buildToolCard('platform', ti, tarr));
+    }
+  }
+  function injectAppTools(){
+    var box = document.getElementById('hardApps');
+    if (!box) return;
+    box.querySelectorAll('.plat-tool-card[data-tool-page="app"]').forEach(function(n){ n.remove(); });
+    for (var ti = 1; ti <= 30; ti++) {
+      var tarr = window['DEFAULT_APP_TOOL_' + ti];
+      if (!tarr || !tarr.length) continue;
+      box.insertAdjacentHTML('beforeend', buildToolCard('app', ti, tarr));
+    }
+  }
+  function wrap(name, after){
+    var orig = window[name];
+    if (typeof orig !== 'function') return;
+    window[name] = function(){
+      var r = orig.apply(this, arguments);
+      try { after(); } catch(e) { console.warn(e); }
+      return r;
+    };
+  }
+  wrap('renderHardPlatforms', injectPlatformTools);
+  wrap('renderHardApps', injectAppTools);
+  // open tool on tap via delegation (doesn't break existing links)
+  document.addEventListener('click', function(e){
+    var card = e.target.closest && e.target.closest('.plat-tool-card');
+    if (!card) return;
+    if (card.getAttribute('data-just-dragged') === '1') return;
+    var pg = card.getAttribute('data-tool-page');
+    var nm = parseInt(card.getAttribute('data-tool-num') || '0', 10);
+    if (pg && nm && typeof openPageTool === 'function') {
+      e.preventDefault(); e.stopPropagation();
+      openPageTool(pg, nm);
+    }
+  }, true);
+  setTimeout(function(){
+    if (typeof renderHardPlatforms === 'function') renderHardPlatforms();
+    if (typeof renderHardApps === 'function') renderHardApps();
+  }, 600);
+})();
+</script>
+
+
+<style id="page-tool-plus-fix-css">
+/* Match the Home tool's Add tile: no extra frame around the whole tile. */
+.mt-page-add{border:0!important;background:transparent!important;box-shadow:none!important}
+.mt-page-add .mt-item-icon{background:rgba(255,255,255,.12)!important;border:1px dashed var(--brda)!important;color:var(--a)!important}
+</style>
+<script id="page-tool-plus-fix">
+(function(){
+'use strict';
+var ctx=null, selected={}, candidates=[];
+var prefix=(document.title||'BAIJID')+'_page_tool_items_';
+function key(pg,n){return pg+':'+n;}
+function toolArray(pg,n){
+  try{var saved=JSON.parse(localStorage.getItem(prefix+key(pg,n))||'null');if(Array.isArray(saved))return saved;}catch(e){}
+  var a=window[(pg==='platform'?'DEFAULT_PLATFORM_TOOL_':'DEFAULT_APP_TOOL_')+n];
+  return Array.isArray(a)?a.slice():[];
+}
+function ident(x){
+  if(x&&x.id)return 'id:'+String(x.id);
+  return [String(x&&x.name||'').trim().toLowerCase(),String(x&&x.link||'').trim().toLowerCase(),String(x&&x.special||''),x&&x.html?'html':''].join('|');
+}
+function esc(v){return String(v==null?'':v).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
+function icon(x){
+  var logo=x.logo||'';
+  if(logo&&!/^ti[ -]/i.test(logo))return '<img src="'+esc(logo)+'" alt="">';
+  var v=(typeof brandIconFromName==='function'&&brandIconFromName(x.name,x.link))||x.icon||'ti ti-world';
+  if(/^ti-/.test(v)&&v.indexOf(' ')<0)v='ti '+v;
+  return '<i class="'+esc(v)+'"></i>';
+}
+function draw(){
+  if(!ctx)return;
+  var a=toolArray(ctx.pg,ctx.n),g=document.getElementById('mtGrid');if(!g)return;
+  g.innerHTML=a.map(function(x,i){return '<div class="mt-item" onclick="openPageToolItem('+i+')"><div class="mt-item-icon">'+icon(x)+'</div><div class="mt-item-name">'+esc(x.name)+'</div></div>';}).join('')+
+    '<div class="mt-item mt-add-btn mt-page-add" onclick="openPageToolPicker()"><div class="mt-item-icon"><i class="ti ti-plus"></i></div><div class="mt-item-name">Add</div></div>';
+  var t=document.getElementById('mtTitle');if(t){t.value=(ctx.pg==='platform'?'Platform':'App')+' tool '+ctx.n;t.readOnly=true;}
+}
+var oldOpen=window.openPageTool;
+window.openPageTool=function(pg,n){
+  if(pg!=='platform'&&pg!=='app')return oldOpen&&oldOpen(pg,n);
+  var a=toolArray(pg,Number(n));if(!a.length){if(window.toastMsg)toastMsg('Tool not found',true);return;}
+  ctx={pg:pg,n:Number(n)};window._pageToolCtx=ctx;window._pageToolItems=a;window._openFolderId=null;
+  var o=document.getElementById('multiToolOverlay');if(o)o.classList.add('open');
+  var m=document.getElementById('mtMenu');if(m)m.classList.remove('open');draw();
+};
+window.openPageToolItem=function(i){
+  if(!ctx)return;var x=toolArray(ctx.pg,ctx.n)[i];if(!x)return;
+  closeMultiTool();
+  if(x.special==='gallery'&&typeof openGalleryPanel==='function'){openGalleryPanel();return;}
+  if(x.html&&typeof openHtmlInModal==='function'){openHtmlInModal(x.name||'Interface',x.html);return;}
+  if(ctx.pg==='app'&&x.id&&typeof openCustomApp==='function'){openCustomApp(x.id);return;}
+  if(x.link)window.open(x.link,'_blank','noopener');
+  else if(window.toastMsg)toastMsg(x.name||'Opened');
+};
+function pageInterfaces(pg){
+  try{if(typeof window.__getScopedPageInterfaces==='function')return window.__getScopedPageInterfaces(pg)||[];}catch(e){}
+  return [];
+}
+window.openPageToolPicker=function(){
+  if(!ctx)return;
+  var current=toolArray(ctx.pg,ctx.n), own={};current.forEach(function(x){own[ident(x)]=true;});
+  var used={};
+  // Only tools belonging to the same page reserve interfaces.
+  for(var n=1;n<=30;n++){if(n===ctx.n)continue;toolArray(ctx.pg,n).forEach(function(x){used[ident(x)]=true;});}
+  var source=pageInterfaces(ctx.pg).concat(current), seen={};
+  candidates=source.filter(function(x){if(!x||!x.name)return false;var k=ident(x);if(seen[k])return false;seen[k]=true;return !!own[k]||!used[k];});
+  selected={};current.forEach(function(x){selected[ident(x)]=x;});
+  var list=document.getElementById('mtPickList');
+  if(list)list.innerHTML=candidates.map(function(x){var k=ident(x),on=!!own[k];return '<div class="mt-pick-row'+(on?' on':'')+'" data-k="'+esc(k)+'" onclick="togglePageToolPick(this)"><div class="mt-pick-ico">'+icon(x)+'</div><div class="mt-pick-name">'+esc(x.name)+'</div><div class="mt-pick-check">'+(on?'✓':'')+'</div></div>';}).join('')||'<div style="padding:18px;text-align:center">No unassigned interfaces</div>';
+  var ov=document.getElementById('mtPickOverlay');if(ov)ov.classList.add('open');
+  var save=document.getElementById('mtPickSave');if(save)save.onclick=window.savePageToolPick;
+};
+window.togglePageToolPick=function(row){
+  if(!row)return;var k=row.getAttribute('data-k');
+  if(Object.prototype.hasOwnProperty.call(selected,k)){delete selected[k];row.classList.remove('on');var c=row.querySelector('.mt-pick-check');if(c)c.textContent='';}
+  else{var x=candidates.find(function(v){return ident(v)===k;});if(x){selected[k]=x;row.classList.add('on');var c2=row.querySelector('.mt-pick-check');if(c2)c2.textContent='✓';}}
+};
+window.savePageToolPick=function(){
+  if(!ctx)return;var a=Object.keys(selected).map(function(k){return selected[k];});
+  localStorage.setItem(prefix+key(ctx.pg,ctx.n),JSON.stringify(a));
+  window[(ctx.pg==='platform'?'DEFAULT_PLATFORM_TOOL_':'DEFAULT_APP_TOOL_')+ctx.n]=a;
+  window._pageToolItems=a;
+  var ov=document.getElementById('mtPickOverlay');if(ov)ov.classList.remove('open');draw();
+  if(window.renderHardPlatforms)renderHardPlatforms();if(window.renderHardApps)renderHardApps();
+  if(window.toastMsg)toastMsg('Tool updated');
+};
+})();
+</script>
+
+<script id="touch-scroll-click-guard-v2">
+(function(){
+'use strict';
+var active=null, blockClickUntil=0;
+function point(t){return {x:t.clientX,y:t.clientY};}
+document.addEventListener('touchstart',function(e){
+  if(!e.changedTouches||!e.changedTouches.length)return;
+  var t=e.changedTouches[0],p=point(t);active={x:p.x,y:p.y,moved:false,target:e.target};
+},{capture:true,passive:true});
+document.addEventListener('touchmove',function(e){
+  if(!active||!e.touches||!e.touches.length)return;
+  var t=e.touches[0];if(Math.abs(t.clientX-active.x)>9||Math.abs(t.clientY-active.y)>9){active.moved=true;blockClickUntil=Date.now()+650;}
+},{capture:true,passive:true});
+document.addEventListener('touchend',function(){
+  if(active&&active.moved)blockClickUntil=Date.now()+650;
+  setTimeout(function(){active=null;},0);
+},{capture:true,passive:true});
+document.addEventListener('touchcancel',function(){if(active&&active.moved)blockClickUntil=Date.now()+650;active=null;},{capture:true,passive:true});
+document.addEventListener('click',function(e){
+  if(Date.now()>blockClickUntil)return;
+  var card=e.target&&e.target.closest&&e.target.closest('#hardPlatforms .plat-card, #hardApps .plat-card, #customApps .plat-card');
+  if(!card)return;
+  e.preventDefault();e.stopPropagation();if(e.stopImmediatePropagation)e.stopImmediatePropagation();
+},true);
+})();
+</script>
+
+
+<script id="v3007-custom-page-toolboxes">
+(function(){
+'use strict';
+var STORE=(document.title||'BAIJID')+'_v3007_';
+var ctx=null, dragState=null;
+function read(k,d){try{var v=JSON.parse(localStorage.getItem(STORE+k)||'null');return v==null?d:v;}catch(e){return d;}}
+function write(k,v){try{localStorage.setItem(STORE+k,JSON.stringify(v));}catch(e){if(window.toastMsg)toastMsg('Storage full',true);}}
+function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
+function boxes(pg){return read('boxes_'+pg,[]);}
+function items(pg,id){return read('items_'+pg+'_'+id,[]);}
+function setItems(pg,id,a){write('items_'+pg+'_'+id,a);}
+function pageSource(pg){try{return window.__getScopedPageInterfaces(pg)||[];}catch(e){return [];}}
+function icon(x){var logo=x&&x.logo?String(x.logo):'';if(logo&&!/^ti[ -]/i.test(logo))return '<img src="'+esc(logo)+'" alt="">';var c=(typeof brandIconFromName==='function'&&brandIconFromName(x&&x.name,x&&x.link))||(x&&x.icon)||'ti ti-world';if(/^ti-/.test(c)&&c.indexOf(' ')<0)c='ti '+c;return '<i class="'+esc(c)+'"></i>'; }
+function metaKey(pg,n){return pg+':'+n;}
+function getTool(pg,n){if(String(n).indexOf('custom:')===0)return items(pg,String(n).slice(7));var k=pg+':'+n;var saved=read('pageItems_'+k,null);if(Array.isArray(saved))return saved;try{var legacy=JSON.parse(localStorage.getItem((document.title||'BAIJID')+'_page_tool_items_'+k)||'null');if(Array.isArray(legacy))return legacy;}catch(e){}var a=window[(pg==='platform'?'DEFAULT_PLATFORM_TOOL_':'DEFAULT_APP_TOOL_')+n];return Array.isArray(a)?a.slice():[];}
+function setTool(pg,n,a){if(String(n).indexOf('custom:')===0)setItems(pg,String(n).slice(7),a);else{write('pageItems_'+pg+':'+n,a);try{localStorage.setItem((document.title||'BAIJID')+'_page_tool_items_'+pg+':'+n,JSON.stringify(a));}catch(e){}window[(pg==='platform'?'DEFAULT_PLATFORM_TOOL_':'DEFAULT_APP_TOOL_')+n]=a;}}
+function titleFor(pg,n){if(String(n).indexOf('custom:')===0){var b=boxes(pg).find(function(x){return x.id===String(n).slice(7);});return b?b.name:'New tool box';}var m=read('meta_'+pg,{});return m[String(n)]||((pg==='platform'?'Platform':'App')+' tool '+n);}
+function renderGrid(){if(!ctx)return;var a=getTool(ctx.pg,ctx.n),g=document.getElementById('mtGrid');if(!g)return;
+ g.innerHTML=a.map(function(x,i){return '<div class="mt-item" data-page-index="'+i+'" onclick="openPageToolItem('+i+')"><div class="mt-item-icon">'+icon(x)+'</div><div class="mt-item-name">'+esc(x.name||'Interface')+'</div></div>';}).join('')+'<div class="mt-item mt-add-btn mt-page-add" onclick="openPageToolPicker()"><div class="mt-item-icon"><i class="ti ti-plus"></i></div><div class="mt-item-name">Add</div></div>';
+ var t=document.getElementById('mtTitle');if(t){t.value=titleFor(ctx.pg,ctx.n);t.readOnly=false;t.placeholder='Tool box name';}
+ bindItemDrag();
+}
+var oldOpen=window.openPageTool;
+window.openPageTool=function(pg,n){
+ if(pg!=='platform'&&pg!=='app')return oldOpen&&oldOpen(pg,n);
+ ctx={pg:pg,n:String(n)};window._pageToolCtx={pg:pg,n:n,key:metaKey(pg,n)};window._pageToolItems=getTool(pg,n);window._openFolderId=null;
+ var ov=document.getElementById('multiToolOverlay');if(ov)ov.classList.add('open');var menu=document.getElementById('mtMenu');if(menu)menu.classList.remove('open');renderGrid();
+};
+window.openPageToolItem=function(i){if(!ctx)return;var a=getTool(ctx.pg,ctx.n),x=a[Number(i)];if(!x)return;window.closeMultiTool();if(x.special==='gallery'&&typeof openGalleryPanel==='function'){openGalleryPanel();return;}if(x.html&&typeof openHtmlInModal==='function'){openHtmlInModal(x.name||'Interface',x.html);return;}if(ctx.pg==='app'&&x.id&&typeof openCustomApp==='function'){openCustomApp(x.id);return;}if(x.link)window.open(x.link,'_blank','noopener');else if(window.toastMsg)toastMsg(x.name||'Opened');};
+window.mtSaveTitle=function(){if(!ctx)return;var t=document.getElementById('mtTitle'),v=(t&&t.value||'').trim();if(!v)v='New tool box';if(String(ctx.n).indexOf('custom:')===0){var id=String(ctx.n).slice(7),a=boxes(ctx.pg);a.forEach(function(b){if(b.id===id)b.name=v;});write('boxes_'+ctx.pg,a);renderPageBoxes(ctx.pg);}else{var m=read('meta_'+ctx.pg,{});m[String(ctx.n)]=v;write('meta_'+ctx.pg,m);renderPageBoxes(ctx.pg);}if(window.toastMsg)toastMsg('Tool box name saved');};
+// Keep the existing icon editor working with the current page tool context.
+var oldIcon=window.mtEditIcon;window.mtEditIcon=function(){if(!ctx)return oldIcon&&oldIcon();window._pageToolCtx={pg:ctx.pg,n:ctx.n,key:metaKey(ctx.pg,ctx.n)};if(oldIcon)oldIcon();};
+var oldSaveIcon=window.saveEditMt;window.saveEditMt=function(){if(!ctx)return oldSaveIcon&&oldSaveIcon();window._pageToolCtx={pg:ctx.pg,n:ctx.n,key:metaKey(ctx.pg,ctx.n)};if(oldSaveIcon)oldSaveIcon();renderPageBoxes(ctx.pg);};
+window.openPageToolPicker=function(){if(!ctx)return;var cur=getTool(ctx.pg,ctx.n),used={};boxes(ctx.pg).forEach(function(b){if(b.id!==String(ctx.n).replace('custom:',''))items(ctx.pg,b.id).forEach(function(x){used[ident(x)]=1;});});for(var z=1;z<=30;z++){if(String(z)===ctx.n)continue;getTool(ctx.pg,z).forEach(function(x){used[ident(x)]=1;});}
+ var own={};cur.forEach(function(x){own[ident(x)]=1;});var seen={},list=pageSource(ctx.pg).concat(cur).filter(function(x){var k=ident(x);if(!x||!x.name||seen[k]||(!own[k]&&used[k]))return false;seen[k]=1;return true;});
+ var selected={};cur.forEach(function(x){selected[ident(x)]=x;});var listEl=document.getElementById('mtPickList');if(listEl){listEl.innerHTML='<button type="button" class="v3007-newbox-btn" onclick="openNewPageToolBox()"><i class="ti ti-folder-plus"></i> ADD NEW TOOL BOX</button>'+((read('hidden_'+ctx.pg,[]).length)?'<button type="button" class="v3007-newbox-btn" onclick="restoreV3007Boxes()">SHOW HIDDEN TOOL BOXES</button>':'')+list.map(function(x){var k=ident(x),on=!!own[k];return '<div class="mt-pick-row'+(on?' on':'')+'" data-vkey="'+esc(k)+'" onclick="toggleV3007Pick(this)"><div class="mt-pick-ico">'+icon(x)+'</div><div class="mt-pick-name">'+esc(x.name)+'</div><div class="mt-pick-check">'+(on?'✓':'')+'</div></div>';}).join('')||'<div style="padding:15px">No interfaces available</div>';}
+ window._v3007Picker={selected:selected,candidates:list};var ov=document.getElementById('mtPickOverlay');if(ov)ov.classList.add('open');var save=document.getElementById('mtPickSave');if(save){save.disabled=false;save.onclick=window.savePageToolPick;}
+};
+function ident(x){return x&&x.id?'id:'+x.id:[String(x&&x.name||'').toLowerCase(),String(x&&x.link||'').toLowerCase(),String(x&&x.special||''),x&&x.html?'html':''].join('|');}
+window.toggleV3007Pick=function(row){var p=window._v3007Picker;if(!p)return;var k=row.getAttribute('data-vkey');if(p.selected[k]){delete p.selected[k];row.classList.remove('on');row.querySelector('.mt-pick-check').textContent='';}else{var x=p.candidates.find(function(v){return ident(v)===k;});if(x){p.selected[k]=x;row.classList.add('on');row.querySelector('.mt-pick-check').textContent='✓';}}};
+window.savePageToolPick=function(){if(!ctx||!window._v3007Picker)return;var a=Object.keys(window._v3007Picker.selected).map(function(k){return window._v3007Picker.selected[k];});setTool(ctx.pg,ctx.n,a);var ov=document.getElementById('mtPickOverlay');if(ov)ov.classList.remove('open');renderGrid();renderPageBoxes(ctx.pg);if(window.toastMsg)toastMsg('Tool updated');};
+function ensureModal(){if(document.getElementById('v3007NewBoxModal'))return;var d=document.createElement('div');d.id='v3007NewBoxModal';d.className='v3007-modal';d.innerHTML='<div class="v3007-modal-panel"><h3>ADD NEW TOOL BOX</h3><label>Tool box name</label><input id="v3007BoxName" maxlength="32" placeholder="Enter tool box name"><button type="button" id="v3007ChooseItems">SELECT ADD <span id="v3007PageLabel">PLATFORM</span></button><div id="v3007BoxItems" class="v3007-box-items"></div><div class="v3007-actions"><button type="button" onclick="closeV3007NewBox()">CANCEL</button><button type="button" onclick="createV3007Box()">CREATE TOOL BOX</button></div></div>';document.body.appendChild(d);d.querySelector('#v3007ChooseItems').onclick=function(){var area=d.querySelector('#v3007BoxItems');var src=pageSource(ctx.pg),taken={};for(var n=1;n<=30;n++)getTool(ctx.pg,n).forEach(function(x){taken[ident(x)]=1;});boxes(ctx.pg).forEach(function(b){items(ctx.pg,b.id).forEach(function(x){taken[ident(x)]=1;});});if(area.dataset.open==='1'){area.dataset.open='0';area.innerHTML='';return;}area.dataset.open='1';area.innerHTML=src.map(function(x,i){return {x:x,i:i};}).filter(function(o){return !taken[ident(o.x)];}).map(function(o){return '<label class="v3007-choice"><input type="checkbox" data-i="'+o.i+'"><span>'+icon(o.x)+'</span><b>'+esc(o.x.name)+'</b></label>';}).join('')||'<small>No unassigned interfaces found</small>'; };}
+window.restoreV3007Boxes=function(){if(!ctx)return;write('hidden_'+ctx.pg,[]);renderPageBoxes(ctx.pg);if(window.toastMsg)toastMsg('Hidden tool boxes restored');};
+window.openNewPageToolBox=function(){if(!ctx)return;ensureModal();var m=document.getElementById('v3007NewBoxModal');m.querySelector('#v3007BoxName').value='';m.querySelector('#v3007PageLabel').textContent=ctx.pg==='platform'?'PLATFORM':'APP';var a=m.querySelector('#v3007BoxItems');a.innerHTML='';a.dataset.open='0';m.classList.add('open');};
+window.closeV3007NewBox=function(){var m=document.getElementById('v3007NewBoxModal');if(m)m.classList.remove('open');};
+window.createV3007Box=function(){if(!ctx)return;var m=document.getElementById('v3007NewBoxModal'),name=(m.querySelector('#v3007BoxName').value||'').trim();if(!name){if(window.toastMsg)toastMsg('Enter tool box name',true);return;}var src=pageSource(ctx.pg),checks=m.querySelectorAll('#v3007BoxItems input[type=checkbox]:checked'),chosen=[];checks.forEach(function(c){var x=src[Number(c.dataset.i)];if(x)chosen.push(x);});if(!chosen.length){if(window.toastMsg)toastMsg('Select at least one interface',true);return;}var id='box'+Date.now();var a=boxes(ctx.pg);a.push({id:id,name:name});write('boxes_'+ctx.pg,a);setItems(ctx.pg,id,chosen);closeV3007NewBox();var pick=document.getElementById('mtPickOverlay');if(pick)pick.classList.remove('open');renderPageBoxes(ctx.pg);if(window.toastMsg)toastMsg('New tool box added');};
+function renderPageBoxes(pg){var root=document.getElementById(pg==='platform'?'hardPlatforms':'hardApps');if(!root)return;root.querySelectorAll('.v3007-custom-box').forEach(function(x){x.remove();});var hidden=read('hidden_'+pg,[]);boxes(pg).filter(function(b){return hidden.indexOf(b.id)<0;}).forEach(function(b){var a=items(pg,b.id),mini=a.slice(0,4).map(function(x){return '<span class="plat-tool-mini">'+icon(x)+'</span>';}).join('');while((a.length<4)&&mini) {break;}var card=document.createElement('div');card.className='plat-card plat-tool-card v3007-custom-box';card.setAttribute('data-v3007-box',b.id);card.innerHTML='<div class="plat-tool-icon">'+mini+'</div><span class="plat-name">'+esc(b.name)+'</span><span class="plat-badge live">'+a.length+'</span>';card.addEventListener('click',function(){window.openPageTool(pg,'custom:'+b.id);});root.appendChild(card);});}
+function renderLoose(pg){var root=document.getElementById(pg==='platform'?'customPlatforms':'customApps');if(!root)return;root.querySelectorAll('.v3007-loose-item').forEach(function(x){x.remove();});var a=read('loose_'+pg,[]).slice().sort(function(x,y){return (x.__slot||9999)-(y.__slot||9999);});a.forEach(function(x,i){var c=document.createElement('div');c.className='plat-card v3007-loose-item';c.innerHTML=icon(x)+'<span class="plat-name">'+esc(x.name)+'</span><span class="plat-badge live">NEW</span>';c.addEventListener('click',function(){if(Date.now()<(window.__v3007DragClickUntil||0))return;if(x.special==='gallery'&&window.openGalleryPanel)openGalleryPanel();else if(x.html&&window.openHtmlInModal)openHtmlInModal(x.name,x.html);else if(x.link)window.open(x.link,'_blank','noopener');});var kids=Array.prototype.slice.call(root.children);var slot=Number(x.__slot);if(!isFinite(slot)||slot<0)slot=kids.length;root.insertBefore(c,kids[Math.min(slot,kids.length)]||null);});}
+function bindItemDrag(){
+ var grid=document.getElementById('mtGrid');if(!grid||grid._v3008dragBound)return;grid._v3008dragBound=true;
+ var startX=0,startY=0,timer=null,active=false,moved=false,source=null,ghost=null;
+ function cleanup(){if(timer){clearTimeout(timer);timer=null;}if(ghost&&ghost.parentNode)ghost.parentNode.removeChild(ghost);ghost=null;if(source){source.classList.remove('mt-dragging');source.style.opacity='';}document.querySelectorAll('.mt-drag-over').forEach(function(n){n.classList.remove('mt-drag-over');});}
+ grid.addEventListener('touchstart',function(e){var el=e.target.closest('.mt-item[data-page-index]');if(!el||!e.touches||!e.touches[0])return;cleanup();source=el;var t=e.touches[0];startX=t.clientX;startY=t.clientY;active=false;moved=false;timer=setTimeout(function(){active=true;try{navigator.vibrate&&navigator.vibrate(20);}catch(_){}source.classList.add('mt-dragging');source.style.opacity='.22';ghost=source.cloneNode(true);ghost.classList.add('v3007-ghost');document.body.appendChild(ghost);ghost.style.left=(startX-36)+'px';ghost.style.top=(startY-30)+'px';},420);},{passive:true});
+ grid.addEventListener('touchmove',function(e){if(!source||!e.touches||!e.touches[0])return;var t=e.touches[0],dx=t.clientX-startX,dy=t.clientY-startY;if(!active){if(Math.abs(dx)>12||Math.abs(dy)>12){if(timer){clearTimeout(timer);timer=null;}source=null;}return;}moved=true;e.preventDefault();if(ghost){ghost.style.left=(t.clientX-36)+'px';ghost.style.top=(t.clientY-30)+'px';}document.querySelectorAll('.mt-drag-over').forEach(function(n){n.classList.remove('mt-drag-over');});var under=document.elementFromPoint(t.clientX,t.clientY),target=under&&under.closest('#mtGrid .mt-item[data-page-index]');if(target&&target!==source)target.classList.add('mt-drag-over');},{passive:false});
+ grid.addEventListener('touchend',function(e){if(!source)return;var el=source,t=e.changedTouches&&e.changedTouches[0],wasActive=active,wasMoved=moved;var under=t&&document.elementFromPoint(t.clientX,t.clientY);var target=under&&under.closest('#mtGrid .mt-item[data-page-index]');var panel=document.getElementById('mtPanel'),r=panel&&panel.getBoundingClientRect();cleanup();source=null;active=false;moved=false;if(!wasActive||!wasMoved||!t)return;window.__v3007DragClickUntil=Date.now()+700;
+  var a=getTool(ctx.pg,ctx.n),from=Number(el.dataset.pageIndex);if(!a[from])return;
+  if(r&&t.clientX>=r.left&&t.clientX<=r.right&&t.clientY>=r.top&&t.clientY<=r.bottom){if(target&&target!==el){var to=Number(target.dataset.pageIndex),item=a.splice(from,1)[0];if(to>from)to--;a.splice(Math.max(0,Math.min(to,a.length)),0,item);setTool(ctx.pg,ctx.n,a);renderGrid();}return;}
+  var item=a.splice(from,1)[0];setTool(ctx.pg,ctx.n,a);var pgRoot=document.getElementById(ctx.pg==='platform'?'customPlatforms':'customApps');var slot=pgRoot?Array.prototype.indexOf.call(pgRoot.children,(under&&under.closest('.plat-card'))||null):-1;if(slot<0&&pgRoot)slot=pgRoot.children.length;var loose=read('loose_'+ctx.pg,[]);item.__slot=slot;loose.push(item);write('loose_'+ctx.pg,loose);renderGrid();renderLoose(ctx.pg);renderPageBoxes(ctx.pg);if(window.toastMsg)toastMsg('Moved to page');
+ },{passive:true});
+ grid.addEventListener('touchcancel',function(){cleanup();source=null;active=false;moved=false;},{passive:true});
+}
+// Hide custom box cards when long-pressed and dragged outside its page grid; restore through Add new tool box list.
+function bindBoxHide(){['platform','app'].forEach(function(pg){var root=document.getElementById(pg==='platform'?'hardPlatforms':'hardApps');if(!root||root._v3007hide)return;root._v3007hide=true;root.addEventListener('touchstart',function(e){var c=e.target.closest('.v3007-custom-box');if(!c)return;var t=e.touches[0],sx=t.clientX,sy=t.clientY,done=false,timer=setTimeout(function(){done=true;c.classList.add('v3007-dragging');},550);function move(ev){var p=ev.touches[0];if(!p)return;if(!done&&(Math.abs(p.clientX-sx)>12||Math.abs(p.clientY-sy)>12)){clearTimeout(timer);timer=null;}if(done){ev.preventDefault();}}function end(ev){clearTimeout(timer);root.removeEventListener('touchmove',move);root.removeEventListener('touchend',end);if(!done)return;c.classList.remove('v3007-dragging');var p=ev.changedTouches[0],r=root.getBoundingClientRect();if(p.clientX<r.left||p.clientX>r.right||p.clientY<r.top||p.clientY>r.bottom){var id=c.dataset.v3007Box,a=read('hidden_'+pg,[]);if(a.indexOf(id)<0)a.push(id);write('hidden_'+pg,a);c.remove();if(window.toastMsg)toastMsg('Tool box hidden');}}root.addEventListener('touchmove',move,{passive:false});root.addEventListener('touchend',end,{once:true});},{passive:true});});}
+var rp=window.renderHardPlatforms,ra=window.renderHardApps;
+if(typeof rp==='function')window.renderHardPlatforms=function(){var r=rp.apply(this,arguments);setTimeout(function(){renderPageBoxes('platform');renderLoose('platform');bindBoxHide();},20);return r;};
+if(typeof ra==='function')window.renderHardApps=function(){var r=ra.apply(this,arguments);setTimeout(function(){renderPageBoxes('app');renderLoose('app');bindBoxHide();},20);return r;};
+// Add a small hidden-box restore action to the picker sheet.
+var style=document.createElement('style');style.textContent='.v3007-newbox-btn{display:block;width:calc(100% - 18px);margin:9px auto;padding:12px;border:1px dashed var(--a,#00e5ff);border-radius:12px;background:rgba(0,229,255,.08);color:var(--a,#00e5ff);font-weight:800}.v3007-modal{display:none;position:fixed;inset:0;z-index:99999;background:rgba(0,0,0,.78);align-items:center;justify-content:center;padding:18px}.v3007-modal.open{display:flex}.v3007-modal-panel{width:min(440px,100%);max-height:85vh;overflow:auto;padding:18px;border:1px solid var(--a,#00e5ff);border-radius:18px;background:#071321;color:#eafaff;box-shadow:0 0 28px #00e5ff33}.v3007-modal-panel h3{margin:0 0 14px;color:var(--a,#00e5ff)}.v3007-modal-panel label{display:block;margin:8px 0}.v3007-modal-panel input:not([type=checkbox]){width:100%;padding:12px;border-radius:10px;background:#0c1c2b;color:#fff;border:1px solid #397080}.v3007-modal-panel button{padding:11px 13px;margin-top:10px;border-radius:10px;border:1px solid #00dfff;background:#092b3a;color:#fff;font-weight:700}.v3007-box-items{max-height:38vh;overflow:auto;margin-top:8px}.v3007-choice{display:flex!important;align-items:center;gap:9px;padding:7px;border-bottom:1px solid #ffffff18}.v3007-choice span img{width:24px;height:24px;object-fit:contain}.v3007-choice b{font-size:13px}.v3007-actions{display:flex;gap:10px;justify-content:flex-end}.v3007-ghost{position:fixed;z-index:100000;pointer-events:none;opacity:.88;width:74px;height:74px;background:#09283a;border:1px solid #00e5ff;border-radius:14px;display:grid;place-items:center}.v3007-dragging{opacity:.35!important;transform:scale(.96)}.mt-page-add{border:0!important;background:transparent!important;box-shadow:none!important}.mt-page-add .mt-item-icon{border:1px dashed var(--brda)!important}.mt-item-icon i,.mt-pick-ico i,.v3007-choice i,.plat-tool-mini i{color:var(--a)!important;text-shadow:0 0 12px var(--ag)!important}.mt-item-icon{color:var(--a)!important}.mt-item[data-page-index]{touch-action:none;user-select:none;-webkit-user-select:none}.v3007-ghost{pointer-events:none!important;touch-action:none!important}.v3007-ghost i{color:var(--a)!important;text-shadow:0 0 14px var(--ag)!important}';document.head.appendChild(style);
+setTimeout(function(){renderPageBoxes('platform');renderPageBoxes('app');renderLoose('platform');renderLoose('app');bindBoxHide();},900);
+})();
+</script>
+
+
+<!-- V3010 GLOBAL THEME ICON COLOR: applies to existing and dynamically-added Tabler icons -->
+<style id="v3010-global-theme-icon-color">
+  html body i[class*="ti-"], html body i[class*="ti-"]::before,
+  html body [class*="ti-brand"], html body [class*="ti-brand"]::before {
+    color: var(--a, #00e5ff) !important;
+    -webkit-text-fill-color: var(--a, #00e5ff) !important;
+    text-shadow: 0 0 12px var(--ag, rgba(0,229,255,.7)) !important;
+  }
+  html body .plat-icon, html body .feat-icon, html body .logo-icon,
+  html body .home-pin-icon, html body .home-pin-icon .hf-mini,
+  html body .plat-tool-icon, html body .plat-tool-mini,
+  html body .mt-item-icon, html body .mt-pick-ico,
+  html body .mt-pick-row .mt-pick-ico, html body .v3007-choice span {
+    color: var(--a, #00e5ff) !important;
+  }
+  html body .plat-card svg, html body .home-pin-icon svg,
+  html body .mt-item-icon svg, html body .mt-pick-ico svg,
+  html body .plat-tool-mini svg { color: var(--a, #00e5ff) !important; stroke: currentColor !important; }
+  html body .plat-card svg [stroke]:not([stroke="none"]),
+  html body .home-pin-icon svg [stroke]:not([stroke="none"]),
+  html body .mt-item-icon svg [stroke]:not([stroke="none"]),
+  html body .mt-pick-ico svg [stroke]:not([stroke="none"]) { stroke: var(--a, #00e5ff) !important; }
+</style>
+
+
+<!-- V3011: Keep dynamically-added cards/icons identical to their page's native layout + active nav state -->
+<style id="v3011-page-native-sizing-nav">
+  /* PLATFORM + APP: every default, custom, loose and newly-created card uses the same native tile size. */
+  #tab-platforms .plat-card,
+  #tab-apps .plat-card {
+    min-height:132px !important;
+    height:132px !important;
+    box-sizing:border-box !important;
+    padding:16px 10px 14px !important;
+    display:flex !important;
+    flex-direction:column !important;
+    align-items:center !important;
+    justify-content:center !important;
+    gap:8px !important;
+  }
+  #tab-platforms .plat-card > i,
+  #tab-apps .plat-card > i,
+  #tab-platforms .plat-card > .plat-icon,
+  #tab-apps .plat-card > .plat-icon,
+  #tab-platforms .v3007-loose-item > i,
+  #tab-apps .v3007-loose-item > i {
+    width:auto !important;
+    height:auto !important;
+    font-size:30px !important;
+    line-height:1 !important;
+    flex:0 0 auto !important;
+    color:var(--a) !important;
+    text-shadow:0 0 16px var(--ag) !important;
+  }
+  #tab-platforms .plat-tool-card .plat-tool-icon,
+  #tab-apps .plat-tool-card .plat-tool-icon {
+    width:52px !important;
+    height:52px !important;
+    flex:0 0 52px !important;
+  }
+  /* HOME: added pins retain the exact same 58px tile / 52px icon footprint as existing pins. */
+  #tab-home .home-pin { width:58px !important; }
+  #tab-home .home-pin-icon {
+    width:52px !important;
+    height:52px !important;
+    min-width:52px !important;
+    min-height:52px !important;
+    box-sizing:border-box !important;
+  }
+  #tab-home .home-pin-icon > i { font-size:26px !important; line-height:1 !important; }
+  /* Bottom navigation: selected page is red and slightly larger; others remain at normal size. */
+  .bnav-btn {
+    transform:scale(1) !important;
+    transform-origin:center center !important;
+    transition:transform .2s ease,color .2s ease !important;
+  }
+  .bnav-btn .bnav-icon,
+  .bnav-btn .bnav-lbl {
+    color:var(--a) !important;
+    transition:color .2s ease,font-size .2s ease,text-shadow .2s ease !important;
+  }
+  .bnav-btn.active {
+    transform:scale(1.10) !important;
+    z-index:2 !important;
+  }
+  .bnav-btn.active .bnav-icon,
+  .bnav-btn.active .bnav-lbl {
+    color:#ff0033 !important;
+    text-shadow:0 0 10px rgba(255,0,51,.55) !important;
+  }
+  .bnav-btn.active .bnav-icon { font-size:24px !important; }
+  .bnav-btn.active .bnav-lbl { font-weight:900 !important; }
+</style>
+
+
+
+<!-- V3013: Bottom navigation active state (selected = red + slightly larger; others = theme color) -->
+<style id="v3013-bottom-nav-active-state">
+  /* Keep this rule last: the global Tabler icon theme rule must not override nav state. */
+  html body .bnav-tabs .bnav-btn {
+    transform: scale(1) !important;
+    transform-origin: center center !important;
+    transition: transform .18s ease !important;
+    position: relative !important;
+    z-index: 1 !important;
+  }
+  html body .bnav-tabs .bnav-btn:not(.active) .bnav-icon,
+  html body .bnav-tabs .bnav-btn:not(.active) .bnav-icon::before,
+  html body .bnav-tabs .bnav-btn:not(.active) .bnav-lbl {
+    color: var(--a, #00e5ff) !important;
+    -webkit-text-fill-color: var(--a, #00e5ff) !important;
+    text-shadow: 0 0 8px var(--ag, rgba(0,229,255,.45)) !important;
+  }
+  html body .bnav-tabs .bnav-btn:not(.active) .bnav-icon {
+    font-size: 21px !important;
+    line-height: 1 !important;
+  }
+  html body .bnav-tabs .bnav-btn:not(.active) .bnav-lbl {
+    font-size: .55rem !important;
+    font-weight: 500 !important;
+  }
+  html body .bnav-tabs .bnav-btn.active {
+    transform: scale(1.09) !important;
+    z-index: 3 !important;
+  }
+  html body .bnav-tabs .bnav-btn.active .bnav-icon,
+  html body .bnav-tabs .bnav-btn.active .bnav-icon::before,
+  html body .bnav-tabs .bnav-btn.active .bnav-lbl {
+    color: #ff0033 !important;
+    -webkit-text-fill-color: #ff0033 !important;
+    text-shadow: 0 0 10px rgba(255,0,51,.62) !important;
+  }
+  html body .bnav-tabs .bnav-btn.active .bnav-icon {
+    font-size: 24px !important;
+    line-height: 1 !important;
+  }
+  html body .bnav-tabs .bnav-btn.active .bnav-lbl {
+    font-size: .60rem !important;
+    font-weight: 800 !important;
+  }
+</style>
+
 </body>
 
 </html>
