@@ -4947,6 +4947,13 @@ body > .wrap { padding-top: 0 !important; }
   .bw-temp small { font-size: .92rem !important; }
 }
 </style>
+
+
+
+
+
+
+
 </body>
 </html>
 ` }, // #8
@@ -6198,6 +6205,10 @@ body > .wrap { padding-top: 0 !important; }
   }
 </style>
 
+
+
+
+
 </body>
 </html>
 ` }, // #9
@@ -6379,6 +6390,10 @@ function copyTxt(){
     font-weight: 800 !important;
   }
 </style>
+
+
+
+
 
 </body>
 </html>`, icon: "ti ti-copy" }, // #11
@@ -6602,6 +6617,10 @@ async function shareQR() {
   }
 </style>
 
+
+
+
+
 </body>
 </html>` }, // #12
     ];
@@ -6746,7 +6765,13 @@ async function shareQR() {
         [/whatsapp|\bwa\b|whatsapp\.com|wa\.me/, 'ti ti-brand-whatsapp'],
         [/github|github\.com/, 'ti ti-brand-github'],
         [/gitlab|gitlab\.com/, 'ti ti-brand-gitlab'],
-        [/google|gmail|chrome|drive|play store|google\./, 'ti ti-brand-google'],
+        [/calculator|calc/, 'ti ti-calculator'],
+        [/gmail|mail\.google/, 'ti ti-mail'],
+        [/maps|google\.com\/maps/, 'ti ti-map'],
+        [/drive|drive\.google/, 'ti ti-brand-google-drive'],
+        [/play store|play\.google/, 'ti ti-brand-google-play'],
+        [/chrome/, 'ti ti-brand-chrome'],
+        [/google|google\./, 'ti ti-brand-google'],
         [/twitter|\bx\b|x\.com/, 'ti ti-brand-x'],
         [/linkedin|linkedin\.com/, 'ti ti-brand-linkedin'],
         [/reddit|reddit\.com/, 'ti ti-brand-reddit'],
@@ -7530,6 +7555,21 @@ async function shareQR() {
       { q: "Instagram / YouTube কেন fail হয়?", a: "Instagram ও YouTube মাঝে মাঝে rate-limit বা bot-check করে। তখন সার্ভারে login cookies লাগে, তাই ডাউনলোড ব্যর্থ হতে পারে। পাবলিক লিংক আবার চেষ্টা করুন বা পরে চেষ্টা করুন। TikTok ও Facebook সাধারণত সবসময় কাজ করে।" }, // #7
       { q: "hi sir?", a: "my name is baijid alam rafi." }, // #8
       { q: "hi man", a: "how are you sir" }, // #9
+      { q: "How do I use the Home page?", a: "হোম পেজে থাকা প্রতিটি আইকন বা Tool Box-এ চাপ দিলে সেটি খুলবে। কোনো আইটেম সরাতে সেটির ওপর কিছুক্ষণ চেপে ধরে রাখুন, তারপর আঙুল না তুলে যেখানে রাখতে চান সেখানে নিয়ে ছেড়ে দিন।" }, // #10
+      { q: "How do I move an item to the next Home page?", a: "আইটেমটি ধরে ডান পাশের একেবারে কিনারায় নিয়ে যান। পরের পেজ অটো সামনে এলে আইটেমটি পছন্দের জায়গায় নিয়ে ছেড়ে দিন। আগের পেজে নিতে বাম কিনারায় নিয়ে যান।" }, // #11
+      { q: "How do I move an item between Home pages?", a: "আইটেমটি লং-প্রেস করে ধরে রাখুন। যে পেজে নিতে চান সেই পেজের বাম বা ডান কিনারায় নিয়ে গেলে পেজ বদলাবে। পেজ বদলানোর পর জায়গা ঠিক করে ছেড়ে দিন।" }, // #12
+      { q: "How do I create a Home folder?", a: "হোম পেজে একটি আইকন ধরে অন্য একটি আইকনের ঠিক ওপর ছেড়ে দিন। সমর্থিত আইটেম হলে সেগুলো একসঙ্গে Folder হিসেবে সাজানো হবে।" }, // #13
+      { q: "What are Platform and App Tool Boxes?", a: "Platform ও App পেজে Tool Box একাধিক ওয়েবসাইট বা অ্যাপ-ইন্টারফেসকে একটি কার্ডের মধ্যে গুছিয়ে রাখে। কার্ডে চাপ দিলে ভেতরের আইটেমগুলো দেখা যায়।" }, // #14
+      { q: "How do I rearrange items inside a Tool Box?", a: "Tool Box খুলে কোনো আইটেম কিছুক্ষণ চেপে ধরে রাখুন, তারপর অন্য আইটেমের আগে বা পরে নিয়ে ছেড়ে দিন। তালিকার ওপর বা নিচের কিনারায় ধরে রাখলে ভেতরের তালিকা অটো স্ক্রল করবে।" }, // #15
+      { q: "How do I rename a Tool Box?", a: "Tool Box খুলে উপরের নামের ওপর একবার চাপ দিন। নামের ঘরে নতুন নাম লিখুন। অন্য জায়গায় টাচ করলে বা Back/Escape চাপলে নামটি সেভ হবে।" }, // #16
+      { q: "Why is my Tool Box name not saving?", a: "নাম লেখার পর কিবোর্ডের Done চাপুন অথবা নামের ঘরের বাইরে টাচ করুন, যাতে ঘরটি ফোকাস হারায়। নাম খালি রাখলে ডিফল্ট নাম বসবে। ব্রাউজারের Local Storage বন্ধ বা পূর্ণ থাকলেও সেভে সমস্যা হতে পারে।" }, // #17
+      { q: "How do I add more items to a Tool Box?", a: "Tool Box খুলে Add (+) আইকনে চাপ দিন। তালিকা থেকে প্রয়োজনীয় আইটেম নির্বাচন করে Save চাপুন।" }, // #18
+      { q: "How do I restore a hidden Tool Box?", a: "Tool Box-এর আইটেম তালিকার Add অপশন খুলুন। Hidden Tool Boxes দেখানোর অপশন থাকলে সেটি চাপুন; লুকানো Tool Box-গুলো আবার পেজে দেখা যাবে।" }, // #19
+      { q: "Why does a website or tool show an error?", a: "ইন্টারনেট সংযোগ পরীক্ষা করুন এবং লিংকটি ঠিক আছে কি না দেখুন। কোনো ওয়েবসাইট নিজস্ব নিরাপত্তা, লগইন, সার্ভার সমস্যা বা ব্রাউজার-সাপোর্টের কারণে খুলতে নাও পারে। BAIJID-এর কার্ডে লিংক থাকলেই বাইরের ওয়েবসাইট সবসময় সচল থাকবে—এমন নিশ্চয়তা নেই।" }, // #20
+      { q: "Why did my changes disappear?", a: "এই পেজের অনেক কাস্টম নাম ও সাজানো আইটেম ব্রাউজারের Local Storage-এ থাকে। ব্রাউজারের Site Data বা Storage মুছে ফেললে সেগুলো হারাতে পারে। একই ব্রাউজার ও একই সাইট ডেটা ব্যবহার করুন।" }, // #21
+      { q: "How do I use the search box?", a: "বর্তমান পেজের সার্চ বক্সে টুল বা কার্ডের নাম লিখুন। মিল থাকা আইটেমগুলো দেখাবে; লেখা মুছে দিলে পুরো তালিকা আবার দেখা যাবে।" }, // #22
+      { q: "What should I do if dragging feels slow?", a: "আইটেমটি ধরে রাখার পর আঙুল ধীরে কিনারার দিকে নিন এবং অটো স্ক্রল শুরু হলে জায়গা ঠিক করে ছেড়ে দিন। খুব দ্রুত আঙুল সরালে টাচ ট্র্যাকিং মিস হতে পারে।" }, // #23
+      { q: "Does every external website open inside this page?", a: "না। কিছু ওয়েবসাইট নিরাপত্তার কারণে অন্য পেজের ভেতরে দেখানো বন্ধ রাখে বা লগইন/পপ-আপ চায়। এমন ক্ষেত্রে ওয়েবসাইটের নিজস্ব নিয়মের কারণে পেজটি ঠিকভাবে নাও খুলতে পারে।" }, // #24
     ];
 
     function renderHardFaqs() {
@@ -9461,7 +9501,7 @@ let resizeTimer;window.addEventListener('resize',()=>{clearTimeout(resizeTimer);
 <div id="multiToolOverlay" onclick="if(event.target===this)closeMultiTool()">
   <div class="mt-panel" id="mtPanel" onclick="event.stopPropagation()">
     <div class="mt-title-row">
-      <input type="text" class="mt-title-text" id="mtTitle" value="tool" onchange="mtSaveTitle()" onblur="mtSaveTitle()" onclick="this.select()">
+      <input type="text" class="mt-title-text" id="mtTitle" value="tool" onclick="this.focus();this.select()">
       <button type="button" class="mt-dots" id="mtDotsBtn" onclick="event.stopPropagation();mtEditIcon()"><i class="ti ti-dots"></i></button>
       <div class="mt-menu" id="mtMenu" style="display:none"></div>
     </div>
@@ -9480,6 +9520,7 @@ let resizeTimer;window.addEventListener('resize',()=>{clearTimeout(resizeTimer);
 <div class="glass-modal-overlay" id="editMtModal">
   <div class="glass-modal">
     <h3 id="editMtTitle">EDIT TOOL</h3>
+    <button type="button" id="v3050AddNewToolBoxBtn" class="v3050-add-toolbox-btn" onclick="window.v3050OpenAddNewToolBox && window.v3050OpenAddNewToolBox()">ADD NEW TOOL BOX</button>
     <div id="editMtNameBlock">
       <label>Tool name</label>
       <input type="text" id="editMtNameInput" placeholder="Folder name">
@@ -9819,41 +9860,41 @@ window.openPageTool = function (page, num) {
     }
   }
 
-  var _edgeTimer = null;
+  var _edgeTimer = null, _edgeDir = 0;
   function clearEdgeScroll() {
     if (_edgeTimer) { clearInterval(_edgeTimer); _edgeTimer = null; }
+    _edgeDir = 0;
   }
   function edgeScrollHome(x, y) {
-    clearEdgeScroll();
     var vw = window.innerWidth, vh = window.innerHeight;
     var edge = 48;
-    // horizontal page flip on home track
+    // horizontal page flip on home track; retain timer across touchmove events
     var dirX = 0;
     if (x > vw - edge) dirX = 1;
     else if (x < edge) dirX = -1;
     if (dirX && typeof goHomePinPage === 'function') {
-      _edgeTimer = setInterval(function () {
-        goHomePinPage(dirX);
-      }, 650);
+      if (_edgeTimer && _edgeDir === dirX) return;
+      clearEdgeScroll(); _edgeDir = dirX;
+      _edgeTimer = setInterval(function () { goHomePinPage(dirX); }, 360);
       return;
     }
     // vertical if track overflows (rare on home)
     var dirY = 0;
-    if (y > vh - edge) dirY = 18;
-    else if (y < edge + 40) dirY = -18;
+    if (y > vh - edge) dirY = 7;
+    else if (y < edge + 40) dirY = -7;
     if (dirY) {
-      _edgeTimer = setInterval(function () {
-        window.scrollBy(0, dirY);
-      }, 16);
-    }
+      if (_edgeTimer && _edgeDir === dirY) return;
+      clearEdgeScroll(); _edgeDir = dirY;
+      _edgeTimer = setInterval(function () { window.scrollBy(0, dirY); }, 16);
+    } else clearEdgeScroll();
   }
   function edgeScrollVertical(x, y) {
     clearEdgeScroll();
     var vh = window.innerHeight;
     var edge = 56;
     var dirY = 0;
-    if (y > vh - edge) dirY = 22;
-    else if (y < edge + 48) dirY = -22;
+    if (y > vh - edge) dirY = 7;
+    else if (y < edge + 48) dirY = -7;
     if (!dirY) return;
     _edgeTimer = setInterval(function () {
       window.scrollBy(0, dirY);
@@ -9997,7 +10038,7 @@ window.openPageTool = function (page, num) {
     }
 
     if (!folder) {
-      folder = { id: 'fld' + Date.now(), name: 'tool', icon: 'ti ti-apps', logo: '', customIcon: false, items: [] };
+      folder = { id: 'fld' + Date.now(), name: 'tool', originalName: 'tool', icon: 'ti ti-apps', logo: '', customIcon: false, items: [] };
       if (!toPin._folder) folder.items.push(snapshotPin(toPin));
       folders.push(folder);
       var oldOrder = getOrderedIds();
@@ -10093,7 +10134,7 @@ window.openPageTool = function (page, num) {
       var order = getOrderedIds();
       if (order.indexOf(itemId) < 0) { order.push(itemId); setOrder(order); }
     }
-    if (!folders[idx].items.length) {
+    if (folders[idx].items.length < 2) {
       var fid = folders[idx].id;
       folders.splice(idx, 1);
       setFolders(folders);
@@ -10113,6 +10154,7 @@ window.openPageTool = function (page, num) {
     el._mtBound = true;
     var id = el.getAttribute('data-id');
     var longT = null, active = false, moved = false, sx = 0, sy = 0, ghost = null;
+    el.addEventListener('click', function(e){ if(Date.now() < (window.__mtTouchHandledUntil||0)){e.preventDefault();e.stopPropagation();return;} openMtItem(id); });
 
     el.addEventListener('touchstart', function (e) {
       if (!e.touches[0]) return;
@@ -10169,13 +10211,10 @@ window.openPageTool = function (page, num) {
       el.classList.remove('mt-dragging');
       el.style.opacity = '';
       document.querySelectorAll('.mt-item.mt-drag-over').forEach(function (n) { n.classList.remove('mt-drag-over'); });
-      if (!active) return;
+      if (!active) { window.__mtTouchHandledUntil=Date.now()+800; openMtItem(id); return; }
       active = false;
 
-      if (!moved) {
-        if (!false) openMtItem(id);
-        return;
-      }
+      if (!moved) { window.__mtTouchHandledUntil=Date.now()+800; openMtItem(id); return; }
 
       var panel = document.getElementById('mtPanel');
       var outside = true;
@@ -10463,7 +10502,7 @@ window.openPageTool = function (page, num) {
     var order = getOrderedIds().filter(function (id) { return added.indexOf(id) < 0; });
     removed.forEach(function (id) { if (order.indexOf(id) < 0) order.push(id); });
     setOrder(order);
-    if (!folders[idx].items.length) {
+    if (folders[idx].items.length < 2) {
       var fid = folders[idx].id;
       folders.splice(idx, 1);
       setFolders(folders);
@@ -10513,6 +10552,7 @@ window.openPageTool = function (page, num) {
         folders.push({
           id: id,
           name: 'tool',
+          originalName: 'tool',
           icon: 'ti ti-apps',
           logo: '',
           customIcon: false,
@@ -10535,190 +10575,96 @@ window.openPageTool = function (page, num) {
 </script>
 <script id="plat-app-drag-script">
 (function(){
-  var LS_PLAT_ORDER = (document.title||'BAIJID')+'_plat_order_v1';
-  var LS_APP_ORDER = (document.title||'BAIJID')+'_app_order_v1';
-  function loadO(k){ try{return JSON.parse(localStorage.getItem(k)||'null');}catch(e){return null;} }
-  function saveO(k,v){ localStorage.setItem(k, JSON.stringify(v)); }
-
-  var edgeTimer = null;
-  function clearEdge(){ if(edgeTimer){ clearInterval(edgeTimer); edgeTimer=null; } }
+  'use strict';
+  var LS_PLAT_ORDER=(document.title||'BAIJID')+'_plat_order_v1';
+  var LS_APP_ORDER=(document.title||'BAIJID')+'_app_order_v1';
+  function loadO(k){try{return JSON.parse(localStorage.getItem(k)||'null');}catch(e){return null;}}
+  function saveO(k,v){try{localStorage.setItem(k,JSON.stringify(v));}catch(e){}}
+  var edgeTimers=Object.create(null);
+  function clearEdge(scope){
+    if(scope){if(edgeTimers[scope]){clearInterval(edgeTimers[scope]);delete edgeTimers[scope];}return;}
+    Object.keys(edgeTimers).forEach(function(k){clearInterval(edgeTimers[k]);delete edgeTimers[k];});
+  }
   function lockScroll(on){
-    if(on){
-      document.body.style.overflow='hidden';
-      document.documentElement.style.overflow='hidden';
-      document.body.style.touchAction='none';
-    } else {
-      document.body.style.overflow='';
-      document.documentElement.style.overflow='';
-      document.body.style.touchAction='';
-    }
+    if(on){document.body.style.overflow='hidden';document.documentElement.style.overflow='hidden';document.body.style.touchAction='none';}
+    else{document.body.style.overflow='';document.documentElement.style.overflow='';document.body.style.touchAction='';}
   }
-  function edgeVert(y){
-    clearEdge();
-    var vh = window.innerHeight, edge = 56, dir = 0;
-    if(y > vh - edge) dir = 24;
-    else if(y < edge + 48) dir = -24;
-    if(!dir) return;
-    edgeTimer = setInterval(function(){ window.scrollBy(0, dir); }, 16);
+  function edgeVert(y,scope){
+    scope=scope||'page-default';clearEdge(scope);
+    var vh=window.innerHeight,edge=62,dir=0;
+    if(y>vh-edge)dir=300;else if(y<edge+48)dir=-300;
+    if(!dir)return;
+    edgeTimers[scope]=setInterval(function(){window.scrollBy(0,dir);},16);
   }
-
+  function pageOf(root){return root&&(root.id==='hardPlatforms'||root.id==='customPlatforms')?'platform':'app';}
+  function rootsFor(pg){return pg==='platform'?[document.getElementById('hardPlatforms'),document.getElementById('customPlatforms')].filter(Boolean):[document.getElementById('hardApps'),document.getElementById('customApps')].filter(Boolean);}
+  function orderKeyFor(root){return pageOf(root)==='platform'?LS_PLAT_ORDER:LS_APP_ORDER;}
+  function ensureIds(root){Array.prototype.forEach.call(root.querySelectorAll('.plat-card'),function(c,i){if(!c.getAttribute('data-order-id')){var id=c.getAttribute('data-v3007-box')||c.getAttribute('data-tool-num')||c.getAttribute('data-link')||c.id||('card_'+i);c.setAttribute('data-order-id',root.id+'_'+String(id).replace(/[^a-zA-Z0-9_-]/g,'_'));}});}
+  function savePageOrder(pg){rootsFor(pg).forEach(function(root){ensureIds(root);var ids=Array.prototype.map.call(root.querySelectorAll('.plat-card'),function(c){return c.getAttribute('data-order-id');});saveO(orderKeyFor(root)+'_'+root.id,ids);});}
   function openCard(card){
-    if(!card || card.getAttribute('data-just-dragged')==='1') return;
-    if(card.classList.contains('plat-tool-card')){
-      var m = (card.getAttribute('onclick')||'').match(/openPageTool\('(\w+)',\s*(\d+)\)/);
-      if(m && typeof openPageTool === 'function'){ openPageTool(m[1], parseInt(m[2],10)); return; }
-      return;
+    if(!card||card.getAttribute('data-just-dragged')==='1')return;
+    if(card.classList.contains('plat-tool-card')){var m=(card.getAttribute('onclick')||'').match(/openPageTool\('([\w]+)',\s*(\d+)\)/);var pg=card.getAttribute('data-tool-page'),n=parseInt(card.getAttribute('data-tool-num')||'0',10);if(pg&&n&&typeof openPageTool==='function'){openPageTool(pg,n);return;}if(m&&typeof openPageTool==='function'){openPageTool(m[1],parseInt(m[2],10));return;}return;}
+    var oc=card.getAttribute('onclick');if(oc&&oc.indexOf('openPageTool')<0){try{(new Function(oc))();return;}catch(e){}}
+    if(oc&&oc.indexOf('openGalleryPanel')>=0){try{openGalleryPanel();}catch(e){}return;}
+    if(oc&&oc.indexOf('openHardPlatform')>=0){try{(new Function(oc))();}catch(e){}return;}
+    var link=card.getAttribute('data-link')||'';if(link)window.open(link,'_blank','noopener');
+  }
+  function bindRoot(root){
+    if(!root||root._dragBoundV3023)return;root._dragBoundV3023=true;
+    var drag={active:false,el:null,ghost:null,sx:0,sy:0,timer:null,moved:false,lastX:0,lastY:0};
+    root.addEventListener('contextmenu',function(e){var c=e.target.closest&&e.target.closest('.plat-card');if(c){e.preventDefault();e.stopPropagation();}},true);
+    root.addEventListener('touchstart',function(e){
+      var card=e.target.closest&&e.target.closest('.plat-card');if(!card||e.target.closest('.plat-open-btn'))return;
+      var t=e.touches&&e.touches[0];if(!t)return;
+      drag.sx=t.clientX;drag.sy=t.clientY;drag.lastX=t.clientX;drag.lastY=t.clientY;drag.el=card;drag.moved=false;drag.active=false;
+      drag.timer=setTimeout(function(){
+        drag.timer=null;drag.active=true;lockScroll(true);card.style.opacity='.22';
+        var g=card.cloneNode(true);g.classList.add('v3044-drag-ghost');g.setAttribute('aria-hidden','true');g.style.cssText='position:fixed;pointer-events:none;touch-action:none;z-index:999950;opacity:.97;transform:scale(1.04);box-shadow:0 12px 30px rgba(0,0,0,.5);width:'+card.getBoundingClientRect().width+'px;left:'+(drag.lastX-card.getBoundingClientRect().width/2)+'px;top:'+(drag.lastY-card.getBoundingClientRect().height/2)+'px;';document.body.appendChild(g);drag.ghost=g;
+        try{navigator.vibrate&&navigator.vibrate(25);}catch(err){}
+        if(window.toastMsg)toastMsg('Drag to move');
+      },420);
+    },{passive:true});
+    root.addEventListener('touchmove',function(e){
+      if(!drag.el||!e.touches||!e.touches[0])return;var t=e.touches[0];drag.lastX=t.clientX;drag.lastY=t.clientY;
+      if(!drag.active){if(Math.abs(t.clientX-drag.sx)>10||Math.abs(t.clientY-drag.sy)>10){drag.moved=true;if(drag.timer){clearTimeout(drag.timer);drag.timer=null;} }return;}
+      drag.moved=true;e.preventDefault();
+      if(drag.ghost){drag.ghost.style.left=(t.clientX-drag.ghost.offsetWidth/2)+'px';drag.ghost.style.top=(t.clientY-drag.ghost.offsetHeight/2)+'px';}
+      document.querySelectorAll('.plat-card.drag-over').forEach(function(n){n.classList.remove('drag-over');});
+      var under=document.elementFromPoint(t.clientX,t.clientY),other=under&&under.closest('.plat-card');if(other&&other!==drag.el)other.classList.add('drag-over');
+      edgeVert(t.clientY,'page-'+pageOf(root));
+    },{passive:false});
+    function finish(e,cancelled){
+      if(drag.timer){clearTimeout(drag.timer);drag.timer=null;}clearEdge('page-'+pageOf(root));lockScroll(false);
+      var card=drag.el,wasActive=drag.active,wasMoved=drag.moved;
+      if(drag.ghost&&drag.ghost.parentNode)drag.ghost.parentNode.removeChild(drag.ghost);if(card)card.style.opacity='';
+      document.querySelectorAll('.plat-card.drag-over').forEach(function(n){n.classList.remove('drag-over');});
+      if(!cancelled&&wasActive&&wasMoved&&card){
+        var t=(e.changedTouches&&e.changedTouches[0])||{clientX:drag.lastX,clientY:drag.lastY};
+        var pg=pageOf(root),target=document.elementFromPoint(t.clientX,t.clientY),targetRoot=root;
+        var targetCard=target&&target.closest('.plat-card');if(targetCard&&targetCard===card)targetCard=null;
+        if(targetCard&&targetCard.parentNode===targetRoot){
+          var r=targetCard.getBoundingClientRect(),after=(t.clientY>r.top+r.height/2)||(Math.abs(t.clientY-(r.top+r.height/2))<r.height*.22&&t.clientX>r.left+r.width/2);
+          targetRoot.insertBefore(card,after?targetCard.nextSibling:targetCard);
+        }else{
+          // Empty space is a valid drop target: choose the closest grid position.
+          var cards=Array.prototype.filter.call(targetRoot.querySelectorAll('.plat-card'),function(c){return c!==card;});
+          var before=null,best=Infinity;
+          cards.forEach(function(c){var r=c.getBoundingClientRect(),cx=r.left+r.width/2,cy=r.top+r.height/2,d=Math.pow(cx-t.clientX,2)+Math.pow(cy-t.clientY,2);if(d<best){best=d;before=c;}});
+          if(before){var br=before.getBoundingClientRect();targetRoot.insertBefore(card,(t.clientY>br.top+br.height/2)?before.nextSibling:before);}else targetRoot.appendChild(card);
+        }
+        card.setAttribute('data-just-dragged','1');setTimeout(function(){card.removeAttribute('data-just-dragged');},650);
+        savePageOrder(pg);if(window.toastMsg)toastMsg('Box moved');
+      }else if(!cancelled&&!wasActive&&card&&!wasMoved&&!card.classList.contains('plat-plus-btn')){card._openedByTouch=true;openCard(card);setTimeout(function(){if(card)card._openedByTouch=false;},500);}
+      drag.active=false;drag.el=null;drag.ghost=null;drag.moved=false;
     }
-    var oc = card.getAttribute('onclick');
-    if(oc && oc.indexOf('openPageTool') < 0){
-      try { (new Function(oc))(); return; } catch(e) {}
-    }
-    if(oc && oc.indexOf('openGalleryPanel') >= 0){ try{ openGalleryPanel(); }catch(e){} return; }
-    if(oc && oc.indexOf('openHardPlatform') >= 0){ try{ (new Function(oc))(); }catch(e){} return; }
-    var link = card.getAttribute('data-link') || '';
-    if(link) window.open(link, '_blank', 'noopener');
+    root.addEventListener('touchend',function(e){finish(e,false);},{passive:true});
+    root.addEventListener('touchcancel',function(e){finish(e,true);},{passive:true});
+    root.addEventListener('click',function(e){var card=e.target.closest&&e.target.closest('.plat-card');if(!card)return;if(card.getAttribute('data-just-dragged')==='1'){e.preventDefault();e.stopPropagation();return;}},true);
   }
-
-  function bindRoot(root, orderKey){
-    if(!root || root._dragBound5) return;
-    root._dragBound5 = true;
-    var drag = {active:false, el:null, ghost:null, sx:0, sy:0, timer:null, moved:false};
-
-    root.addEventListener('contextmenu', function(e){
-      if(e.target.closest('.plat-card')){ e.preventDefault(); e.stopPropagation(); }
-    }, true);
-
-    root.addEventListener('touchstart', function(e){
-      var card = e.target.closest('.plat-card');
-      if(!card || card.classList.contains('plat-plus-btn')) return;
-      // skip OPEN button inside card
-      if(e.target.closest('.plat-open-btn')) return;
-      var t = e.touches[0];
-      drag.sx = t.clientX; drag.sy = t.clientY;
-      drag.el = card;
-      drag.moved = false;
-      drag.timer = setTimeout(function(){
-        drag.timer = null;
-        drag.active = true;
-        lockScroll(true);
-        card.style.opacity = '0.25';
-        var g = card.cloneNode(true);
-        g.style.cssText = 'position:fixed;pointer-events:none;z-index:99950;opacity:.95;transform:scale(1.05);box-shadow:0 12px 28px rgba(0,0,0,.45);width:'+card.offsetWidth+'px;left:'+(t.clientX-card.offsetWidth/2)+'px;top:'+(t.clientY-card.offsetHeight/2)+'px;';
-        document.body.appendChild(g);
-        drag.ghost = g;
-        try{ navigator.vibrate && navigator.vibrate(15); }catch(err){}
-      }, 420);
-    }, {passive:true});
-
-    root.addEventListener('touchmove', function(e){
-      if(!drag.el) return;
-      var t = e.touches[0];
-      if(!drag.active){
-        if(Math.abs(t.clientX-drag.sx)>9 || Math.abs(t.clientY-drag.sy)>9){
-          // Any real finger movement is a scroll/gesture, never a tap-to-open.
-          drag.moved = true;
-          if(drag.timer){ clearTimeout(drag.timer); drag.timer=null; }
-        }
-        return;
-      }
-      drag.moved = true;
-      e.preventDefault();
-      if(drag.ghost){
-        drag.ghost.style.left = (t.clientX - drag.ghost.offsetWidth/2)+'px';
-        drag.ghost.style.top = (t.clientY - drag.ghost.offsetHeight/2)+'px';
-      }
-      document.querySelectorAll('.plat-card.drag-over').forEach(function(n){ n.classList.remove('drag-over'); });
-      var under = document.elementFromPoint(t.clientX, t.clientY);
-      var other = under && under.closest('.plat-card');
-      if(other && other !== drag.el) other.classList.add('drag-over');
-      edgeVert(t.clientY);
-    }, {passive:false});
-
-    root.addEventListener('touchend', function(e){
-      if(drag.timer){ clearTimeout(drag.timer); drag.timer=null; }
-      clearEdge();
-      lockScroll(false);
-      var card = drag.el;
-      var wasActive = drag.active;
-      var wasMoved = drag.moved;
-      if(drag.ghost && drag.ghost.parentNode) drag.ghost.parentNode.removeChild(drag.ghost);
-      if(card) card.style.opacity = '';
-      document.querySelectorAll('.plat-card.drag-over').forEach(function(n){ n.classList.remove('drag-over'); });
-
-      if(wasActive && wasMoved && card){
-        var t = e.changedTouches[0];
-        var under = document.elementFromPoint(t.clientX, t.clientY);
-        var other = under && under.closest('.plat-card');
-        if(other && other !== card && other.parentNode === card.parentNode){
-          card.parentNode.insertBefore(card, other);
-          var ids = Array.prototype.slice.call(card.parentNode.querySelectorAll('.plat-card')).map(function(c,i){
-            if(!c.getAttribute('data-order-id')) c.setAttribute('data-order-id', 'x'+i);
-            return c.getAttribute('data-order-id');
-          });
-          saveO(orderKey, ids);
-          if(typeof toastMsg==='function') toastMsg('Moved');
-        }
-        card.setAttribute('data-just-dragged','1');
-        setTimeout(function(){ card.removeAttribute('data-just-dragged'); }, 450);
-      } else if(!wasActive && card && !wasMoved){
-        // short tap → open link / tool
-        openCard(card);
-      }
-
-      drag.active=false; drag.el=null; drag.ghost=null; drag.moved=false;
-    });
-
-    root.addEventListener('touchcancel', function(){
-      if(drag.timer){ clearTimeout(drag.timer); drag.timer=null; }
-      clearEdge(); lockScroll(false);
-      if(drag.ghost && drag.ghost.parentNode) drag.ghost.parentNode.removeChild(drag.ghost);
-      if(drag.el) drag.el.style.opacity = '';
-      drag.active=false; drag.el=null; drag.ghost=null; drag.moved=false;
-    });
-
-    // block ghost clicks after drag; allow normal click for desktop
-    root.addEventListener('click', function(e){
-      var card = e.target.closest('.plat-card');
-      if(!card) return;
-      if(card.getAttribute('data-just-dragged')==='1'){
-        e.preventDefault(); e.stopPropagation(); return;
-      }
-      // mobile already handled on touchend; desktop click:
-      if(e.pointerType === 'mouse' || e.detail > 0){
-        if(card.getAttribute('data-link') || card.classList.contains('plat-tool-card') || card.getAttribute('onclick')){
-          // if touch devices also fire click after touchend open, skip duplicate
-          if(card._openedByTouch){ card._openedByTouch=false; e.preventDefault(); e.stopPropagation(); return; }
-        }
-      }
-    }, true);
-  }
-
-  function applyOrder(box, orderKey){
-    if(!box) return;
-    var order = loadO(orderKey);
-    if(!order || !order.length) return;
-    var map = {};
-    Array.prototype.forEach.call(box.querySelectorAll('.plat-card'), function(c,i){
-      if(!c.getAttribute('data-order-id')) c.setAttribute('data-order-id','x'+i);
-      map[c.getAttribute('data-order-id')] = c;
-    });
-    order.forEach(function(id){ if(map[id]) box.appendChild(map[id]); });
-  }
-
-  function setup(){
-    var hp = document.getElementById('hardPlatforms');
-    var ha = document.getElementById('hardApps');
-    var ca = document.getElementById('customApps');
-    if(hp){ Array.prototype.forEach.call(hp.querySelectorAll('.plat-card'), function(c,i){ if(!c.getAttribute('data-order-id')) c.setAttribute('data-order-id','p'+i); }); applyOrder(hp, LS_PLAT_ORDER); bindRoot(hp, LS_PLAT_ORDER); }
-    if(ha){ Array.prototype.forEach.call(ha.querySelectorAll('.plat-card'), function(c,i){ if(!c.getAttribute('data-order-id')) c.setAttribute('data-order-id','a'+i); }); applyOrder(ha, LS_APP_ORDER); bindRoot(ha, LS_APP_ORDER); }
-    if(ca){ bindRoot(ca, LS_APP_ORDER+'_c'); }
-  }
-
-  var _rp = window.renderHardPlatforms;
-  if(typeof _rp==='function'){ window.renderHardPlatforms=function(){ _rp.apply(this,arguments); setTimeout(setup,40); }; }
-  var _ra = window.renderHardApps;
-  if(typeof _ra==='function'){ window.renderHardApps=function(){ _ra.apply(this,arguments); setTimeout(setup,40); }; }
-  setTimeout(setup, 1000);
+  function applyOrder(root){if(!root)return;ensureIds(root);var order=loadO(orderKeyFor(root)+'_'+root.id);if(!order||!order.length)return;var map={};Array.prototype.forEach.call(root.querySelectorAll('.plat-card'),function(c){map[c.getAttribute('data-order-id')]=c;});order.forEach(function(id){if(map[id])root.appendChild(map[id]);});}
+  function setup(){['hardPlatforms','customPlatforms','hardApps','customApps'].forEach(function(id){var root=document.getElementById(id);if(root){ensureIds(root);applyOrder(root);bindRoot(root);}});}
+  ['renderHardPlatforms','renderHardApps'].forEach(function(name){var orig=window[name];if(typeof orig==='function'&&!orig._v3023Wrapped){var wrapped=function(){var r=orig.apply(this,arguments);setTimeout(setup,50);return r;};wrapped._v3023Wrapped=true;window[name]=wrapped;}});
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',setup);setTimeout(setup,350);setTimeout(setup,1100);
 })();
 </script>
 
@@ -10771,7 +10717,7 @@ window.openPageTool = function (page, num) {
   wrap('renderHardApps', injectAppTools);
   // open tool on tap via delegation (doesn't break existing links)
   document.addEventListener('click', function(e){
-    var card = e.target.closest && e.target.closest('.plat-tool-card');
+    var card = e.target.closest && e.target.closest('.plat-tool-card.__disabled_v3034');
     if (!card) return;
     if (card.getAttribute('data-just-dragged') === '1') return;
     var pg = card.getAttribute('data-tool-page');
@@ -10824,6 +10770,7 @@ function draw(){
     '<div class="mt-item mt-add-btn mt-page-add" onclick="openPageToolPicker()"><div class="mt-item-icon"><i class="ti ti-plus"></i></div><div class="mt-item-name">Add</div></div>';
   var t=document.getElementById('mtTitle');if(t){t.value=(ctx.pg==='platform'?'Platform':'App')+' tool '+ctx.n;t.readOnly=true;}
 }
+var originalHomeTitleSaver=window.mtSaveTitle;
 var oldOpen=window.openPageTool;
 window.openPageTool=function(pg,n){
   if(pg!=='platform'&&pg!=='app')return oldOpen&&oldOpen(pg,n);
@@ -10923,7 +10870,7 @@ function setTool(pg,n,a){if(String(n).indexOf('custom:')===0)setItems(pg,String(
 function titleFor(pg,n){if(String(n).indexOf('custom:')===0){var b=boxes(pg).find(function(x){return x.id===String(n).slice(7);});return b?b.name:'New tool box';}var m=read('meta_'+pg,{});return m[String(n)]||((pg==='platform'?'Platform':'App')+' tool '+n);}
 function renderGrid(){if(!ctx)return;var a=getTool(ctx.pg,ctx.n),g=document.getElementById('mtGrid');if(!g)return;
  g.innerHTML=a.map(function(x,i){return '<div class="mt-item" data-page-index="'+i+'" onclick="openPageToolItem('+i+')"><div class="mt-item-icon">'+icon(x)+'</div><div class="mt-item-name">'+esc(x.name||'Interface')+'</div></div>';}).join('')+'<div class="mt-item mt-add-btn mt-page-add" onclick="openPageToolPicker()"><div class="mt-item-icon"><i class="ti ti-plus"></i></div><div class="mt-item-name">Add</div></div>';
- var t=document.getElementById('mtTitle');if(t){t.value=titleFor(ctx.pg,ctx.n);t.readOnly=false;t.placeholder='Tool box name';}
+ var t=document.getElementById('mtTitle');if(t){t.value=titleFor(ctx.pg,ctx.n);t.readOnly=String(ctx.n).indexOf('custom:')!==0;t.placeholder=t.readOnly?'Built-in tool box name':'Custom tool box name';t.setAttribute('aria-readonly',t.readOnly?'true':'false');}
  bindItemDrag();
 }
 var oldOpen=window.openPageTool;
@@ -10933,7 +10880,7 @@ window.openPageTool=function(pg,n){
  var ov=document.getElementById('multiToolOverlay');if(ov)ov.classList.add('open');var menu=document.getElementById('mtMenu');if(menu)menu.classList.remove('open');renderGrid();
 };
 window.openPageToolItem=function(i){if(!ctx)return;var a=getTool(ctx.pg,ctx.n),x=a[Number(i)];if(!x)return;window.closeMultiTool();if(x.special==='gallery'&&typeof openGalleryPanel==='function'){openGalleryPanel();return;}if(x.html&&typeof openHtmlInModal==='function'){openHtmlInModal(x.name||'Interface',x.html);return;}if(ctx.pg==='app'&&x.id&&typeof openCustomApp==='function'){openCustomApp(x.id);return;}if(x.link)window.open(x.link,'_blank','noopener');else if(window.toastMsg)toastMsg(x.name||'Opened');};
-window.mtSaveTitle=function(){if(!ctx)return;var t=document.getElementById('mtTitle'),v=(t&&t.value||'').trim();if(!v)v='New tool box';if(String(ctx.n).indexOf('custom:')===0){var id=String(ctx.n).slice(7),a=boxes(ctx.pg);a.forEach(function(b){if(b.id===id)b.name=v;});write('boxes_'+ctx.pg,a);renderPageBoxes(ctx.pg);}else{var m=read('meta_'+ctx.pg,{});m[String(ctx.n)]=v;write('meta_'+ctx.pg,m);renderPageBoxes(ctx.pg);}if(window.toastMsg)toastMsg('Tool box name saved');};
+window.mtSaveTitle=function(){if(!ctx){if(typeof originalHomeTitleSaver==='function')return originalHomeTitleSaver();return;}if(String(ctx.n).indexOf('custom:')!==0){var fixed=document.getElementById('mtTitle');if(fixed){fixed.value=titleFor(ctx.pg,ctx.n);fixed.readOnly=true;}return false;}var t=document.getElementById('mtTitle'),v=(t&&t.value||'').trim();if(!v)v='New tool box';var id=String(ctx.n).slice(7),a=boxes(ctx.pg),found=false;a.forEach(function(b){if(String(b.id)===id){b.name=v;found=true;}});if(!found)return false;write('boxes_'+ctx.pg,a);var verify=boxes(ctx.pg).some(function(b){return String(b.id)===id&&b.name===v;});if(verify){renderPageBoxes(ctx.pg);if(window.toastMsg)toastMsg('Tool box name saved');}return verify;};
 // Keep the existing icon editor working with the current page tool context.
 var oldIcon=window.mtEditIcon;window.mtEditIcon=function(){if(!ctx)return oldIcon&&oldIcon();window._pageToolCtx={pg:ctx.pg,n:ctx.n,key:metaKey(ctx.pg,ctx.n)};if(oldIcon)oldIcon();};
 var oldSaveIcon=window.saveEditMt;window.saveEditMt=function(){if(!ctx)return oldSaveIcon&&oldSaveIcon();window._pageToolCtx={pg:ctx.pg,n:ctx.n,key:metaKey(ctx.pg,ctx.n)};if(oldSaveIcon)oldSaveIcon();renderPageBoxes(ctx.pg);};
@@ -10949,7 +10896,7 @@ function ensureModal(){if(document.getElementById('v3007NewBoxModal'))return;var
 window.restoreV3007Boxes=function(){if(!ctx)return;write('hidden_'+ctx.pg,[]);renderPageBoxes(ctx.pg);if(window.toastMsg)toastMsg('Hidden tool boxes restored');};
 window.openNewPageToolBox=function(){if(!ctx)return;ensureModal();var m=document.getElementById('v3007NewBoxModal');m.querySelector('#v3007BoxName').value='';m.querySelector('#v3007PageLabel').textContent=ctx.pg==='platform'?'PLATFORM':'APP';var a=m.querySelector('#v3007BoxItems');a.innerHTML='';a.dataset.open='0';m.classList.add('open');};
 window.closeV3007NewBox=function(){var m=document.getElementById('v3007NewBoxModal');if(m)m.classList.remove('open');};
-window.createV3007Box=function(){if(!ctx)return;var m=document.getElementById('v3007NewBoxModal'),name=(m.querySelector('#v3007BoxName').value||'').trim();if(!name){if(window.toastMsg)toastMsg('Enter tool box name',true);return;}var src=pageSource(ctx.pg),checks=m.querySelectorAll('#v3007BoxItems input[type=checkbox]:checked'),chosen=[];checks.forEach(function(c){var x=src[Number(c.dataset.i)];if(x)chosen.push(x);});if(!chosen.length){if(window.toastMsg)toastMsg('Select at least one interface',true);return;}var id='box'+Date.now();var a=boxes(ctx.pg);a.push({id:id,name:name});write('boxes_'+ctx.pg,a);setItems(ctx.pg,id,chosen);closeV3007NewBox();var pick=document.getElementById('mtPickOverlay');if(pick)pick.classList.remove('open');renderPageBoxes(ctx.pg);if(window.toastMsg)toastMsg('New tool box added');};
+window.createV3007Box=function(){if(!ctx)return;var m=document.getElementById('v3007NewBoxModal'),name=(m.querySelector('#v3007BoxName').value||'').trim();if(!name){if(window.toastMsg)toastMsg('Enter tool box name',true);return;}var src=pageSource(ctx.pg),checks=m.querySelectorAll('#v3007BoxItems input[type=checkbox]:checked'),chosen=[];checks.forEach(function(c){var x=src[Number(c.dataset.i)];if(x)chosen.push(x);});if(chosen.length<2){if(window.toastMsg)toastMsg('Select at least two interfaces',true);return;}var id='box'+Date.now();var a=boxes(ctx.pg);a.push({id:id,name:name,originalName:name});write('boxes_'+ctx.pg,a);setItems(ctx.pg,id,chosen);closeV3007NewBox();var pick=document.getElementById('mtPickOverlay');if(pick)pick.classList.remove('open');renderPageBoxes(ctx.pg);if(window.toastMsg)toastMsg('New tool box added');};
 function renderPageBoxes(pg){var root=document.getElementById(pg==='platform'?'hardPlatforms':'hardApps');if(!root)return;root.querySelectorAll('.v3007-custom-box').forEach(function(x){x.remove();});var hidden=read('hidden_'+pg,[]);boxes(pg).filter(function(b){return hidden.indexOf(b.id)<0;}).forEach(function(b){var a=items(pg,b.id),mini=a.slice(0,4).map(function(x){return '<span class="plat-tool-mini">'+icon(x)+'</span>';}).join('');while((a.length<4)&&mini) {break;}var card=document.createElement('div');card.className='plat-card plat-tool-card v3007-custom-box';card.setAttribute('data-v3007-box',b.id);card.innerHTML='<div class="plat-tool-icon">'+mini+'</div><span class="plat-name">'+esc(b.name)+'</span><span class="plat-badge live">'+a.length+'</span>';card.addEventListener('click',function(){window.openPageTool(pg,'custom:'+b.id);});root.appendChild(card);});}
 function renderLoose(pg){var root=document.getElementById(pg==='platform'?'customPlatforms':'customApps');if(!root)return;root.querySelectorAll('.v3007-loose-item').forEach(function(x){x.remove();});var a=read('loose_'+pg,[]).slice().sort(function(x,y){return (x.__slot||9999)-(y.__slot||9999);});a.forEach(function(x,i){var c=document.createElement('div');c.className='plat-card v3007-loose-item';c.innerHTML=icon(x)+'<span class="plat-name">'+esc(x.name)+'</span><span class="plat-badge live">NEW</span>';c.addEventListener('click',function(){if(Date.now()<(window.__v3007DragClickUntil||0))return;if(x.special==='gallery'&&window.openGalleryPanel)openGalleryPanel();else if(x.html&&window.openHtmlInModal)openHtmlInModal(x.name,x.html);else if(x.link)window.open(x.link,'_blank','noopener');});var kids=Array.prototype.slice.call(root.children);var slot=Number(x.__slot);if(!isFinite(slot)||slot<0)slot=kids.length;root.insertBefore(c,kids[Math.min(slot,kids.length)]||null);});}
 function bindItemDrag(){
@@ -10961,7 +10908,7 @@ function bindItemDrag(){
  grid.addEventListener('touchend',function(e){if(!source)return;var el=source,t=e.changedTouches&&e.changedTouches[0],wasActive=active,wasMoved=moved;var under=t&&document.elementFromPoint(t.clientX,t.clientY);var target=under&&under.closest('#mtGrid .mt-item[data-page-index]');var panel=document.getElementById('mtPanel'),r=panel&&panel.getBoundingClientRect();cleanup();source=null;active=false;moved=false;if(!wasActive||!wasMoved||!t)return;window.__v3007DragClickUntil=Date.now()+700;
   var a=getTool(ctx.pg,ctx.n),from=Number(el.dataset.pageIndex);if(!a[from])return;
   if(r&&t.clientX>=r.left&&t.clientX<=r.right&&t.clientY>=r.top&&t.clientY<=r.bottom){if(target&&target!==el){var to=Number(target.dataset.pageIndex),item=a.splice(from,1)[0];if(to>from)to--;a.splice(Math.max(0,Math.min(to,a.length)),0,item);setTool(ctx.pg,ctx.n,a);renderGrid();}return;}
-  var item=a.splice(from,1)[0];setTool(ctx.pg,ctx.n,a);var pgRoot=document.getElementById(ctx.pg==='platform'?'customPlatforms':'customApps');var slot=pgRoot?Array.prototype.indexOf.call(pgRoot.children,(under&&under.closest('.plat-card'))||null):-1;if(slot<0&&pgRoot)slot=pgRoot.children.length;var loose=read('loose_'+ctx.pg,[]);item.__slot=slot;loose.push(item);write('loose_'+ctx.pg,loose);renderGrid();renderLoose(ctx.pg);renderPageBoxes(ctx.pg);if(window.toastMsg)toastMsg('Moved to page');
+  var item=a.splice(from,1)[0];var released=[item],dissolve=a.length<2;if(dissolve){released=released.concat(a);setTool(ctx.pg,ctx.n,[]);if(String(ctx.n).indexOf('custom:')===0){var bid=String(ctx.n).slice(7),ba=boxes(ctx.pg).filter(function(b){return String(b.id)!==bid;});write('boxes_'+ctx.pg,ba);write('items_'+ctx.pg+'_'+bid,[]);}else{var hk=read('hidden_tools_'+ctx.pg,[]);if(hk.indexOf(String(ctx.n))<0)hk.push(String(ctx.n));write('hidden_tools_'+ctx.pg,hk);}}else setTool(ctx.pg,ctx.n,a);var pgRoot=document.getElementById(ctx.pg==='platform'?'customPlatforms':'customApps');var slot=pgRoot?Array.prototype.indexOf.call(pgRoot.children,(under&&under.closest('.plat-card'))||null):-1;if(slot<0&&pgRoot)slot=pgRoot.children.length;var loose=read('loose_'+ctx.pg,[]);released.forEach(function(it,j){it.__slot=slot+j;loose.push(it);});write('loose_'+ctx.pg,loose);if(dissolve&&window.closeMultiTool)closeMultiTool();else renderGrid();renderLoose(ctx.pg);renderPageBoxes(ctx.pg);if(window.toastMsg)toastMsg(dissolve?'Tool box removed · minimum 2 sides':'Moved to page');
  },{passive:true});
  grid.addEventListener('touchcancel',function(){cleanup();source=null;active=false;moved=false;},{passive:true});
 }
@@ -11119,6 +11066,3816 @@ setTimeout(function(){renderPageBoxes('platform');renderPageBoxes('app');renderL
   }
 </style>
 
+
+<script id="v3016-home-tool-click-and-title-fix">
+(function(){
+  'use strict';
+  document.addEventListener('click',function(e){
+    var item=e.target&&e.target.closest&&e.target.closest('#mtGrid .mt-item[data-id]');
+    if(!item)return;
+    if(Date.now()<(window.__mtTouchHandledUntil||0)){e.preventDefault();e.stopPropagation();return;}
+    var id=item.getAttribute('data-id');
+    if(id&&typeof window.openMtItem==='function'){e.preventDefault();window.openMtItem(id);}
+  },true);
+})();
+</script>
+
+
+<!-- V3018: faster controlled edge scrolling and verified Tool Box title persistence -->
+<script id="v3018-drag-scroll-title-fix">
+(function(){
+  'use strict';
+  var edgeRaf = 0, lastY = 0, edgeDir = 0, edgeTarget = null;
+  function stopEdge(){ if(edgeRaf) cancelAnimationFrame(edgeRaf); edgeRaf=0; edgeDir=0; edgeTarget=null; }
+  function edgeStep(){
+    if(!edgeDir || !edgeTarget) return;
+    var amount = edgeDir * 9.2; // faster but still controlled edge-scroll speed
+    if(edgeTarget === window) window.scrollBy(0, amount);
+    else edgeTarget.scrollTop += amount;
+    edgeRaf=requestAnimationFrame(edgeStep);
+  }
+  function startEdge(target, dir){
+    if(!target || !dir){ stopEdge(); return; }
+    if(edgeTarget===target && edgeDir===dir && edgeRaf) return;
+    stopEdge(); edgeTarget=target; edgeDir=dir; edgeRaf=requestAnimationFrame(edgeStep);
+  }
+  function dragEdgeScroll(x,y,grid){
+    var vh=window.innerHeight, margin=62, dir=0, target=window;
+    if(grid){
+      var r=grid.getBoundingClientRect();
+      if(y>=r.top && y<=r.bottom && grid.scrollHeight>grid.clientHeight+2){
+        if(y>r.bottom-margin) dir=1;
+        else if(y<r.top+margin) dir=-1;
+        if(dir) target=grid;
+      }
+    }
+    if(!dir){
+      if(y>vh-64) dir=1;
+      else if(y<64) dir=-1;
+      target=window;
+    }
+    startEdge(target,dir);
+  }
+
+  // Tool Box item drag: keep the list scrollable while the finger is held near its edges.
+  var grid=document.getElementById('mtGrid');
+  if(grid && !grid._v3017EdgeScroll){
+    grid._v3017EdgeScroll=true;
+    grid.addEventListener('touchmove',function(e){
+      if(!e.touches || !e.touches[0]) return;
+      var t=e.touches[0];
+      if(document.querySelector('#mtGrid .mt-item.mt-dragging')) dragEdgeScroll(t.clientX,t.clientY,grid);
+    },{passive:true});
+    ['touchend','touchcancel'].forEach(function(n){grid.addEventListener(n,stopEdge,{passive:true});});
+  }
+
+  // Platform/App use their original drag-edge loop, tuned above to a modestly faster speed.
+
+  // Reliable Tool Box title editing: save on blur, outside tap, Enter and Android Back.
+  // Keep the active editing value intact until it has been persisted.
+  function bindTitle(){
+    var title=document.getElementById('mtTitle');
+    if(!title || title._v3018Bound) return;
+    title._v3018Bound=true;
+    title.removeAttribute('onblur');
+    title.removeAttribute('onchange');
+    title.onblur=null;
+    title.onchange=null;
+    var initialCtx=window._pageToolCtx;
+    if(initialCtx) title.readOnly=!(String(initialCtx.n).indexOf('custom:')===0);
+    else if(window._openFolderId) title.readOnly=false;
+    title.setAttribute('autocomplete','off');
+    title.setAttribute('autocapitalize','sentences');
+
+    function persist(){
+      var value=(title.value||'').trim();
+      if(!value) value='New tool box';
+      title.value=value;
+      var pageCtx=window._pageToolCtx;
+      var overlay=document.getElementById('multiToolOverlay');
+      var isPageTool=pageCtx && (pageCtx.pg==='platform'||pageCtx.pg==='app') && overlay && overlay.classList.contains('open');
+      var isCustomTool=!!(isPageTool && String(pageCtx.n).indexOf('custom:')===0);
+      var isHomeCustom=!!(!pageCtx && window.__v3019HomeCustomId && overlay && overlay.classList.contains('open'));
+      if(!isCustomTool && !isHomeCustom){if(pageCtx)title.readOnly=true;title.dataset.v3018Dirty='0';return;}
+      var saved=false;
+      try {
+        if(typeof window.mtSaveTitle==='function') window.mtSaveTitle();
+        saved=true;
+      } catch(err) { saved=false; }
+
+      // Explicit persistence fallback for Platform/App Tool Boxes. This uses
+      // the same storage namespace and keys as the existing V3007 toolbox code.
+      if(isPageTool){
+        try {
+          var prefix=(document.title||'BAIJID')+'_v3007_';
+          var n=String(pageCtx.n);
+          var id=n.slice(7), key=prefix+'boxes_'+pageCtx.pg;
+          var arr=JSON.parse(localStorage.getItem(key)||'[]');
+          if(!Array.isArray(arr)) arr=[];
+          var found=false;
+          arr.forEach(function(box){if(box&&String(box.id)===id){box.name=value;found=true;}});
+          if(found) localStorage.setItem(key,JSON.stringify(arr));
+          // Read-after-write check: only a user-created toolbox can be renamed.
+          var check=JSON.parse(localStorage.getItem(prefix+'boxes_'+pageCtx.pg)||'[]');
+          saved=found && Array.isArray(check)&&check.some(function(box){return box&&String(box.id)===id&&box.name===value;});
+          if(saved && typeof window.renderPageBoxes==='function') window.renderPageBoxes(pageCtx.pg);
+        } catch(err) { saved=false; }
+      }
+      title.dataset.v3018Saved=saved?'1':'0';
+      title.dataset.v3018Value=value;
+      if(!saved && typeof window.toastMsg==='function') window.toastMsg('Name could not be saved. Check browser storage.',true);
+      else if(isPageTool && typeof window.toastMsg==='function') window.toastMsg('Tool box name saved');
+    }
+
+    title.addEventListener('input',function(){var c=window._pageToolCtx,editable=(c&&String(c.n).indexOf('custom:')===0)||(!c&&!!window.__v3019HomeCustomId);if(editable&&!title.readOnly)title.dataset.v3018Dirty='1';});
+    title.addEventListener('keydown',function(e){
+      if(e.key==='Enter'){
+        e.preventDefault();
+        persist();
+        title.blur();
+      } else if(e.key==='Escape'||e.key==='BrowserBack'||e.key==='GoBack'){
+        e.preventDefault();
+        persist();
+        title.blur();
+      }
+    });
+    title.addEventListener('blur',function(){
+      if(title.dataset.v3018Dirty==='1'){
+        title.dataset.v3018Dirty='0';
+        persist();
+      }
+    });
+  }
+  bindTitle();
+  // The title input is rendered once, but may be reused for many different boxes.
+  document.addEventListener('focusin',function(e){if(e.target&&e.target.id==='mtTitle'){bindTitle();var c=window._pageToolCtx;e.target.readOnly=c?String(c.n).indexOf('custom:')!==0:!window._openFolderId;}},true);
+  // Keep Home's user-created folders editable while built-in tool titles stay locked.
+  var priorOpenMulti=window.openMultiTool;
+  if(typeof priorOpenMulti==='function'&&!priorOpenMulti._v3019Wrapped){
+    var wrappedOpenMulti=function(id){window.__v3019HomeCustomId=String(id||'');window._pageToolCtx=null;var result=priorOpenMulti.apply(this,arguments);var field=document.getElementById('mtTitle');if(field)field.readOnly=false;return result;};
+    wrappedOpenMulti._v3019Wrapped=true;window.openMultiTool=wrappedOpenMulti;
+  }
+  var priorOpenPageTool=window.openPageTool;
+  if(typeof priorOpenPageTool==='function'&&!priorOpenPageTool._v3019Wrapped){
+    var wrappedOpenPageTool=function(pg,n){window.__v3019HomeCustomId=null;return priorOpenPageTool.apply(this,arguments);};
+    wrappedOpenPageTool._v3019Wrapped=true;window.openPageTool=wrappedOpenPageTool;
+  }
+  // A tap anywhere outside the title forces a save before the UI changes context.
+  document.addEventListener('pointerdown',function(e){
+    var title=document.getElementById('mtTitle');
+    if(!title || document.activeElement!==title || e.target===title || title.contains(e.target)) return;
+    if(title.dataset.v3018Dirty==='1'){
+      title.dataset.v3018Dirty='0';
+      var ev;
+      try{ev=new Event('blur');}catch(err){}
+      if(ev){
+        // Save directly; calling blur below also keeps normal keyboard behavior.
+        var value=(title.value||'').trim();
+        if(value){
+          var oldDirty=title.dataset.v3018Dirty;
+          title.dataset.v3018Dirty='1';
+          title.blur();
+          if(title.dataset.v3018Dirty==='1') title.dataset.v3018Dirty='0';
+        }
+      }
+    }
+  },true);
+  // Android hardware/system Back may not dispatch a normal blur event.
+  document.addEventListener('keydown',function(e){
+    var title=document.getElementById('mtTitle');
+    if(title && document.activeElement===title && (e.key==='Escape'||e.key==='BrowserBack'||e.key==='GoBack')){
+      e.preventDefault();
+      if(title.dataset.v3018Dirty==='1'){
+        title.dataset.v3018Dirty='0';
+        var value=(title.value||'').trim();
+        if(value){
+          try{ if(typeof window.mtSaveTitle==='function') window.mtSaveTitle(); }catch(err){}
+          var pageCtx=window._pageToolCtx;
+          if(pageCtx&&(pageCtx.pg==='platform'||pageCtx.pg==='app')&&String(pageCtx.n).indexOf('custom:')===0){
+            try{var prefix=(document.title||'BAIJID')+'_v3007_',n=String(pageCtx.n),k=prefix+'boxes_'+pageCtx.pg,a=JSON.parse(localStorage.getItem(k)||'[]');a.forEach(function(b){if(b&&String(b.id)===n.slice(7))b.name=value;});localStorage.setItem(k,JSON.stringify(a));}catch(err){}
+          }
+        }
+      }
+      title.blur();
+    }
+  },true);
+  document.addEventListener('baijid:tabchange',stopEdge);
+  document.addEventListener('visibilitychange',function(){if(document.hidden)stopEdge();});
+})();
+</script>
+
+
+<!-- V3020: Reliable Tool Box Name Manager + minimum-two-side toolbox rule -->
+<style id="v3020-tool-name-style">
+  #editMtNameBlock{display:block!important;margin:0 0 14px;padding:12px;border:1px solid var(--brda,rgba(0,229,255,.35));border-radius:12px;background:rgba(0,229,255,.045)}
+  #editMtNameBlock label{display:block;margin:0 0 8px;color:var(--a,#00e5ff);font-weight:800;letter-spacing:.8px}
+  #editMtNameInput{width:100%;box-sizing:border-box;padding:12px;border-radius:10px;background:#0b1b2a;color:#fff;border:1px solid var(--brda,rgba(0,229,255,.4));outline:none}
+  #v3020NameActions{display:flex;gap:8px;margin-top:9px}
+  #v3020NameActions button{flex:1;padding:10px 8px;border-radius:9px;border:1px solid var(--brda,rgba(0,229,255,.4));background:rgba(0,229,255,.09);color:var(--a,#00e5ff);font-weight:800;font-size:11px}
+  #v3020NameActions button:last-child{border-color:rgba(255,70,90,.45);color:#ff7184;background:rgba(255,50,70,.08)}
+  #editMtIconBlock{margin-top:12px;padding-top:12px;border-top:1px solid rgba(255,255,255,.1)}
+</style>
+<script id="v3020-tool-name-and-minimum-rule">
+(function(){
+'use strict';
+var ROOT=(document.title||'BAIJID'), STORE=ROOT+'_v3007_';
+function read(k,fb){try{var v=JSON.parse(localStorage.getItem(k)||'null');return v==null?fb:v;}catch(e){return fb;}}
+function write(k,v){try{localStorage.setItem(k,JSON.stringify(v));return JSON.stringify(read(k,null))===JSON.stringify(v);}catch(e){if(window.toastMsg)toastMsg('Could not save · browser storage unavailable',true);return false;}}
+function esc(v){return String(v==null?'':v).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
+function pageCtx(){var c=window._pageToolCtx;if(c&&c.pg&&c.n!=null)return {kind:'page',pg:String(c.pg),n:String(c.n)};var id=window.__v3019HomeCustomId||window._openFolderId;if(id)return {kind:'home',id:String(id)};return null;}
+function folderList(){return read(ROOT+'_home_folders_v2',[]);}
+function setFolderList(a){return write(ROOT+'_home_folders_v2',a);}
+function pageBoxes(pg){return read(STORE+'boxes_'+pg,[]);}
+function baseline(ctx,obj){if(!obj.originalName){obj.originalName=obj.name||'tool';}}
+function builtInDefault(ctx){var n=ctx.n;if(ctx.pg==='home')return 'tool';return (ctx.pg==='platform'?'Platform':'App')+' tool '+n;}
+function currentName(ctx){
+ if(!ctx)return '';
+ if(ctx.kind==='home'){var f=folderList().find(function(x){return String(x.id)===ctx.id;});return f?(f.name||'tool'):'';}
+ if(ctx.n.indexOf('custom:')===0){var id=ctx.n.slice(7),b=pageBoxes(ctx.pg).find(function(x){return String(x.id)===id;});return b?(b.name||'New tool box'):'';}
+ var meta=read(STORE+'meta_'+ctx.pg,{});return meta[ctx.n]||builtInDefault(ctx);
+}
+function saveName(ctx,value,reset){
+ if(!ctx)return false;
+ var v=String(value||'').trim();
+ if(!reset&&!v){if(window.toastMsg)toastMsg('Enter a tool box name',true);return false;}
+ if(ctx.kind==='home'){
+  var a=folderList(),f=a.find(function(x){return String(x.id)===ctx.id;});if(!f)return false;baseline(ctx,f);f.name=reset?f.originalName:v;
+  if(!setFolderList(a))return false;
+  if(typeof window.renderHomePins==='function')window.renderHomePins();
+ }else if(ctx.n.indexOf('custom:')===0){
+  var id=ctx.n.slice(7),a=pageBoxes(ctx.pg),b=a.find(function(x){return String(x.id)===id;});if(!b)return false;baseline(ctx,b);b.name=reset?b.originalName:v;
+  if(!write(STORE+'boxes_'+ctx.pg,a))return false;
+  if(ctx.pg==='platform'&&typeof window.renderHardPlatforms==='function')window.renderHardPlatforms();if(ctx.pg==='app'&&typeof window.renderHardApps==='function')window.renderHardApps();
+ }else{
+  var key=STORE+'meta_'+ctx.pg,meta=read(key,{});if(reset)delete meta[ctx.n];else meta[ctx.n]=v;
+  if(!write(key,meta))return false;
+  if(ctx.pg==='platform'&&typeof window.renderHardPlatforms==='function')window.renderHardPlatforms();
+  if(ctx.pg==='app'&&typeof window.renderHardApps==='function')window.renderHardApps();
+  if(ctx.pg==='home'&&typeof window.renderHomePins==='function')window.renderHomePins();
+ }
+ var shown=reset?currentName(ctx):v;
+ var title=document.getElementById('mtTitle');if(title)title.value=shown;
+ if(window.toastMsg)toastMsg(reset?'Tool name reset':'Tool name saved');
+ return true;
+}
+function addNameControls(){
+ var block=document.getElementById('editMtNameBlock'),input=document.getElementById('editMtNameInput');if(!block||!input)return;
+ var actions=document.getElementById('v3020NameActions');if(!actions){actions=document.createElement('div');actions.id='v3020NameActions';actions.innerHTML='<button type="button" id="v3020SaveName">SAVE TOOL NAME</button><button type="button" id="v3020ResetName">RESET TOOL NAME</button>';block.appendChild(actions);}
+ var save=document.getElementById('v3020SaveName'),reset=document.getElementById('v3020ResetName');
+ if(save&&!save._v3020Bound){save._v3020Bound=true;save.addEventListener('click',function(){var c=pageCtx();if(saveName(c,input.value,false))closeEditMtModal();});}
+ if(reset&&!reset._v3020Bound){reset._v3020Bound=true;reset.addEventListener('click',function(){var c=pageCtx();if(saveName(c,'',true)){input.value=currentName(c);closeEditMtModal();}});}
+}
+var oldEdit=window.mtEditIcon;
+window.mtEditIcon=function(){if(typeof oldEdit==='function')oldEdit.apply(this,arguments);var c=pageCtx();if(!c)return;var modal=document.getElementById('editMtModal'),block=document.getElementById('editMtNameBlock'),input=document.getElementById('editMtNameInput'),iconBlock=document.getElementById('editMtIconBlock');if(!modal||!block||!input)return;block.style.display='block';if(iconBlock)iconBlock.style.display='block';var nameLabel=block.querySelector('label');if(nameLabel)nameLabel.textContent='EDIT TOOL NAME';input.value=currentName(c);var h=document.getElementById('editMtTitle');if(h)h.textContent='TOOL BOX SETTINGS';addNameControls();modal.style.display='flex';modal.classList.add('open');};
+// Keep the name manager accessible for every tool type, including built-in Home/Platform/App boxes.
+var oldOpen=window.openPageTool;
+if(typeof oldOpen==='function'&&!oldOpen._v3020Wrapped){
+ var wrapped=function(pg,n){var result=oldOpen.apply(this,arguments);if(pg==='home'||pg==='platform'||pg==='app'){window._pageToolCtx={pg:String(pg),n:String(n),key:String(pg)+':'+String(n)};window.__v3019HomeCustomId=null;var t=document.getElementById('mtTitle');if(t)t.value=currentName({kind:'page',pg:String(pg),n:String(n)});}return result;};
+ wrapped._v3020Wrapped=true;window.openPageTool=wrapped;
+}
+// Page built-in titles and their Reset state are read from the same metadata used by the title renderer.
+// Ensure old user-created boxes have a stable original name before they are edited.
+['platform','app'].forEach(function(pg){var a=pageBoxes(pg),changed=false;a.forEach(function(b){if(b&&!b.originalName){b.originalName=b.name||'New tool box';changed=true;}});if(changed)write(STORE+'boxes_'+pg,a);});
+var home=folderList(),homeChanged=false;home.forEach(function(f){if(f&&!f.originalName){f.originalName=f.name||'tool';homeChanged=true;}});if(homeChanged)setFolderList(home);
+// Also dissolve any legacy Home folder that already contains fewer than two sides.
+var tinyHome=home.filter(function(f){return f&&(f.items||[]).length<2;}),validHome=home.filter(function(f){return f&&(f.items||[]).length>=2;});if(tinyHome.length){var ord=read(ROOT+'_home_order_v2',[]);tinyHome.forEach(function(f){ord=ord.filter(function(id){return String(id)!==String(f.id);});(f.items||[]).forEach(function(it){if(it&&it.id&&ord.indexOf(it.id)<0)ord.push(it.id);});});setFolderList(validHome);write(ROOT+'_home_order_v2',ord);}
+// Legacy built-in Platform/App toolboxes with fewer than two sides are dissolved too.
+['platform','app'].forEach(function(pg){var loose=read(STORE+'loose_'+pg,[]),hidden=read(STORE+'hidden_tools_'+pg,[]),changed=false;for(var n=1;n<=30;n++){var k=pg+':'+n,a=read(STORE+'pageItems_'+k,null);if(!Array.isArray(a)){try{a=JSON.parse(localStorage.getItem(ROOT+'_page_tool_items_'+k)||'null');}catch(e){a=null;}}if(Array.isArray(a)&&a.length<2){a.forEach(function(x){if(x){x.__slot=loose.length;loose.push(x);}});write(STORE+'pageItems_'+k,[]);try{localStorage.setItem(ROOT+'_page_tool_items_'+k,'[]');}catch(e){}if(hidden.indexOf(String(n))<0)hidden.push(String(n));changed=true;}}if(changed){write(STORE+'loose_'+pg,loose);write(STORE+'hidden_tools_'+pg,hidden);}});
+// On load, dissolve any old page toolbox with fewer than two interfaces; return its sides to the page.
+function dissolveSmallPageBoxes(pg){
+ var bs=pageBoxes(pg),keep=[],loose=read(STORE+'loose_'+pg,[]),changed=false;
+ bs.forEach(function(b){var a=read(STORE+'items_'+pg+'_'+b.id,[]);if(a.length<2){changed=true;a.forEach(function(x){if(x){x.__slot=loose.length;loose.push(x);}});write(STORE+'items_'+pg+'_'+b.id,[]);}else keep.push(b);});
+ if(changed){write(STORE+'boxes_'+pg,keep);write(STORE+'loose_'+pg,loose);}
+}
+dissolveSmallPageBoxes('platform');dissolveSmallPageBoxes('app');
+// Hide a built-in page toolbox when dragging its contents leaves fewer than two sides.
+function applyHiddenBuiltins(pg){var hidden=read(STORE+'hidden_tools_'+pg,[]),meta=read(STORE+'meta_'+pg,{});document.querySelectorAll('#hard'+(pg==='platform'?'Platforms':'Apps')+' .plat-tool-card[data-tool-page="'+pg+'"]').forEach(function(card){var n=String(card.getAttribute('data-tool-num')||'');if(hidden.indexOf(n)>=0){card.remove();return;}var label=card.querySelector('.plat-name');if(label)label.textContent=meta[n]||'tool';});}
+['platform','app'].forEach(function(pg){var name=pg==='platform'?'renderHardPlatforms':'renderHardApps',old=window[name];if(typeof old==='function'&&!old._v3020Wrapped){var w=function(){var r=old.apply(this,arguments);applyHiddenBuiltins(pg);return r;};w._v3020Wrapped=true;window[name]=w;}});
+// Ensure picker-based edits cannot leave a one-side toolbox behind.
+var oldPickSave=window.savePageToolPick;
+if(typeof oldPickSave==='function'&&!oldPickSave._v3020Wrapped){var wrappedPickSave=function(){var r=oldPickSave.apply(this,arguments);var c=pageCtx();if(!c||c.kind==='home')return r;var id=c.n.indexOf('custom:')===0?c.n.slice(7):null;var key=STORE+(id?'items_'+c.pg+'_'+id:'pageItems_'+c.pg+':'+c.n);var a=read(key,null);if(!Array.isArray(a))a=read(ROOT+'_page_tool_items_'+c.pg+':'+c.n,[]);if(a.length<2){var loose=read(STORE+'loose_'+c.pg,[]);a.forEach(function(x){if(x){x.__slot=loose.length;loose.push(x);}});write(STORE+'loose_'+c.pg,loose);if(id){write(STORE+'boxes_'+c.pg,pageBoxes(c.pg).filter(function(b){return String(b.id)!==id;}));write(STORE+'items_'+c.pg+'_'+id,[]);}else{write(STORE+'pageItems_'+c.pg+':'+c.n,[]);try{localStorage.setItem(ROOT+'_page_tool_items_'+c.pg+':'+c.n,'[]');}catch(e){}var h=read(STORE+'hidden_tools_'+c.pg,[]);if(h.indexOf(c.n)<0)h.push(c.n);write(STORE+'hidden_tools_'+c.pg,h);}if(window.closeMultiTool)closeMultiTool();if(window.renderPageBoxes)renderPageBoxes(c.pg);if(window.renderLoose)renderLoose(c.pg);if(window.toastMsg)toastMsg('Tool box removed · minimum 2 sides');}return r;};wrappedPickSave._v3020Wrapped=true;window.savePageToolPick=wrappedPickSave;}
+// Home folders dissolve at the same two-item threshold when saved through the Add/Remove picker.
+var oldHomePick=window.saveMtPick;
+if(typeof oldHomePick==='function'&&!oldHomePick._v3020Wrapped){var hp=function(){var r=oldHomePick.apply(this,arguments);var id=window.__v3019HomeCustomId||window._openFolderId;if(id){var a=folderList(),f=a.find(function(x){return String(x.id)===String(id);});if(f&&(f.items||[]).length<2){var remaining=(f.items||[]).slice();a=a.filter(function(x){return String(x.id)!==String(id);});setFolderList(a);var order=read(ROOT+'_home_order_v2',[]);remaining.forEach(function(x){if(x&&order.indexOf(x.id)<0)order.push(x.id);});write(ROOT+'_home_order_v2',order);if(window.closeMultiTool)closeMultiTool();if(window.renderHomePins)renderHomePins();if(window.toastMsg)toastMsg('Tool box removed · minimum 2 sides');}}return r;};hp._v3020Wrapped=true;window.saveMtPick=hp;}
+})();
+</script>
+
+
+
+<!-- V3021: Home toolbox name editor context fix + modal clarity/theme styling -->
+<style id="v3021-toolbox-modal-style">
+  #editMtNameInput,
+  #editMtIconInput,
+  #editMtModal input[type="text"] { color:#42e889 !important; caret-color:#42e889 !important; }
+  #editMtIconBlock > label,
+  #editMtIconHint { color:var(--a,#00e5ff) !important; }
+  #editMtModal button[onclick="resetToolIcon()"] {
+    color:#ff4d64 !important; border:1px solid rgba(255,65,90,.75) !important;
+    background:rgba(255,45,70,.16) !important; font-weight:900 !important;
+    box-shadow:0 0 12px rgba(255,45,70,.18) !important;
+  }
+  #editMtModal .row-btns .btn-cancel {
+    color:#ff536b !important; border:1px solid rgba(255,65,90,.75) !important;
+    background:rgba(255,45,70,.16) !important; font-weight:900 !important;
+    box-shadow:0 0 12px rgba(255,45,70,.18) !important;
+  }
+</style>
+<script id="v3021-home-name-editor-fix">
+(function(){
+  'use strict';
+  var ROOT=document.title||'BAIJID';
+  var active=null;
+  var homeKey=ROOT+'_home_folders_v2';
+  var storePrefix=ROOT+'_v3007_';
+  function read(k,fb){try{var x=JSON.parse(localStorage.getItem(k)||'null');return x==null?fb:x;}catch(e){return fb;}}
+  function write(k,v){try{var raw=JSON.stringify(v);localStorage.setItem(k,raw);return localStorage.getItem(k)===raw;}catch(e){return false;}}
+  function folders(){return read(homeKey,[]);}
+  function getActive(){
+    var ov=document.getElementById('multiToolOverlay');
+    if(!ov||!ov.classList.contains('open')) return active;
+    if(active&&active.kind==='home'){
+      var id=String(active.id||'');
+      if(id&&folders().some(function(f){return String(f.id)===id;})) return active;
+    }
+    var pc=window._pageToolCtx;
+    if(pc&&pc.pg&&pc.n!=null) return {kind:'page',pg:String(pc.pg),n:String(pc.n)};
+    var hid=window.__v3019HomeCustomId||window._openFolderId;
+    if(hid) return {kind:'home',id:String(hid)};
+    return active;
+  }
+  function currentName(c){
+    if(!c)return '';
+    if(c.kind==='home'){
+      var f=folders().find(function(x){return String(x.id)===String(c.id);});
+      return f?(f.name||'tool'):'';
+    }
+    if(String(c.n).indexOf('custom:')===0){
+      var id=String(c.n).slice(7),a=read(storePrefix+'boxes_'+c.pg,[]),b=a.find(function(x){return String(x.id)===id;});
+      return b?(b.name||'New tool box'):'';
+    }
+    var meta=read(storePrefix+'meta_'+c.pg,{});
+    return meta[String(c.n)]||((c.pg==='platform'?'Platform':c.pg==='app'?'App':'Home')+' tool '+c.n);
+  }
+  function save(c,value,reset){
+    if(!c)return false;
+    var v=String(value==null?'':value).trim();
+    if(!reset&&!v){if(window.toastMsg)toastMsg('Enter a tool box name',true);return false;}
+    if(c.kind==='home'){
+      var a=folders(),f=a.find(function(x){return String(x.id)===String(c.id);});
+      if(!f){if(window.toastMsg)toastMsg('Tool box not found',true);return false;}
+      if(!f.originalName)f.originalName=f.name||'tool';
+      f.name=reset?f.originalName:v;
+      if(!write(homeKey,a)){if(window.toastMsg)toastMsg('Name could not be saved',true);return false;}
+      var check=folders().find(function(x){return String(x.id)===String(c.id);});
+      if(!check||check.name!==f.name){if(window.toastMsg)toastMsg('Name save verification failed',true);return false;}
+      if(typeof window.renderHomePins==='function')window.renderHomePins();
+    } else if(String(c.n).indexOf('custom:')===0){
+      var id=String(c.n).slice(7),key=storePrefix+'boxes_'+c.pg,a=read(key,[]),b=a.find(function(x){return String(x.id)===id;});
+      if(!b)return false;
+      if(!b.originalName)b.originalName=b.name||'New tool box';
+      b.name=reset?b.originalName:v;
+      if(!write(key,a))return false;
+      var check=read(key,[]).find(function(x){return String(x.id)===id;});
+      if(!check||check.name!==b.name)return false;
+      if(c.pg==='platform'&&window.renderHardPlatforms)window.renderHardPlatforms();
+      if(c.pg==='app'&&window.renderHardApps)window.renderHardApps();
+    } else {
+      var mk=storePrefix+'meta_'+c.pg,m=read(mk,{});
+      if(reset)delete m[String(c.n)];else m[String(c.n)]=v;
+      if(!write(mk,m))return false;
+      if(c.pg==='platform'&&window.renderHardPlatforms)window.renderHardPlatforms();
+      if(c.pg==='app'&&window.renderHardApps)window.renderHardApps();
+    }
+    var title=document.getElementById('mtTitle');if(title)title.value=currentName(c);
+    if(window.toastMsg)toastMsg(reset?'Tool name reset':'Tool name saved');
+    return true;
+  }
+  function bindNameButtons(c){
+    var block=document.getElementById('editMtNameBlock'),input=document.getElementById('editMtNameInput');
+    if(!block||!input)return;
+    var actions=document.getElementById('v3020NameActions');
+    if(!actions){actions=document.createElement('div');actions.id='v3020NameActions';block.appendChild(actions);}
+    actions.innerHTML='<button type="button" id="v3021SaveName">SAVE TOOL NAME</button><button type="button" id="v3021ResetName">RESET TOOL NAME</button>';
+    document.getElementById('v3021SaveName').addEventListener('click',function(){if(save(c,input.value,false))window.closeEditMtModal();});
+    document.getElementById('v3021ResetName').addEventListener('click',function(){if(save(c,'',true)){input.value=currentName(c);window.closeEditMtModal();}});
+  }
+  // Capture the exact Home custom-folder ID after the existing open routine completes.
+  var priorHomeOpen=window.openMultiTool;
+  if(typeof priorHomeOpen==='function'&&!priorHomeOpen._v3021Wrapped){
+    var homeOpen=function(id){var result=priorHomeOpen.apply(this,arguments);var actual=String(id||window._openFolderId||window.__v3019HomeCustomId||'');if(actual){active={kind:'home',id:actual};window._pageToolCtx=null;window.__v3019HomeCustomId=actual;}return result;};
+    homeOpen._v3021Wrapped=true;window.openMultiTool=homeOpen;
+  }
+  var priorPageOpen=window.openPageTool;
+  if(typeof priorPageOpen==='function'&&!priorPageOpen._v3021Wrapped){
+    var pageOpen=function(pg,n){active={kind:'page',pg:String(pg),n:String(n)};window.__v3019HomeCustomId=null;var result=priorPageOpen.apply(this,arguments);return result;};
+    pageOpen._v3021Wrapped=true;window.openPageTool=pageOpen;
+  }
+  var priorEdit=window.mtEditIcon;
+  window.mtEditIcon=function(){
+    var c=getActive();
+    if(c&&c.kind==='home'){
+      window._pageToolCtx=null;window._openFolderId=c.id;window.__v3019HomeCustomId=c.id;
+    } else if(c&&c.kind==='page') {
+      window._pageToolCtx={pg:c.pg,n:c.n,key:c.pg+':'+c.n};
+    }
+    if(typeof priorEdit==='function')priorEdit.apply(this,arguments);
+    c=getActive()||c;if(!c)return;
+    active=c;
+    var modal=document.getElementById('editMtModal'),block=document.getElementById('editMtNameBlock'),input=document.getElementById('editMtNameInput');
+    if(!modal||!block||!input)return;
+    block.style.display='block';input.value=currentName(c);input.placeholder='Enter new tool box name';
+    var label=block.querySelector('label');if(label)label.textContent='EDIT TOOL NAME';
+    var heading=document.getElementById('editMtTitle');if(heading)heading.textContent='TOOL BOX SETTINGS';
+    bindNameButtons(c);
+    modal.style.display='flex';modal.classList.add('open');
+  };
+  // Keep active context correct if a user returns to a previously opened box and opens its menu.
+  document.addEventListener('click',function(e){
+    var dots=e.target&&e.target.closest&&e.target.closest('#mtDotsBtn');if(!dots)return;
+    setTimeout(function(){var c=getActive();if(c)active=c;},0);
+  },true);
+})();
+</script>
+
+
+<!-- V3024: theme-colored add dialogs + faster Platform/App edge auto-scroll -->
+<style id="v3024-add-modal-theme-and-scroll">
+  /* Keep each page's original modal wording; unify only the requested colors. */
+  #addPlatformModal .glass-modal h3,
+  #addPlatformModal .glass-modal label,
+  #addPlatformModal .glass-modal .hint,
+  #addAppModal .glass-modal h3,
+  #addAppModal .glass-modal label,
+  #addAppModal .glass-modal .hint,
+  #addFaqModal .glass-modal h3,
+  #addFaqModal .glass-modal label,
+  #addFaqModal .glass-modal .hint {
+    color: var(--a) !important;
+  }
+  #addPlatformModal .glass-modal input:not([type="file"]),
+  #addPlatformModal .glass-modal textarea,
+  #addAppModal .glass-modal input:not([type="file"]),
+  #addAppModal .glass-modal textarea,
+  #addFaqModal .glass-modal input:not([type="file"]),
+  #addFaqModal .glass-modal textarea {
+    color: #42e889 !important;
+    caret-color: #42e889 !important;
+  }
+  #addPlatformModal .glass-modal input::placeholder,
+  #addPlatformModal .glass-modal textarea::placeholder,
+  #addAppModal .glass-modal input::placeholder,
+  #addAppModal .glass-modal textarea::placeholder,
+  #addFaqModal .glass-modal input::placeholder,
+  #addFaqModal .glass-modal textarea::placeholder {
+    color: rgba(66,232,137,.72) !important;
+    opacity: 1 !important;
+  }
+  #addPlatformModal .glass-modal .file-btn,
+  #addAppModal .glass-modal .file-btn {
+    color: var(--a) !important;
+    border-color: var(--a) !important;
+  }
+  #addPlatformModal .glass-modal .row-btns .btn-cancel,
+  #addAppModal .glass-modal .row-btns .btn-cancel,
+  #addFaqModal .glass-modal .row-btns .btn-cancel {
+    background: linear-gradient(135deg,#a90024,#ff1744) !important;
+    color: #fff !important;
+    border: 1px solid rgba(255,75,105,.9) !important;
+    box-shadow: 0 0 16px rgba(255,23,68,.38) !important;
+  }
+  /* The custom ADD NEW TOOL BOX dialog is also opened from page-level add controls. */
+  #v3007NewBoxModal .v3007-modal-panel h3,
+  #v3007NewBoxModal .v3007-modal-panel label,
+  #v3007NewBoxModal .v3007-modal-panel small,
+  #v3007NewBoxModal .v3007-modal-panel #v3007PageLabel {
+    color: var(--a) !important;
+  }
+  #v3007NewBoxModal .v3007-modal-panel input:not([type="checkbox"]) {
+    color: #42e889 !important;
+    caret-color: #42e889 !important;
+  }
+  #v3007NewBoxModal .v3007-modal-panel input:not([type="checkbox"])::placeholder {
+    color: rgba(66,232,137,.72) !important;
+    opacity: 1 !important;
+  }
+  #v3007NewBoxModal .v3007-actions button:first-child {
+    background: linear-gradient(135deg,#a90024,#ff1744) !important;
+    color: #fff !important;
+    border: 1px solid rgba(255,75,105,.9) !important;
+    box-shadow: 0 0 16px rgba(255,23,68,.38) !important;
+  }
+  #v3007NewBoxModal .v3007-actions button:last-child {
+    background: var(--a) !important;
+    color: #071321 !important;
+    border-color: var(--a) !important;
+    box-shadow: 0 0 16px var(--ab) !important;
+  }
+</style>
+
 </body>
 
+</html>
+
+
+<!-- V3025: outside-tap modal close and toolbox-first tap -->
+<style id="v3025-interaction-fixes">
+</style>
+<script id="v3025-interaction-fixes">
+(function(){
+  'use strict';
+
+  /* Close add/picker dialogs when the user taps the overlay outside the panel. */
+  function closeOverlay(ov){
+    if(!ov)return;
+    if(ov.id==='addPlatformModal'){
+      if(typeof window.closeAddPlatformModal==='function')window.closeAddPlatformModal();
+      ov.classList.remove('open');
+      if(ov.dataset.mode==='home'){
+        ov.dataset.mode='';
+        var h=ov.querySelector('h3');if(h)h.textContent='ADD PLATFORM';
+      }
+    }else if(ov.id==='addAppModal'){
+      if(typeof window.closeAddAppModal==='function')window.closeAddAppModal();else ov.classList.remove('open');
+    }else if(ov.id==='addFaqModal'){
+      if(typeof window.closeAddFaqModal==='function')window.closeAddFaqModal();else ov.classList.remove('open');
+    }else if(ov.id==='v3007NewBoxModal'){
+      if(typeof window.closeV3007NewBox==='function')window.closeV3007NewBox();else ov.classList.remove('open');
+    }else if(ov.id==='mtPickOverlay'){
+      ov.classList.remove('open');
+    }else{
+      ov.classList.remove('open');
+    }
+  }
+  document.addEventListener('click',function(e){
+    var ov=e.target;
+    if(!ov||ov.nodeType!==1)return;
+    if(ov.classList.contains('glass-modal-overlay') && ov.classList.contains('open') && e.target===ov){
+      closeOverlay(ov);return;
+    }
+    if((ov.id==='v3007NewBoxModal'||ov.id==='mtPickOverlay')&&ov.classList.contains('open')&&e.target===ov){
+      closeOverlay(ov);
+    }
+  },true);
+
+
+  /* V3039: toolbox is a locked container until it is explicitly opened. */
+  (function(){
+    var overlay=document.getElementById('multiToolOverlay');
+    if(!overlay)return;
+    var lastTouchCard=null,lastTouchAt=0;
+
+    function setState(){
+      var opened=overlay.classList.contains('open');
+      overlay.setAttribute('data-v3039-unlocked',opened?'1':'0');
+      if(!opened){
+        var menu=document.getElementById('mtMenu');
+        if(menu)menu.classList.remove('open');
+      }
+    }
+    function unlocked(){
+      return overlay.classList.contains('open') &&
+        overlay.getAttribute('data-v3039-unlocked')==='1';
+    }
+    function stop(e){
+      if(e.cancelable)e.preventDefault();
+      e.stopPropagation();
+      if(e.stopImmediatePropagation)e.stopImmediatePropagation();
+    }
+    setState();
+    if(window.MutationObserver){
+      new MutationObserver(setState).observe(overlay,{attributes:true,attributeFilter:['class']});
+    }
+
+    function openFromCard(card){
+      if(!card||card.getAttribute('data-just-dragged')==='1')return;
+      var pg=card.getAttribute('data-tool-page') ||
+        (card.closest('#hardPlatforms,#customPlatforms')?'platform':'app');
+      var n=card.getAttribute('data-tool-num');
+      var bid=card.getAttribute('data-v3007-box');
+      if(typeof window.openPageTool!=='function')return;
+      if(bid)window.openPageTool(pg,'custom:'+bid);
+      else if(n)window.openPageTool(pg,Number(n));
+      else{
+        var oc=card.getAttribute('onclick')||'';
+        var mt=oc.match(/openPageTool\(['"]?(platform|app)['"]?\s*,\s*['"]?(\d+)/);
+        if(mt)window.openPageTool(mt[1],Number(mt[2]));
+      }
+      setState();
+    }
+    function cardEvent(e){
+      var card=e.target&&e.target.closest&&
+        e.target.closest('.plat-card.plat-tool-card, .plat-card.v3007-custom-box');
+      if(!card)return;
+      /* Cards rendered inside the active toolbox are contents, never a new
+         toolbox trigger. Let their own side/item handlers receive the tap. */
+      if(card.closest && card.closest('#multiToolOverlay'))return;
+      if(card.getAttribute('data-just-dragged')==='1'){stop(e);return;}
+      if(e.type==='click'&&lastTouchCard===card&&Date.now()-lastTouchAt<900){
+        stop(e);lastTouchCard=null;return;
+      }
+      stop(e);
+      if(e.type==='touchend'){lastTouchCard=card;lastTouchAt=Date.now();}
+      openFromCard(card);
+    }
+
+    /* Capture touch before drag handlers; capture click before inline card actions. */
+    document.addEventListener('touchend',cardEvent,{capture:true,passive:false});
+    document.addEventListener('click',cardEvent,true);
+
+    /* All toolbox contents remain blocked until the overlay has opened. */
+    function innerGate(e){
+      var target=e.target;
+      if(!target||!target.closest)return;
+      var inner=target.closest('#mtGrid, #mtMenu');
+      if(inner&&!unlocked())stop(e);
+    }
+    ['click','pointerdown','touchstart','touchend'].forEach(function(type){
+      document.addEventListener(type,innerGate,{capture:true,passive:false});
+    });
+  })();
+
+
+
+})();
+</script>
+
+<!-- V3026 patch -->
+<style id="v3026-toolbox-settings-drag-css">
+  #tab-faq .v3026-dragging-card{opacity:.28!important;}
+  .v3026-drag-ghost{position:fixed!important;pointer-events:none!important;z-index:999999!important;opacity:.96!important;transform:scale(1.025);box-shadow:0 14px 36px rgba(0,0,0,.5)!important;}
+  #tab-faq .v3026-drop-before{outline:2px solid var(--a,#00e5ff)!important;outline-offset:3px;}
+</style>
+<script id="v3026-toolbox-settings-drag-fix">
+/* V3036: the V3025 capture handler is the single authority for toolbox taps.
+   This intentionally empty compatibility block prevents a later card-wide
+   click handler from overriding icon-only opening. */
+</script>
+
+
+
+
+
+<!-- V3034: icon-only toolbox opening; Settings cards are not draggable -->
+<style id="v3034-settings-no-drag">
+  #tab-faq, #tab-faq * { -webkit-user-drag:none; }
+  #tab-faq .faq-card, #tab-faq .faq-item, #tab-faq .settings-card { touch-action:pan-y!important; }
+</style>
+<script id="v3034-icon-only-toolbox">
+(function(){
+  'use strict';
+  /* Home: folder/toolbox opens only when its icon is tapped. */
+  document.addEventListener('click',function(e){
+    var card=e.target&&e.target.closest&&e.target.closest('#tab-home .home-pin[data-folder="1"]');
+    if(!card)return;
+    e.preventDefault();e.stopPropagation();
+    if(e.stopImmediatePropagation)e.stopImmediatePropagation();
+    if(!(e.target.closest&&e.target.closest('.home-pin-icon')))return;
+    if(typeof window.openHomePin==='function')window.openHomePin(card);
+    else if(typeof window.openMultiTool==='function')window.openMultiTool(card.getAttribute('data-id'));
+  },true);
+})();
+</script>
+
+
+<!-- V3040: prevent nested toolbox activation and restore page interaction cleanly -->
+<style id="v3040-toolbox-isolation">
+  #multiToolOverlay { pointer-events:none; }
+  #multiToolOverlay.open { pointer-events:auto; }
+  #multiToolOverlay .mt-panel { pointer-events:auto; }
+  body.v3040-toolbox-open { overflow:hidden !important; }
+  #multiToolOverlay:not(.open) { visibility:hidden; }
+  #multiToolOverlay.open { visibility:visible; }
+</style>
+<script id="v3040-toolbox-isolation">
+(function(){
+  'use strict';
+  var overlay=document.getElementById('multiToolOverlay');
+  if(!overlay)return;
+  var body=document.body;
+  var previousOverflow='';
+  function sync(){
+    var opened=overlay.classList.contains('open');
+    overlay.setAttribute('aria-hidden',opened?'false':'true');
+    overlay.setAttribute('data-v3040-state',opened?'unlocked':'locked');
+    if(opened){
+      if(!body.classList.contains('v3040-toolbox-open')){
+        previousOverflow=body.style.overflow||'';
+        body.classList.add('v3040-toolbox-open');
+      }
+    }else{
+      body.classList.remove('v3040-toolbox-open');
+      body.style.overflow=previousOverflow;
+      var menu=document.getElementById('mtMenu');
+      if(menu)menu.classList.remove('open');
+    }
+  }
+  /* A toolbox already displayed must never be reopened by a card-like
+     element rendered inside its own panel. Inner side buttons remain usable. */
+  document.addEventListener('click',function(e){
+    if(!overlay.classList.contains('open'))return;
+    var t=e.target;
+    if(!t||!t.closest)return;
+    /* Inner toolbox controls are handled by their own actions. */
+  },true);
+  if(window.MutationObserver){
+    new MutationObserver(sync).observe(overlay,{attributes:true,attributeFilter:['class']});
+  }
+  var oldClose=window.closeMultiTool;
+  if(typeof oldClose==='function'&&!oldClose._v3040Wrapped){
+    var close=function(){
+      var result=oldClose.apply(this,arguments);
+      sync();
+      return result;
+    };
+    close._v3040Wrapped=true;
+    window.closeMultiTool=close;
+  }
+  /* Synchronize after all existing open routines finish adding .open. */
+  ['openPageTool','openMultiTool'].forEach(function(name){
+    var old=window[name];
+    if(typeof old==='function'&&!old._v3040Wrapped){
+      var wrapped=function(){
+        var result=old.apply(this,arguments);
+        sync();
+        return result;
+      };
+      wrapped._v3040Wrapped=true;
+      window[name]=wrapped;
+    }
+  });
+  overlay.addEventListener('click',function(e){
+    if(e.target===overlay && typeof window.closeMultiTool==='function'){
+      window.closeMultiTool();
+    }
+  });
+  sync();
+})();
+</script>
+
+
+<!-- V3041: isolate the open toolbox from the page behind it -->
+<style id="v3041-toolbox-background-isolation">
+  #multiToolOverlay.open {
+    background: rgba(0,0,0,.94) !important;
+    -webkit-backdrop-filter: blur(22px) saturate(115%) !important;
+    backdrop-filter: blur(22px) saturate(115%) !important;
+  }
+  #multiToolOverlay.open .mt-panel {
+    background: rgba(7,15,24,.96) !important;
+    isolation: isolate;
+  }
+  #multiToolOverlay:not(.open) {
+    display: none !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+  }
+  #multiToolOverlay.open {
+    display: flex !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
+  }
+  #multiToolOverlay.open .mt-panel,
+  #multiToolOverlay.open .mt-panel * {
+    pointer-events: auto;
+  }
+</style>
+<script id="v3041-toolbox-background-isolation">
+(function(){
+  'use strict';
+  var overlay=document.getElementById('multiToolOverlay');
+  if(!overlay)return;
+
+  /* Keep the page behind the toolbox from receiving interaction. */
+  function syncToolboxLayer(){
+    var opened=overlay.classList.contains('open');
+    document.body.classList.toggle('v3041-toolbox-active',opened);
+    overlay.setAttribute('aria-hidden',opened?'false':'true');
+    if(!opened){
+      var menu=document.getElementById('mtMenu');
+      if(menu)menu.classList.remove('open');
+      var ghost=document.querySelectorAll('.v3007-ghost,.v3026-drag-ghost');
+      ghost.forEach(function(node){node.remove();});
+      document.querySelectorAll('.mt-dragging,.mt-drag-over').forEach(function(node){
+        node.classList.remove('mt-dragging','mt-drag-over');
+        node.style.opacity='';
+      });
+    }
+  }
+  if(window.MutationObserver){
+    new MutationObserver(syncToolboxLayer).observe(overlay,{
+      attributes:true,attributeFilter:['class']
+    });
+  }
+  syncToolboxLayer();
+})();
+</script>
+<style id="v3041-toolbox-body-lock">
+  body.v3041-toolbox-active { overflow: hidden !important; }
+</style>
+
+
+
+<!-- V3043: single, safely appended toolbox layer fix -->
+<style id="v3043-toolbox-top-layer">
+  #multiToolOverlay { z-index: 2147483000 !important; isolation: isolate !important; }
+  #multiToolOverlay.open {
+    position: fixed !important; inset: 0 !important; display: flex !important;
+    align-items: center !important; justify-content: center !important;
+    background: rgba(0,0,0,.985) !important;
+    -webkit-backdrop-filter: blur(24px) saturate(110%) !important;
+    backdrop-filter: blur(24px) saturate(110%) !important;
+    pointer-events: auto !important;
+  }
+  #multiToolOverlay.open .mt-panel {
+    position: relative !important; z-index: 1 !important;
+    background: rgba(5,13,22,.98) !important;
+  }
+  #multiToolOverlay:not(.open) { display: none !important; pointer-events: none !important; }
+  body.v3043-toolbox-open { overflow: hidden !important; }
+</style>
+<script id="v3043-toolbox-top-layer">
+(function(){
+  'use strict';
+  function init(){
+    var overlay=document.getElementById('multiToolOverlay');
+    if(!overlay || overlay.dataset.v3043Ready==='1') return;
+    overlay.dataset.v3043Ready='1';
+    var body=document.body;
+    function clearDragArtifacts(){
+      document.querySelectorAll('.drag-ghost,.v3007-ghost,.v3026-drag-ghost').forEach(function(node){
+        if(!overlay.contains(node)) node.remove();
+      });
+      document.querySelectorAll('.v3007-dragging,.mt-dragging,.mt-drag-over').forEach(function(node){
+        node.classList.remove('v3007-dragging','mt-dragging','mt-drag-over');
+        node.style.opacity='';
+        node.style.transform='';
+      });
+    }
+    function sync(){
+      var opened=overlay.classList.contains('open');
+      body.classList.toggle('v3043-toolbox-open',opened);
+      overlay.setAttribute('aria-hidden',opened?'false':'true');
+      clearDragArtifacts();
+      if(!opened){
+        var menu=document.getElementById('mtMenu');
+        if(menu) menu.classList.remove('open');
+      }
+    }
+    if(window.MutationObserver){
+      new MutationObserver(sync).observe(overlay,{attributes:true,attributeFilter:['class']});
+    }
+    document.addEventListener('pointerdown',function(e){
+      if(!overlay.classList.contains('open') || overlay.contains(e.target)) return;
+      /* Tool-box child dialogs are intentionally rendered outside the main
+         overlay. Let their first tap reach them instead of swallowing it. */
+      var target=e.target;
+      if(target && target.closest && target.closest('#mtPickOverlay.open, #editMtModal.open, .glass-modal-overlay.open, #v3007NewBoxModal.open, #v3057PickOverlay.open, #v3057PickOverlay, #v3057PickPanel')) return;
+      e.preventDefault(); e.stopPropagation();
+      if(e.stopImmediatePropagation) e.stopImmediatePropagation();
+    },true);
+    sync();
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',init,{once:true});
+  else init();
+})();
+</script>
+
+
+<!-- V3044: final toolbox positioning, drag-ghost cleanup, and reliable dots action -->
+<style id="v3044-toolbox-final-css">
+  #multiToolOverlay { z-index:2147483000 !important; }
+  #multiToolOverlay.open {
+    position:fixed !important; inset:0 !important; display:flex !important;
+    align-items:flex-start !important; justify-content:center !important;
+    padding: max(76px, 9vh) 14px 22px !important;
+    background:rgba(0,0,0,.30) !important;
+    -webkit-backdrop-filter:blur(18px) saturate(135%) !important;
+    backdrop-filter:blur(18px) saturate(135%) !important;
+    overflow-y:auto !important; overscroll-behavior:contain !important;
+    isolation:isolate !important; pointer-events:auto !important;
+  }
+  #multiToolOverlay.open .mt-panel {
+    position:relative !important; z-index:2 !important;
+    width:min(320px, calc(100vw - 28px)) !important;
+    max-height:min(78vh, 680px) !important; overflow:visible !important;
+    margin:0 auto !important; background:rgba(5,13,22,.68) !important;
+    -webkit-backdrop-filter:blur(30px) saturate(170%) !important;
+    backdrop-filter:blur(30px) saturate(170%) !important;
+    border-color:color-mix(in srgb,var(--a) 60%,rgba(255,255,255,.18)) !important;
+  }
+  #multiToolOverlay.open .mt-title-row { overflow:visible !important; z-index:5 !important; }
+  #multiToolOverlay.open .mt-dots { z-index:8 !important; pointer-events:auto !important; }
+  #multiToolOverlay.open .mt-menu { z-index:20 !important; pointer-events:auto !important; }
+  #multiToolOverlay.open .mt-grid { max-height:min(58vh, 520px) !important; overflow-y:auto !important; }
+  .v3044-drag-ghost { position:fixed !important; pointer-events:none !important; z-index:999950 !important; }
+  body.v3044-toolbox-open { overflow:hidden !important; }
+  /* Child interfaces must sit above the toolbox and accept the first tap. */
+  #mtPickOverlay.open { z-index:2147483002 !important; pointer-events:auto !important; }
+  #editMtModal.open, .glass-modal-overlay.open { z-index:2147483003 !important; pointer-events:auto !important; }
+  #mtPickOverlay.open *, #editMtModal.open * { pointer-events:auto; }
+  #v3057PickOverlay, #v3057PickOverlay.open {
+    z-index: 2147483646 !important;
+    pointer-events: auto !important;
+  }
+  #v3057PickOverlay.open * {
+    pointer-events: auto !important;
+  }
+  #v3057PickPanel, #v3057PickList, .v3057-row, #v3057Save, #v3057Cancel {
+    pointer-events: auto !important;
+  }
+</style>
+<script id="v3044-toolbox-final-fix">
+(function(){
+  'use strict';
+  var overlay=document.getElementById('multiToolOverlay');
+  if(!overlay || overlay.dataset.v3044Ready==='1') return;
+  overlay.dataset.v3044Ready='1';
+  var body=document.body;
+  function removeGhosts(){
+    document.querySelectorAll('.v3044-drag-ghost,.v3007-ghost,.v3026-drag-ghost,.drag-ghost').forEach(function(n){ if(n && !overlay.contains(n)) n.remove(); });
+    Array.prototype.forEach.call(body.children,function(n){
+      if(n===overlay || !n.style) return;
+      if(n.style.position==='fixed' && String(n.style.zIndex)==='999950' && n.style.pointerEvents==='none') n.remove();
+    });
+    document.querySelectorAll('.plat-card').forEach(function(c){ c.style.opacity=''; c.classList.remove('drag-over','v3007-dragging','v3026-dragging-card'); });
+    body.classList.remove('v3007-dragging');
+  }
+  function sync(){
+    var opened=overlay.classList.contains('open');
+    body.classList.toggle('v3044-toolbox-open',opened);
+    overlay.setAttribute('aria-hidden',opened?'false':'true');
+    removeGhosts();
+    if(!opened){ var menu=document.getElementById('mtMenu'); if(menu) menu.classList.remove('open'); }
+  }
+  if(window.MutationObserver) new MutationObserver(sync).observe(overlay,{attributes:true,attributeFilter:['class']});
+  ['touchend','touchcancel','pointerup','pointercancel'].forEach(function(type){ document.addEventListener(type,function(){setTimeout(removeGhosts,0);},true); });
+  /* Dots and Add are dispatched once by the V3046 capture handler below. */
+  sync();
+})();
+</script>
+
+
+
+<!-- V3046: single-dispatch controls for toolbox Add and three-dot settings -->
+<script id="v3046-single-toolbox-control-dispatch">
+(function(){
+  'use strict';
+  if(window.__v3046SingleDispatchInstalled)return;
+  window.__v3046SingleDispatchInstalled=true;
+  document.addEventListener('click',function(e){
+    var target=e.target;
+    if(!target||!target.closest)return;
+    var overlay=document.getElementById('multiToolOverlay');
+    if(!overlay||!overlay.classList.contains('open'))return;
+
+    var dots=target.closest('#mtDotsBtn');
+    var add=target.closest('#mtGrid .mt-add-btn');
+    if(!dots&&!add)return;
+
+    /* Stop the inline onclick and any legacy bubbling handlers. This capture
+       handler performs exactly one action for this actual click event. */
+    e.preventDefault();
+    e.stopPropagation();
+    if(e.stopImmediatePropagation)e.stopImmediatePropagation();
+
+    if(dots){
+      if(typeof window.mtEditIcon==='function')window.mtEditIcon();
+      return;
+    }
+
+    if(add){
+      var pageCtx=window._pageToolCtx||window.__v3057LastCtx||window.__v3056LastCtx;
+      var isPageTool=!!(pageCtx&&pageCtx.pg&&pageCtx.n!=null);
+      if(isPageTool){
+        window._pageToolCtx=pageCtx;
+        try{
+          var oldPick=document.getElementById('mtPickOverlay');
+          if(oldPick){oldPick.classList.remove('open');oldPick.style.display='none';}
+        }catch(err){}
+        if(typeof window.v3057OpenPicker==='function'){window.v3057OpenPicker();return;}
+        if(typeof window.openPageToolPicker==='function'){window.openPageToolPicker();return;}
+      }
+      if(typeof window.openMtPick==='function')window.openMtPick();
+    }
+  },true);
+})();
+</script>
+
+
+<!-- V3050: ADD NEW TOOL BOX from 3-dot settings + simplified unassigned checklist -->
+<style id="v3050-add-toolbox-style">
+  #v3050AddNewToolBoxBtn,
+  .v3050-add-toolbox-btn {
+    display: block;
+    width: 100%;
+    margin: 0 0 14px;
+    padding: 13px 12px;
+    border-radius: 12px;
+    border: 1px solid var(--brda, rgba(0,229,255,.4));
+    background: color-mix(in srgb, var(--a, #00e5ff) 18%, rgba(0,0,0,.35));
+    color: var(--a, #00e5ff) !important;
+    font-family: 'Orbitron', monospace;
+    font-size: 0.62rem;
+    font-weight: 800;
+    letter-spacing: 1.4px;
+    cursor: pointer;
+    box-shadow: 0 0 18px var(--ad, rgba(0,229,255,.25));
+  }
+  #v3050AddNewToolBoxBtn:active { transform: scale(0.97); opacity: 0.9; }
+  #mtPickOverlay[data-v3050-mode="newbox"] .mt-pick-title {
+    color: var(--a) !important;
+  }
+</style>
+<script id="v3050-add-new-toolbox">
+(function(){
+  'use strict';
+  if (window.__v3050Installed) return;
+  window.__v3050Installed = true;
+
+  var ROOT = (document.title || 'BAIJID');
+  var STORE = ROOT + '_v3007_';
+  var mode = null;
+
+  function read(k, fb) {
+    try {
+      var v = JSON.parse(localStorage.getItem(k) || 'null');
+      return v == null ? fb : v;
+    } catch (e) { return fb; }
+  }
+  function write(k, v) {
+    try { localStorage.setItem(k, JSON.stringify(v)); return true; }
+    catch (e) { if (window.toastMsg) toastMsg('Storage full', true); return false; }
+  }
+  function esc(s) {
+    return String(s == null ? '' : s).replace(/[&<>"']/g, function(c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
+  function ident(x) {
+    if (x && x.id) return 'id:' + String(x.id);
+    return [
+      String(x && x.name || '').trim().toLowerCase(),
+      String(x && x.link || '').trim().toLowerCase(),
+      String(x && x.special || ''),
+      x && x.html ? 'html' : ''
+    ].join('|');
+  }
+  function icon(x) {
+    var logo = x && x.logo ? String(x.logo) : '';
+    if (logo && !/^ti[ -]/i.test(logo)) return '<img src="' + esc(logo) + '" alt="">';
+    var c = (typeof brandIconFromName === 'function' && brandIconFromName(x && x.name, x && x.link))
+      || (x && x.icon) || 'ti ti-world';
+    if (/^ti-/.test(c) && c.indexOf(' ') < 0) c = 'ti ' + c;
+    return '<i class="' + esc(c) + '"></i>';
+  }
+  function pageSource(pg) {
+    try {
+      if (typeof window.__getScopedPageInterfaces === 'function')
+        return window.__getScopedPageInterfaces(pg) || [];
+    } catch (e) {}
+    return [];
+  }
+  function getTool(pg, n) {
+    if (String(n).indexOf('custom:') === 0) {
+      return read(STORE + 'items_' + pg + '_' + String(n).slice(7), []);
+    }
+    var saved = read(STORE + 'pageItems_' + pg + ':' + n, null);
+    if (Array.isArray(saved)) return saved;
+    try {
+      var legacy = JSON.parse(localStorage.getItem(ROOT + '_page_tool_items_' + pg + ':' + n) || 'null');
+      if (Array.isArray(legacy)) return legacy;
+    } catch (e) {}
+    var a = window[(pg === 'platform' ? 'DEFAULT_PLATFORM_TOOL_' : 'DEFAULT_APP_TOOL_') + n];
+    return Array.isArray(a) ? a.slice() : [];
+  }
+  function boxes(pg) { return read(STORE + 'boxes_' + pg, []); }
+  function resolvePage() {
+    var c = window._pageToolCtx;
+    if (c && (c.pg === 'platform' || c.pg === 'app')) return String(c.pg);
+    var plat = document.getElementById('tab-platforms');
+    var apps = document.getElementById('tab-apps');
+    if (plat && plat.classList.contains('active')) return 'platform';
+    if (apps && apps.classList.contains('active')) return 'app';
+    if (c && c.pg) return String(c.pg);
+    return null;
+  }
+  function unassigned(pg) {
+    var taken = {};
+    for (var n = 1; n <= 30; n++) {
+      getTool(pg, n).forEach(function(x) { if (x) taken[ident(x)] = 1; });
+    }
+    boxes(pg).forEach(function(b) {
+      read(STORE + 'items_' + pg + '_' + b.id, []).forEach(function(x) {
+        if (x) taken[ident(x)] = 1;
+      });
+    });
+    var src = pageSource(pg).slice();
+    var loose = read(STORE + 'loose_' + pg, []);
+    loose.forEach(function(x) {
+      if (x && x.name) src.push(x);
+    });
+    var seen = {}, out = [];
+    src.forEach(function(x) {
+      if (!x || !x.name) return;
+      var k = ident(x);
+      if (seen[k] || taken[k]) return;
+      seen[k] = 1;
+      out.push(x);
+    });
+    return out;
+  }
+  function closeEditModal() {
+    var m = document.getElementById('editMtModal');
+    if (m) {
+      m.classList.remove('open');
+      m.style.display = 'none';
+    }
+    if (typeof window.closeEditMtModal === 'function') {
+      try { window.closeEditMtModal(); } catch (e) {}
+    }
+  }
+  function openChecklist(pg) {
+    var list = unassigned(pg);
+    mode = { pg: pg, candidates: list, selected: {} };
+    var ov = document.getElementById('mtPickOverlay');
+    var title = ov && ov.querySelector('.mt-pick-title');
+    var save = document.getElementById('mtPickSave');
+    var listEl = document.getElementById('mtPickList');
+    if (!ov || !listEl) {
+      if (window.toastMsg) toastMsg('Picker unavailable', true);
+      return;
+    }
+    ov.setAttribute('data-v3050-mode', 'newbox');
+    if (title) title.textContent = 'ADD NEW TOOL BOX';
+    if (!list.length) {
+      listEl.innerHTML = '<div style="padding:18px;text-align:center;color:var(--txm);font-family:Rajdhani,sans-serif">No unassigned interfaces on this page</div>';
+      if (save) { save.disabled = true; save.onclick = function(){}; }
+    } else {
+      listEl.innerHTML = list.map(function(x, i) {
+        var k = ident(x);
+        return '<div class="mt-pick-row" data-v3050-k="' + esc(k) + '" data-v3050-i="' + i + '" onclick="window.v3050TogglePick(this)">' +
+          '<div class="mt-pick-ico">' + icon(x) + '</div>' +
+          '<div class="mt-pick-name">' + esc(x.name) + '</div>' +
+          '<div class="mt-pick-check"></div></div>';
+      }).join('');
+      if (save) {
+        save.disabled = true;
+        save.onclick = function(e) {
+          if (e) { e.preventDefault(); e.stopPropagation(); }
+          window.v3050SaveNewBox();
+        };
+      }
+    }
+    ov.classList.add('open');
+  }
+
+  window.v3050TogglePick = function(row) {
+    if (!mode || !row) return;
+    var k = row.getAttribute('data-v3050-k');
+    var i = Number(row.getAttribute('data-v3050-i'));
+    var check = row.querySelector('.mt-pick-check');
+    if (mode.selected[k]) {
+      delete mode.selected[k];
+      row.classList.remove('on');
+      if (check) check.textContent = '';
+    } else {
+      var x = mode.candidates[i];
+      if (x) {
+        mode.selected[k] = x;
+        row.classList.add('on');
+        if (check) check.textContent = '\u2713';
+      }
+    }
+    var save = document.getElementById('mtPickSave');
+    if (save) save.disabled = Object.keys(mode.selected).length < 2;
+  };
+
+  window.v3050SaveNewBox = function() {
+    if (!mode || !mode.pg) return;
+    var chosen = Object.keys(mode.selected).map(function(k) { return mode.selected[k]; });
+    if (chosen.length < 2) {
+      if (window.toastMsg) toastMsg('Select at least two interfaces', true);
+      return;
+    }
+    var pg = mode.pg;
+    var id = 'box' + Date.now();
+    var name = 'New tool box';
+    var a = boxes(pg);
+    var n = 1;
+    var names = {};
+    a.forEach(function(b) { if (b && b.name) names[String(b.name).toLowerCase()] = 1; });
+    while (names[name.toLowerCase()]) { n++; name = 'New tool box ' + n; }
+    a.push({ id: id, name: name, originalName: name });
+    if (!write(STORE + 'boxes_' + pg, a)) return;
+    if (!write(STORE + 'items_' + pg + '_' + id, chosen)) return;
+
+    var loose = read(STORE + 'loose_' + pg, []);
+    var chosenKeys = {};
+    chosen.forEach(function(x) { chosenKeys[ident(x)] = 1; });
+    loose = loose.filter(function(x) { return !chosenKeys[ident(x)]; });
+    write(STORE + 'loose_' + pg, loose);
+
+    var ov = document.getElementById('mtPickOverlay');
+    if (ov) {
+      ov.classList.remove('open');
+      ov.removeAttribute('data-v3050-mode');
+    }
+    mode = null;
+
+    try {
+      if (typeof window.renderPageBoxes === 'function') window.renderPageBoxes(pg);
+    } catch (e) {}
+    try {
+      if (typeof window.renderLoose === 'function') window.renderLoose(pg);
+    } catch (e) {}
+    try {
+      if (pg === 'platform' && typeof window.renderHardPlatforms === 'function') window.renderHardPlatforms();
+      if (pg === 'app' && typeof window.renderHardApps === 'function') window.renderHardApps();
+    } catch (e) {}
+
+    if (window.toastMsg) toastMsg('New tool box added');
+  };
+
+  window.v3050OpenAddNewToolBox = function() {
+    var pg = resolvePage();
+    if (!pg || (pg !== 'platform' && pg !== 'app')) {
+      var c = window._pageToolCtx;
+      if (c && (c.pg === 'platform' || c.pg === 'app')) pg = String(c.pg);
+    }
+    if (!pg || (pg !== 'platform' && pg !== 'app')) {
+      if (window.toastMsg) toastMsg('Open a Platform or App tool box first', true);
+      return;
+    }
+    try {
+      window._pageToolCtx = window._pageToolCtx || { pg: pg, n: 'custom:new' };
+      if (!window._pageToolCtx.pg) window._pageToolCtx.pg = pg;
+    } catch (e) {}
+    closeEditModal();
+    setTimeout(function() { openChecklist(pg); }, 40);
+  };
+
+  var oldOpenNew = window.openNewPageToolBox;
+  window.openNewPageToolBox = function() {
+    var pg = null;
+    try {
+      if (window._pageToolCtx && (window._pageToolCtx.pg === 'platform' || window._pageToolCtx.pg === 'app'))
+        pg = String(window._pageToolCtx.pg);
+    } catch (e) {}
+    if (!pg) pg = resolvePage();
+    if (pg === 'platform' || pg === 'app') {
+      openChecklist(pg);
+      return;
+    }
+    if (typeof oldOpenNew === 'function') return oldOpenNew.apply(this, arguments);
+  };
+
+  var pickOv = document.getElementById('mtPickOverlay');
+  if (pickOv && window.MutationObserver) {
+    new MutationObserver(function() {
+      if (!pickOv.classList.contains('open')) {
+        pickOv.removeAttribute('data-v3050-mode');
+        var title = pickOv.querySelector('.mt-pick-title');
+        if (title && title.textContent === 'ADD NEW TOOL BOX') title.textContent = 'ADD TO TOOL';
+        mode = null;
+      }
+    }).observe(pickOv, { attributes: true, attributeFilter: ['class'] });
+  }
+})();
+</script>
+
+
+
+
+<!-- V3053: reliable toolbox add + hide assigned sides on every page -->
+<style id="v3053-style">
+  /* Must beat #tab-platforms/.plat-card { display:flex !important } rules */
+  #tab-platforms .plat-card.v3053-hidden,
+  #tab-apps .plat-card.v3053-hidden,
+  #hardPlatforms .plat-card.v3053-hidden,
+  #hardApps .plat-card.v3053-hidden,
+  #customPlatforms .plat-card.v3053-hidden,
+  #customApps .plat-card.v3053-hidden,
+  #tab-platforms a.plat-card.v3053-hidden,
+  #tab-apps a.plat-card.v3053-hidden,
+  html body #tab-platforms .plat-card.v3053-hidden,
+  html body #tab-apps .plat-card.v3053-hidden,
+  html body .plat-card.v3053-hidden {
+    display: none !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+    height: 0 !important;
+    min-height: 0 !important;
+    max-height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: none !important;
+    overflow: hidden !important;
+    opacity: 0 !important;
+  }
+  #tab-home .home-pin.v3053-hidden,
+  .home-pin.v3053-hidden {
+    display: none !important;
+  }
+</style>
+<script id="v3053-toolbox-add-and-hide">
+(function () {
+  'use strict';
+  if (window.__v3053Installed) return;
+  window.__v3053Installed = true;
+
+  var ROOT = document.title || 'BAIJID';
+  var STORE = ROOT + '_v3007_';
+  var LEGACY = ROOT + '_page_tool_items_';
+  var HOME_FOLDERS = ROOT + '_home_folders_v2';
+  var hideTimer = 0;
+  var pickState = null; // { pg, n, selected, candidates }
+
+  function read(k, fb) {
+    try {
+      var v = JSON.parse(localStorage.getItem(k) || 'null');
+      return v == null ? fb : v;
+    } catch (e) { return fb; }
+  }
+  function write(k, v) {
+    try { localStorage.setItem(k, JSON.stringify(v)); return true; }
+    catch (e) { if (window.toastMsg) toastMsg('Storage full', true); return false; }
+  }
+  function esc(s) {
+    return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
+  function normName(s) { return String(s || '').trim().toLowerCase(); }
+  function normLink(s) { return String(s || '').trim().toLowerCase().replace(/\/+$/, ''); }
+  function ident(x) {
+    if (!x) return '';
+    if (x.id != null && String(x.id) !== '') return 'id:' + String(x.id);
+    return [normName(x.name), normLink(x.link), String(x.special || ''), x.html ? 'html' : ''].join('|');
+  }
+  function softKey(name, link) { return normName(name) + '|' + normLink(link); }
+
+  function pageSource(pg) {
+    try {
+      // Prefer original unscoped list if available via data sources
+      if (pg === 'platform') {
+        var base = (typeof DEFAULT_PLATFORMS_ADD !== 'undefined' && Array.isArray(DEFAULT_PLATFORMS_ADD))
+          ? DEFAULT_PLATFORMS_ADD.map(function (x) { return Object.assign({}, x); }) : [];
+        var extra = [];
+        try { extra = JSON.parse(localStorage.getItem((ROOT.indexOf('BAIJID') >= 0 ? '' : '') + '') || 'null'); } catch (e) {}
+        // use public helper if present for custom platforms/apps
+        if (typeof window.__getScopedPageInterfaces === 'function' && window.__getScopedPageInterfaces._v3053Raw) {
+          return window.__getScopedPageInterfaces._v3053Raw(pg) || base;
+        }
+      }
+    } catch (e) {}
+    try {
+      if (typeof window.__v3053RawScoped === 'function') return window.__v3053RawScoped(pg) || [];
+    } catch (e) {}
+    try {
+      if (typeof window.__getScopedPageInterfaces === 'function') {
+        // may be wrapped; still usable as full catalog for picker candidates
+        return window.__getScopedPageInterfaces(pg) || [];
+      }
+    } catch (e) {}
+    return [];
+  }
+
+  function getTool(pg, n) {
+    n = String(n);
+    if (n.indexOf('custom:') === 0) {
+      return read(STORE + 'items_' + pg + '_' + n.slice(7), []);
+    }
+    var saved = read(STORE + 'pageItems_' + pg + ':' + n, null);
+    if (Array.isArray(saved)) return saved;
+    var legacy = read(LEGACY + pg + ':' + n, null);
+    if (Array.isArray(legacy)) return legacy;
+    var key = (pg === 'platform' ? 'DEFAULT_PLATFORM_TOOL_' : pg === 'app' ? 'DEFAULT_APP_TOOL_' : 'DEFAULT_HOME_TOOL_') + n;
+    var a = window[key];
+    return Array.isArray(a) ? a.slice() : [];
+  }
+  function setTool(pg, n, arr) {
+    n = String(n);
+    if (n.indexOf('custom:') === 0) {
+      write(STORE + 'items_' + pg + '_' + n.slice(7), arr);
+      return;
+    }
+    write(STORE + 'pageItems_' + pg + ':' + n, arr);
+    write(LEGACY + pg + ':' + n, arr);
+    try {
+      window[(pg === 'platform' ? 'DEFAULT_PLATFORM_TOOL_' : 'DEFAULT_APP_TOOL_') + n] = arr;
+    } catch (e) {}
+  }
+  function boxes(pg) { return read(STORE + 'boxes_' + pg, []); }
+
+  function assignedSets(pg) {
+    var byId = {}, bySoft = {}, byName = {}, byIdent = {};
+    function mark(x) {
+      if (!x) return;
+      var i = ident(x); if (i) byIdent[i] = 1;
+      var s = softKey(x.name, x.link); if (s !== '|') bySoft[s] = 1;
+      if (x.name) byName[normName(x.name)] = 1;
+      if (x.id != null && String(x.id) !== '') byId[String(x.id)] = 1;
+    }
+    if (pg === 'home') {
+      read(HOME_FOLDERS, []).forEach(function (f) {
+        (f && f.items || []).forEach(mark);
+      });
+      return { byId: byId, bySoft: bySoft, byName: byName, byIdent: byIdent };
+    }
+    for (var n = 1; n <= 30; n++) getTool(pg, n).forEach(mark);
+    boxes(pg).forEach(function (b) {
+      if (!b) return;
+      read(STORE + 'items_' + pg + '_' + b.id, []).forEach(mark);
+    });
+    return { byId: byId, bySoft: bySoft, byName: byName, byIdent: byIdent };
+  }
+
+  function isToolboxCard(card) {
+    return !!(card.classList.contains('plat-tool-card')
+      || card.classList.contains('v3007-custom-box')
+      || card.classList.contains('is-folder')
+      || card.getAttribute('data-folder') === '1'
+      || card.hasAttribute('data-tool-page')
+      || card.hasAttribute('data-v3007-box')
+      || card.hasAttribute('data-tool-num'));
+  }
+
+  function hidePlat(rootId, sets) {
+    var root = document.getElementById(rootId);
+    if (!root) return;
+    Array.prototype.forEach.call(root.querySelectorAll('.plat-card'), function (card) {
+      if (isToolboxCard(card)) {
+        card.classList.remove('v3053-hidden');
+        return;
+      }
+      var id = card.getAttribute('data-id') || '';
+      var nameEl = card.querySelector('.plat-name');
+      var name = nameEl ? (nameEl.textContent || '').trim() : '';
+      var link = '';
+      if (card.tagName === 'A') link = card.getAttribute('href') || '';
+      if (link === '#') link = '';
+      var oc = card.getAttribute('onclick') || '';
+      var m = oc.match(/window\.open\(\s*['"]([^'"]+)/);
+      if (m) link = m[1];
+      // openHardPlatform(i) / openHardApp(i) — resolve from DEFAULT arrays
+      var hm = oc.match(/openHardPlatform\((\d+)\)/);
+      if (hm && typeof DEFAULT_PLATFORMS_ADD !== 'undefined' && DEFAULT_PLATFORMS_ADD[hm[1]]) {
+        var dp = DEFAULT_PLATFORMS_ADD[hm[1]];
+        name = dp.name || name;
+        link = dp.link || link || '';
+      }
+      var am = oc.match(/openHardApp\((\d+)\)/);
+      if (am && typeof DEFAULT_APP_ADD !== 'undefined' && DEFAULT_APP_ADD[am[1]]) {
+        var da = DEFAULT_APP_ADD[am[1]];
+        name = da.name || name;
+        link = da.link || link || '';
+      }
+      var hit = false;
+      if (id && sets.byId[id]) hit = true;
+      if (!hit && sets.bySoft[softKey(name, link)]) hit = true;
+      if (!hit && name && sets.byName[normName(name)]) hit = true;
+      if (hit) {
+        if (!card.classList.contains('v3053-hidden')) card.classList.add('v3053-hidden');
+      } else {
+        if (card.classList.contains('v3053-hidden')) card.classList.remove('v3053-hidden');
+      }
+    });
+  }
+
+  function hideHome() {
+    var sets = assignedSets('home');
+    var track = document.getElementById('homePinTrack');
+    if (!track) return;
+    Array.prototype.forEach.call(track.querySelectorAll('.home-pin[data-id]'), function (el) {
+      if (el.classList.contains('home-pin-plus') || el.classList.contains('is-folder') || el.getAttribute('data-folder') === '1') {
+        el.classList.remove('v3053-hidden');
+        return;
+      }
+      var id = el.getAttribute('data-id') || '';
+      if (id && sets.byId[id]) el.classList.add('v3053-hidden');
+      else el.classList.remove('v3053-hidden');
+    });
+  }
+
+  var _hideBusy = false;
+  function applyHide() {
+    if (_hideBusy) return;
+    _hideBusy = true;
+    try {
+      try { hidePlat('hardPlatforms', assignedSets('platform')); } catch (e) {}
+      try { hidePlat('customPlatforms', assignedSets('platform')); } catch (e) {}
+      try { hidePlat('hardApps', assignedSets('app')); } catch (e) {}
+      try { hidePlat('customApps', assignedSets('app')); } catch (e) {}
+      try { hideHome(); } catch (e) {}
+    } finally {
+      // release after paint so MutationObserver from class toggles settles
+      setTimeout(function () { _hideBusy = false; }, 80);
+    }
+  }
+  function scheduleHide() {
+    if (_hideBusy) return;
+    clearTimeout(hideTimer);
+    hideTimer = setTimeout(applyHide, 120);
+  }
+  window.v3053ApplyHide = applyHide;
+
+  function resolveCtx() {
+    var c = window._pageToolCtx;
+    if (c && (c.pg === 'platform' || c.pg === 'app') && c.n != null) {
+      return { pg: String(c.pg), n: String(c.n) };
+    }
+    return null;
+  }
+
+  function iconHtml(x) {
+    var logo = x && x.logo ? String(x.logo) : '';
+    if (logo && !/^ti[ -]/i.test(logo)) return '<img src="' + esc(logo) + '" alt="">';
+    var v = (typeof brandIconFromName === 'function' && brandIconFromName(x && x.name, x && x.link))
+      || (x && x.icon) || 'ti ti-world';
+    if (/^ti-/.test(v) && v.indexOf(' ') < 0) v = 'ti ' + v;
+    return '<i class="' + esc(v) + '"></i>';
+  }
+
+  /* Full catalog without our hide filter — capture raw scoped API once. */
+  (function captureRawScoped() {
+    var fn = window.__getScopedPageInterfaces;
+    if (typeof fn === 'function' && !fn._v3053Captured) {
+      // unwrap one layer of v3052 if present by storing current as raw if not already wrapped by us
+      window.__v3053RawScoped = function (page) {
+        try {
+          // Build from known arrays for reliability
+          if (page === 'platform') {
+            var a = (typeof DEFAULT_PLATFORMS_ADD !== 'undefined' && Array.isArray(DEFAULT_PLATFORMS_ADD))
+              ? DEFAULT_PLATFORMS_ADD.map(function (x) { return Object.assign({}, x); }) : [];
+            try {
+              var customs = JSON.parse(localStorage.getItem((document.title || 'BAIJID').replace(/.*/, function () {
+                // LS key used in main code
+                return null;
+              }) ) || '[]');
+            } catch (e) {}
+            // try common keys
+            try {
+              var keys = [];
+              for (var i = 0; i < localStorage.length; i++) keys.push(localStorage.key(i));
+              var platKey = keys.filter(function (k) { return /plat/i.test(k) && /custom|LS_PLAT|platforms/i.test(k); })[0];
+              // main code uses LS_PLAT variable — search
+            } catch (e) {}
+            // Fallback to existing function then strip nothing
+            try {
+              var via = fn.call(window, page);
+              if (Array.isArray(via) && via.length) return via.map(function (x) { return Object.assign({}, x); });
+            } catch (e) {}
+            return a;
+          }
+          if (page === 'app') {
+            try {
+              var via2 = fn.call(window, page);
+              if (Array.isArray(via2) && via2.length) return via2.map(function (x) { return Object.assign({}, x); });
+            } catch (e) {}
+            return (typeof DEFAULT_APP_ADD !== 'undefined' && Array.isArray(DEFAULT_APP_ADD))
+              ? DEFAULT_APP_ADD.map(function (x) { return Object.assign({}, x); }) : [];
+          }
+        } catch (e) {}
+        return [];
+      };
+      fn._v3053Captured = true;
+    }
+  })();
+
+  function catalog(pg) {
+    var out = [];
+    try {
+      if (pg === 'platform') {
+        if (typeof DEFAULT_PLATFORMS_ADD !== 'undefined' && Array.isArray(DEFAULT_PLATFORMS_ADD)) {
+          DEFAULT_PLATFORMS_ADD.forEach(function (x) { out.push(Object.assign({}, x)); });
+        }
+        try {
+          var customs = JSON.parse(localStorage.getItem(ROOT + '_custom_platforms') || '[]');
+          if (Array.isArray(customs)) customs.forEach(function (x) { out.push(Object.assign({}, x)); });
+        } catch (e) {}
+      } else if (pg === 'app') {
+        if (typeof DEFAULT_APP_ADD !== 'undefined' && Array.isArray(DEFAULT_APP_ADD)) {
+          DEFAULT_APP_ADD.forEach(function (x) { out.push(Object.assign({}, x)); });
+        }
+        try {
+          var apps = JSON.parse(localStorage.getItem(ROOT + '_custom_apps') || '[]');
+          if (Array.isArray(apps)) apps.forEach(function (x) { out.push(Object.assign({}, x)); });
+        } catch (e) {}
+      }
+    } catch (e) {}
+    if (out.length) return out;
+    try {
+      if (typeof window.__getScopedPageInterfaces === 'function') {
+        var list2 = window.__getScopedPageInterfaces(pg);
+        if (list2 && list2.length) return list2.slice();
+      }
+    } catch (e) {}
+    return out;
+  }
+
+  function usedOutside(pg, selfN) {
+    var used = {};
+    function mark(x) { if (x) used[ident(x)] = 1; }
+    for (var n = 1; n <= 30; n++) {
+      if (String(n) === String(selfN)) continue;
+      getTool(pg, n).forEach(mark);
+    }
+    boxes(pg).forEach(function (b) {
+      if (!b) return;
+      if (String(selfN).indexOf('custom:') === 0 && String(b.id) === String(selfN).slice(7)) return;
+      read(STORE + 'items_' + pg + '_' + b.id, []).forEach(mark);
+    });
+    return used;
+  }
+
+  window.v3053OpenPicker = function () {
+    var ctx = resolveCtx();
+    // Home folder?
+    if (!ctx) {
+      if (window._openFolderId || window.__v3019HomeCustomId) {
+        if (typeof window.openMtPick === 'function') {
+          window.openMtPick();
+          return;
+        }
+      }
+      if (window.toastMsg) toastMsg('Open a tool box first', true);
+      return;
+    }
+    var pg = ctx.pg, n = ctx.n;
+    var cur = getTool(pg, n);
+    var own = {};
+    cur.forEach(function (x) { own[ident(x)] = 1; });
+    var used = usedOutside(pg, n);
+    var source = catalog(pg).concat(cur);
+    var seen = {}, candidates = [];
+    source.forEach(function (x) {
+      if (!x || !x.name) return;
+      var k = ident(x);
+      if (seen[k]) return;
+      seen[k] = 1;
+      if (own[k] || !used[k]) candidates.push(x);
+    });
+    var selected = {};
+    cur.forEach(function (x) { selected[ident(x)] = x; });
+    pickState = { pg: pg, n: n, selected: selected, candidates: candidates };
+
+    var listEl = document.getElementById('mtPickList');
+    var save = document.getElementById('mtPickSave');
+    var title = document.querySelector('#mtPickOverlay .mt-pick-title');
+    var ov = document.getElementById('mtPickOverlay');
+    if (title) title.textContent = 'ADD TO TOOL';
+    if (listEl) {
+      if (!candidates.length) {
+        listEl.innerHTML = '<div style="padding:18px;text-align:center">No interfaces available</div>';
+      } else {
+        listEl.innerHTML = candidates.map(function (x) {
+          var k = ident(x);
+          var on = !!own[k];
+          return '<div class="mt-pick-row' + (on ? ' on' : '') + '" data-v3053-k="' + esc(k) + '" onclick="window.v3053TogglePick(this)">' +
+            '<div class="mt-pick-ico">' + iconHtml(x) + '</div>' +
+            '<div class="mt-pick-name">' + esc(x.name) + '</div>' +
+            '<div class="mt-pick-check">' + (on ? '\u2713' : '') + '</div></div>';
+        }).join('');
+      }
+    }
+    if (save) {
+      save.disabled = false;
+      save.onclick = function (e) {
+        if (e) { e.preventDefault(); e.stopPropagation(); }
+        window.v3053SavePick();
+      };
+    }
+    if (ov) {
+      ov.classList.add('open');
+      ov.removeAttribute('data-v3050-mode');
+    }
+  };
+
+  window.v3053TogglePick = function (row) {
+    if (!pickState || !row) return;
+    var k = row.getAttribute('data-v3053-k');
+    var check = row.querySelector('.mt-pick-check');
+    if (pickState.selected[k]) {
+      delete pickState.selected[k];
+      row.classList.remove('on');
+      if (check) check.textContent = '';
+    } else {
+      var x = pickState.candidates.find(function (v) { return ident(v) === k; });
+      if (x) {
+        pickState.selected[k] = x;
+        row.classList.add('on');
+        if (check) check.textContent = '\u2713';
+      }
+    }
+  };
+
+  window.v3053SavePick = function () {
+    if (!pickState) return;
+    var arr = Object.keys(pickState.selected).map(function (k) { return pickState.selected[k]; });
+    if (arr.length < 2) {
+      if (window.toastMsg) toastMsg('Select at least two interfaces', true);
+      return;
+    }
+    setTool(pickState.pg, pickState.n, arr);
+    window._pageToolItems = arr;
+    // keep window default arrays in sync
+    try {
+      if (String(pickState.n).indexOf('custom:') !== 0) {
+        window[(pickState.pg === 'platform' ? 'DEFAULT_PLATFORM_TOOL_' : 'DEFAULT_APP_TOOL_') + pickState.n] = arr;
+      }
+    } catch (e) {}
+
+    var ov = document.getElementById('mtPickOverlay');
+    if (ov) ov.classList.remove('open');
+    pickState = null;
+
+    // refresh open toolbox grid
+    try {
+      if (typeof window.openPageTool === 'function') {
+        var ctx = resolveCtx();
+        if (ctx) window.openPageTool(ctx.pg, ctx.n);
+      }
+    } catch (e) {}
+    try { if (window.renderHardPlatforms) window.renderHardPlatforms(); } catch (e) {}
+    try { if (window.renderHardApps) window.renderHardApps(); } catch (e) {}
+    try { if (window.renderCustomPlatforms) window.renderCustomPlatforms(); } catch (e) {}
+    try { if (window.renderCustomApps) window.renderCustomApps(); } catch (e) {}
+    scheduleHide();
+    if (window.toastMsg) toastMsg('Tool updated');
+  };
+
+  // Authoritative Plus / picker entry points
+  window.openPageToolPicker = function () { window.v3053OpenPicker(); };
+  var _prevSavePageToolPick = window.savePageToolPick;
+  window.savePageToolPick = function () {
+    if (pickState) return window.v3053SavePick();
+    if (typeof _prevSavePageToolPick === 'function') return _prevSavePageToolPick.apply(this, arguments);
+  };
+
+  // When home plus is used, leave openMtPick alone — but after saveMtPick, hide.
+  var _prevSaveMt = window.saveMtPick;
+  if (typeof _prevSaveMt === 'function') {
+    window.saveMtPick = function () {
+      var r = _prevSaveMt.apply(this, arguments);
+      scheduleHide();
+      try { if (window.renderHomePins) window.renderHomePins(); } catch (e) {}
+      scheduleHide();
+      return r;
+    };
+  }
+
+  // After any page tool open, remember ctx
+  var _prevOpenPageTool = window.openPageTool;
+  if (typeof _prevOpenPageTool === 'function') {
+    window.openPageTool = function (pg, n) {
+      if (pg === 'platform' || pg === 'app') {
+        window._pageToolCtx = { pg: String(pg), n: String(n), key: String(pg) + ':' + String(n) };
+        window._openFolderId = null;
+      }
+      var r = _prevOpenPageTool.apply(this, arguments);
+      scheduleHide();
+      return r;
+    };
+  }
+
+  // Wrap renders to re-apply hide
+  ['renderHardPlatforms', 'renderHardApps', 'renderCustomPlatforms', 'renderCustomApps', 'renderHomePins', 'renderLoose', 'renderPageBoxes'].forEach(function (name) {
+    var old = window[name];
+    if (typeof old !== 'function' || old._v3053Wrapped) return;
+    var w = function () {
+      var r = old.apply(this, arguments);
+      scheduleHide();
+      return r;
+    };
+    w._v3053Wrapped = true;
+    window[name] = w;
+  });
+
+  // Observe DOM
+  function observe() {
+    if (!window.MutationObserver) return;
+    ['hardPlatforms', 'customPlatforms', 'hardApps', 'customApps', 'homePinTrack'].forEach(function (id) {
+      var el = document.getElementById(id);
+      if (!el || el._v3053Obs) return;
+      el._v3053Obs = true;
+      var t = 0;
+      new MutationObserver(function () {
+        if (_hideBusy) return;
+        clearTimeout(t);
+        t = setTimeout(scheduleHide, 150);
+      }).observe(el, { childList: true, subtree: false });
+    });
+  }
+
+  // Ensure V3046 Plus path uses our picker
+  // (openPageToolPicker already reassigned)
+
+  // Bubble backup removed — caused double-open races with V3046/V3057.
+
+  function boot() {
+    observe();
+    scheduleHide();
+    setTimeout(scheduleHide, 500);
+    setTimeout(scheduleHide, 1200);
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);
+  else boot();
+  document.addEventListener('baijid:tabchange', scheduleHide);
+})();
+</script>
+
+
+<!-- V3054: no duplicate sides on Platform/App — page OR tool, never both/twice -->
+<script id="v3054-no-dup-platform-app">
+(function () {
+  'use strict';
+  if (window.__v3054Installed) return;
+  window.__v3054Installed = true;
+
+  var ROOT = document.title || 'BAIJID';
+  var STORE = ROOT + '_v3007_';
+
+  function read(k, fb) {
+    try {
+      var v = JSON.parse(localStorage.getItem(k) || 'null');
+      return v == null ? fb : v;
+    } catch (e) { return fb; }
+  }
+  function write(k, v) {
+    try { localStorage.setItem(k, JSON.stringify(v)); return true; }
+    catch (e) { return false; }
+  }
+  function normName(s) { return String(s || '').trim().toLowerCase(); }
+  function normLink(s) { return String(s || '').trim().toLowerCase().replace(/\/+$/, ''); }
+  function ident(x) {
+    if (!x) return '';
+    if (x.id != null && String(x.id) !== '') return 'id:' + String(x.id);
+    return [normName(x.name), normLink(x.link), String(x.special || ''), x.html ? 'html' : ''].join('|');
+  }
+  function softKey(x) {
+    return normName(x && x.name) + '|' + normLink(x && x.link);
+  }
+  function nameKey(x) { return normName(x && x.name); }
+
+  function pageCatalog(pg) {
+    var out = [];
+    try {
+      if (pg === 'platform') {
+        if (typeof DEFAULT_PLATFORMS_ADD !== 'undefined' && Array.isArray(DEFAULT_PLATFORMS_ADD)) {
+          DEFAULT_PLATFORMS_ADD.forEach(function (x) { out.push(Object.assign({}, x)); });
+        }
+        try {
+          var c = JSON.parse(localStorage.getItem(ROOT + '_custom_platforms') || '[]');
+          if (Array.isArray(c)) c.forEach(function (x) { out.push(Object.assign({}, x)); });
+        } catch (e) {}
+      } else if (pg === 'app') {
+        if (typeof DEFAULT_APP_ADD !== 'undefined' && Array.isArray(DEFAULT_APP_ADD)) {
+          DEFAULT_APP_ADD.forEach(function (x) { out.push(Object.assign({}, x)); });
+        }
+        try {
+          var a = JSON.parse(localStorage.getItem(ROOT + '_custom_apps') || '[]');
+          if (Array.isArray(a)) a.forEach(function (x) { out.push(Object.assign({}, x)); });
+        } catch (e) {}
+      }
+    } catch (e) {}
+    return out;
+  }
+
+  function isOnPageCatalog(pg, item) {
+    if (!item) return false;
+    var cat = pageCatalog(pg);
+    var i = ident(item), s = softKey(item), n = nameKey(item);
+    for (var k = 0; k < cat.length; k++) {
+      var x = cat[k];
+      if (!x) continue;
+      if (ident(x) === i) return true;
+      if (softKey(x) === s && s !== '|') return true;
+      if (nameKey(x) === n && n) return true;
+    }
+    return false;
+  }
+
+  /* Strip loose copies that already exist as normal page cards (fixes double). */
+  function cleanLoose(pg) {
+    var loose = read(STORE + 'loose_' + pg, []);
+    if (!Array.isArray(loose) || !loose.length) return;
+    var seen = {};
+    var next = [];
+    loose.forEach(function (x) {
+      if (!x) return;
+      // Drop anything that already lives on the page catalog
+      if (isOnPageCatalog(pg, x)) return;
+      var k = ident(x) || softKey(x) || nameKey(x);
+      if (!k || seen[k]) return;
+      seen[k] = 1;
+      next.push(x);
+    });
+    write(STORE + 'loose_' + pg, next);
+  }
+
+  function cleanAllLoose() {
+    cleanLoose('platform');
+    cleanLoose('app');
+  }
+
+  /* Wrap renderLoose so catalog items never appear as extra NEW cards */
+  function wrapRenderLoose() {
+    var old = window.renderLoose;
+    if (typeof old !== 'function' || old._v3054Wrapped) {
+      // still provide a safe renderer if missing
+      if (typeof old !== 'function') {
+        window.renderLoose = function (pg) {
+          cleanLoose(pg);
+          var root = document.getElementById(pg === 'platform' ? 'customPlatforms' : 'customApps');
+          if (!root) return;
+          root.querySelectorAll('.v3007-loose-item').forEach(function (n) { n.remove(); });
+          var a = read(STORE + 'loose_' + pg, []);
+          a.forEach(function (x) {
+            if (!x || isOnPageCatalog(pg, x)) return;
+            var c = document.createElement('div');
+            c.className = 'plat-card v3007-loose-item';
+            var name = String(x.name || 'Item');
+            c.innerHTML = '<span class="plat-name">' + name.replace(/[<>]/g, '') + '</span><span class="plat-badge live">NEW</span>';
+            if (x.link) {
+              c.addEventListener('click', function () { window.open(x.link, '_blank', 'noopener'); });
+            }
+            root.appendChild(c);
+          });
+          if (typeof window.v3053ApplyHide === 'function') window.v3053ApplyHide();
+        };
+        window.renderLoose._v3054Wrapped = true;
+      }
+      return;
+    }
+    window.renderLoose = function (pg) {
+      cleanLoose(pg);
+      var r = old.apply(this, arguments);
+      // Remove any loose DOM cards that match page catalog (belt & suspenders)
+      try {
+        var root = document.getElementById(pg === 'platform' ? 'customPlatforms' : 'customApps');
+        if (root) {
+          root.querySelectorAll('.v3007-loose-item').forEach(function (card) {
+            var nameEl = card.querySelector('.plat-name');
+            var name = nameEl ? nameEl.textContent : '';
+            if (isOnPageCatalog(pg, { name: name })) card.remove();
+          });
+        }
+      } catch (e) {}
+      if (typeof window.v3053ApplyHide === 'function') setTimeout(window.v3053ApplyHide, 30);
+      return r;
+    };
+    window.renderLoose._v3054Wrapped = true;
+  }
+
+  /* After picker save: item left tool → only page card shows (hide class cleared). No new loose copy. */
+  var prevSave = window.v3053SavePick || window.savePageToolPick;
+  window.v3053SavePick = function () {
+    var r;
+    if (typeof prevSave === 'function') r = prevSave.apply(this, arguments);
+    cleanAllLoose();
+    try {
+      if (window.renderLoose) {
+        window.renderLoose('platform');
+        window.renderLoose('app');
+      }
+    } catch (e) {}
+    if (typeof window.v3053ApplyHide === 'function') window.v3053ApplyHide();
+    setTimeout(function () {
+      if (typeof window.v3053ApplyHide === 'function') window.v3053ApplyHide();
+    }, 80);
+    return r;
+  };
+  window.savePageToolPick = window.v3053SavePick;
+
+  /* Periodic / post-render cleanup */
+  wrapRenderLoose();
+  cleanAllLoose();
+  setTimeout(function () {
+    wrapRenderLoose();
+    cleanAllLoose();
+    try { if (window.renderLoose) { window.renderLoose('platform'); window.renderLoose('app'); } } catch (e) {}
+    if (typeof window.v3053ApplyHide === 'function') window.v3053ApplyHide();
+  }, 600);
+  setTimeout(function () {
+    cleanAllLoose();
+    if (typeof window.v3053ApplyHide === 'function') window.v3053ApplyHide();
+  }, 1500);
+
+  // When toolbox closes after drag-out, clean duplicates
+  var prevClose = window.closeMultiTool;
+  if (typeof prevClose === 'function' && !prevClose._v3054Wrapped) {
+    window.closeMultiTool = function () {
+      var r = prevClose.apply(this, arguments);
+      cleanAllLoose();
+      try {
+        if (window.renderLoose) {
+          window.renderLoose('platform');
+          window.renderLoose('app');
+        }
+      } catch (e) {}
+      if (typeof window.v3053ApplyHide === 'function') window.v3053ApplyHide();
+      return r;
+    };
+    window.closeMultiTool._v3054Wrapped = true;
+  }
+
+  document.addEventListener('baijid:tabchange', function () {
+    cleanAllLoose();
+    if (typeof window.v3053ApplyHide === 'function') window.v3053ApplyHide();
+  });
+})();
+</script>
+
+
+<!-- V3055: restore Tabler icons after tool-remove + theme-colored icons -->
+<style id="v3055-icon-theme">
+  /* All platform/app card icons follow active theme color */
+  #tab-platforms .plat-card i,
+  #tab-platforms .plat-card .plat-icon,
+  #tab-apps .plat-card i,
+  #tab-apps .plat-card .plat-icon,
+  #tab-platforms .v3007-loose-item i,
+  #tab-apps .v3007-loose-item i,
+  #mtGrid .mt-item-icon i,
+  #mtPickList .mt-pick-ico i,
+  .plat-tool-mini i {
+    color: var(--a) !important;
+    -webkit-text-fill-color: var(--a) !important;
+    text-shadow: 0 0 12px var(--ag) !important;
+  }
+</style>
+<script id="v3055-icon-fix">
+(function () {
+  'use strict';
+  if (window.__v3055Installed) return;
+  window.__v3055Installed = true;
+
+  var ROOT = document.title || 'BAIJID';
+  var STORE = ROOT + '_v3007_';
+
+  function read(k, fb) {
+    try {
+      var v = JSON.parse(localStorage.getItem(k) || 'null');
+      return v == null ? fb : v;
+    } catch (e) { return fb; }
+  }
+  function write(k, v) {
+    try { localStorage.setItem(k, JSON.stringify(v)); return true; } catch (e) { return false; }
+  }
+
+  /* Strong Tabler brand resolver (always returns ti ti-*) */
+  window.v3055BrandIcon = function (name, link, fallback) {
+    if (typeof brandIconFromName === 'function') {
+      var b = brandIconFromName(name, link);
+      if (b) {
+        if (/^ti-/.test(b) && b.indexOf(' ') < 0) b = 'ti ' + b;
+        return b;
+      }
+    }
+    var n = String(name || '').toLowerCase();
+    var u = String(link || '').toLowerCase();
+    var rules = [
+      [/calculator|calc/, 'ti ti-calculator'],
+      [/gmail|mail\.google/, 'ti ti-mail'],
+      [/maps|google\.com\/maps/, 'ti ti-map'],
+      [/drive|drive\.google/, 'ti ti-brand-google-drive'],
+      [/play store|play\.google/, 'ti ti-brand-google-play'],
+      [/chrome/, 'ti ti-brand-chrome'],
+      [/youtube|youtu\.be/, 'ti ti-brand-youtube'],
+      [/facebook|\bfb\b/, 'ti ti-brand-facebook'],
+      [/instagram|\big\b|insta/, 'ti ti-brand-instagram'],
+      [/tiktok/, 'ti ti-brand-tiktok'],
+      [/telegram|t\.me/, 'ti ti-brand-telegram'],
+      [/whatsapp|wa\.me/, 'ti ti-brand-whatsapp'],
+      [/github/, 'ti ti-brand-github'],
+      [/gitlab/, 'ti ti-brand-gitlab'],
+      [/google/, 'ti ti-brand-google'],
+      [/twitter|\bx\b|x\.com/, 'ti ti-brand-x'],
+      [/linkedin/, 'ti ti-brand-linkedin'],
+      [/reddit/, 'ti ti-brand-reddit'],
+      [/discord/, 'ti ti-brand-discord'],
+      [/cloudflare/, 'ti ti-brand-cloudflare'],
+      [/netlify/, 'ti ti-device-desktop-code'],
+      [/vercel/, 'ti ti-brand-vercel']
+    ];
+    for (var i = 0; i < rules.length; i++) {
+      if (rules[i][0].test(n) || rules[i][0].test(u)) return rules[i][1];
+    }
+    var fb = fallback || 'ti ti-world';
+    if (/^ti-/.test(fb) && fb.indexOf(' ') < 0) fb = 'ti ' + fb;
+    if (!/^ti\s/.test(fb)) fb = 'ti ti-world';
+    return fb;
+  };
+
+  function ensureItemIcon(x) {
+    if (!x || typeof x !== 'object') return x;
+    var ic = x.icon || '';
+    // Prefer brand from name/link; force Tabler class
+    var brand = window.v3055BrandIcon(x.name, x.link, ic);
+    x.icon = brand;
+    // Drop broken image logos so Tabler icon is used
+    if (x.logo && /^ti[ -]/i.test(String(x.logo))) {
+      x.icon = window.v3055BrandIcon(x.name, x.link, x.logo);
+      delete x.logo;
+    }
+    return x;
+  }
+
+  function iconHtml(x) {
+    x = ensureItemIcon(x || {});
+    var brand = window.v3055BrandIcon(x.name, x.link, x.icon);
+    return '<i class="' + brand + ' plat-icon"></i>';
+  }
+
+  /* Rewrite renderLoose: always Tabler icons, theme color via CSS */
+  window.renderLoose = function (pg) {
+    var root = document.getElementById(pg === 'platform' ? 'customPlatforms' : 'customApps');
+    if (!root) return;
+    root.querySelectorAll('.v3007-loose-item').forEach(function (n) { n.remove(); });
+
+    // Prefer not to show loose copies of page-catalog items
+    var loose = read(STORE + 'loose_' + pg, []);
+    if (!Array.isArray(loose)) loose = [];
+    var cleaned = [];
+    var seen = {};
+    loose.forEach(function (x) {
+      if (!x || !x.name) return;
+      x = ensureItemIcon(Object.assign({}, x));
+      var k = [String(x.name).toLowerCase(), String(x.link || '').toLowerCase()].join('|');
+      if (seen[k]) return;
+      seen[k] = 1;
+      cleaned.push(x);
+    });
+    write(STORE + 'loose_' + pg, cleaned);
+
+    cleaned.forEach(function (x) {
+      var c = document.createElement('div');
+      c.className = 'plat-card v3007-loose-item';
+      c.setAttribute('data-name', x.name || '');
+      if (x.link) c.setAttribute('data-link', x.link);
+      c.innerHTML = iconHtml(x) +
+        '<span class="plat-name">' + String(x.name || '').replace(/[<>]/g, '') + '</span>' +
+        '<span class="plat-badge live">NEW</span>';
+      c.addEventListener('click', function () {
+        if (Date.now() < (window.__v3007DragClickUntil || 0)) return;
+        if (x.special === 'gallery' && window.openGalleryPanel) openGalleryPanel();
+        else if (x.html && window.openHtmlInModal) openHtmlInModal(x.name, x.html);
+        else if (x.link) window.open(x.link, '_blank', 'noopener');
+      });
+      root.appendChild(c);
+    });
+    if (typeof window.v3053ApplyHide === 'function') setTimeout(window.v3053ApplyHide, 20);
+  };
+
+  /* Repair icons inside open toolbox grid & pick list */
+  var _repairBusy = false;
+  function repairDomIcons(root) {
+    if (!root || _repairBusy) return;
+    _repairBusy = true;
+    try { _repairDomIconsInner(root); } finally { setTimeout(function(){ _repairBusy = false; }, 60); }
+  }
+  function _repairDomIconsInner(root) {
+    if (!root) return;
+    root.querySelectorAll('.mt-item-name, .mt-pick-name, .plat-name').forEach(function (nameEl) {
+      var card = nameEl.closest('.mt-item, .mt-pick-row, .plat-card');
+      if (!card) return;
+      if (card.classList.contains('plat-tool-card') || card.classList.contains('v3007-custom-box')) return;
+      var name = (nameEl.textContent || '').trim();
+      if (!name) return;
+      var link = card.getAttribute('data-link') || card.getAttribute('href') || '';
+      var ico = card.querySelector('.mt-item-icon, .mt-pick-ico, .plat-icon, i');
+      var brand = window.v3055BrandIcon(name, link);
+      if (card.classList.contains('mt-item')) {
+        var box = card.querySelector('.mt-item-icon');
+        if (box && !box.querySelector('img')) box.innerHTML = '<i class="' + brand + '"></i>';
+      } else if (card.classList.contains('mt-pick-row')) {
+        var box2 = card.querySelector('.mt-pick-ico');
+        if (box2 && !box2.querySelector('img')) box2.innerHTML = '<i class="' + brand + '"></i>';
+      } else if (card.classList.contains('v3007-loose-item') || card.classList.contains('plat-card')) {
+        // If no icon element, inject one
+        var existing = card.querySelector('i.plat-icon, i[class*="ti-"], img');
+        if (!existing) {
+          var nameSpan = card.querySelector('.plat-name');
+          if (nameSpan) nameSpan.insertAdjacentHTML('beforebegin', '<i class="' + brand + ' plat-icon"></i>');
+        } else if (existing.tagName === 'I') {
+          existing.className = brand + ' plat-icon';
+        }
+      }
+    });
+  }
+
+  /* When items are saved into / removed from tools, normalize icons on stored arrays */
+  function normalizeToolStorage(pg) {
+    for (var n = 1; n <= 30; n++) {
+      var key = STORE + 'pageItems_' + pg + ':' + n;
+      var arr = read(key, null);
+      if (!Array.isArray(arr)) {
+        try {
+          arr = JSON.parse(localStorage.getItem(ROOT + '_page_tool_items_' + pg + ':' + n) || 'null');
+        } catch (e) { arr = null; }
+      }
+      if (!Array.isArray(arr) || !arr.length) continue;
+      var fixed = arr.map(function (x) { return ensureItemIcon(Object.assign({}, x)); });
+      write(key, fixed);
+      try { localStorage.setItem(ROOT + '_page_tool_items_' + pg + ':' + n, JSON.stringify(fixed)); } catch (e) {}
+      try {
+        window[(pg === 'platform' ? 'DEFAULT_PLATFORM_TOOL_' : 'DEFAULT_APP_TOOL_') + n] = fixed;
+      } catch (e) {}
+    }
+    // custom boxes
+    var boxes = read(STORE + 'boxes_' + pg, []);
+    (boxes || []).forEach(function (b) {
+      if (!b || !b.id) return;
+      var items = read(STORE + 'items_' + pg + '_' + b.id, []);
+      if (!Array.isArray(items)) return;
+      write(STORE + 'items_' + pg + '_' + b.id, items.map(function (x) { return ensureItemIcon(Object.assign({}, x)); }));
+    });
+    // loose
+    var loose = read(STORE + 'loose_' + pg, []);
+    if (Array.isArray(loose)) {
+      write(STORE + 'loose_' + pg, loose.map(function (x) { return ensureItemIcon(Object.assign({}, x)); }));
+    }
+  }
+
+  // Hook save so icons stay after add/remove
+  var prevSave = window.v3053SavePick;
+  if (typeof prevSave === 'function') {
+    window.v3053SavePick = function () {
+      var r = prevSave.apply(this, arguments);
+      normalizeToolStorage('platform');
+      normalizeToolStorage('app');
+      try { window.renderLoose('platform'); window.renderLoose('app'); } catch (e) {}
+      setTimeout(function () {
+        repairDomIcons(document.getElementById('mtGrid'));
+        repairDomIcons(document.getElementById('mtPickList'));
+        repairDomIcons(document.getElementById('hardPlatforms'));
+        repairDomIcons(document.getElementById('hardApps'));
+        repairDomIcons(document.getElementById('customPlatforms'));
+        repairDomIcons(document.getElementById('customApps'));
+      }, 50);
+      return r;
+    };
+    window.savePageToolPick = window.v3053SavePick;
+  }
+
+  // After open picker / tool, repair icons
+  var prevOpenPicker = window.v3053OpenPicker;
+  if (typeof prevOpenPicker === 'function') {
+    window.v3053OpenPicker = function () {
+      var r = prevOpenPicker.apply(this, arguments);
+      setTimeout(function () { repairDomIcons(document.getElementById('mtPickList')); }, 30);
+      return r;
+    };
+    window.openPageToolPicker = window.v3053OpenPicker;
+  }
+
+  function boot() {
+    normalizeToolStorage('platform');
+    normalizeToolStorage('app');
+    try { window.renderLoose('platform'); window.renderLoose('app'); } catch (e) {}
+    setTimeout(function () {
+      repairDomIcons(document.body);
+    }, 400);
+    setTimeout(function () {
+      repairDomIcons(document.body);
+    }, 1200);
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);
+  else boot();
+
+  // V3055 observer removed — it caused infinite DOM repair loops and page freezes.
+  // Icons are repaired once on boot and after save only.
+})();
+</script>
+
+
+<!-- V3056: fix Platform/App toolbox Plus picker list -->
+<script id="v3056-fix-plus-picker">
+(function () {
+  'use strict';
+  if (window.__v3056Installed) return;
+  window.__v3056Installed = true;
+
+  var ROOT = document.title || 'BAIJID';
+  var STORE = ROOT + '_v3007_';
+  var LEGACY = ROOT + '_page_tool_items_';
+  var pickState = null;
+
+  function read(k, fb) {
+    try {
+      var v = JSON.parse(localStorage.getItem(k) || 'null');
+      return v == null ? fb : v;
+    } catch (e) { return fb; }
+  }
+  function write(k, v) {
+    try { localStorage.setItem(k, JSON.stringify(v)); return true; }
+    catch (e) { return false; }
+  }
+  function esc(s) {
+    return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
+  function normName(s) { return String(s || '').trim().toLowerCase(); }
+  function normLink(s) { return String(s || '').trim().toLowerCase().replace(/\/+$/, ''); }
+  function ident(x) {
+    if (!x) return '';
+    if (x.id != null && String(x.id) !== '') return 'id:' + String(x.id);
+    return [normName(x.name), normLink(x.link), String(x.special || ''), x.html ? 'html' : ''].join('|');
+  }
+
+  function getTool(pg, n) {
+    n = String(n);
+    if (n.indexOf('custom:') === 0) return read(STORE + 'items_' + pg + '_' + n.slice(7), []);
+    var saved = read(STORE + 'pageItems_' + pg + ':' + n, null);
+    if (Array.isArray(saved)) return saved;
+    var legacy = read(LEGACY + pg + ':' + n, null);
+    if (Array.isArray(legacy)) return legacy;
+    var key = (pg === 'platform' ? 'DEFAULT_PLATFORM_TOOL_' : 'DEFAULT_APP_TOOL_') + n;
+    var a = window[key];
+    return Array.isArray(a) ? a.slice() : [];
+  }
+  function setTool(pg, n, arr) {
+    n = String(n);
+    if (n.indexOf('custom:') === 0) {
+      write(STORE + 'items_' + pg + '_' + n.slice(7), arr);
+      return;
+    }
+    write(STORE + 'pageItems_' + pg + ':' + n, arr);
+    write(LEGACY + pg + ':' + n, arr);
+    try {
+      window[(pg === 'platform' ? 'DEFAULT_PLATFORM_TOOL_' : 'DEFAULT_APP_TOOL_') + n] = arr;
+    } catch (e) {}
+  }
+  function boxes(pg) { return read(STORE + 'boxes_' + pg, []); }
+
+  function brandIcon(name, link, fallback) {
+    if (typeof window.v3055BrandIcon === 'function') return window.v3055BrandIcon(name, link, fallback);
+    if (typeof brandIconFromName === 'function') {
+      var b = brandIconFromName(name, link);
+      if (b) return (/^ti-/.test(b) && b.indexOf(' ') < 0) ? ('ti ' + b) : b;
+    }
+    var fb = fallback || 'ti ti-world';
+    if (/^ti-/.test(fb) && fb.indexOf(' ') < 0) fb = 'ti ' + fb;
+    return fb;
+  }
+
+  /* Build full page catalog: arrays + DOM scrape (includes hidden cards) */
+  function catalog(pg) {
+    var out = [], seen = {};
+    function push(x) {
+      if (!x || !x.name) return;
+      var k = ident(x);
+      if (!k || seen[k]) return;
+      seen[k] = 1;
+      out.push(x);
+    }
+    try {
+      if (pg === 'platform') {
+        try {
+          if (typeof DEFAULT_PLATFORMS_ADD !== 'undefined' && Array.isArray(DEFAULT_PLATFORMS_ADD)) {
+            DEFAULT_PLATFORMS_ADD.forEach(function (x) { push(Object.assign({}, x)); });
+          }
+        } catch (e) {}
+        try {
+          var customs = JSON.parse(localStorage.getItem(ROOT + '_custom_platforms') || '[]');
+          if (Array.isArray(customs)) customs.forEach(function (x) { push(Object.assign({}, x)); });
+        } catch (e) {}
+      } else if (pg === 'app') {
+        try {
+          if (typeof DEFAULT_APP_ADD !== 'undefined' && Array.isArray(DEFAULT_APP_ADD)) {
+            DEFAULT_APP_ADD.forEach(function (x) { push(Object.assign({}, x)); });
+          }
+        } catch (e) {}
+        try {
+          var apps = JSON.parse(localStorage.getItem(ROOT + '_custom_apps') || '[]');
+          if (Array.isArray(apps)) apps.forEach(function (x) { push(Object.assign({}, x)); });
+        } catch (e) {}
+      }
+    } catch (e) {}
+
+    // DOM scrape — works even if const arrays are out of scope
+    var rootIds = pg === 'platform'
+      ? ['hardPlatforms', 'customPlatforms']
+      : ['hardApps', 'customApps'];
+    rootIds.forEach(function (rid) {
+      var root = document.getElementById(rid);
+      if (!root) return;
+      Array.prototype.forEach.call(root.querySelectorAll('.plat-card'), function (card) {
+        if (card.classList.contains('plat-tool-card') || card.classList.contains('v3007-custom-box')) return;
+        if (card.classList.contains('home-pin-plus')) return;
+        var nameEl = card.querySelector('.plat-name');
+        var name = nameEl ? (nameEl.textContent || '').trim() : '';
+        if (!name || /^add$/i.test(name)) return;
+        var id = card.getAttribute('data-id') || '';
+        var link = '';
+        if (card.tagName === 'A') link = card.getAttribute('href') || '';
+        if (link === '#') link = '';
+        var oc = card.getAttribute('onclick') || '';
+        var m = oc.match(/window\.open\(\s*['"]([^'"]+)/);
+        if (m) link = m[1];
+        var hm = oc.match(/openHardPlatform\((\d+)\)/);
+        if (hm) {
+          try {
+            if (typeof DEFAULT_PLATFORMS_ADD !== 'undefined' && DEFAULT_PLATFORMS_ADD[hm[1]]) {
+              push(Object.assign({}, DEFAULT_PLATFORMS_ADD[hm[1]]));
+              return;
+            }
+          } catch (e) {}
+        }
+        var am = oc.match(/openHardApp\((\d+)\)/);
+        if (am) {
+          try {
+            if (typeof DEFAULT_APP_ADD !== 'undefined' && DEFAULT_APP_ADD[am[1]]) {
+              push(Object.assign({}, DEFAULT_APP_ADD[am[1]]));
+              return;
+            }
+          } catch (e) {}
+        }
+        var iconEl = card.querySelector('i[class*="ti-"]');
+        var icon = iconEl ? iconEl.className.replace(/\s*plat-icon\s*/g, ' ').trim() : '';
+        push({ id: id || undefined, name: name, link: link, icon: icon || brandIcon(name, link) });
+      });
+    });
+
+    // Also include any loose items still stored
+    try {
+      var loose = read(STORE + 'loose_' + pg, []);
+      if (Array.isArray(loose)) loose.forEach(function (x) { push(Object.assign({}, x)); });
+    } catch (e) {}
+
+    return out;
+  }
+
+  function usedOutside(pg, selfN) {
+    var used = {};
+    function mark(x) { if (x) used[ident(x)] = 1; }
+    for (var n = 1; n <= 30; n++) {
+      if (String(n) === String(selfN)) continue;
+      getTool(pg, n).forEach(mark);
+    }
+    boxes(pg).forEach(function (b) {
+      if (!b) return;
+      if (String(selfN).indexOf('custom:') === 0 && String(b.id) === String(selfN).slice(7)) return;
+      read(STORE + 'items_' + pg + '_' + b.id, []).forEach(mark);
+    });
+    return used;
+  }
+
+  function resolveCtx() {
+    var c = window._pageToolCtx;
+    if (c && (c.pg === 'platform' || c.pg === 'app') && c.n != null && String(c.n) !== '') {
+      return { pg: String(c.pg), n: String(c.n) };
+    }
+    // Infer from open toolbox title / last open
+    var ov = document.getElementById('multiToolOverlay');
+    if (ov && ov.classList.contains('open') && window.__v3056LastCtx) {
+      return window.__v3056LastCtx;
+    }
+    return null;
+  }
+
+  function openPicker() {
+    var ctx = resolveCtx();
+    if (!ctx) {
+      // Home folder path
+      if (window._openFolderId || window.__v3019HomeCustomId) {
+        if (typeof window.openMtPick === 'function') window.openMtPick();
+        return;
+      }
+      if (window.toastMsg) toastMsg('Open a tool box first', true);
+      return;
+    }
+    var pg = ctx.pg, n = ctx.n;
+    window.__v3056LastCtx = ctx;
+    window._pageToolCtx = { pg: pg, n: n, key: pg + ':' + n };
+
+    var cur = getTool(pg, n).map(function (x) { return Object.assign({}, x); });
+    var own = {};
+    cur.forEach(function (x) { own[ident(x)] = 1; });
+    var used = usedOutside(pg, n);
+    var source = catalog(pg).concat(cur);
+    var seen = {}, candidates = [];
+    source.forEach(function (x) {
+      if (!x || !x.name) return;
+      var k = ident(x);
+      if (seen[k]) return;
+      seen[k] = 1;
+      // Show if already in THIS tool, or not reserved by another tool
+      if (own[k] || !used[k]) candidates.push(x);
+    });
+
+    var selected = {};
+    cur.forEach(function (x) { selected[ident(x)] = x; });
+    pickState = { pg: pg, n: n, selected: selected, candidates: candidates };
+
+    var listEl = document.getElementById('mtPickList');
+    var save = document.getElementById('mtPickSave');
+    var title = document.querySelector('#mtPickOverlay .mt-pick-title');
+    var ov = document.getElementById('mtPickOverlay');
+    if (title) title.textContent = 'ADD TO TOOL';
+    if (listEl) {
+      if (!candidates.length) {
+        listEl.innerHTML = '<div style="padding:18px;text-align:center;color:var(--txm)">No interfaces available</div>';
+      } else {
+        listEl.innerHTML = candidates.map(function (x) {
+          var k = ident(x);
+          var on = !!own[k];
+          var ic = brandIcon(x.name, x.link, x.icon);
+          return '<div class="mt-pick-row' + (on ? ' on' : '') + '" data-v3056-k="' + esc(k) + '" onclick="window.v3056Toggle(this)">' +
+            '<div class="mt-pick-ico"><i class="' + esc(ic) + '"></i></div>' +
+            '<div class="mt-pick-name">' + esc(x.name) + '</div>' +
+            '<div class="mt-pick-check">' + (on ? '\u2713' : '') + '</div></div>';
+        }).join('');
+      }
+    }
+    if (save) {
+      save.disabled = false;
+      save.onclick = function (e) {
+        if (e) { e.preventDefault(); e.stopPropagation(); }
+        window.v3056Save();
+      };
+    }
+    if (ov) {
+      ov.classList.add('open');
+      ov.style.display = 'flex';
+      ov.style.zIndex = '2147483002';
+      ov.removeAttribute('data-v3050-mode');
+    }
+  }
+
+  window.v3056Toggle = function (row) {
+    if (!pickState || !row) return;
+    var k = row.getAttribute('data-v3056-k');
+    var check = row.querySelector('.mt-pick-check');
+    if (pickState.selected[k]) {
+      delete pickState.selected[k];
+      row.classList.remove('on');
+      if (check) check.textContent = '';
+    } else {
+      var x = pickState.candidates.find(function (v) { return ident(v) === k; });
+      if (x) {
+        pickState.selected[k] = x;
+        row.classList.add('on');
+        if (check) check.textContent = '\u2713';
+      }
+    }
+  };
+
+  window.v3056Save = function () {
+    if (!pickState) return;
+    var arr = Object.keys(pickState.selected).map(function (k) { return pickState.selected[k]; });
+    if (arr.length && arr.length < 2) {
+      if (window.toastMsg) toastMsg('Select at least two interfaces', true);
+      return;
+    }
+    // Allow empty? No — min 2 keeps existing rule. If 0 selected, treat as clear not allowed.
+    if (!arr.length) {
+      if (window.toastMsg) toastMsg('Select at least two interfaces', true);
+      return;
+    }
+    setTool(pickState.pg, pickState.n, arr);
+    window._pageToolItems = arr;
+    try {
+      if (String(pickState.n).indexOf('custom:') !== 0) {
+        window[(pickState.pg === 'platform' ? 'DEFAULT_PLATFORM_TOOL_' : 'DEFAULT_APP_TOOL_') + pickState.n] = arr;
+      }
+    } catch (e) {}
+
+    var ov = document.getElementById('mtPickOverlay');
+    if (ov) {
+      ov.classList.remove('open');
+      ov.style.display = '';
+    }
+    var pg = pickState.pg, n = pickState.n;
+    pickState = null;
+
+    // Refresh tool grid
+    try {
+      if (typeof window.openPageTool === 'function') window.openPageTool(pg, n);
+    } catch (e) {}
+    try { if (window.renderHardPlatforms) window.renderHardPlatforms(); } catch (e) {}
+    try { if (window.renderHardApps) window.renderHardApps(); } catch (e) {}
+    try { if (window.renderCustomPlatforms) window.renderCustomPlatforms(); } catch (e) {}
+    try { if (window.renderCustomApps) window.renderCustomApps(); } catch (e) {}
+    if (typeof window.v3053ApplyHide === 'function') setTimeout(window.v3053ApplyHide, 40);
+    if (window.toastMsg) toastMsg('Tool updated');
+  };
+
+  // Authoritative entry points
+  window.v3053OpenPicker = openPicker;
+  window.openPageToolPicker = openPicker;
+  window.v3056OpenPicker = openPicker;
+
+  // Remember ctx whenever a page tool opens
+  var prevOpen = window.openPageTool;
+  if (typeof prevOpen === 'function') {
+    window.openPageTool = function (pg, n) {
+      if (pg === 'platform' || pg === 'app') {
+        window._pageToolCtx = { pg: String(pg), n: String(n), key: String(pg) + ':' + String(n) };
+        window.__v3056LastCtx = window._pageToolCtx;
+        window._openFolderId = null;
+      }
+      return prevOpen.apply(this, arguments);
+    };
+  }
+
+  // V3056 plus handlers disabled — V3057 owns ADD PAGE SIDES only
+  // Redirect any leftover call of V3056 openPicker to V3057
+  window.v3056OpenPicker = function () {
+    if (typeof window.v3057OpenPicker === 'function') return window.v3057OpenPicker();
+  };
+})();
+</script>
+
+
+<!-- V3057: working Plus picker — only unassigned page sides, merge into tool -->
+<style id="v3057-picker-style">
+  #v3057PickOverlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 2147483646 !important;
+    background: rgba(0,0,0,.82);
+    align-items: flex-end;
+    justify-content: center;
+    padding: 0;
+    pointer-events: auto !important;
+  }
+  #v3057PickOverlay.open { display: flex !important; }
+  #v3057PickPanel {
+    width: 100%;
+    max-width: 520px;
+    max-height: 78vh;
+    background: #071321;
+    border: 1px solid var(--a, #00e5ff);
+    border-radius: 18px 18px 0 0;
+    box-shadow: 0 0 40px rgba(0,229,255,.25);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    color: #eafaff;
+  }
+  #v3057PickHead {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 14px 16px;
+    border-bottom: 1px solid rgba(0,229,255,.2);
+  }
+  #v3057PickHead strong {
+    color: var(--a, #00e5ff);
+    font-size: 14px;
+    letter-spacing: .04em;
+  }
+  #v3057PickHead button {
+    border: 1px solid var(--a, #00e5ff);
+    background: rgba(0,229,255,.12);
+    color: #fff;
+    border-radius: 10px;
+    padding: 8px 14px;
+    font-weight: 700;
+  }
+  #v3057PickList {
+    overflow: auto;
+    padding: 8px 10px 18px;
+    -webkit-overflow-scrolling: touch;
+  }
+  .v3057-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 10px;
+    border-bottom: 1px solid rgba(255,255,255,.08);
+    cursor: pointer;
+    user-select: none;
+  }
+  .v3057-row.on { background: rgba(0,229,255,.1); }
+  .v3057-row i {
+    font-size: 22px;
+    color: var(--a, #00e5ff) !important;
+    width: 28px;
+    text-align: center;
+  }
+  .v3057-row span { flex: 1; font-size: 14px; }
+  .v3057-row b {
+    width: 24px;
+    height: 24px;
+    border-radius: 6px;
+    border: 1px solid var(--a, #00e5ff);
+    display: grid;
+    place-items: center;
+    color: var(--a, #00e5ff);
+    font-size: 14px;
+  }
+  .v3057-row.on b { background: var(--a, #00e5ff); color: #041018; }
+  #v3057Empty {
+    padding: 28px 16px;
+    text-align: center;
+    color: rgba(255,255,255,.55);
+  }
+</style>
+<script id="v3057-working-plus-picker">
+(function () {
+  'use strict';
+  if (window.__v3057Installed) return;
+  window.__v3057Installed = true;
+
+  var ROOT = document.title || 'BAIJID';
+  var STORE = ROOT + '_v3007_';
+  var LEGACY = ROOT + '_page_tool_items_';
+  var state = null; // { pg, n, selected: {key: item}, candidates: [] }
+
+  function read(k, fb) {
+    try {
+      var v = JSON.parse(localStorage.getItem(k) || 'null');
+      return v == null ? fb : v;
+    } catch (e) { return fb; }
+  }
+  function write(k, v) {
+    try { localStorage.setItem(k, JSON.stringify(v)); return true; }
+    catch (e) { return false; }
+  }
+  function esc(s) {
+    return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
+  function normName(s) { return String(s || '').trim().toLowerCase(); }
+  function normLink(s) { return String(s || '').trim().toLowerCase().replace(/\/+$/, ''); }
+  function ident(x) {
+    if (!x) return '';
+    if (x.id != null && String(x.id) !== '') return 'id:' + String(x.id);
+    return [normName(x.name), normLink(x.link), String(x.special || ''), x.html ? 'html' : ''].join('|');
+  }
+  function brand(name, link, fallback) {
+    if (typeof window.v3055BrandIcon === 'function') return window.v3055BrandIcon(name, link, fallback);
+    if (typeof brandIconFromName === 'function') {
+      var b = brandIconFromName(name, link);
+      if (b) return (/^ti-/.test(b) && b.indexOf(' ') < 0) ? ('ti ' + b) : b;
+    }
+    return fallback || 'ti ti-world';
+  }
+
+  function getTool(pg, n) {
+    n = String(n);
+    if (n.indexOf('custom:') === 0) return read(STORE + 'items_' + pg + '_' + n.slice(7), []);
+    var saved = read(STORE + 'pageItems_' + pg + ':' + n, null);
+    if (Array.isArray(saved)) return saved;
+    var legacy = read(LEGACY + pg + ':' + n, null);
+    if (Array.isArray(legacy)) return legacy;
+    var a = window[(pg === 'platform' ? 'DEFAULT_PLATFORM_TOOL_' : 'DEFAULT_APP_TOOL_') + n];
+    return Array.isArray(a) ? a.slice() : [];
+  }
+  function setTool(pg, n, arr) {
+    n = String(n);
+    if (n.indexOf('custom:') === 0) {
+      write(STORE + 'items_' + pg + '_' + n.slice(7), arr);
+      return;
+    }
+    write(STORE + 'pageItems_' + pg + ':' + n, arr);
+    write(LEGACY + pg + ':' + n, arr);
+    try {
+      window[(pg === 'platform' ? 'DEFAULT_PLATFORM_TOOL_' : 'DEFAULT_APP_TOOL_') + n] = arr;
+    } catch (e) {}
+  }
+  function boxes(pg) { return read(STORE + 'boxes_' + pg, []); }
+
+  /* Every interface already inside ANY toolbox on this page */
+  function assignedMap(pg) {
+    var used = {};
+    function mark(x) {
+      if (!x) return;
+      used[ident(x)] = 1;
+      if (x.name) used['name:' + normName(x.name)] = 1;
+    }
+    for (var n = 1; n <= 30; n++) getTool(pg, n).forEach(mark);
+    boxes(pg).forEach(function (b) {
+      if (!b) return;
+      read(STORE + 'items_' + pg + '_' + b.id, []).forEach(mark);
+    });
+    return used;
+  }
+
+  /* Page catalog from defaults + custom storage + DOM (incl. hidden) */
+  function pageCatalog(pg) {
+    var out = [], seen = {};
+    function push(x) {
+      if (!x || !x.name) return;
+      var k = ident(x);
+      if (seen[k]) return;
+      seen[k] = 1;
+      out.push(Object.assign({}, x));
+    }
+    try {
+      if (pg === 'platform') {
+        if (typeof DEFAULT_PLATFORMS_ADD !== 'undefined' && Array.isArray(DEFAULT_PLATFORMS_ADD))
+          DEFAULT_PLATFORMS_ADD.forEach(function (x) { push(x); });
+        try {
+          JSON.parse(localStorage.getItem(ROOT + '_custom_platforms') || '[]')
+            .forEach(function (x) { push(x); });
+        } catch (e) {}
+      } else {
+        if (typeof DEFAULT_APP_ADD !== 'undefined' && Array.isArray(DEFAULT_APP_ADD))
+          DEFAULT_APP_ADD.forEach(function (x) { push(x); });
+        try {
+          JSON.parse(localStorage.getItem(ROOT + '_custom_apps') || '[]')
+            .forEach(function (x) { push(x); });
+        } catch (e) {}
+      }
+    } catch (e) {}
+
+    var roots = pg === 'platform'
+      ? ['hardPlatforms', 'customPlatforms']
+      : ['hardApps', 'customApps'];
+    roots.forEach(function (rid) {
+      var root = document.getElementById(rid);
+      if (!root) return;
+      Array.prototype.forEach.call(root.querySelectorAll('.plat-card'), function (card) {
+        if (card.classList.contains('plat-tool-card') || card.classList.contains('v3007-custom-box')) return;
+        var nameEl = card.querySelector('.plat-name');
+        var name = nameEl ? nameEl.textContent.trim() : '';
+        if (!name || /^add$/i.test(name)) return;
+        var id = card.getAttribute('data-id') || '';
+        var link = card.tagName === 'A' ? (card.getAttribute('href') || '') : '';
+        if (link === '#') link = '';
+        var oc = card.getAttribute('onclick') || '';
+        var m = oc.match(/window\.open\(\s*['"]([^'"]+)/);
+        if (m) link = m[1];
+        var hm = oc.match(/openHardPlatform\((\d+)\)/);
+        if (hm) {
+          try {
+            if (typeof DEFAULT_PLATFORMS_ADD !== 'undefined' && DEFAULT_PLATFORMS_ADD[hm[1]]) {
+              push(DEFAULT_PLATFORMS_ADD[hm[1]]);
+              return;
+            }
+          } catch (e) {}
+        }
+        var am = oc.match(/openHardApp\((\d+)\)/);
+        if (am) {
+          try {
+            if (typeof DEFAULT_APP_ADD !== 'undefined' && DEFAULT_APP_ADD[am[1]]) {
+              push(DEFAULT_APP_ADD[am[1]]);
+              return;
+            }
+          } catch (e) {}
+        }
+        var ico = card.querySelector('i[class*="ti-"]');
+        push({
+          id: id || undefined,
+          name: name,
+          link: link,
+          icon: ico ? ico.className.replace(/\s*plat-icon\s*/g, ' ').trim() : brand(name, link)
+        });
+      });
+    });
+    return out;
+  }
+
+  function resolveCtx() {
+    var c = window._pageToolCtx;
+    if (c && (c.pg === 'platform' || c.pg === 'app') && c.n != null && String(c.n) !== '') {
+      return { pg: String(c.pg), n: String(c.n) };
+    }
+    if (window.__v3056LastCtx) return window.__v3056LastCtx;
+    if (window.__v3057LastCtx) return window.__v3057LastCtx;
+    return null;
+  }
+
+  function ensureUi() {
+    if (document.getElementById('v3057PickOverlay')) return;
+    var ov = document.createElement('div');
+    ov.id = 'v3057PickOverlay';
+    ov.innerHTML =
+      '<div id="v3057PickPanel">' +
+        '<div id="v3057PickHead">' +
+          '<strong>ADD PAGE SIDES</strong>' +
+          '<div style="display:flex;gap:8px;">' +
+            '<button type="button" id="v3057Cancel">CLOSE</button>' +
+            '<button type="button" id="v3057Save">SAVE</button>' +
+          '</div>' +
+        '</div>' +
+        '<div id="v3057PickList"></div>' +
+      '</div>';
+    document.body.appendChild(ov);
+    ov.addEventListener('click', function (e) {
+      if (e.target === ov || (e.target && e.target.id === 'v3057PickOverlay')) closeUi();
+    });
+    ov.addEventListener('pointerdown', function (e) {
+      if (e.target === ov) closeUi();
+    });
+    ov.addEventListener('touchstart', function (e) {
+      if (e.target === ov) closeUi();
+    }, { passive: true });
+    document.getElementById('v3057Cancel').addEventListener('click', function (e) {
+      e.preventDefault(); e.stopPropagation(); closeUi();
+    });
+    document.getElementById('v3057Save').addEventListener('click', function (e) {
+      e.preventDefault(); e.stopPropagation(); savePick();
+    });
+  }
+
+  function closeUi() {
+    var ov = document.getElementById('v3057PickOverlay');
+    if (ov) { ov.classList.remove('open'); ov.style.display = ''; }
+    state = null;
+    window.__v3057State = null;
+  }
+  window.__v3057Close = closeUi;
+
+  function openPicker() {
+    ensureUi();
+    var ctx = resolveCtx();
+    if (!ctx) {
+      if (window.toastMsg) toastMsg('Open a tool box first', true);
+      return;
+    }
+    window.__v3057LastCtx = ctx;
+    window._pageToolCtx = { pg: ctx.pg, n: ctx.n, key: ctx.pg + ':' + ctx.n };
+
+    var used = assignedMap(ctx.pg);
+    var all = pageCatalog(ctx.pg);
+    // Only sides that are still on the page (NOT in any toolbox)
+    var candidates = all.filter(function (x) {
+      var k = ident(x);
+      if (used[k]) return false;
+      if (x.name && used['name:' + normName(x.name)]) return false;
+      return true;
+    });
+
+    state = { pg: ctx.pg, n: ctx.n, selected: {}, candidates: candidates };
+    window.__v3057State = state;
+
+    var list = document.getElementById('v3057PickList');
+    if (!candidates.length) {
+      list.innerHTML = '<div id="v3057Empty">No free page sides left to add.<br>Everything is already inside a tool box.</div>';
+    } else {
+      list.innerHTML = candidates.map(function (x, i) {
+        var k = ident(x);
+        var ic = brand(x.name, x.link, x.icon);
+        return '<div class="v3057-row" data-i="' + i + '" data-k="' + esc(k) + '">' +
+          '<i class="' + esc(ic) + '"></i>' +
+          '<span>' + esc(x.name) + '</span>' +
+          '<b></b></div>';
+      }).join('');
+      Array.prototype.forEach.call(list.querySelectorAll('.v3057-row'), function (row) {
+        row.addEventListener('click', function (e) {
+          e.preventDefault(); e.stopPropagation();
+          var k = row.getAttribute('data-k');
+          var i = Number(row.getAttribute('data-i'));
+          var box = row.querySelector('b');
+          if (state.selected[k]) {
+            delete state.selected[k];
+            row.classList.remove('on');
+            if (box) box.textContent = '';
+          } else {
+            state.selected[k] = state.candidates[i];
+            row.classList.add('on');
+            if (box) box.textContent = '\u2713';
+          }
+        });
+      });
+    }
+
+    // Close legacy pickers so only ADD PAGE SIDES shows
+    try {
+      var oldPick = document.getElementById('mtPickOverlay');
+      if (oldPick) {
+        oldPick.classList.remove('open');
+        oldPick.style.display = 'none';
+      }
+    } catch (e) {}
+    var ov = document.getElementById('v3057PickOverlay');
+    ov.classList.add('open');
+    ov.style.display = 'flex';
+    ov.style.pointerEvents = 'auto';
+    ov.style.zIndex = '2147483646';
+    var panel = document.getElementById('v3057PickPanel');
+    if (panel) panel.style.pointerEvents = 'auto';
+  }
+
+  function savePick() {
+    if (!state) state = window.__v3057State;
+    if (!state) return;
+    var keys = Object.keys(state.selected);
+    if (!keys.length) {
+      if (window.toastMsg) toastMsg('Select at least one side', true);
+      return;
+    }
+    var cur = getTool(state.pg, state.n).map(function (x) { return Object.assign({}, x); });
+    var have = {};
+    cur.forEach(function (x) { have[ident(x)] = 1; });
+    keys.forEach(function (k) {
+      var x = state.selected[k];
+      if (!x) return;
+      if (have[ident(x)]) return;
+      cur.push(Object.assign({}, x));
+      have[ident(x)] = 1;
+    });
+    if (cur.length < 2) {
+      if (window.toastMsg) toastMsg('Tool needs at least 2 sides', true);
+      return;
+    }
+    setTool(state.pg, state.n, cur);
+    window._pageToolItems = cur;
+    try {
+      if (String(state.n).indexOf('custom:') !== 0) {
+        window[(state.pg === 'platform' ? 'DEFAULT_PLATFORM_TOOL_' : 'DEFAULT_APP_TOOL_') + state.n] = cur;
+      }
+    } catch (e) {}
+
+    var pg = state.pg, n = state.n;
+    closeUi();
+
+    try { if (typeof window.openPageTool === 'function') window.openPageTool(pg, n); } catch (e) {}
+    try { if (window.renderHardPlatforms) window.renderHardPlatforms(); } catch (e) {}
+    try { if (window.renderHardApps) window.renderHardApps(); } catch (e) {}
+    try { if (window.renderCustomPlatforms) window.renderCustomPlatforms(); } catch (e) {}
+    try { if (window.renderCustomApps) window.renderCustomApps(); } catch (e) {}
+    if (typeof window.v3053ApplyHide === 'function') setTimeout(window.v3053ApplyHide, 50);
+    if (window.toastMsg) toastMsg('Added to tool');
+  }
+
+  // Public API — override previous broken pickers
+  window.__v3057Save = savePick;
+  window.__v3057ToggleRow = function(row){
+    if(!state) state=window.__v3057State; if(!state||!row)return;
+    var k=row.getAttribute("data-k"); var i=Number(row.getAttribute("data-i"));
+    var box=row.querySelector("b");
+    if(state.selected[k]){ delete state.selected[k]; row.classList.remove("on"); if(box)box.textContent=""; }
+    else { state.selected[k]=state.candidates[i]; row.classList.add("on"); if(box)box.textContent="\u2713"; }
+  };
+  window.v3057OpenPicker = openPicker;
+  window.v3053OpenPicker = openPicker;
+  window.openPageToolPicker = openPicker;
+  window.v3056OpenPicker = openPicker;
+
+  // Keep ctx when opening tools
+  var prevOpen = window.openPageTool;
+  if (typeof prevOpen === 'function') {
+    window.openPageTool = function (pg, n) {
+      if (pg === 'platform' || pg === 'app') {
+        window._pageToolCtx = { pg: String(pg), n: String(n), key: String(pg) + ':' + String(n) };
+        window.__v3057LastCtx = window._pageToolCtx;
+        window.__v3056LastCtx = window._pageToolCtx;
+        window._openFolderId = null;
+      }
+      return prevOpen.apply(this, arguments);
+    };
+  }
+
+  // Direct Plus handler (capture) — do not rely on older handlers
+  var _plusLock = 0;
+  function onPlus(e) {
+    var t = e.target;
+    if (!t || !t.closest) return;
+    var add = t.closest('#mtGrid .mt-add-btn, #mtGrid .mt-page-add');
+    if (!add) return;
+    var overlay = document.getElementById('multiToolOverlay');
+    if (!overlay || !overlay.classList.contains('open')) return;
+    e.preventDefault();
+    e.stopPropagation();
+    if (e.stopImmediatePropagation) e.stopImmediatePropagation();
+    var now = Date.now();
+    if (now - _plusLock < 500) return;
+    _plusLock = now;
+    try {
+      var oldPick = document.getElementById('mtPickOverlay');
+      if (oldPick) { oldPick.classList.remove('open'); oldPick.style.display = 'none'; }
+    } catch (err) {}
+    openPicker();
+  }
+  document.addEventListener('click', onPlus, true);
+  // touchend without preventDefault on non-plus; only click drives open to avoid double UI
+
+  // Also patch V3046 path by replacing functions it already calls
+  // (already set openPageToolPicker / v3053OpenPicker above)
+})();
+</script>
+
+
+<!-- V3058: stop page freeze loops -->
+<script id="v3058-unfreeze">
+(function () {
+  'use strict';
+  if (window.__v3058Installed) return;
+  window.__v3058Installed = true;
+
+  // Guard global hide
+  var busy = false;
+  var lastHide = 0;
+  var realHide = window.v3053ApplyHide;
+  window.v3053ApplyHide = function () {
+    var now = Date.now();
+    if (busy || now - lastHide < 100) return;
+    busy = true;
+    lastHide = now;
+    try {
+      if (typeof realHide === 'function') realHide();
+    } catch (e) {}
+    setTimeout(function () { busy = false; }, 100);
+  };
+
+  // Prevent touchend preventDefault on whole document from blocking UI
+  // (handlers still work on plus via click)
+
+  // Safe plus open — only once per gesture
+  var lastOpen = 0;
+  function safeOpen(e) {
+    var t = e.target;
+    if (!t || !t.closest) return;
+    var add = t.closest('#mtGrid .mt-add-btn, #mtGrid .mt-page-add');
+    if (!add) return;
+    var overlay = document.getElementById('multiToolOverlay');
+    if (!overlay || !overlay.classList.contains('open')) return;
+    // If ADD PAGE SIDES already open, just block others
+    var v = document.getElementById('v3057PickOverlay');
+    if (v && v.classList.contains('open')) {
+      e.preventDefault();
+      e.stopPropagation();
+      return;
+    }
+    var now = Date.now();
+    if (now - lastOpen < 500) {
+      e.preventDefault();
+      e.stopPropagation();
+      return;
+    }
+    lastOpen = now;
+    e.preventDefault();
+    e.stopPropagation();
+    try {
+      var oldPick = document.getElementById('mtPickOverlay');
+      if (oldPick) { oldPick.classList.remove('open'); oldPick.style.display = 'none'; }
+      if (typeof window.v3057OpenPicker === 'function') window.v3057OpenPicker();
+    } catch (err) {
+      if (window.toastMsg) toastMsg('Picker error', true);
+    }
+  }
+  document.addEventListener('click', safeOpen, true);
+
+  // Ensure our picker overlay can open even if body is stuck
+  var style = document.createElement('style');
+  style.textContent = '#v3057PickOverlay.open{display:flex!important;z-index:2147483646!important;pointer-events:auto!important;}#v3057PickPanel{pointer-events:auto!important;}';
+  document.head.appendChild(style);
+})();
+</script>
+
+
+<script id="v3058b-single-picker">
+(function(){
+  'use strict';
+  if(window.__v3058bInstalled)return;
+  window.__v3058bInstalled=true;
+  function onlyPageSides(){
+    try{
+      var oldPick=document.getElementById('mtPickOverlay');
+      if(oldPick){oldPick.classList.remove('open');oldPick.style.display='none';}
+    }catch(e){}
+    if(typeof window.v3057OpenPicker==='function')window.v3057OpenPicker();
+  }
+  window.openPageToolPicker=onlyPageSides;
+  window.v3053OpenPicker=onlyPageSides;
+  window.v3056OpenPicker=onlyPageSides;
+  // Watch legacy overlay — if something opens it, close and show only V3057
+  if(window.MutationObserver){
+    var el=document.getElementById('mtPickOverlay');
+    if(el){
+      new MutationObserver(function(){
+        if(!el.classList.contains('open'))return;
+        // Allow home folder pick (openMtPick) only when not a page tool context
+        var ctx=window._pageToolCtx||window.__v3057LastCtx;
+        if(ctx&&(ctx.pg==='platform'||ctx.pg==='app')){
+          el.classList.remove('open');
+          el.style.display='none';
+          if(typeof window.v3057OpenPicker==='function')window.v3057OpenPicker();
+        }
+      }).observe(el,{attributes:true,attributeFilter:['class']});
+    }
+  }
+})();
+</script>
+
+
+<script id="v3059-picker-clicks">
+(function(){
+  'use strict';
+  if(window.__v3059Installed)return;
+  window.__v3059Installed=true;
+
+  // Let all pointer/touch/click events reach ADD PAGE SIDES even while toolbox is open
+  function isPickerPanel(t){
+    // Only the sheet content — NOT the dark backdrop
+    return t && t.closest && t.closest('#v3057PickPanel, #v3057PickList, .v3057-row, #v3057Save, #v3057Cancel, #v3057PickHead');
+  }
+  function isPickerBackdrop(t){
+    var ov = document.getElementById('v3057PickOverlay');
+    if(!ov || !ov.classList.contains('open') || !t) return false;
+    // Target is the overlay itself, or outside the panel
+    if(t === ov) return true;
+    if(ov.contains(t) && !isPickerPanel(t)) return true;
+    return false;
+  }
+  ['pointerdown','pointerup','touchstart','touchend','mousedown','mouseup','click'].forEach(function(type){
+    document.addEventListener(type, function(e){
+      if(isPickerPanel(e.target)){
+        // Allow panel interactions; don't let toolbox isolation kill them
+        e.stopPropagation();
+        return;
+      }
+      // Outside panel while open → close on primary press/click
+      if((type === 'pointerdown' || type === 'touchstart' || type === 'click') && isPickerBackdrop(e.target)){
+        e.preventDefault();
+        e.stopPropagation();
+        if(typeof window.__v3057Close === 'function') window.__v3057Close();
+        else {
+          var ov = document.getElementById('v3057PickOverlay');
+          if(ov){ ov.classList.remove('open'); ov.style.display=''; }
+        }
+      }
+    }, true);
+  });
+
+  // Re-bind row clicks after list render using event delegation (more reliable)
+  document.addEventListener('click', function(e){
+    var ov=document.getElementById('v3057PickOverlay');
+    if(!ov||!ov.classList.contains('open'))return;
+    var row=e.target&&e.target.closest&&e.target.closest('.v3057-row');
+    if(row){
+      e.preventDefault();
+      e.stopPropagation();
+      var k=row.getAttribute('data-k');
+      var i=Number(row.getAttribute('data-i'));
+      // Access state via re-toggle using public API if needed
+      if(typeof window.__v3057ToggleRow==='function'){
+        window.__v3057ToggleRow(row);
+      } else {
+        // Fallback visual toggle
+        row.classList.toggle('on');
+        var b=row.querySelector('b');
+        if(b) b.textContent = row.classList.contains('on') ? '\u2713' : '';
+        if(window.__v3057State && window.__v3057State.candidates){
+          var st=window.__v3057State;
+          if(row.classList.contains('on')) st.selected[k]=st.candidates[i];
+          else delete st.selected[k];
+        }
+      }
+      return;
+    }
+    if(e.target&&(e.target.id==='v3057Save'||e.target.closest&&e.target.closest('#v3057Save'))){
+      e.preventDefault(); e.stopPropagation();
+      if(typeof window.__v3057Save==='function') window.__v3057Save();
+    }
+    if(e.target&&(e.target.id==='v3057Cancel'||e.target.closest&&e.target.closest('#v3057Cancel'))){
+      e.preventDefault(); e.stopPropagation();
+      if(typeof window.__v3057Close==='function') window.__v3057Close();
+    }
+  }, true);
+})();
+</script>
+
+
+<!-- V3060: sync free page sides with picker — no ghost sides, picker shows all free -->
+<script id="v3060-sync-free-sides">
+(function () {
+  'use strict';
+  if (window.__v3060Installed) return;
+  window.__v3060Installed = true;
+
+  var ROOT = document.title || 'BAIJID';
+  var STORE = ROOT + '_v3007_';
+  var LEGACY = ROOT + '_page_tool_items_';
+
+  function read(k, fb) {
+    try {
+      var v = JSON.parse(localStorage.getItem(k) || 'null');
+      return v == null ? fb : v;
+    } catch (e) { return fb; }
+  }
+  function write(k, v) {
+    try { localStorage.setItem(k, JSON.stringify(v)); return true; }
+    catch (e) { return false; }
+  }
+  function normName(s) { return String(s || '').trim().toLowerCase(); }
+  function normLink(s) { return String(s || '').trim().toLowerCase().replace(/\/+$/, ''); }
+  function ident(x) {
+    if (!x) return '';
+    if (x.id != null && String(x.id) !== '') return 'id:' + String(x.id);
+    return [normName(x.name), normLink(x.link), String(x.special || ''), x.html ? 'html' : ''].join('|');
+  }
+  function nameKey(x) { return 'name:' + normName(x && x.name); }
+
+  function getTool(pg, n) {
+    n = String(n);
+    if (n.indexOf('custom:') === 0) return read(STORE + 'items_' + pg + '_' + n.slice(7), []);
+    var saved = read(STORE + 'pageItems_' + pg + ':' + n, null);
+    if (Array.isArray(saved)) return saved;
+    var legacy = read(LEGACY + pg + ':' + n, null);
+    if (Array.isArray(legacy)) return legacy;
+    var a = window[(pg === 'platform' ? 'DEFAULT_PLATFORM_TOOL_' : 'DEFAULT_APP_TOOL_') + n];
+    return Array.isArray(a) ? a.slice() : [];
+  }
+  function setTool(pg, n, arr) {
+    n = String(n);
+    if (n.indexOf('custom:') === 0) {
+      write(STORE + 'items_' + pg + '_' + n.slice(7), arr);
+      return;
+    }
+    write(STORE + 'pageItems_' + pg + ':' + n, arr);
+    write(LEGACY + pg + ':' + n, arr);
+    try {
+      window[(pg === 'platform' ? 'DEFAULT_PLATFORM_TOOL_' : 'DEFAULT_APP_TOOL_') + n] = arr;
+    } catch (e) {}
+  }
+  function boxes(pg) { return read(STORE + 'boxes_' + pg, []); }
+
+  function markMap(x, used) {
+    if (!x) return;
+    used[ident(x)] = 1;
+    if (x.name) used[nameKey(x)] = 1;
+  }
+
+  function assignedMap(pg) {
+    var used = {};
+    for (var n = 1; n <= 30; n++) getTool(pg, n).forEach(function (x) { markMap(x, used); });
+    boxes(pg).forEach(function (b) {
+      if (!b) return;
+      read(STORE + 'items_' + pg + '_' + b.id, []).forEach(function (x) { markMap(x, used); });
+    });
+    return used;
+  }
+
+  /* If a side is on the page as free (loose / visible card), it must NOT stay inside any tool. */
+  function scrapeFreeCards(pg) {
+    var out = [], seenIdent = {}, seenName = {};
+    function pushItem(item) {
+      if (!item || !item.name) return;
+      var n = normName(item.name);
+      if (!n || seenName[n]) return;
+      var k = ident(item);
+      if (seenIdent[k]) return;
+      seenName[n] = 1;
+      seenIdent[k] = 1;
+      out.push(item);
+    }
+    var roots = pg === 'platform'
+      ? ['hardPlatforms', 'customPlatforms']
+      : ['hardApps', 'customApps'];
+    roots.forEach(function (rid) {
+      var root = document.getElementById(rid);
+      if (!root) return;
+      Array.prototype.forEach.call(root.querySelectorAll('.plat-card'), function (card) {
+        if (card.classList.contains('plat-tool-card') || card.classList.contains('v3007-custom-box')) return;
+        if (card.classList.contains('v3053-hidden')) return;
+        var nameEl = card.querySelector('.plat-name');
+        var name = nameEl ? nameEl.textContent.trim() : '';
+        if (!name || /^add$/i.test(name)) return;
+        var id = card.getAttribute('data-id') || '';
+        var link = card.tagName === 'A' ? (card.getAttribute('href') || '') : '';
+        if (link === '#') link = '';
+        var oc = card.getAttribute('onclick') || '';
+        var m = oc.match(/window\.open\(\s*['"]([^'"]+)/);
+        if (m) link = m[1];
+        var item = { name: name, link: link };
+        if (id) item.id = id;
+        pushItem(item);
+      });
+    });
+    var loose = read(STORE + 'loose_' + pg, []);
+    if (Array.isArray(loose)) {
+      // Deduplicate loose storage itself
+      var cleanLoose = [];
+      var ln = {};
+      loose.forEach(function (x) {
+        if (!x || !x.name) return;
+        var n = normName(x.name);
+        if (ln[n]) return;
+        ln[n] = 1;
+        cleanLoose.push(x);
+        pushItem(Object.assign({}, x));
+      });
+      if (cleanLoose.length !== loose.length) write(STORE + 'loose_' + pg, cleanLoose);
+    }
+    return out;
+  }
+
+  /* Remove free page sides from every toolbox so ownership is exclusive */
+  function purgeFreeFromTools(pg) {
+    var free = scrapeFreeCards(pg);
+    if (!free.length) return false;
+    var freeKeys = {};
+    free.forEach(function (x) {
+      freeKeys[ident(x)] = 1;
+      freeKeys[nameKey(x)] = 1;
+    });
+    function isFree(x) {
+      if (!x) return false;
+      return !!(freeKeys[ident(x)] || freeKeys[nameKey(x)]);
+    }
+    var changed = false;
+    for (var n = 1; n <= 30; n++) {
+      var arr = getTool(pg, n);
+      if (!arr.length) continue;
+      var next = arr.filter(function (x) { return !isFree(x); });
+      if (next.length !== arr.length) {
+        setTool(pg, n, next);
+        changed = true;
+      }
+    }
+    boxes(pg).forEach(function (b) {
+      if (!b || !b.id) return;
+      var arr = read(STORE + 'items_' + pg + '_' + b.id, []);
+      if (!Array.isArray(arr) || !arr.length) return;
+      var next = arr.filter(function (x) { return !isFree(x); });
+      if (next.length !== arr.length) {
+        write(STORE + 'items_' + pg + '_' + b.id, next);
+        changed = true;
+      }
+    });
+    return changed;
+  }
+
+  /* Build picker list: ONLY free sides currently on the page (not in any tool) */
+  function freeCandidates(pg) {
+    // First sync ownership
+    purgeFreeFromTools(pg);
+    var used = assignedMap(pg);
+    var free = scrapeFreeCards(pg);
+    var out = [], seenIdent = {}, seenName = {};
+    free.forEach(function (x) {
+      if (!x || !x.name) return;
+      var n = normName(x.name);
+      if (!n) return;
+      // One entry per site name — never list WhatsApp/LinkedIn twice
+      if (seenName[n]) return;
+      var k = ident(x);
+      if (seenIdent[k]) return;
+      if (used[k] || used[nameKey(x)] || used['name:' + n]) return;
+      seenName[n] = 1;
+      seenIdent[k] = 1;
+      out.push(x);
+    });
+    return out;
+  }
+
+  // Hook V3057 openPicker catalog path
+  var prevOpen = window.v3057OpenPicker;
+  window.v3057OpenPicker = function () {
+    // Ensure free sides are not stuck inside tools before listing
+    try {
+      var ctx = window._pageToolCtx || window.__v3057LastCtx || window.__v3056LastCtx;
+      if (ctx && (ctx.pg === 'platform' || ctx.pg === 'app')) {
+        purgeFreeFromTools(ctx.pg);
+      }
+    } catch (e) {}
+    if (typeof prevOpen === 'function') return prevOpen.apply(this, arguments);
+  };
+  window.openPageToolPicker = window.v3057OpenPicker;
+  window.v3053OpenPicker = window.v3057OpenPicker;
+
+  // Patch the internal candidate builder used by V3057 by wrapping after it sets state
+  // Override open again with full implementation that uses freeCandidates
+  window.v3057OpenPicker = function () {
+    var ROOT2 = document.title || 'BAIJID';
+    var ctx = window._pageToolCtx || window.__v3057LastCtx || window.__v3056LastCtx;
+    if (!ctx || (ctx.pg !== 'platform' && ctx.pg !== 'app')) {
+      if (window.toastMsg) toastMsg('Open a tool box first', true);
+      return;
+    }
+    window._pageToolCtx = ctx;
+    window.__v3057LastCtx = ctx;
+
+    // Ensure UI exists (from V3057)
+    if (typeof window.__v3057Ensure === 'function') window.__v3057Ensure();
+    else if (!document.getElementById('v3057PickOverlay')) {
+      // call previous to build UI if needed
+      if (typeof prevOpen === 'function') {
+        try { prevOpen(); } catch (e) {}
+        var ov0 = document.getElementById('v3057PickOverlay');
+        if (ov0) { ov0.classList.remove('open'); ov0.style.display = ''; }
+      }
+    }
+
+    var candidates = freeCandidates(ctx.pg);
+    var state = { pg: ctx.pg, n: String(ctx.n), selected: {}, candidates: candidates };
+    window.__v3057State = state;
+
+    // Close legacy
+    try {
+      var oldPick = document.getElementById('mtPickOverlay');
+      if (oldPick) { oldPick.classList.remove('open'); oldPick.style.display = 'none'; }
+    } catch (e) {}
+
+    var list = document.getElementById('v3057PickList');
+    if (!list) {
+      // Fallback to prev open
+      if (typeof prevOpen === 'function') return prevOpen();
+      return;
+    }
+
+    function brand(name, link) {
+      if (typeof window.v3055BrandIcon === 'function') return window.v3055BrandIcon(name, link);
+      if (typeof brandIconFromName === 'function') {
+        var b = brandIconFromName(name, link);
+        if (b) return (/^ti-/.test(b) && b.indexOf(' ') < 0) ? ('ti ' + b) : b;
+      }
+      return 'ti ti-world';
+    }
+    function esc(s) {
+      return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
+        return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+      });
+    }
+
+    if (!candidates.length) {
+      list.innerHTML = '<div id="v3057Empty">No free page sides left to add.<br>Everything is already inside a tool box.</div>';
+    } else {
+      list.innerHTML = candidates.map(function (x, i) {
+        var k = ident(x);
+        var ic = brand(x.name, x.link);
+        return '<div class="v3057-row" data-i="' + i + '" data-k="' + esc(k) + '">' +
+          '<i class="' + esc(ic) + '"></i>' +
+          '<span>' + esc(x.name) + '</span>' +
+          '<b></b></div>';
+      }).join('');
+    }
+
+    var ov = document.getElementById('v3057PickOverlay');
+    if (ov) {
+      ov.classList.add('open');
+      ov.style.display = 'flex';
+      ov.style.pointerEvents = 'auto';
+      ov.style.zIndex = '2147483646';
+    }
+  };
+  window.openPageToolPicker = window.v3057OpenPicker;
+  window.v3053OpenPicker = window.v3057OpenPicker;
+
+  // After closing toolbox, purge so free page cards aren't still "in tool"
+  var prevClose = window.closeMultiTool;
+  if (typeof prevClose === 'function') {
+    window.closeMultiTool = function () {
+      var r = prevClose.apply(this, arguments);
+      try {
+        purgeFreeFromTools('platform');
+        purgeFreeFromTools('app');
+      } catch (e) {}
+      if (typeof window.v3053ApplyHide === 'function') setTimeout(window.v3053ApplyHide, 60);
+      return r;
+    };
+  }
+
+  // On load, one sync pass
+  setTimeout(function () {
+    try {
+      purgeFreeFromTools('platform');
+      purgeFreeFromTools('app');
+      if (typeof window.v3053ApplyHide === 'function') window.v3053ApplyHide();
+    } catch (e) {}
+  }, 900);
+})();
+</script>
+
+
+<script id="v3061-dedupe-names">
+(function(){
+  'use strict';
+  if(window.__v3061Installed)return;
+  window.__v3061Installed=true;
+  function norm(s){return String(s||'').trim().toLowerCase();}
+  function dedupeLooseDom(pg){
+    var root=document.getElementById(pg==='platform'?'customPlatforms':'customApps');
+    if(!root)return;
+    var seen={};
+    Array.prototype.slice.call(root.querySelectorAll('.v3007-loose-item')).forEach(function(card){
+      var nameEl=card.querySelector('.plat-name');
+      var n=norm(nameEl?nameEl.textContent:'');
+      if(!n)return;
+      if(seen[n]){ card.remove(); return; }
+      seen[n]=1;
+      // Also remove if a non-loose card with same name exists on page
+      var hard=document.getElementById(pg==='platform'?'hardPlatforms':'hardApps');
+      var dup=false;
+      [hard, root].forEach(function(r){
+        if(!r||dup)return;
+        Array.prototype.forEach.call(r.querySelectorAll('.plat-card:not(.v3007-loose-item):not(.plat-tool-card):not(.v3007-custom-box)'), function(c){
+          var nm=c.querySelector('.plat-name');
+          if(nm&&norm(nm.textContent)===n) dup=true;
+        });
+      });
+      if(dup) card.remove();
+    });
+  }
+  var prev=window.renderLoose;
+  if(typeof prev==='function'){
+    window.renderLoose=function(pg){
+      var r=prev.apply(this,arguments);
+      try{ dedupeLooseDom(pg||'platform'); dedupeLooseDom('app'); }catch(e){}
+      return r;
+    };
+  }
+  setTimeout(function(){ dedupeLooseDom('platform'); dedupeLooseDom('app'); }, 800);
+})();
+</script>
+
+
+<!-- V3062: instant hide on add / show on remove for Platform+App sides -->
+<script id="v3062-instant-page-tool-sync">
+(function () {
+  'use strict';
+  if (window.__v3062Installed) return;
+  window.__v3062Installed = true;
+
+  var ROOT = document.title || 'BAIJID';
+  var STORE = ROOT + '_v3007_';
+  var LEGACY = ROOT + '_page_tool_items_';
+
+  function read(k, fb) {
+    try {
+      var v = JSON.parse(localStorage.getItem(k) || 'null');
+      return v == null ? fb : v;
+    } catch (e) { return fb; }
+  }
+  function write(k, v) {
+    try { localStorage.setItem(k, JSON.stringify(v)); return true; }
+    catch (e) { return false; }
+  }
+  function normName(s) { return String(s || '').trim().toLowerCase(); }
+
+  function getTool(pg, n) {
+    n = String(n);
+    if (n.indexOf('custom:') === 0) return read(STORE + 'items_' + pg + '_' + n.slice(7), []);
+    var saved = read(STORE + 'pageItems_' + pg + ':' + n, null);
+    if (Array.isArray(saved)) return saved;
+    var legacy = read(LEGACY + pg + ':' + n, null);
+    if (Array.isArray(legacy)) return legacy;
+    var a = window[(pg === 'platform' ? 'DEFAULT_PLATFORM_TOOL_' : 'DEFAULT_APP_TOOL_') + n];
+    return Array.isArray(a) ? a.slice() : [];
+  }
+
+  function assignedNames(pg) {
+    var names = {};
+    function mark(x) {
+      if (x && x.name) names[normName(x.name)] = 1;
+    }
+    for (var n = 1; n <= 30; n++) getTool(pg, n).forEach(mark);
+    var boxes = read(STORE + 'boxes_' + pg, []);
+    (boxes || []).forEach(function (b) {
+      if (!b || !b.id) return;
+      read(STORE + 'items_' + pg + '_' + b.id, []).forEach(mark);
+    });
+    return names;
+  }
+
+  /** Instantly hide every page/loose card whose name is inside any toolbox */
+  function hideAssignedNow(pg) {
+    var names = assignedNames(pg);
+    var roots = pg === 'platform'
+      ? ['hardPlatforms', 'customPlatforms']
+      : ['hardApps', 'customApps'];
+    roots.forEach(function (rid) {
+      var root = document.getElementById(rid);
+      if (!root) return;
+      Array.prototype.forEach.call(root.querySelectorAll('.plat-card'), function (card) {
+        if (card.classList.contains('plat-tool-card') || card.classList.contains('v3007-custom-box')) {
+          card.classList.remove('v3053-hidden');
+          card.style.display = '';
+          return;
+        }
+        var nameEl = card.querySelector('.plat-name');
+        var n = normName(nameEl ? nameEl.textContent : '');
+        if (n && names[n]) {
+          card.classList.add('v3053-hidden');
+          card.style.display = 'none';
+        } else {
+          card.classList.remove('v3053-hidden');
+          if (card.style.display === 'none') card.style.display = '';
+        }
+      });
+    });
+  }
+
+  /** Remove loose storage entries that are now inside a tool */
+  function cleanLooseAssigned(pg) {
+    var names = assignedNames(pg);
+    var loose = read(STORE + 'loose_' + pg, []);
+    if (!Array.isArray(loose)) return;
+    var next = loose.filter(function (x) {
+      return !(x && x.name && names[normName(x.name)]);
+    });
+    if (next.length !== loose.length) write(STORE + 'loose_' + pg, next);
+  }
+
+  function syncPage(pg) {
+    cleanLooseAssigned(pg);
+    hideAssignedNow(pg);
+    // Drop duplicate loose DOM nodes for assigned names
+    var names = assignedNames(pg);
+    var root = document.getElementById(pg === 'platform' ? 'customPlatforms' : 'customApps');
+    if (root) {
+      Array.prototype.forEach.call(root.querySelectorAll('.v3007-loose-item'), function (card) {
+        var nameEl = card.querySelector('.plat-name');
+        var n = normName(nameEl ? nameEl.textContent : '');
+        if (n && names[n]) card.remove();
+      });
+    }
+    if (typeof window.v3053ApplyHide === 'function') {
+      try { window.v3053ApplyHide(); } catch (e) {}
+    }
+  }
+
+  window.v3062SyncPage = syncPage;
+
+  // After ADD PAGE SIDES save → hide immediately
+  function wrapSave() {
+    var prev = window.__v3057Save;
+    if (typeof prev !== 'function' || prev._v3062) return;
+    var wrapped = function () {
+      var st = window.__v3057State;
+      var pg = st && st.pg;
+      var r = prev.apply(this, arguments);
+      if (pg === 'platform' || pg === 'app') {
+        syncPage(pg);
+        setTimeout(function () { syncPage(pg); }, 30);
+        setTimeout(function () { syncPage(pg); }, 120);
+      } else {
+        syncPage('platform');
+        syncPage('app');
+      }
+      return r;
+    };
+    wrapped._v3062 = true;
+    window.__v3057Save = wrapped;
+  }
+  wrapSave();
+  setTimeout(wrapSave, 500);
+
+  // After any openPageTool refresh / close → resync
+  var prevClose = window.closeMultiTool;
+  if (typeof prevClose === 'function' && !prevClose._v3062) {
+    window.closeMultiTool = function () {
+      var r = prevClose.apply(this, arguments);
+      setTimeout(function () {
+        syncPage('platform');
+        syncPage('app');
+      }, 20);
+      return r;
+    };
+    window.closeMultiTool._v3062 = true;
+  }
+
+  // When tool contents change via older save paths
+  var prevSavePick = window.savePageToolPick;
+  if (typeof prevSavePick === 'function' && !prevSavePick._v3062) {
+    window.savePageToolPick = function () {
+      var r = prevSavePick.apply(this, arguments);
+      setTimeout(function () {
+        syncPage('platform');
+        syncPage('app');
+      }, 20);
+      return r;
+    };
+    window.savePageToolPick._v3062 = true;
+  }
+
+  // Observe tool grid item count changes after drag-out (removed from tool)
+  // Re-sync when multiToolOverlay closes or mtGrid mutates while open
+  if (window.MutationObserver) {
+    var ov = document.getElementById('multiToolOverlay');
+    if (ov) {
+      new MutationObserver(function (muts) {
+        muts.forEach(function (m) {
+          if (m.attributeName === 'class' && !ov.classList.contains('open')) {
+            setTimeout(function () {
+              syncPage('platform');
+              syncPage('app');
+            }, 30);
+          }
+        });
+      }).observe(ov, { attributes: true, attributeFilter: ['class'] });
+    }
+  }
+
+  // Hook renderLoose so assigned names never reappear as NEW cards
+  var prevLoose = window.renderLoose;
+  if (typeof prevLoose === 'function' && !prevLoose._v3062) {
+    window.renderLoose = function (pg) {
+      if (pg === 'platform' || pg === 'app') cleanLooseAssigned(pg);
+      var r = prevLoose.apply(this, arguments);
+      if (pg === 'platform' || pg === 'app') hideAssignedNow(pg);
+      return r;
+    };
+    window.renderLoose._v3062 = true;
+  }
+
+  // Initial
+  setTimeout(function () {
+    syncPage('platform');
+    syncPage('app');
+  }, 700);
+})();
+</script>
+
+</body>
 </html>
