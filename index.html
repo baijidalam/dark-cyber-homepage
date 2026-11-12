@@ -2050,11 +2050,7 @@
     .spooky-house .content-circle {
       position: absolute; width: 100%; height: 100%; overflow: hidden;
     }
-    .spooky-house .hill {
-      position: absolute; width: 150vw; height: 40vh; bottom: -10vh; left: -25vw;
-      border-radius: 50% 50% 0 0; background: #000; z-index: 3;
-    }
-    .spooky-house .house {
+.spooky-house .house {
       position: absolute; width: 120px; height: 150px; background: #000;
       left: 50%; margin-left: -60px; bottom: 29vh;
       transform: rotate(5deg) scale(1.25); transform-origin: bottom center; z-index: 2;
@@ -3293,6 +3289,290 @@
 }
 </style>
 
+
+<style id="baijid-page-title-underline-actual-moving-effect">
+/* Only the thin line directly below the BAIJID PAGE title */
+.baijid-page-header > .header-line {
+  display: block !important;
+  position: relative !important;
+  flex: 0 0 130px !important;
+  width: 130px !important;
+  min-width: 130px !important;
+  height: 2px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  background: rgba(0, 229, 255, 0.28) !important;
+  border: 0 !important;
+  border-radius: 2px !important;
+  box-shadow: 0 0 5px rgba(0, 229, 255, 0.45) !important;
+  animation: none !important;
+}
+.baijid-page-header > .header-line::before {
+  content: "" !important;
+  display: block !important;
+  position: absolute !important;
+  top: 0 !important;
+  left: -45% !important;
+  width: 45% !important;
+  height: 100% !important;
+  border: 0 !important;
+  border-radius: 2px !important;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    #00e5ff 25%,
+    #ffffff 50%,
+    #00e5ff 75%,
+    transparent 100%) !important;
+  opacity: 1 !important;
+  transform: translateX(0);
+  animation: baijidPageUnderlineTravel 1.8s linear infinite !important;
+  -webkit-animation: baijidPageUnderlineTravel 1.8s linear infinite !important;
+  box-shadow: 0 0 7px rgba(0, 229, 255, 0.8) !important;
+}
+.baijid-page-header > .header-line::after {
+  content: none !important;
+  display: none !important;
+}
+@keyframes baijidPageUnderlineTravel {
+  from { transform: translateX(0); }
+  to { transform: translateX(325%); }
+}
+@-webkit-keyframes baijidPageUnderlineTravel {
+  from { -webkit-transform: translateX(0); }
+  to { -webkit-transform: translateX(325%); }
+}
+</style>
+<style id="baijid-page-title-original-style-underline-final">
+/* Original thin cyan/white loading line, centered directly beneath BAIJID PAGE. */
+.baijid-page-header > .header-line {
+  display: block !important; position: absolute !important;
+  top: 39px !important; left: 50% !important; right: auto !important;
+  transform: translateX(-50%) !important;
+  width: 130px !important; min-width: 130px !important; max-width: 130px !important;
+  height: 1.5px !important; min-height: 1.5px !important; max-height: 1.5px !important;
+  margin: 0 !important; padding: 0 !important; border: 0 !important; border-radius: 0 !important;
+  background: linear-gradient(90deg, transparent, #00e5ff, #fff, #00e5ff, transparent) !important;
+  background-size: 200% 100% !important; background-position: 200% center !important; background-repeat: no-repeat !important;
+  animation: baijidOriginalTitleLineMove 2.5s linear infinite !important;
+  -webkit-animation: baijidOriginalTitleLineMove 2.5s linear infinite !important;
+  box-shadow: 0 0 6px rgba(0,229,255,.55) !important;
+  opacity: 1 !important; visibility: visible !important; overflow: hidden !important; pointer-events: none !important;
+}
+@keyframes baijidOriginalTitleLineMove {
+  0% { background-position: 200% center; }
+  100% { background-position: -200% center; }
+}
+@-webkit-keyframes baijidOriginalTitleLineMove {
+  0% { background-position: 200% center; }
+  100% { background-position: -200% center; }
+}
+</style>
+<style id="baijid-title-line-close-and-longer-glow">
+/* Keep the underline the same length; move it closer to the BAIJID PAGE title. */
+.baijid-page-header > .header-line {
+  top: 33px !important;
+  width: 130px !important;
+  min-width: 130px !important;
+  max-width: 130px !important;
+  height: 1.5px !important;
+  min-height: 1.5px !important;
+  max-height: 1.5px !important;
+  background: rgba(0, 229, 255, .24) !important;
+  background-size: 100% 100% !important;
+  animation: none !important;
+  -webkit-animation: none !important;
+  box-shadow: 0 0 5px rgba(0, 229, 255, .5) !important;
+  overflow: hidden !important;
+}
+.baijid-page-header > .header-line::before {
+  content: "" !important;
+  display: block !important;
+  position: absolute !important;
+  top: 0 !important;
+  left: -75% !important;
+  width: 75% !important;
+  height: 100% !important;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    #00cfff 22%,
+    #ffffff 50%,
+    #00e5ff 78%,
+    transparent 100%) !important;
+  box-shadow: 0 0 7px rgba(0, 229, 255, .85) !important;
+  animation: baijidTitleLineLongGlow 1.8s linear infinite !important;
+  -webkit-animation: baijidTitleLineLongGlow 1.8s linear infinite !important;
+}
+@keyframes baijidTitleLineLongGlow {
+  from { transform: translateX(0); }
+  to { transform: translateX(235%); }
+}
+@-webkit-keyframes baijidTitleLineLongGlow {
+  from { -webkit-transform: translateX(0); }
+  to { -webkit-transform: translateX(235%); }
+}
+</style>
+<style id="baijid-longer-inner-color-sweep-v2">
+.baijid-page-header > .header-line {
+  width: 130px !important;
+  min-width: 130px !important;
+  max-width: 130px !important;
+  height: 1.5px !important;
+  min-height: 1.5px !important;
+  max-height: 1.5px !important;
+  overflow: hidden !important;
+  position: absolute !important;
+  top: 33px !important;
+  background: rgba(0, 229, 255, .20) !important;
+  box-shadow: 0 0 5px rgba(0, 229, 255, .55) !important;
+}
+.baijid-page-header > .header-line::before {
+  content: "" !important;
+  display: block !important;
+  position: absolute !important;
+  top: 0 !important;
+  left: -100% !important;
+  width: 95% !important;
+  height: 100% !important;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    rgba(0, 207, 255, .65) 18%,
+    #00e5ff 36%,
+    #ffffff 50%,
+    #00e5ff 66%,
+    rgba(0, 207, 255, .65) 84%,
+    transparent 100%) !important;
+  box-shadow: 0 0 8px rgba(0, 229, 255, .95) !important;
+  animation: baijidTitleLineExtraLongSweep 1.8s linear infinite !important;
+  -webkit-animation: baijidTitleLineExtraLongSweep 1.8s linear infinite !important;
+}
+.baijid-page-header > .header-line::after {
+  content: none !important;
+  display: none !important;
+}
+@keyframes baijidTitleLineExtraLongSweep {
+  from { transform: translateX(0); }
+  to { transform: translateX(211%); }
+}
+@-webkit-keyframes baijidTitleLineExtraLongSweep {
+  from { -webkit-transform: translateX(0); }
+  to { -webkit-transform: translateX(211%); }
+}
+.baijid-page-header #status.neon-greeting-inline {
+  transition: opacity .45s ease, visibility .45s ease !important;
+}
+.baijid-page-header #status.neon-greeting-inline.hide {
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+</style>
+<style id="baijid-title-line-sweep-final-tune">
+/* Keep the underline dimensions unchanged; enlarge only the moving light inside it. */
+.baijid-page-header > .header-line {
+  width: 130px !important;
+  min-width: 130px !important;
+  max-width: 130px !important;
+  height: 1.5px !important;
+  min-height: 1.5px !important;
+  max-height: 1.5px !important;
+  overflow: hidden !important;
+}
+.baijid-page-header > .header-line::before {
+  left: -110% !important;
+  width: 110% !important;
+  height: 100% !important;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    rgba(0, 207, 255, .72) 14%,
+    #00dfff 32%,
+    #ffffff 50%,
+    #00e5ff 68%,
+    rgba(0, 207, 255, .72) 86%,
+    transparent 100%) !important;
+  box-shadow: 0 0 9px rgba(0, 229, 255, .98) !important;
+  animation: baijidTitleLineSmoothSweep 1.65s linear infinite !important;
+  -webkit-animation: baijidTitleLineSmoothSweep 1.65s linear infinite !important;
+}
+@keyframes baijidTitleLineSmoothSweep {
+  from { transform: translateX(0); }
+  to { transform: translateX(200%); }
+}
+@-webkit-keyframes baijidTitleLineSmoothSweep {
+  from { -webkit-transform: translateX(0); }
+  to { -webkit-transform: translateX(200%); }
+}
+</style>
+<style id="baijid-title-line-overlapping-continuous-sweep">
+/* The underline itself stays 130px x 1.5px. Two overlapping light bands
+   travel through it with a short phase gap, so the line does not go empty. */
+.baijid-page-header > .header-line {
+  width: 130px !important;
+  min-width: 130px !important;
+  max-width: 130px !important;
+  height: 1.5px !important;
+  min-height: 1.5px !important;
+  max-height: 1.5px !important;
+  overflow: hidden !important;
+  position: absolute !important;
+}
+.baijid-page-header > .header-line::before,
+.baijid-page-header > .header-line::after {
+  content: "" !important;
+  display: block !important;
+  position: absolute !important;
+  top: 0 !important;
+  left: -85% !important;
+  width: 85% !important;
+  height: 100% !important;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    rgba(0, 207, 255, .72) 12%,
+    #00dfff 32%,
+    #ffffff 50%,
+    #00e5ff 68%,
+    rgba(0, 207, 255, .72) 88%,
+    transparent 100%) !important;
+  box-shadow: 0 0 9px rgba(0, 229, 255, .98) !important;
+  animation: baijidTitleLineOverlapSweep 1.65s linear infinite !important;
+  -webkit-animation: baijidTitleLineOverlapSweep 1.65s linear infinite !important;
+}
+.baijid-page-header > .header-line::after {
+  animation-delay: -.825s !important;
+  -webkit-animation-delay: -.825s !important;
+}
+@keyframes baijidTitleLineOverlapSweep {
+  from { transform: translateX(0); }
+  to { transform: translateX(220%); }
+}
+@-webkit-keyframes baijidTitleLineOverlapSweep {
+  from { -webkit-transform: translateX(0); }
+  to { -webkit-transform: translateX(220%); }
+}
+</style>
+<style id="baijid-bottom-nav-compact-background-only">
+/* Reduce excess black space around the four page icons; keep all nav behavior intact. */
+html body .bnav {
+  padding: 3px 0 3px !important;
+  background: rgba(3, 4, 7, .97) !important;
+}
+html body .bnav-tabs {
+  padding: 0 !important;
+  min-height: 0 !important;
+  align-items: center !important;
+}
+html body .bnav-tabs .bnav-btn {
+  padding: 3px 14px !important;
+  gap: 3px !important;
+  min-height: 0 !important;
+}
+html body .bnav-dev {
+  padding: 3px 8px 1px !important;
+  line-height: 1.2 !important;
+}
+</style>
 </head>
 
 <body>
@@ -3301,7 +3581,7 @@
     <div class="content-circle">
       <div class="moon"></div>
       <div class="hill"></div>
-      <div class="house house-glow">
+<div class="house house-glow">
         <div class="porch"></div>
         <div class="first-floor"></div>
         <div class="second-floor"></div>
@@ -15907,302 +16187,174 @@ if(typeof oldHomePick==='function'&&!oldHomePick._v3020Wrapped){var hp=function(
 @-webkit-keyframes baijidUltraThinTitleLine { from { -webkit-transform: translateX(0); } to { -webkit-transform: translateX(350%); } }
 </style>
 
-</body>
-</html>
 
+<style id="baijid-home-bottom-pins-clear-and-visible">
+/* 1) Remove the large black ground/hill behind the lower Home pins. */
+html body .spooky-house .content-circle > .hill {
+  display: none !important;
+  background: transparent !important;
+}
 
-<style id="baijid-page-title-underline-actual-moving-effect">
-/* Only the thin line directly below the BAIJID PAGE title */
-.baijid-page-header > .header-line {
-  display: block !important;
+/* 2) Keep Home pin rows above the scene and remove any panel behind them. */
+html body #tab-home,
+html body #tab-home .home-pin-viewport,
+html body #tab-home .home-pin-track,
+html body #tab-home .home-pin-page,
+html body #tab-home .pin-row-top,
+html body #tab-home .pin-sides,
+html body #tab-home .pin-col,
+html body #tab-home .home-pin-dots {
+  background: transparent !important;
+  background-color: transparent !important;
+  box-shadow: none !important;
+}
+
+/* 3) The old fixed-height/overflow rules clipped the last rows.
+      Let the Home content take its natural height while preserving horizontal swipe. */
+html body.home-no-vertical-scroll {
+  height: auto !important;
+  min-height: 100vh !important;
+  min-height: 100dvh !important;
+  overflow-x: hidden !important;
+  overflow-y: auto !important;
+  touch-action: pan-y !important;
+}
+html body.home-no-vertical-scroll > .wrap {
+  height: auto !important;
+  min-height: 100vh !important;
+  min-height: 100dvh !important;
+  overflow: visible !important;
+}
+html body.home-no-vertical-scroll #tab-home {
+  height: auto !important;
+  min-height: calc(100vh - 88px) !important;
+  min-height: calc(100dvh - 88px) !important;
+  overflow: visible !important;
+  padding-bottom: 112px !important;
+}
+html body.home-no-vertical-scroll #homePinViewport {
+  height: auto !important;
+  min-height: 0 !important;
+  overflow-x: clip !important;
+  overflow-y: visible !important;
+  touch-action: pan-x !important;
+}
+html body.home-no-vertical-scroll #homePinTrack {
+  height: auto !important;
+  align-items: flex-start !important;
+}
+html body.home-no-vertical-scroll .home-pin-page {
+  height: auto !important;
+  min-height: 62vh !important;
+  overflow: visible !important;
+  flex-shrink: 0 !important;
+}
+html body #tab-home .pin-sides,
+html body #tab-home .pin-col {
+  overflow: visible !important;
   position: relative !important;
-  flex: 0 0 130px !important;
-  width: 130px !important;
-  min-width: 130px !important;
-  height: 2px !important;
-  margin: 0 !important;
-  padding: 0 !important;
+  z-index: 4 !important;
+}
+html body #tab-home .home-pin {
+  position: relative !important;
+  z-index: 5 !important;
+}
+</style>
+
+
+<style id="baijid-house-reference-look-final">
+/* Keep the same haunted house from the supplied screenshot and recreate its cyan night atmosphere. */
+html body .spooky-house {
+  background: #02090b !important;
   overflow: hidden !important;
+}
+html body .spooky-house .content-circle {
+  background:
+    radial-gradient(ellipse 58% 38% at 50% 58%, rgba(0, 229, 255, .30) 0%, rgba(0, 190, 220, .17) 34%, rgba(0, 80, 100, .08) 61%, transparent 78%),
+    radial-gradient(ellipse 90% 60% at 50% 48%, rgba(0, 35, 43, .52) 0%, rgba(0, 10, 14, .22) 58%, transparent 82%),
+    linear-gradient(180deg, #02090b 0%, #031216 48%, #010608 100%) !important;
+}
+html body .spooky-house .house {
+  background: #000 !important;
+  filter: drop-shadow(0 0 13px rgba(0,229,255,.38));
+}
+html body .spooky-house .house-glow {
+  animation: pulseDropShadow 2s infinite alternate !important;
+}
+html body .spooky-house .moon { z-index:1 !important; }
+html body .spooky-house .fireflies { z-index:5 !important; }
+</style>
+
+
+<style id="baijid-restore-original-black-hill-under-house">
+/* Restore the original black curved hill under the haunted house. */
+html body .spooky-house .content-circle > .hill,
+html body .spooky-house .hill {
+  display: block !important;
+  position: absolute !important;
+  width: 150vw !important;
+  height: 40vh !important;
+  bottom: -10vh !important;
+  left: -25vw !important;
+  border-radius: 50% 50% 0 0 !important;
+  background: #000 !important;
+  z-index: 3 !important;
   opacity: 1 !important;
   visibility: visible !important;
-  background: rgba(0, 229, 255, 0.28) !important;
-  border: 0 !important;
-  border-radius: 2px !important;
-  box-shadow: 0 0 5px rgba(0, 229, 255, 0.45) !important;
-  animation: none !important;
-}
-.baijid-page-header > .header-line::before {
-  content: "" !important;
-  display: block !important;
-  position: absolute !important;
-  top: 0 !important;
-  left: -45% !important;
-  width: 45% !important;
-  height: 100% !important;
-  border: 0 !important;
-  border-radius: 2px !important;
-  background: linear-gradient(90deg,
-    transparent 0%,
-    #00e5ff 25%,
-    #ffffff 50%,
-    #00e5ff 75%,
-    transparent 100%) !important;
-  opacity: 1 !important;
-  transform: translateX(0);
-  animation: baijidPageUnderlineTravel 1.8s linear infinite !important;
-  -webkit-animation: baijidPageUnderlineTravel 1.8s linear infinite !important;
-  box-shadow: 0 0 7px rgba(0, 229, 255, 0.8) !important;
-}
-.baijid-page-header > .header-line::after {
-  content: none !important;
-  display: none !important;
-}
-@keyframes baijidPageUnderlineTravel {
-  from { transform: translateX(0); }
-  to { transform: translateX(325%); }
-}
-@-webkit-keyframes baijidPageUnderlineTravel {
-  from { -webkit-transform: translateX(0); }
-  to { -webkit-transform: translateX(325%); }
 }
 </style>
 
 
-<style id="baijid-page-title-original-style-underline-final">
-/* Original thin cyan/white loading line, centered directly beneath BAIJID PAGE. */
-.baijid-page-header > .header-line {
-  display: block !important; position: absolute !important;
-  top: 39px !important; left: 50% !important; right: auto !important;
-  transform: translateX(-50%) !important;
-  width: 130px !important; min-width: 130px !important; max-width: 130px !important;
-  height: 1.5px !important; min-height: 1.5px !important; max-height: 1.5px !important;
-  margin: 0 !important; padding: 0 !important; border: 0 !important; border-radius: 0 !important;
-  background: linear-gradient(90deg, transparent, #00e5ff, #fff, #00e5ff, transparent) !important;
-  background-size: 200% 100% !important; background-position: 200% center !important; background-repeat: no-repeat !important;
-  animation: baijidOriginalTitleLineMove 2.5s linear infinite !important;
-  -webkit-animation: baijidOriginalTitleLineMove 2.5s linear infinite !important;
-  box-shadow: 0 0 6px rgba(0,229,255,.55) !important;
-  opacity: 1 !important; visibility: visible !important; overflow: hidden !important; pointer-events: none !important;
-}
-@keyframes baijidOriginalTitleLineMove {
-  0% { background-position: 200% center; }
-  100% { background-position: -200% center; }
-}
-@-webkit-keyframes baijidOriginalTitleLineMove {
-  0% { background-position: 200% center; }
-  100% { background-position: -200% center; }
-}
-</style>
 
+<script id="baijid-toolbox-page-specific-click-sounds">
+(function () {
+  'use strict';
 
-<style id="baijid-title-line-close-and-longer-glow">
-/* Keep the underline the same length; move it closer to the BAIJID PAGE title. */
-.baijid-page-header > .header-line {
-  top: 33px !important;
-  width: 130px !important;
-  min-width: 130px !important;
-  max-width: 130px !important;
-  height: 1.5px !important;
-  min-height: 1.5px !important;
-  max-height: 1.5px !important;
-  background: rgba(0, 229, 255, .24) !important;
-  background-size: 100% 100% !important;
-  animation: none !important;
-  -webkit-animation: none !important;
-  box-shadow: 0 0 5px rgba(0, 229, 255, .5) !important;
-  overflow: hidden !important;
-}
-.baijid-page-header > .header-line::before {
-  content: "" !important;
-  display: block !important;
-  position: absolute !important;
-  top: 0 !important;
-  left: -75% !important;
-  width: 75% !important;
-  height: 100% !important;
-  background: linear-gradient(90deg,
-    transparent 0%,
-    #00cfff 22%,
-    #ffffff 50%,
-    #00e5ff 78%,
-    transparent 100%) !important;
-  box-shadow: 0 0 7px rgba(0, 229, 255, .85) !important;
-  animation: baijidTitleLineLongGlow 1.8s linear infinite !important;
-  -webkit-animation: baijidTitleLineLongGlow 1.8s linear infinite !important;
-}
-@keyframes baijidTitleLineLongGlow {
-  from { transform: translateX(0); }
-  to { transform: translateX(235%); }
-}
-@-webkit-keyframes baijidTitleLineLongGlow {
-  from { -webkit-transform: translateX(0); }
-  to { -webkit-transform: translateX(235%); }
-}
-</style>
+  /* Remember which page owns the currently opened toolbox. */
+  var originalOpenPageTool = window.openPageTool;
+  if (typeof originalOpenPageTool === 'function' && !originalOpenPageTool.__baijidSoundWrapped) {
+    var wrappedOpenPageTool = function (page) {
+      window.__baijidActiveToolboxSoundPage =
+        page === 'platform' ? 'platform' :
+        page === 'app' ? 'app' : 'home';
+      return originalOpenPageTool.apply(this, arguments);
+    };
+    wrappedOpenPageTool.__baijidSoundWrapped = true;
+    window.openPageTool = wrappedOpenPageTool;
+  }
 
+  function playForActivePage() {
+    if (typeof window.playUiClickSound !== 'function') return;
+    var page = window.__baijidActiveToolboxSoundPage || 'home';
+    if (page === 'platform') {
+      window.playUiClickSound('platformBox');
+    } else if (page === 'app') {
+      window.playUiClickSound('appBox');
+    } else {
+      window.playUiClickSound('homePin');
+    }
+  }
 
-<style id="baijid-longer-inner-color-sweep-v2">
-.baijid-page-header > .header-line {
-  width: 130px !important;
-  min-width: 130px !important;
-  max-width: 130px !important;
-  height: 1.5px !important;
-  min-height: 1.5px !important;
-  max-height: 1.5px !important;
-  overflow: hidden !important;
-  position: absolute !important;
-  top: 33px !important;
-  background: rgba(0, 229, 255, .20) !important;
-  box-shadow: 0 0 5px rgba(0, 229, 255, .55) !important;
-}
-.baijid-page-header > .header-line::before {
-  content: "" !important;
-  display: block !important;
-  position: absolute !important;
-  top: 0 !important;
-  left: -100% !important;
-  width: 95% !important;
-  height: 100% !important;
-  background: linear-gradient(90deg,
-    transparent 0%,
-    rgba(0, 207, 255, .65) 18%,
-    #00e5ff 36%,
-    #ffffff 50%,
-    #00e5ff 66%,
-    rgba(0, 207, 255, .65) 84%,
-    transparent 100%) !important;
-  box-shadow: 0 0 8px rgba(0, 229, 255, .95) !important;
-  animation: baijidTitleLineExtraLongSweep 1.8s linear infinite !important;
-  -webkit-animation: baijidTitleLineExtraLongSweep 1.8s linear infinite !important;
-}
-.baijid-page-header > .header-line::after {
-  content: none !important;
-  display: none !important;
-}
-@keyframes baijidTitleLineExtraLongSweep {
-  from { transform: translateX(0); }
-  to { transform: translateX(211%); }
-}
-@-webkit-keyframes baijidTitleLineExtraLongSweep {
-  from { -webkit-transform: translateX(0); }
-  to { -webkit-transform: translateX(211%); }
-}
-.baijid-page-header #status.neon-greeting-inline {
-  transition: opacity .45s ease, visibility .45s ease !important;
-}
-.baijid-page-header #status.neon-greeting-inline.hide {
-  opacity: 0 !important;
-  visibility: hidden !important;
-  pointer-events: none !important;
-}
-</style>
+  /* Items inside an opened toolbox must use that page's own click sound.
+     Exclude Add controls, menu buttons and non-item panel interactions. */
+  document.addEventListener('click', function (event) {
+    var target = event.target;
+    if (!target || !target.closest) return;
 
+    var toolboxItem = target.closest('#multiToolOverlay.open #mtGrid .mt-item:not(.mt-add-btn)');
+    if (toolboxItem) {
+      playForActivePage();
+      return;
+    }
 
-<style id="baijid-title-line-sweep-final-tune">
-/* Keep the underline dimensions unchanged; enlarge only the moving light inside it. */
-.baijid-page-header > .header-line {
-  width: 130px !important;
-  min-width: 130px !important;
-  max-width: 130px !important;
-  height: 1.5px !important;
-  min-height: 1.5px !important;
-  max-height: 1.5px !important;
-  overflow: hidden !important;
-}
-.baijid-page-header > .header-line::before {
-  left: -110% !important;
-  width: 110% !important;
-  height: 100% !important;
-  background: linear-gradient(90deg,
-    transparent 0%,
-    rgba(0, 207, 255, .72) 14%,
-    #00dfff 32%,
-    #ffffff 50%,
-    #00e5ff 68%,
-    rgba(0, 207, 255, .72) 86%,
-    transparent 100%) !important;
-  box-shadow: 0 0 9px rgba(0, 229, 255, .98) !important;
-  animation: baijidTitleLineSmoothSweep 1.65s linear infinite !important;
-  -webkit-animation: baijidTitleLineSmoothSweep 1.65s linear infinite !important;
-}
-@keyframes baijidTitleLineSmoothSweep {
-  from { transform: translateX(0); }
-  to { transform: translateX(200%); }
-}
-@-webkit-keyframes baijidTitleLineSmoothSweep {
-  from { -webkit-transform: translateX(0); }
-  to { -webkit-transform: translateX(200%); }
-}
-</style>
+    /* The picker rows are part of the same page-specific toolbox workflow. */
+    var pickerItem = target.closest('#mtPickOverlay.open .mt-pick-row');
+    if (pickerItem) {
+      playForActivePage();
+    }
+  }, false);
+})();
+</script>
 
-
-<style id="baijid-title-line-overlapping-continuous-sweep">
-/* The underline itself stays 130px x 1.5px. Two overlapping light bands
-   travel through it with a short phase gap, so the line does not go empty. */
-.baijid-page-header > .header-line {
-  width: 130px !important;
-  min-width: 130px !important;
-  max-width: 130px !important;
-  height: 1.5px !important;
-  min-height: 1.5px !important;
-  max-height: 1.5px !important;
-  overflow: hidden !important;
-  position: absolute !important;
-}
-.baijid-page-header > .header-line::before,
-.baijid-page-header > .header-line::after {
-  content: "" !important;
-  display: block !important;
-  position: absolute !important;
-  top: 0 !important;
-  left: -85% !important;
-  width: 85% !important;
-  height: 100% !important;
-  background: linear-gradient(90deg,
-    transparent 0%,
-    rgba(0, 207, 255, .72) 12%,
-    #00dfff 32%,
-    #ffffff 50%,
-    #00e5ff 68%,
-    rgba(0, 207, 255, .72) 88%,
-    transparent 100%) !important;
-  box-shadow: 0 0 9px rgba(0, 229, 255, .98) !important;
-  animation: baijidTitleLineOverlapSweep 1.65s linear infinite !important;
-  -webkit-animation: baijidTitleLineOverlapSweep 1.65s linear infinite !important;
-}
-.baijid-page-header > .header-line::after {
-  animation-delay: -.825s !important;
-  -webkit-animation-delay: -.825s !important;
-}
-@keyframes baijidTitleLineOverlapSweep {
-  from { transform: translateX(0); }
-  to { transform: translateX(220%); }
-}
-@-webkit-keyframes baijidTitleLineOverlapSweep {
-  from { -webkit-transform: translateX(0); }
-  to { -webkit-transform: translateX(220%); }
-}
-</style>
-
-
-<style id="baijid-bottom-nav-compact-background-only">
-/* Reduce excess black space around the four page icons; keep all nav behavior intact. */
-html body .bnav {
-  padding: 3px 0 3px !important;
-  background: rgba(3, 4, 7, .97) !important;
-}
-html body .bnav-tabs {
-  padding: 0 !important;
-  min-height: 0 !important;
-  align-items: center !important;
-}
-html body .bnav-tabs .bnav-btn {
-  padding: 3px 14px !important;
-  gap: 3px !important;
-  min-height: 0 !important;
-}
-html body .bnav-dev {
-  padding: 3px 8px 1px !important;
-  line-height: 1.2 !important;
-}
-</style>
+</body>
+</html>
