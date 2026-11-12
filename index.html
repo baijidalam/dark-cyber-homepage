@@ -3150,7 +3150,149 @@
 
 /* Weather panel is a HOME-only component. */
 #baijidWeatherWidget.bw-hidden{display:none!important;}
+
+    /* BAIJID header strip: black only behind the clock/title/search and cyan line.
+       The greeting/status row below it stays transparent. */
+    .baijid-page-header {
+      background: transparent !important;
+      isolation: isolate;
+    }
+    .baijid-page-header::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 48px;
+      background: #000;
+      z-index: -1;
+      pointer-events: none;
+    }
+    .baijid-page-header .header-row,
+    .baijid-page-header .header-line {
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Home is a fixed phone-style screen: no vertical page scrolling.
+       The existing Home pin pager continues to handle horizontal swipes. */
+    body.home-no-vertical-scroll {
+      height: 100vh !important;
+      height: 100dvh !important;
+      min-height: 0 !important;
+      overflow: hidden !important;
+      overscroll-behavior: none !important;
+      touch-action: pan-x;
+    }
+    body.home-no-vertical-scroll > .wrap {
+      height: 100vh !important;
+      height: 100dvh !important;
+      min-height: 0 !important;
+      overflow: hidden !important;
+    }
+    body.home-no-vertical-scroll #tab-home {
+      height: calc(100vh - 88px);
+      height: calc(100dvh - 88px);
+      min-height: 0 !important;
+      overflow: hidden !important;
+    }
+    body.home-no-vertical-scroll #homePinViewport {
+      height: 100%;
+      overflow: hidden !important;
+      touch-action: pan-x !important;
+    }
+    body.home-no-vertical-scroll #homePinTrack,
+    body.home-no-vertical-scroll .home-pin-page {
+      height: 100%;
+    }
+    body.home-no-vertical-scroll .home-pin-page {
+      min-height: 0 !important;
+      overflow: hidden !important;
+    }
+
 </style>
+
+<style id="baijid-header-black-area-precision-fix">
+/* Black background is restricted to the clock + BAIJID PAGE + search row only. */
+.baijid-page-header {
+  background: transparent !important;
+  background-color: transparent !important;
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+  box-shadow: none !important;
+  border-bottom: 0 !important;
+}
+.baijid-page-header::before {
+  content: "" !important;
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  height: 43px !important;
+  background: #000 !important;
+  z-index: 0 !important;
+  pointer-events: none !important;
+}
+.baijid-page-header .header-row {
+  position: relative !important;
+  z-index: 1 !important;
+}
+.baijid-page-header .header-line,
+.baijid-page-header #status {
+  position: relative !important;
+  z-index: 1 !important;
+  background: transparent !important;
+  background-color: transparent !important;
+}
+</style>
+
+<style id="baijid-header-row-raised-cyan-line-preserved-v2">
+/* Keep the black strip snug around the top control row; retain the animated cyan line. */
+.baijid-page-header {
+  background: transparent !important;
+  background-color: transparent !important;
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+  box-shadow: none !important;
+  border-bottom: 0 !important;
+}
+.baijid-page-header::before {
+  content: "" !important;
+  position: absolute !important;
+  top: -8px !important;
+  left: 0 !important;
+  right: 0 !important;
+  height: 53px !important;
+  background: #000 !important;
+  z-index: 0 !important;
+  pointer-events: none !important;
+}
+.baijid-page-header .header-row {
+  position: relative !important;
+  z-index: 2 !important;
+}
+/* Do not replace, hide, or recolor the original animated cyan underline. */
+.baijid-page-header .header-line {
+  position: relative !important;
+  z-index: 2 !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+.baijid-page-header #status {
+  position: relative !important;
+  z-index: 1 !important;
+  background: transparent !important;
+  background-color: transparent !important;
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+}
+/* Nudge only Platform and App content slightly lower without changing card sizing. */
+#tab-platforms, #tab-apps {
+  padding-top: 8px !important;
+  box-sizing: border-box !important;
+}
+</style>
+
 </head>
 
 <body>
@@ -4954,6 +5096,169 @@ body > .wrap { padding-top: 0 !important; }
 
 
 
+
+
+<style id="baijid-header-black-extra-compact-cyan-original-restore">
+/* Compact black strip: only the clock/title/search row. */
+.baijid-page-header {
+  background: transparent !important;
+  background-color: transparent !important;
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+  box-shadow: none !important;
+  border-bottom: 0 !important;
+}
+.baijid-page-header::before {
+  content: "" !important;
+  position: absolute !important;
+  top: -12px !important;
+  left: 0 !important;
+  right: 0 !important;
+  height: 46px !important;
+  background: #000 !important;
+  z-index: 0 !important;
+  pointer-events: none !important;
+}
+.baijid-page-header .header-row {
+  position: relative !important;
+  z-index: 2 !important;
+}
+/* Restore the original moving cyan underline below “BAIJID PAGE”. */
+.baijid-page-header .header-line {
+  position: relative !important;
+  z-index: 2 !important;
+  display: block !important;
+  height: 1.5px !important;
+  width: 130px !important;
+  background: linear-gradient(90deg, transparent, var(--a), #fff, var(--a), transparent) !important;
+  background-size: 200% 100% !important;
+  animation: baijidLineMove 2.5s linear infinite !important;
+  -webkit-animation: baijidLineMove 2.5s linear infinite !important;
+  will-change: background-position !important;
+  box-shadow: 0 0 6px var(--ab) !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+.baijid-page-header #status {
+  position: relative !important;
+  z-index: 1 !important;
+  background: transparent !important;
+  background-color: transparent !important;
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+}
+</style>
+
+
+<style id="baijid-header-original-cyan-loading-restore">
+/* Restore the exact original BAIJID PAGE cyan loading-line effect. */
+.baijid-page-header > .header-line {
+  position: relative !important;
+  height: 1.5px !important;
+  width: 130px !important;
+  background: linear-gradient(90deg, transparent, var(--a), #fff, var(--a), transparent) !important;
+  background-size: 200% 100% !important;
+  background-repeat: repeat !important;
+  animation: baijidHeaderOriginalSweep 2.5s linear infinite !important;
+  box-shadow: 0 0 6px var(--ab) !important;
+  overflow: hidden !important;
+}
+.baijid-page-header > .header-line::before,
+.baijid-page-header > .header-line::after {
+  content: none !important;
+  display: none !important;
+  animation: none !important;
+}
+@keyframes baijidHeaderOriginalSweep {
+  0% { background-position: 200% center; }
+  100% { background-position: -200% center; }
+}
+</style>
+
+
+
+<style id="baijid-header-cyan-white-loading-final">
+/* The underline is a direct child of .baijid-page-header (not inside the title).
+   Animate that exact element so the cyan/white loading sweep remains visible. */
+.baijid-page-header > .header-line {
+  display: block !important;
+  position: relative !important;
+  flex: 0 0 130px !important;
+  width: 130px !important;
+  min-width: 130px !important;
+  height: 1.5px !important;
+  margin: 0 !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  overflow: hidden !important;
+  background-image: linear-gradient(90deg, transparent 0%, #00e5ff 30%, #ffffff 50%, #00e5ff 70%, transparent 100%) !important;
+  background-size: 200% 100% !important;
+  background-position: 200% center !important;
+  background-repeat: no-repeat !important;
+  animation: baijidHeaderCyanWhiteLoading 2.5s linear infinite !important;
+  -webkit-animation: baijidHeaderCyanWhiteLoading 2.5s linear infinite !important;
+  box-shadow: 0 0 6px rgba(0,229,255,.55) !important;
+  will-change: background-position;
+}
+.baijid-page-header > .header-line::before,
+.baijid-page-header > .header-line::after {
+  content: none !important;
+  display: none !important;
+  animation: none !important;
+}
+@keyframes baijidHeaderCyanWhiteLoading {
+  0% { background-position: 200% center; }
+  100% { background-position: -200% center; }
+}
+@-webkit-keyframes baijidHeaderCyanWhiteLoading {
+  0% { background-position: 200% center; }
+  100% { background-position: -200% center; }
+}
+</style>
+
+
+
+<style id="baijid-page-title-ultra-thin-underline-final">
+/* Ultra-thin animated underline positioned directly beneath the centered title only. */
+.baijid-page-header > .header-line {
+  position: absolute !important;
+  top: 35px !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  display: block !important;
+  width: 96px !important;
+  min-width: 96px !important;
+  max-width: 96px !important;
+  height: 0.7px !important;
+  min-height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  flex: none !important;
+  overflow: hidden !important;
+  border: 0 !important;
+  border-radius: 1px !important;
+  background: rgba(0,229,255,.22) !important;
+  box-shadow: 0 0 2px rgba(0,229,255,.35) !important;
+  z-index: 3 !important;
+}
+.baijid-page-header > .header-line::before {
+  content: "" !important;
+  display: block !important;
+  position: absolute !important;
+  top: 0 !important;
+  left: -40% !important;
+  width: 40% !important;
+  height: 100% !important;
+  border: 0 !important;
+  background: linear-gradient(90deg, transparent, #62dcff 30%, #fff 50%, #62dcff 70%, transparent) !important;
+  box-shadow: 0 0 2px rgba(110,220,255,.6) !important;
+  animation: baijidUltraThinTitleLine 1.8s linear infinite !important;
+}
+.baijid-page-header > .header-line::after { content: none !important; display: none !important; }
+@keyframes baijidUltraThinTitleLine { from { transform: translateX(0); } to { transform: translateX(350%); } }
+@-webkit-keyframes baijidUltraThinTitleLine { from { -webkit-transform: translateX(0); } to { -webkit-transform: translateX(350%); } }
+</style>
+
 </body>
 </html>
 ` }, // #8
@@ -6209,6 +6514,141 @@ body > .wrap { padding-top: 0 !important; }
 
 
 
+
+
+<style id="baijid-header-black-extra-compact-cyan-original-restore">
+/* Compact black strip: only the clock/title/search row. */
+.baijid-page-header {
+  background: transparent !important;
+  background-color: transparent !important;
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+  box-shadow: none !important;
+  border-bottom: 0 !important;
+}
+.baijid-page-header::before {
+  content: "" !important;
+  position: absolute !important;
+  top: -12px !important;
+  left: 0 !important;
+  right: 0 !important;
+  height: 46px !important;
+  background: #000 !important;
+  z-index: 0 !important;
+  pointer-events: none !important;
+}
+.baijid-page-header .header-row {
+  position: relative !important;
+  z-index: 2 !important;
+}
+/* Restore the original moving cyan underline below “BAIJID PAGE”. */
+.baijid-page-header .header-line {
+  position: relative !important;
+  z-index: 2 !important;
+  display: block !important;
+  height: 1.5px !important;
+  width: 130px !important;
+  background: linear-gradient(90deg, transparent, var(--a), #fff, var(--a), transparent) !important;
+  background-size: 200% 100% !important;
+  animation: baijidLineMove 2.5s linear infinite !important;
+  box-shadow: 0 0 6px var(--ab) !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+.baijid-page-header #status {
+  position: relative !important;
+  z-index: 1 !important;
+  background: transparent !important;
+  background-color: transparent !important;
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+}
+</style>
+
+
+
+<style id="baijid-header-cyan-white-loading-final">
+/* The underline is a direct child of .baijid-page-header (not inside the title).
+   Animate that exact element so the cyan/white loading sweep remains visible. */
+.baijid-page-header > .header-line {
+  display: block !important;
+  position: relative !important;
+  flex: 0 0 130px !important;
+  width: 130px !important;
+  min-width: 130px !important;
+  height: 1.5px !important;
+  margin: 0 !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  overflow: hidden !important;
+  background-image: linear-gradient(90deg, transparent 0%, #00e5ff 30%, #ffffff 50%, #00e5ff 70%, transparent 100%) !important;
+  background-size: 200% 100% !important;
+  background-position: 200% center !important;
+  background-repeat: no-repeat !important;
+  animation: baijidHeaderCyanWhiteLoading 2.5s linear infinite !important;
+  -webkit-animation: baijidHeaderCyanWhiteLoading 2.5s linear infinite !important;
+  box-shadow: 0 0 6px rgba(0,229,255,.55) !important;
+  will-change: background-position;
+}
+.baijid-page-header > .header-line::before,
+.baijid-page-header > .header-line::after {
+  content: none !important;
+  display: none !important;
+  animation: none !important;
+}
+@keyframes baijidHeaderCyanWhiteLoading {
+  0% { background-position: 200% center; }
+  100% { background-position: -200% center; }
+}
+@-webkit-keyframes baijidHeaderCyanWhiteLoading {
+  0% { background-position: 200% center; }
+  100% { background-position: -200% center; }
+}
+</style>
+
+
+
+<style id="baijid-page-title-ultra-thin-underline-final">
+/* Ultra-thin animated underline positioned directly beneath the centered title only. */
+.baijid-page-header > .header-line {
+  position: absolute !important;
+  top: 35px !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  display: block !important;
+  width: 96px !important;
+  min-width: 96px !important;
+  max-width: 96px !important;
+  height: 0.7px !important;
+  min-height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  flex: none !important;
+  overflow: hidden !important;
+  border: 0 !important;
+  border-radius: 1px !important;
+  background: rgba(0,229,255,.22) !important;
+  box-shadow: 0 0 2px rgba(0,229,255,.35) !important;
+  z-index: 3 !important;
+}
+.baijid-page-header > .header-line::before {
+  content: "" !important;
+  display: block !important;
+  position: absolute !important;
+  top: 0 !important;
+  left: -40% !important;
+  width: 40% !important;
+  height: 100% !important;
+  border: 0 !important;
+  background: linear-gradient(90deg, transparent, #62dcff 30%, #fff 50%, #62dcff 70%, transparent) !important;
+  box-shadow: 0 0 2px rgba(110,220,255,.6) !important;
+  animation: baijidUltraThinTitleLine 1.8s linear infinite !important;
+}
+.baijid-page-header > .header-line::after { content: none !important; display: none !important; }
+@keyframes baijidUltraThinTitleLine { from { transform: translateX(0); } to { transform: translateX(350%); } }
+@-webkit-keyframes baijidUltraThinTitleLine { from { -webkit-transform: translateX(0); } to { -webkit-transform: translateX(350%); } }
+</style>
+
 </body>
 </html>
 ` }, // #9
@@ -6394,6 +6834,141 @@ function copyTxt(){
 
 
 
+
+
+
+<style id="baijid-header-black-extra-compact-cyan-original-restore">
+/* Compact black strip: only the clock/title/search row. */
+.baijid-page-header {
+  background: transparent !important;
+  background-color: transparent !important;
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+  box-shadow: none !important;
+  border-bottom: 0 !important;
+}
+.baijid-page-header::before {
+  content: "" !important;
+  position: absolute !important;
+  top: -12px !important;
+  left: 0 !important;
+  right: 0 !important;
+  height: 46px !important;
+  background: #000 !important;
+  z-index: 0 !important;
+  pointer-events: none !important;
+}
+.baijid-page-header .header-row {
+  position: relative !important;
+  z-index: 2 !important;
+}
+/* Restore the original moving cyan underline below “BAIJID PAGE”. */
+.baijid-page-header .header-line {
+  position: relative !important;
+  z-index: 2 !important;
+  display: block !important;
+  height: 1.5px !important;
+  width: 130px !important;
+  background: linear-gradient(90deg, transparent, var(--a), #fff, var(--a), transparent) !important;
+  background-size: 200% 100% !important;
+  animation: baijidLineMove 2.5s linear infinite !important;
+  box-shadow: 0 0 6px var(--ab) !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+.baijid-page-header #status {
+  position: relative !important;
+  z-index: 1 !important;
+  background: transparent !important;
+  background-color: transparent !important;
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+}
+</style>
+
+
+
+<style id="baijid-header-cyan-white-loading-final">
+/* The underline is a direct child of .baijid-page-header (not inside the title).
+   Animate that exact element so the cyan/white loading sweep remains visible. */
+.baijid-page-header > .header-line {
+  display: block !important;
+  position: relative !important;
+  flex: 0 0 130px !important;
+  width: 130px !important;
+  min-width: 130px !important;
+  height: 1.5px !important;
+  margin: 0 !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  overflow: hidden !important;
+  background-image: linear-gradient(90deg, transparent 0%, #00e5ff 30%, #ffffff 50%, #00e5ff 70%, transparent 100%) !important;
+  background-size: 200% 100% !important;
+  background-position: 200% center !important;
+  background-repeat: no-repeat !important;
+  animation: baijidHeaderCyanWhiteLoading 2.5s linear infinite !important;
+  -webkit-animation: baijidHeaderCyanWhiteLoading 2.5s linear infinite !important;
+  box-shadow: 0 0 6px rgba(0,229,255,.55) !important;
+  will-change: background-position;
+}
+.baijid-page-header > .header-line::before,
+.baijid-page-header > .header-line::after {
+  content: none !important;
+  display: none !important;
+  animation: none !important;
+}
+@keyframes baijidHeaderCyanWhiteLoading {
+  0% { background-position: 200% center; }
+  100% { background-position: -200% center; }
+}
+@-webkit-keyframes baijidHeaderCyanWhiteLoading {
+  0% { background-position: 200% center; }
+  100% { background-position: -200% center; }
+}
+</style>
+
+
+
+<style id="baijid-page-title-ultra-thin-underline-final">
+/* Ultra-thin animated underline positioned directly beneath the centered title only. */
+.baijid-page-header > .header-line {
+  position: absolute !important;
+  top: 35px !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  display: block !important;
+  width: 96px !important;
+  min-width: 96px !important;
+  max-width: 96px !important;
+  height: 0.7px !important;
+  min-height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  flex: none !important;
+  overflow: hidden !important;
+  border: 0 !important;
+  border-radius: 1px !important;
+  background: rgba(0,229,255,.22) !important;
+  box-shadow: 0 0 2px rgba(0,229,255,.35) !important;
+  z-index: 3 !important;
+}
+.baijid-page-header > .header-line::before {
+  content: "" !important;
+  display: block !important;
+  position: absolute !important;
+  top: 0 !important;
+  left: -40% !important;
+  width: 40% !important;
+  height: 100% !important;
+  border: 0 !important;
+  background: linear-gradient(90deg, transparent, #62dcff 30%, #fff 50%, #62dcff 70%, transparent) !important;
+  box-shadow: 0 0 2px rgba(110,220,255,.6) !important;
+  animation: baijidUltraThinTitleLine 1.8s linear infinite !important;
+}
+.baijid-page-header > .header-line::after { content: none !important; display: none !important; }
+@keyframes baijidUltraThinTitleLine { from { transform: translateX(0); } to { transform: translateX(350%); } }
+@-webkit-keyframes baijidUltraThinTitleLine { from { -webkit-transform: translateX(0); } to { -webkit-transform: translateX(350%); } }
+</style>
 
 </body>
 </html>`, icon: "ti ti-copy" }, // #11
@@ -6620,6 +7195,141 @@ async function shareQR() {
 
 
 
+
+
+
+<style id="baijid-header-black-extra-compact-cyan-original-restore">
+/* Compact black strip: only the clock/title/search row. */
+.baijid-page-header {
+  background: transparent !important;
+  background-color: transparent !important;
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+  box-shadow: none !important;
+  border-bottom: 0 !important;
+}
+.baijid-page-header::before {
+  content: "" !important;
+  position: absolute !important;
+  top: -12px !important;
+  left: 0 !important;
+  right: 0 !important;
+  height: 46px !important;
+  background: #000 !important;
+  z-index: 0 !important;
+  pointer-events: none !important;
+}
+.baijid-page-header .header-row {
+  position: relative !important;
+  z-index: 2 !important;
+}
+/* Restore the original moving cyan underline below “BAIJID PAGE”. */
+.baijid-page-header .header-line {
+  position: relative !important;
+  z-index: 2 !important;
+  display: block !important;
+  height: 1.5px !important;
+  width: 130px !important;
+  background: linear-gradient(90deg, transparent, var(--a), #fff, var(--a), transparent) !important;
+  background-size: 200% 100% !important;
+  animation: baijidLineMove 2.5s linear infinite !important;
+  box-shadow: 0 0 6px var(--ab) !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+.baijid-page-header #status {
+  position: relative !important;
+  z-index: 1 !important;
+  background: transparent !important;
+  background-color: transparent !important;
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+}
+</style>
+
+
+
+<style id="baijid-header-cyan-white-loading-final">
+/* The underline is a direct child of .baijid-page-header (not inside the title).
+   Animate that exact element so the cyan/white loading sweep remains visible. */
+.baijid-page-header > .header-line {
+  display: block !important;
+  position: relative !important;
+  flex: 0 0 130px !important;
+  width: 130px !important;
+  min-width: 130px !important;
+  height: 1.5px !important;
+  margin: 0 !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  overflow: hidden !important;
+  background-image: linear-gradient(90deg, transparent 0%, #00e5ff 30%, #ffffff 50%, #00e5ff 70%, transparent 100%) !important;
+  background-size: 200% 100% !important;
+  background-position: 200% center !important;
+  background-repeat: no-repeat !important;
+  animation: baijidHeaderCyanWhiteLoading 2.5s linear infinite !important;
+  -webkit-animation: baijidHeaderCyanWhiteLoading 2.5s linear infinite !important;
+  box-shadow: 0 0 6px rgba(0,229,255,.55) !important;
+  will-change: background-position;
+}
+.baijid-page-header > .header-line::before,
+.baijid-page-header > .header-line::after {
+  content: none !important;
+  display: none !important;
+  animation: none !important;
+}
+@keyframes baijidHeaderCyanWhiteLoading {
+  0% { background-position: 200% center; }
+  100% { background-position: -200% center; }
+}
+@-webkit-keyframes baijidHeaderCyanWhiteLoading {
+  0% { background-position: 200% center; }
+  100% { background-position: -200% center; }
+}
+</style>
+
+
+
+<style id="baijid-page-title-ultra-thin-underline-final">
+/* Ultra-thin animated underline positioned directly beneath the centered title only. */
+.baijid-page-header > .header-line {
+  position: absolute !important;
+  top: 35px !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  display: block !important;
+  width: 96px !important;
+  min-width: 96px !important;
+  max-width: 96px !important;
+  height: 0.7px !important;
+  min-height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  flex: none !important;
+  overflow: hidden !important;
+  border: 0 !important;
+  border-radius: 1px !important;
+  background: rgba(0,229,255,.22) !important;
+  box-shadow: 0 0 2px rgba(0,229,255,.35) !important;
+  z-index: 3 !important;
+}
+.baijid-page-header > .header-line::before {
+  content: "" !important;
+  display: block !important;
+  position: absolute !important;
+  top: 0 !important;
+  left: -40% !important;
+  width: 40% !important;
+  height: 100% !important;
+  border: 0 !important;
+  background: linear-gradient(90deg, transparent, #62dcff 30%, #fff 50%, #62dcff 70%, transparent) !important;
+  box-shadow: 0 0 2px rgba(110,220,255,.6) !important;
+  animation: baijidUltraThinTitleLine 1.8s linear infinite !important;
+}
+.baijid-page-header > .header-line::after { content: none !important; display: none !important; }
+@keyframes baijidUltraThinTitleLine { from { transform: translateX(0); } to { transform: translateX(350%); } }
+@-webkit-keyframes baijidUltraThinTitleLine { from { -webkit-transform: translateX(0); } to { -webkit-transform: translateX(350%); } }
+</style>
 
 </body>
 </html>` }, // #12
@@ -9348,7 +10058,10 @@ let resizeTimer;window.addEventListener('resize',()=>{clearTimeout(resizeTimer);
     statusBox.style.borderColor = neonColor;
     statusBox.style.textShadow = '0 0 10px ' + neonColor;
     statusBox.style.boxShadow = '0 0 14px ' + neonColor + '50';
-    setTimeout(function () { statusBox.classList.add('hide'); }, 30000);
+    window.clearTimeout(window.__baijidGreetingHideTimer);
+    window.__baijidGreetingHideTimer = window.setTimeout(function () {
+      statusBox.classList.add('hide');
+    }, 30000);
   }
   function boot() {
     updateDynamicGreeting();
@@ -11570,6 +12283,98 @@ if(typeof oldHomePick==='function'&&!oldHomePick._v3020Wrapped){var hp=function(
     border-color: var(--a) !important;
     box-shadow: 0 0 16px var(--ab) !important;
   }
+</style>
+
+
+
+<style id="baijid-header-black-extra-compact-cyan-original-restore">
+/* Compact black strip: only the clock/title/search row. */
+.baijid-page-header {
+  background: transparent !important;
+  background-color: transparent !important;
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+  box-shadow: none !important;
+  border-bottom: 0 !important;
+}
+.baijid-page-header::before {
+  content: "" !important;
+  position: absolute !important;
+  top: -12px !important;
+  left: 0 !important;
+  right: 0 !important;
+  height: 46px !important;
+  background: #000 !important;
+  z-index: 0 !important;
+  pointer-events: none !important;
+}
+.baijid-page-header .header-row {
+  position: relative !important;
+  z-index: 2 !important;
+}
+/* Restore the original moving cyan underline below “BAIJID PAGE”. */
+.baijid-page-header .header-line {
+  position: relative !important;
+  z-index: 2 !important;
+  display: block !important;
+  height: 1.5px !important;
+  width: 130px !important;
+  background: linear-gradient(90deg, transparent, var(--a), #fff, var(--a), transparent) !important;
+  background-size: 200% 100% !important;
+  animation: baijidLineMove 2.5s linear infinite !important;
+  box-shadow: 0 0 6px var(--ab) !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+.baijid-page-header #status {
+  position: relative !important;
+  z-index: 1 !important;
+  background: transparent !important;
+  background-color: transparent !important;
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+}
+</style>
+
+
+
+<style id="baijid-header-cyan-white-loading-final">
+/* The underline is a direct child of .baijid-page-header (not inside the title).
+   Animate that exact element so the cyan/white loading sweep remains visible. */
+.baijid-page-header > .header-line {
+  display: block !important;
+  position: relative !important;
+  flex: 0 0 130px !important;
+  width: 130px !important;
+  min-width: 130px !important;
+  height: 1.5px !important;
+  margin: 0 !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  overflow: hidden !important;
+  background-image: linear-gradient(90deg, transparent 0%, #00e5ff 30%, #ffffff 50%, #00e5ff 70%, transparent 100%) !important;
+  background-size: 200% 100% !important;
+  background-position: 200% center !important;
+  background-repeat: no-repeat !important;
+  animation: baijidHeaderCyanWhiteLoading 2.5s linear infinite !important;
+  -webkit-animation: baijidHeaderCyanWhiteLoading 2.5s linear infinite !important;
+  box-shadow: 0 0 6px rgba(0,229,255,.55) !important;
+  will-change: background-position;
+}
+.baijid-page-header > .header-line::before,
+.baijid-page-header > .header-line::after {
+  content: none !important;
+  display: none !important;
+  animation: none !important;
+}
+@keyframes baijidHeaderCyanWhiteLoading {
+  0% { background-position: 200% center; }
+  100% { background-position: -200% center; }
+}
+@-webkit-keyframes baijidHeaderCyanWhiteLoading {
+  0% { background-position: 200% center; }
+  100% { background-position: -200% center; }
+}
 </style>
 
 </body>
@@ -14877,5 +15682,527 @@ if(typeof oldHomePick==='function'&&!oldHomePick._v3020Wrapped){var hp=function(
 })();
 </script>
 
+
+<script id="baijid-home-vertical-scroll-lock">
+(function () {
+  function syncHomeScrollMode() {
+    var home = document.getElementById('tab-home');
+    var isHome = !!(home && home.classList.contains('active'));
+    document.body.classList.toggle('home-no-vertical-scroll', isHome);
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', syncHomeScrollMode, { once: true });
+  } else {
+    syncHomeScrollMode();
+  }
+
+  window.addEventListener('baijid:tabchange', syncHomeScrollMode);
+  var home = document.getElementById('tab-home');
+  if (home && window.MutationObserver) {
+    new MutationObserver(syncHomeScrollMode).observe(home, {
+      attributes: true,
+      attributeFilter: ['class']
+    });
+  }
+})();
+</script>
+
+
+
+<style id="baijid-header-black-extra-compact-cyan-original-restore">
+/* Compact black strip: only the clock/title/search row. */
+.baijid-page-header {
+  background: transparent !important;
+  background-color: transparent !important;
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+  box-shadow: none !important;
+  border-bottom: 0 !important;
+}
+.baijid-page-header::before {
+  content: "" !important;
+  position: absolute !important;
+  top: -12px !important;
+  left: 0 !important;
+  right: 0 !important;
+  height: 46px !important;
+  background: #000 !important;
+  z-index: 0 !important;
+  pointer-events: none !important;
+}
+.baijid-page-header .header-row {
+  position: relative !important;
+  z-index: 2 !important;
+}
+/* Restore the original moving cyan underline below “BAIJID PAGE”. */
+.baijid-page-header .header-line {
+  position: relative !important;
+  z-index: 2 !important;
+  display: block !important;
+  height: 1.5px !important;
+  width: 130px !important;
+  background: linear-gradient(90deg, transparent, var(--a), #fff, var(--a), transparent) !important;
+  background-size: 200% 100% !important;
+  animation: baijidLineMove 2.5s linear infinite !important;
+  box-shadow: 0 0 6px var(--ab) !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+.baijid-page-header #status {
+  position: relative !important;
+  z-index: 1 !important;
+  background: transparent !important;
+  background-color: transparent !important;
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+}
+</style>
+
+
+
+<style id="baijid-cyan-underline-rotating-sweep">
+/* Keep the existing cyan underline, with a continuously cycling bright sweep. */
+.baijid-page-header > .header-line {
+  position: relative !important;
+  overflow: hidden !important;
+  background: rgba(0,229,255,.22) !important;
+  box-shadow: 0 0 5px rgba(0,229,255,.55) !important;
+  animation: none !important;
+}
+.baijid-page-header > .header-line::after {
+  content: "" !important;
+  position: absolute !important;
+  top: -1px !important;
+  left: -28% !important;
+  width: 28% !important;
+  height: 3px !important;
+  border-radius: 50% !important;
+  background: linear-gradient(90deg, transparent, #00eaff, #ffffff, #00eaff, transparent) !important;
+  box-shadow: 0 0 7px #00eaff, 0 0 12px rgba(0,234,255,.8) !important;
+  animation: baijidCyanSweepSpin 1.8s linear infinite !important;
+  pointer-events: none !important;
+}
+@keyframes baijidCyanSweepSpin {
+  0% { left: -28%; opacity: .55; }
+  50% { opacity: 1; }
+  100% { left: 100%; opacity: .55; }
+}
+</style>
+
+<style id="baijid-header-cyan-line-final-fix">
+/* The underline is nested inside .header-center-block, so target the real element.
+   Restore the original continuously sweeping cyan/white gradient. */
+.baijid-page-header .header-center-block .header-line {
+  display: block !important;
+  position: relative !important;
+  flex: 0 0 130px !important;
+  width: 130px !important;
+  min-width: 130px !important;
+  height: 1.5px !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  overflow: visible !important;
+  background-image: linear-gradient(90deg, transparent 0%, var(--a, #00e5ff) 35%, #ffffff 50%, var(--a, #00e5ff) 65%, transparent 100%) !important;
+  background-size: 200% 100% !important;
+  background-position: 200% center !important;
+  background-repeat: repeat !important;
+  animation: baijidHeaderCyanLineSweepFinal 2.5s linear infinite !important;
+  -webkit-animation: baijidHeaderCyanLineSweepFinal 2.5s linear infinite !important;
+  box-shadow: 0 0 6px var(--ab, rgba(0,229,255,.35)) !important;
+  will-change: background-position !important;
+}
+.baijid-page-header .header-center-block .header-line::before,
+.baijid-page-header .header-center-block .header-line::after {
+  content: none !important;
+  display: none !important;
+  animation: none !important;
+}
+@keyframes baijidHeaderCyanLineSweepFinal {
+  0% { background-position: 200% center; }
+  100% { background-position: -200% center; }
+}
+</style>
+
+
+<style id="baijid-header-cyan-white-loading-final">
+/* The underline is a direct child of .baijid-page-header (not inside the title).
+   Animate that exact element so the cyan/white loading sweep remains visible. */
+.baijid-page-header > .header-line {
+  display: block !important;
+  position: relative !important;
+  flex: 0 0 130px !important;
+  width: 130px !important;
+  min-width: 130px !important;
+  height: 1.5px !important;
+  margin: 0 !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  overflow: hidden !important;
+  background-image: linear-gradient(90deg, transparent 0%, #00e5ff 30%, #ffffff 50%, #00e5ff 70%, transparent 100%) !important;
+  background-size: 200% 100% !important;
+  background-position: 200% center !important;
+  background-repeat: no-repeat !important;
+  animation: baijidHeaderCyanWhiteLoading 2.5s linear infinite !important;
+  -webkit-animation: baijidHeaderCyanWhiteLoading 2.5s linear infinite !important;
+  box-shadow: 0 0 6px rgba(0,229,255,.55) !important;
+  will-change: background-position;
+}
+.baijid-page-header > .header-line::before,
+.baijid-page-header > .header-line::after {
+  content: none !important;
+  display: none !important;
+  animation: none !important;
+}
+@keyframes baijidHeaderCyanWhiteLoading {
+  0% { background-position: 200% center; }
+  100% { background-position: -200% center; }
+}
+@-webkit-keyframes baijidHeaderCyanWhiteLoading {
+  0% { background-position: 200% center; }
+  100% { background-position: -200% center; }
+}
+</style>
+
+
+
+<style id="baijid-page-title-ultra-thin-underline-final">
+/* Ultra-thin animated underline positioned directly beneath the centered title only. */
+.baijid-page-header > .header-line {
+  position: absolute !important;
+  top: 35px !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  display: block !important;
+  width: 96px !important;
+  min-width: 96px !important;
+  max-width: 96px !important;
+  height: 0.7px !important;
+  min-height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  flex: none !important;
+  overflow: hidden !important;
+  border: 0 !important;
+  border-radius: 1px !important;
+  background: rgba(0,229,255,.22) !important;
+  box-shadow: 0 0 2px rgba(0,229,255,.35) !important;
+  z-index: 3 !important;
+}
+.baijid-page-header > .header-line::before {
+  content: "" !important;
+  display: block !important;
+  position: absolute !important;
+  top: 0 !important;
+  left: -40% !important;
+  width: 40% !important;
+  height: 100% !important;
+  border: 0 !important;
+  background: linear-gradient(90deg, transparent, #62dcff 30%, #fff 50%, #62dcff 70%, transparent) !important;
+  box-shadow: 0 0 2px rgba(110,220,255,.6) !important;
+  animation: baijidUltraThinTitleLine 1.8s linear infinite !important;
+}
+.baijid-page-header > .header-line::after { content: none !important; display: none !important; }
+@keyframes baijidUltraThinTitleLine { from { transform: translateX(0); } to { transform: translateX(350%); } }
+@-webkit-keyframes baijidUltraThinTitleLine { from { -webkit-transform: translateX(0); } to { -webkit-transform: translateX(350%); } }
+</style>
+
 </body>
 </html>
+
+
+<style id="baijid-page-title-underline-actual-moving-effect">
+/* Only the thin line directly below the BAIJID PAGE title */
+.baijid-page-header > .header-line {
+  display: block !important;
+  position: relative !important;
+  flex: 0 0 130px !important;
+  width: 130px !important;
+  min-width: 130px !important;
+  height: 2px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  background: rgba(0, 229, 255, 0.28) !important;
+  border: 0 !important;
+  border-radius: 2px !important;
+  box-shadow: 0 0 5px rgba(0, 229, 255, 0.45) !important;
+  animation: none !important;
+}
+.baijid-page-header > .header-line::before {
+  content: "" !important;
+  display: block !important;
+  position: absolute !important;
+  top: 0 !important;
+  left: -45% !important;
+  width: 45% !important;
+  height: 100% !important;
+  border: 0 !important;
+  border-radius: 2px !important;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    #00e5ff 25%,
+    #ffffff 50%,
+    #00e5ff 75%,
+    transparent 100%) !important;
+  opacity: 1 !important;
+  transform: translateX(0);
+  animation: baijidPageUnderlineTravel 1.8s linear infinite !important;
+  -webkit-animation: baijidPageUnderlineTravel 1.8s linear infinite !important;
+  box-shadow: 0 0 7px rgba(0, 229, 255, 0.8) !important;
+}
+.baijid-page-header > .header-line::after {
+  content: none !important;
+  display: none !important;
+}
+@keyframes baijidPageUnderlineTravel {
+  from { transform: translateX(0); }
+  to { transform: translateX(325%); }
+}
+@-webkit-keyframes baijidPageUnderlineTravel {
+  from { -webkit-transform: translateX(0); }
+  to { -webkit-transform: translateX(325%); }
+}
+</style>
+
+
+<style id="baijid-page-title-original-style-underline-final">
+/* Original thin cyan/white loading line, centered directly beneath BAIJID PAGE. */
+.baijid-page-header > .header-line {
+  display: block !important; position: absolute !important;
+  top: 39px !important; left: 50% !important; right: auto !important;
+  transform: translateX(-50%) !important;
+  width: 130px !important; min-width: 130px !important; max-width: 130px !important;
+  height: 1.5px !important; min-height: 1.5px !important; max-height: 1.5px !important;
+  margin: 0 !important; padding: 0 !important; border: 0 !important; border-radius: 0 !important;
+  background: linear-gradient(90deg, transparent, #00e5ff, #fff, #00e5ff, transparent) !important;
+  background-size: 200% 100% !important; background-position: 200% center !important; background-repeat: no-repeat !important;
+  animation: baijidOriginalTitleLineMove 2.5s linear infinite !important;
+  -webkit-animation: baijidOriginalTitleLineMove 2.5s linear infinite !important;
+  box-shadow: 0 0 6px rgba(0,229,255,.55) !important;
+  opacity: 1 !important; visibility: visible !important; overflow: hidden !important; pointer-events: none !important;
+}
+@keyframes baijidOriginalTitleLineMove {
+  0% { background-position: 200% center; }
+  100% { background-position: -200% center; }
+}
+@-webkit-keyframes baijidOriginalTitleLineMove {
+  0% { background-position: 200% center; }
+  100% { background-position: -200% center; }
+}
+</style>
+
+
+<style id="baijid-title-line-close-and-longer-glow">
+/* Keep the underline the same length; move it closer to the BAIJID PAGE title. */
+.baijid-page-header > .header-line {
+  top: 33px !important;
+  width: 130px !important;
+  min-width: 130px !important;
+  max-width: 130px !important;
+  height: 1.5px !important;
+  min-height: 1.5px !important;
+  max-height: 1.5px !important;
+  background: rgba(0, 229, 255, .24) !important;
+  background-size: 100% 100% !important;
+  animation: none !important;
+  -webkit-animation: none !important;
+  box-shadow: 0 0 5px rgba(0, 229, 255, .5) !important;
+  overflow: hidden !important;
+}
+.baijid-page-header > .header-line::before {
+  content: "" !important;
+  display: block !important;
+  position: absolute !important;
+  top: 0 !important;
+  left: -75% !important;
+  width: 75% !important;
+  height: 100% !important;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    #00cfff 22%,
+    #ffffff 50%,
+    #00e5ff 78%,
+    transparent 100%) !important;
+  box-shadow: 0 0 7px rgba(0, 229, 255, .85) !important;
+  animation: baijidTitleLineLongGlow 1.8s linear infinite !important;
+  -webkit-animation: baijidTitleLineLongGlow 1.8s linear infinite !important;
+}
+@keyframes baijidTitleLineLongGlow {
+  from { transform: translateX(0); }
+  to { transform: translateX(235%); }
+}
+@-webkit-keyframes baijidTitleLineLongGlow {
+  from { -webkit-transform: translateX(0); }
+  to { -webkit-transform: translateX(235%); }
+}
+</style>
+
+
+<style id="baijid-longer-inner-color-sweep-v2">
+.baijid-page-header > .header-line {
+  width: 130px !important;
+  min-width: 130px !important;
+  max-width: 130px !important;
+  height: 1.5px !important;
+  min-height: 1.5px !important;
+  max-height: 1.5px !important;
+  overflow: hidden !important;
+  position: absolute !important;
+  top: 33px !important;
+  background: rgba(0, 229, 255, .20) !important;
+  box-shadow: 0 0 5px rgba(0, 229, 255, .55) !important;
+}
+.baijid-page-header > .header-line::before {
+  content: "" !important;
+  display: block !important;
+  position: absolute !important;
+  top: 0 !important;
+  left: -100% !important;
+  width: 95% !important;
+  height: 100% !important;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    rgba(0, 207, 255, .65) 18%,
+    #00e5ff 36%,
+    #ffffff 50%,
+    #00e5ff 66%,
+    rgba(0, 207, 255, .65) 84%,
+    transparent 100%) !important;
+  box-shadow: 0 0 8px rgba(0, 229, 255, .95) !important;
+  animation: baijidTitleLineExtraLongSweep 1.8s linear infinite !important;
+  -webkit-animation: baijidTitleLineExtraLongSweep 1.8s linear infinite !important;
+}
+.baijid-page-header > .header-line::after {
+  content: none !important;
+  display: none !important;
+}
+@keyframes baijidTitleLineExtraLongSweep {
+  from { transform: translateX(0); }
+  to { transform: translateX(211%); }
+}
+@-webkit-keyframes baijidTitleLineExtraLongSweep {
+  from { -webkit-transform: translateX(0); }
+  to { -webkit-transform: translateX(211%); }
+}
+.baijid-page-header #status.neon-greeting-inline {
+  transition: opacity .45s ease, visibility .45s ease !important;
+}
+.baijid-page-header #status.neon-greeting-inline.hide {
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+</style>
+
+
+<style id="baijid-title-line-sweep-final-tune">
+/* Keep the underline dimensions unchanged; enlarge only the moving light inside it. */
+.baijid-page-header > .header-line {
+  width: 130px !important;
+  min-width: 130px !important;
+  max-width: 130px !important;
+  height: 1.5px !important;
+  min-height: 1.5px !important;
+  max-height: 1.5px !important;
+  overflow: hidden !important;
+}
+.baijid-page-header > .header-line::before {
+  left: -110% !important;
+  width: 110% !important;
+  height: 100% !important;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    rgba(0, 207, 255, .72) 14%,
+    #00dfff 32%,
+    #ffffff 50%,
+    #00e5ff 68%,
+    rgba(0, 207, 255, .72) 86%,
+    transparent 100%) !important;
+  box-shadow: 0 0 9px rgba(0, 229, 255, .98) !important;
+  animation: baijidTitleLineSmoothSweep 1.65s linear infinite !important;
+  -webkit-animation: baijidTitleLineSmoothSweep 1.65s linear infinite !important;
+}
+@keyframes baijidTitleLineSmoothSweep {
+  from { transform: translateX(0); }
+  to { transform: translateX(200%); }
+}
+@-webkit-keyframes baijidTitleLineSmoothSweep {
+  from { -webkit-transform: translateX(0); }
+  to { -webkit-transform: translateX(200%); }
+}
+</style>
+
+
+<style id="baijid-title-line-overlapping-continuous-sweep">
+/* The underline itself stays 130px x 1.5px. Two overlapping light bands
+   travel through it with a short phase gap, so the line does not go empty. */
+.baijid-page-header > .header-line {
+  width: 130px !important;
+  min-width: 130px !important;
+  max-width: 130px !important;
+  height: 1.5px !important;
+  min-height: 1.5px !important;
+  max-height: 1.5px !important;
+  overflow: hidden !important;
+  position: absolute !important;
+}
+.baijid-page-header > .header-line::before,
+.baijid-page-header > .header-line::after {
+  content: "" !important;
+  display: block !important;
+  position: absolute !important;
+  top: 0 !important;
+  left: -85% !important;
+  width: 85% !important;
+  height: 100% !important;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    rgba(0, 207, 255, .72) 12%,
+    #00dfff 32%,
+    #ffffff 50%,
+    #00e5ff 68%,
+    rgba(0, 207, 255, .72) 88%,
+    transparent 100%) !important;
+  box-shadow: 0 0 9px rgba(0, 229, 255, .98) !important;
+  animation: baijidTitleLineOverlapSweep 1.65s linear infinite !important;
+  -webkit-animation: baijidTitleLineOverlapSweep 1.65s linear infinite !important;
+}
+.baijid-page-header > .header-line::after {
+  animation-delay: -.825s !important;
+  -webkit-animation-delay: -.825s !important;
+}
+@keyframes baijidTitleLineOverlapSweep {
+  from { transform: translateX(0); }
+  to { transform: translateX(220%); }
+}
+@-webkit-keyframes baijidTitleLineOverlapSweep {
+  from { -webkit-transform: translateX(0); }
+  to { -webkit-transform: translateX(220%); }
+}
+</style>
+
+
+<style id="baijid-bottom-nav-compact-background-only">
+/* Reduce excess black space around the four page icons; keep all nav behavior intact. */
+html body .bnav {
+  padding: 3px 0 3px !important;
+  background: rgba(3, 4, 7, .97) !important;
+}
+html body .bnav-tabs {
+  padding: 0 !important;
+  min-height: 0 !important;
+  align-items: center !important;
+}
+html body .bnav-tabs .bnav-btn {
+  padding: 3px 14px !important;
+  gap: 3px !important;
+  min-height: 0 !important;
+}
+html body .bnav-dev {
+  padding: 3px 8px 1px !important;
+  line-height: 1.2 !important;
+}
+</style>
