@@ -8,7 +8,7 @@
 <html lang="en">
 
 <head>
-  <!-- 
+<!-- 
   Copyright © 2026 MD BAIJID ALAM
   All Rights Reserved.
   এই কোডের কোনো অংশ অনুমতি ছাড়া কপি, পরিবর্তন বা পুনঃবিতরণ করা সম্পূর্ণ নিষিদ্ধ।
@@ -18436,3 +18436,88 @@ html body #tab-home .pin-row-top > .home-pin > .home-pin-name {
 </style>
 </body>
 </html>
+
+<!-- BAIJID RESET ICON FINAL FIX: restore the original 2x2 toolbox-side icons -->
+<script id="baijid-toolbox-reset-icon-final-fix">
+(function () {
+  'use strict';
+  if (window.__baijidToolboxResetIconFinalFix) return;
+  window.__baijidToolboxResetIconFinalFix = true;
+
+  var ROOT = document.title || 'BAIJID';
+  var PREFIX = ROOT + '_v3007_';
+
+  function read(key, fallback) {
+    try {
+      var value = JSON.parse(localStorage.getItem(key) || 'null');
+      return value == null ? fallback : value;
+    } catch (e) { return fallback; }
+  }
+  function write(key, value) {
+    try {
+      var raw = JSON.stringify(value);
+      localStorage.setItem(key, raw);
+      return localStorage.getItem(key) === raw;
+    } catch (e) { return false; }
+  }
+  function closeEditor() {
+    window._pendingMtIconData = null;
+    var modal = document.getElementById('editMtModal');
+    if (modal) {
+      modal.classList.remove('open');
+      modal.style.display = '';
+    }
+  }
+
+  window.resetToolIcon = function () {
+    var ctx = window._pageToolCtx;
+    if (!ctx || (ctx.pg !== 'platform' && ctx.pg !== 'app') || ctx.n == null) {
+      if (window.toastMsg) window.toastMsg('Tool box পাওয়া যায়নি — আবার 3 ডট চাপুন', true);
+      return;
+    }
+
+    var pg = String(ctx.pg);
+    var n = String(ctx.n);
+    var ok = false;
+
+    if (n.indexOf('custom:') === 0) {
+      // Custom Platform/App toolbox: clear the override so its four original
+      // side icons are rendered again in their normal 2-by-2 arrangement.
+      var id = n.slice(7);
+      var boxKey = PREFIX + 'boxes_' + pg;
+      var boxes = read(boxKey, []);
+      if (!Array.isArray(boxes)) boxes = [];
+      var box = boxes.find(function (item) { return String(item.id) === id; });
+      if (!box) {
+        if (window.toastMsg) window.toastMsg('Tool box পাওয়া যায়নি', true);
+        return;
+      }
+      box.logo = '';
+      box.icon = '';
+      box.customIcon = false;
+      ok = write(boxKey, boxes);
+      if (ok && typeof window.renderPageBoxes === 'function') window.renderPageBoxes(pg);
+      if (ok && typeof window.renderHardPlatforms === 'function' && pg === 'platform') window.renderHardPlatforms();
+      if (ok && typeof window.renderHardApps === 'function' && pg === 'app') window.renderHardApps();
+    } else {
+      // Built-in toolbox: remove its metadata override completely. The main
+      // arrays in the HTML then provide the original default appearance.
+      var metaKey = ROOT + '_page_tool_meta';
+      var allMeta = read(metaKey, {});
+      if (!allMeta || typeof allMeta !== 'object') allMeta = {};
+      delete allMeta[pg + ':' + n];
+      ok = write(metaKey, allMeta);
+      if (ok && pg === 'platform' && typeof window.renderHardPlatforms === 'function') window.renderHardPlatforms();
+      if (ok && pg === 'app' && typeof window.renderHardApps === 'function') window.renderHardApps();
+    }
+
+    if (!ok) {
+      if (window.toastMsg) window.toastMsg('আইকন রিসেট সেভ করা যায়নি', true);
+      return;
+    }
+
+    closeEditor();
+    if (window.toastMsg) window.toastMsg('Original toolbox icon restored');
+  };
+})();
+</script>
