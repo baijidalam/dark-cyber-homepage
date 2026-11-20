@@ -5586,6 +5586,9 @@ body > .wrap { padding-top: 0 !important; }
 
 
 
+
+
+
 </body>
 </html>
 ` }, // #8
@@ -16634,7 +16637,7 @@ html body .spooky-house .hill {
     else list.innerHTML=candidates.map(function(x,i){var label=esc(x.name);var icon=x.logo&&!/^ti[ -]/i.test(x.logo)?'<img src="'+esc(x.logo)+'">':'<i class="'+esc(x.icon||'ti ti-world')+'"></i>';return '<label class="v3070-choice"><input type="checkbox" data-i="'+i+'"><span class="v3070-icon">'+icon+'</span><b>'+label+'</b></label>';}).join('');
     ov.classList.add('open');
   }
-  function create(){if(!active)return;var ov=document.getElementById('v3070NewBox'),name=(ov.querySelector('#v3070Name').value||'').trim();if(!name){if(window.toastMsg)toastMsg('Tool box name লিখুন',true);return;}var checks=ov.querySelectorAll('.v3070-choice input:checked'),chosen=[];checks.forEach(function(c){var x=active.candidates[Number(c.dataset.i)];if(x)chosen.push(x);});if(chosen.length<2){if(window.toastMsg)toastMsg('কমপক্ষে ২টি টুল সিলেক্ট করুন',true);return;}
+  function create(){if(!active)return;var ov=document.getElementById('v3070NewBox'),name=(ov.querySelector('#v3070Name').value||'').trim();if(!name){if(window.toastMsg)toastMsg('Tool box name লিখুন',true);var nameInput=ov.querySelector('#v3070Name');if(nameInput){nameInput.placeholder='এখানে Tool box name লিখুন';setTimeout(function(){try{nameInput.focus({preventScroll:true});}catch(e){nameInput.focus();}try{nameInput.setSelectionRange(nameInput.value.length,nameInput.value.length);}catch(e){}},60);}return;}var checks=ov.querySelectorAll('.v3070-choice input:checked'),chosen=[];checks.forEach(function(c){var x=active.candidates[Number(c.dataset.i)];if(x)chosen.push(x);});if(chosen.length<2){if(window.toastMsg)toastMsg('কমপক্ষে ২টি টুল সিলেক্ট করুন',true);return;}
     var kind=active.kind;
     if(kind==='home'){
       var folders=read(HOME,[]),id='fld'+Date.now();var f={id:id,name:name,originalName:name,items:chosen.map(function(x){return Object.assign({},x);}),icon:'ti ti-apps',logo:'',customIcon:false};folders.push(f);if(!write(HOME,folders))return;var order=read(ORDER,[]);order.push(id);write(ORDER,order);close();if(window.renderHomePins)window.renderHomePins();ensureHomeFolderCards();if(window.v3053ApplyHide)window.v3053ApplyHide();if(window.toastMsg)toastMsg('Home tool box তৈরি হয়েছে');return;
@@ -16653,12 +16656,12 @@ html body .spooky-house .hill {
 <!-- V3071: close toolbox settings with toolbox + focus green toolbox name input -->
 <style id="v3071-new-toolbox-name-green">
   #v3070NewBox #v3070Name {
-    color:#42e889 !important;
-    -webkit-text-fill-color:#42e889 !important;
-    caret-color:#42e889 !important;
+    color:var(--a,#00e5ff) !important;
+    -webkit-text-fill-color:var(--a,#00e5ff) !important;
+    caret-color:var(--a,#00e5ff) !important;
     font-weight:700 !important;
   }
-  #v3070NewBox #v3070Name::placeholder { color:rgba(66,232,137,.55) !important; -webkit-text-fill-color:rgba(66,232,137,.55) !important; }
+  #v3070NewBox #v3070Name::placeholder { color:var(--a,#00e5ff) !important; opacity:.58 !important; -webkit-text-fill-color:var(--a,#00e5ff) !important; }
 </style>
 <script id="v3071-new-toolbox-focus-and-close-fix">
 (function(){
@@ -17485,7 +17488,7 @@ html body #tab-apps .plat-plus-btn.search-hidden {
  function create(){
    if(!active)return;
    var o=document.getElementById('baijidPlatformBoxRepair'),name=(o.querySelector('#bprName').value||'').trim();
-   if(!name){if(window.toastMsg)toastMsg('Tool box name লিখুন',true);return}
+   if(!name){if(window.toastMsg)toastMsg('Tool box name লিখুন',true);var nameInput=o.querySelector('#bprName');if(nameInput){nameInput.placeholder='এখানে Tool box name লিখুন';setTimeout(function(){try{nameInput.focus({preventScroll:true})}catch(e){nameInput.focus()}try{nameInput.setSelectionRange(nameInput.value.length,nameInput.value.length)}catch(e){}},60)}return}
    var chosen=[];
    o.querySelectorAll('input[type=checkbox]:checked').forEach(function(c){var x=active.items[Number(c.dataset.index)];if(x)chosen.push(x)});
    if(chosen.length<2){if(window.toastMsg)toastMsg('কমপক্ষে ২টি আইটেম সিলেক্ট করুন',true);return}
@@ -17594,8 +17597,340 @@ html body #tab-apps .plat-plus-btn.search-hidden {
   }
   #v3057PickList .v3057-row > b { flex: 0 0 24px !important; margin-left: auto !important; }
 </style>
-</body>
-</html>
+
+
+
+
+<script id="baijid-toolbox-icon-gallery-save-repair-v3">
+(function () {
+  'use strict';
+  if (window.__baijidToolboxIconGalleryRepairV3) return;
+  window.__baijidToolboxIconGalleryRepairV3 = true;
+
+  var ROOT = document.title || 'BAIJID';
+  var PREFIX = ROOT + '_v3007_';
+  var activeCtx = null;
+
+  function read(key, fallback) {
+    try { var v = JSON.parse(localStorage.getItem(key) || 'null'); return v == null ? fallback : v; }
+    catch (e) { return fallback; }
+  }
+  function write(key, value) {
+    try {
+      var raw = JSON.stringify(value);
+      localStorage.setItem(key, raw);
+      return localStorage.getItem(key) === raw;
+    } catch (e) {
+      if (window.toastMsg) window.toastMsg('ছবি সেভ করার জায়গা নেই — ছোট ছবি ব্যবহার করুন', true);
+      return false;
+    }
+  }
+  function normalizeIcon(value) {
+    var raw = String(value || '').trim().replace(/\s+/g, ' ');
+    if (/^ti-[\w-]+$/i.test(raw)) return 'ti ' + raw;
+    // Keep the complete Tabler class pair, including ti ti-brand-* names.
+    if (/^ti\s+ti-[\w-]+$/i.test(raw)) return raw;
+    if (/^ti\s+[\w-]+$/i.test(raw)) return raw;
+    return '';
+  }
+  function getCtx() {
+    var c = window._pageToolCtx;
+    if (c && (c.pg === 'platform' || c.pg === 'app') && c.n != null) {
+      return { kind: 'page', pg: String(c.pg), n: String(c.n), key: String(c.pg) + ':' + String(c.n) };
+    }
+    if (activeCtx && activeCtx.kind === 'page') return activeCtx;
+    var id = window.__v3019HomeCustomId || window._openFolderId;
+    if (id) return { kind: 'home', id: String(id) };
+    if (activeCtx && activeCtx.kind === 'home') return activeCtx;
+    return null;
+  }
+  function getBox(ctx) {
+    if (!ctx || ctx.kind !== 'page' || String(ctx.n).indexOf('custom:') !== 0) return null;
+    var id = String(ctx.n).slice(7), key = PREFIX + 'boxes_' + ctx.pg;
+    var arr = read(key, []), box = arr.find(function (b) { return String(b.id) === id; });
+    return box ? { key: key, arr: arr, box: box, id: id } : null;
+  }
+  function iconMarkup(box) {
+    if (box.logo) return '<img src="' + String(box.logo).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;') + '" alt="" style="width:36px;height:36px;max-width:100%;max-height:100%;object-fit:cover;border-radius:10px;">';
+    var ic = normalizeIcon(box.icon) || 'ti ti-apps';
+    return '<i class="' + ic + ' plat-icon" style="font-size:34px;line-height:1;"></i>';
+  }
+  function patchRenderedBoxCards(pg) {
+    var root = document.getElementById(pg === 'platform' ? 'hardPlatforms' : 'hardApps');
+    if (!root) return;
+    var arr = read(PREFIX + 'boxes_' + pg, []);
+    root.querySelectorAll('.v3007-custom-box[data-v3007-box]').forEach(function (card) {
+      var id = card.getAttribute('data-v3007-box');
+      var box = arr.find(function (b) { return String(b.id) === String(id); });
+      if (!box || !box.customIcon) return;
+      var host = card.querySelector('.plat-tool-icon');
+      if (!host) return;
+      host.innerHTML = iconMarkup(box);
+      host.style.display = 'flex';
+      host.style.alignItems = 'center';
+      host.style.justifyContent = 'center';
+    });
+  }
+
+  // Capture the exact toolbox identity at the moment it is opened.
+  var oldOpenPage = window.openPageTool;
+  if (typeof oldOpenPage === 'function' && !oldOpenPage._baijidIconCtxV3) {
+    var openPage = function (pg, n) {
+      if (pg === 'platform' || pg === 'app') activeCtx = { kind: 'page', pg: String(pg), n: String(n), key: String(pg) + ':' + String(n) };
+      var result = oldOpenPage.apply(this, arguments);
+      if (pg === 'platform' || pg === 'app') {
+        window._pageToolCtx = { pg: String(pg), n: String(n), key: String(pg) + ':' + String(n) };
+      }
+      return result;
+    };
+    openPage._baijidIconCtxV3 = true;
+    window.openPageTool = openPage;
+  }
+  var oldOpenHome = window.openMultiTool;
+  if (typeof oldOpenHome === 'function' && !oldOpenHome._baijidIconCtxV3) {
+    var openHome = function (id) {
+      activeCtx = { kind: 'home', id: String(id || window._openFolderId || window.__v3019HomeCustomId || '') };
+      var result = oldOpenHome.apply(this, arguments);
+      if (activeCtx.id) { window.__v3019HomeCustomId = activeCtx.id; window._pageToolCtx = null; }
+      return result;
+    };
+    openHome._baijidIconCtxV3 = true;
+    window.openMultiTool = openHome;
+  }
+
+  // When the three-dot editor opens, preload the selected toolbox's current icon.
+  var oldEdit = window.mtEditIcon;
+  window.mtEditIcon = function () {
+    var c = getCtx();
+    if (c) {
+      activeCtx = c;
+      if (c.kind === 'page') window._pageToolCtx = { pg: c.pg, n: c.n, key: c.key };
+      else { window._openFolderId = c.id; window.__v3019HomeCustomId = c.id; window._pageToolCtx = null; }
+    }
+    var result = typeof oldEdit === 'function' ? oldEdit.apply(this, arguments) : undefined;
+    c = getCtx() || c;
+    var field = document.getElementById('editMtIconInput');
+    var hint = document.getElementById('editMtIconHint');
+    if (field && c) {
+      var data = null;
+      if (c.kind === 'home') {
+        var folders = read(ROOT + '_home_folders_v2', []);
+        data = folders.find(function (f) { return String(f.id) === c.id; });
+      } else {
+        var found = getBox(c);
+        if (found) data = found.box;
+        else data = read(ROOT + '_page_tool_meta', {})[c.key] || {};
+      }
+      field.value = data ? (data.icon || (data.logo && !/^data:image\//i.test(data.logo) ? data.logo : '')) : '';
+      if (hint && data && data.logo && /^data:image\//i.test(data.logo)) hint.textContent = 'Custom image already saved';
+    }
+    window._pendingMtIconData = null;
+    return result;
+  };
+
+  // Read gallery images at document capture phase, compress them, and keep the
+  // resulting data URL until SAVE is pressed. Do not replace the real file input.
+  document.addEventListener('change', function (event) {
+    var input = event.target;
+    if (!input || input.id !== 'editMtIconFile') return;
+    var file = input.files && input.files[0];
+    if (!file) return;
+    // Stop the legacy uncompressed image handler from overwriting the compressed data URL.
+    event.stopImmediatePropagation();
+    if (!/^image\//i.test(file.type || '')) {
+      if (window.toastMsg) window.toastMsg('শুধু ছবি সিলেক্ট করুন', true);
+      return;
+    }
+    var hint = document.getElementById('editMtIconHint');
+    if (hint) hint.textContent = 'ছবি প্রস্তুত হচ্ছে…';
+    var reader = new FileReader();
+    reader.onerror = function () {
+      if (hint) hint.textContent = 'ছবি পড়া যায়নি';
+      if (window.toastMsg) window.toastMsg('ছবি পড়া যায়নি', true);
+    };
+    reader.onload = function () {
+      var img = new Image();
+      img.onerror = function () {
+        if (hint) hint.textContent = 'ছবি খোলা যায়নি';
+        if (window.toastMsg) window.toastMsg('ছবি খোলা যায়নি', true);
+      };
+      img.onload = function () {
+        try {
+          var max = 180, scale = Math.min(1, max / Math.max(img.naturalWidth || img.width, img.naturalHeight || img.height));
+          var canvas = document.createElement('canvas');
+          canvas.width = Math.max(1, Math.round((img.naturalWidth || img.width) * scale));
+          canvas.height = Math.max(1, Math.round((img.naturalHeight || img.height) * scale));
+          var cx = canvas.getContext('2d');
+          cx.drawImage(img, 0, 0, canvas.width, canvas.height);
+          var data = canvas.toDataURL('image/jpeg', 0.62);
+          if (!data || data.indexOf('data:image/jpeg') !== 0) throw new Error('Could not encode image');
+          window._pendingMtIconData = data;
+          var textField = document.getElementById('editMtIconInput');
+          if (textField) textField.value = '';
+          if (hint) hint.textContent = file.name + ' — ready, press SAVE';
+          if (window.toastMsg) window.toastMsg('ছবি প্রস্তুত হয়েছে — এখন SAVE চাপুন');
+        } catch (err) {
+          if (hint) hint.textContent = 'ছবি প্রস্তুত করা যায়নি';
+          if (window.toastMsg) window.toastMsg('ছবি প্রস্তুত করা যায়নি', true);
+        }
+      };
+      img.src = reader.result;
+    };
+    reader.readAsDataURL(file);
+    input.value = '';
+  }, true);
+
+  // Final SAVE handler: use the active box record, not the unrelated page metadata.
+  window.saveEditMt = function () {
+    var c = getCtx();
+    if (!c) {
+      if (window.toastMsg) window.toastMsg('Tool box পাওয়া যায়নি — আবার 3 ডট চাপুন', true);
+      return;
+    }
+    var pending = window._pendingMtIconData || '';
+    var field = document.getElementById('editMtIconInput');
+    var raw = String(field && field.value || '').trim();
+    var icon = '', logo = '';
+    if (pending) logo = pending;
+    else {
+      icon = normalizeIcon(raw);
+      if (!icon) {
+        if (/^https?:\/\//i.test(raw) || /^data:image\//i.test(raw)) logo = raw;
+        else {
+          if (window.toastMsg) window.toastMsg('ti ti-brand icon-এর সঠিক নাম লিখুন অথবা গ্যালারি থেকে ছবি দিন', true);
+          return;
+        }
+      }
+    }
+
+    if (c.kind === 'home') {
+      var folders = read(ROOT + '_home_folders_v2', []);
+      var folder = folders.find(function (f) { return String(f.id) === c.id; });
+      if (!folder) { if (window.toastMsg) window.toastMsg('Home tool box পাওয়া যায়নি', true); return; }
+      folder.logo = logo;
+      folder.icon = icon || '';
+      folder.customIcon = true;
+      if (!write(ROOT + '_home_folders_v2', folders)) return;
+      var checkHome = read(ROOT + '_home_folders_v2', []).find(function (f) { return String(f.id) === c.id; });
+      if (!checkHome || String(checkHome.logo || '') !== logo || String(checkHome.icon || '') !== icon) {
+        if (window.toastMsg) window.toastMsg('আইকন সেভ যাচাই করা যায়নি', true);
+        return;
+      }
+      if (typeof window.renderHomePins === 'function') window.renderHomePins();
+    } else if (String(c.n).indexOf('custom:') === 0) {
+      var found = getBox(c);
+      if (!found) { if (window.toastMsg) window.toastMsg('Platform/App tool box পাওয়া যায়নি', true); return; }
+      found.box.logo = logo;
+      found.box.icon = icon || '';
+      found.box.customIcon = true;
+      if (!write(found.key, found.arr)) return;
+      var verify = read(found.key, []).find(function (b) { return String(b.id) === found.id; });
+      if (!verify || String(verify.logo || '') !== logo || String(verify.icon || '') !== icon || !verify.customIcon) {
+        if (window.toastMsg) window.toastMsg('আইকন সেভ যাচাই করা যায়নি', true);
+        return;
+      }
+      if (typeof window.renderPageBoxes === 'function') window.renderPageBoxes(c.pg);
+      patchRenderedBoxCards(c.pg);
+    } else {
+      var metaKey = ROOT + '_page_tool_meta';
+      var allMeta = read(metaKey, {}), key = c.key || (c.pg + ':' + c.n);
+      var meta = allMeta[key] || {};
+      meta.logo = logo; meta.icon = icon || ''; meta.customIcon = true;
+      allMeta[key] = meta;
+      if (!write(metaKey, allMeta)) return;
+      var verifyMeta = read(metaKey, {})[key];
+      if (!verifyMeta || String(verifyMeta.logo || '') !== logo || String(verifyMeta.icon || '') !== icon) {
+        if (window.toastMsg) window.toastMsg('আইকন সেভ যাচাই করা যায়নি', true);
+        return;
+      }
+      if (c.pg === 'platform' && window.renderHardPlatforms) window.renderHardPlatforms();
+      if (c.pg === 'app' && window.renderHardApps) window.renderHardApps();
+    }
+
+    window._pendingMtIconData = null;
+    if (typeof window.closeEditMtModal === 'function') window.closeEditMtModal();
+    else { var modal = document.getElementById('editMtModal'); if (modal) { modal.classList.remove('open'); modal.style.display = 'none'; } }
+    if (window.toastMsg) window.toastMsg('Tool box icon saved');
+  };
+
+  // Every subsequent page-box render must use the saved custom icon instead of
+  // always drawing the four mini-side icons.
+  var oldRenderBoxes = window.renderPageBoxes;
+  if (typeof oldRenderBoxes === 'function' && !oldRenderBoxes._baijidIconRenderV3) {
+    var renderBoxes = function (pg) {
+      var result = oldRenderBoxes.apply(this, arguments);
+      if (pg === 'platform' || pg === 'app') patchRenderedBoxCards(pg);
+      return result;
+    };
+    renderBoxes._baijidIconRenderV3 = true;
+    window.renderPageBoxes = renderBoxes;
+  }
+  // Ensure currently visible cards also receive the right icon after page refresh.
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function () {
+      patchRenderedBoxCards('platform'); patchRenderedBoxCards('app');
+    }, { once: true });
+  } else {
+    patchRenderedBoxCards('platform'); patchRenderedBoxCards('app');
+  }
+})();
+</script>
+
+
+<script id="baijid-toolbox-icon-render-final-v4">
+(function(){
+ 'use strict';
+ if(window.__baijidToolboxIconRenderFinalV4)return;
+ window.__baijidToolboxIconRenderFinalV4=true;
+ var ROOT=document.title||'BAIJID', PREFIX=ROOT+'_v3007_';
+ function read(k,d){try{var v=JSON.parse(localStorage.getItem(k)||'null');return v==null?d:v;}catch(e){return d;}}
+ function esc(v){return String(v==null?'':v).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
+ function markup(b){
+   var logo=String(b.logo||'');
+   if(logo)return '<img src="'+esc(logo)+'" alt="" style="display:block;width:36px;height:36px;max-width:100%;max-height:100%;object-fit:contain;border-radius:9px">';
+   var ic=String(b.icon||'ti ti-apps').trim().replace(/\s+/g,' ');
+   if(/^ti-[\w-]+$/i.test(ic))ic='ti '+ic;
+   if(/^ti\s+ti-/i.test(ic))ic=ic.replace(/^ti\s+/i,'');
+   if(!/^ti\s+[\w-]+$/i.test(ic))ic='ti ti-apps';
+   return '<i class="'+esc(ic)+' plat-icon" style="display:block;font-size:34px;line-height:1"></i>';
+ }
+ function apply(pg){
+   var root=document.getElementById(pg==='platform'?'hardPlatforms':'hardApps');if(!root)return;
+   var arr=read(PREFIX+'boxes_'+pg,[]);if(!Array.isArray(arr))return;
+   root.querySelectorAll('.v3007-custom-box, [data-v3007-box]').forEach(function(card){
+     var id=card.getAttribute('data-v3007-box');if(!id)return;
+     var b=arr.find(function(x){return String(x.id)===String(id);});if(!b||!b.customIcon)return;
+     var host=card.querySelector('.plat-tool-icon');if(!host)return;
+     var desired=markup(b);
+     if(host.innerHTML!==desired){host.innerHTML=desired;}
+     host.style.setProperty('display','flex','important');
+     host.style.setProperty('align-items','center','important');
+     host.style.setProperty('justify-content','center','important');
+     host.style.setProperty('visibility','visible','important');
+   });
+ }
+ function applyAll(){apply('platform');apply('app');}
+ // Re-apply after every toolbox render, including renders triggered by other scripts.
+ ['renderPageBoxes','renderHardPlatforms','renderHardApps'].forEach(function(name){
+   var old=window[name];if(typeof old!=='function'||old.__iconV4Wrapped)return;
+   var wrapped=function(){var r=old.apply(this,arguments);var pg=(name==='renderHardPlatforms'?'platform':name==='renderHardApps'?'app':arguments[0]);if(pg==='platform'||pg==='app')apply(pg);else applyAll();return r;};
+   wrapped.__iconV4Wrapped=true;window[name]=wrapped;
+ });
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',applyAll,{once:true});else applyAll();
+ // MutationObserver catches cards recreated by page switching or late render scripts.
+ if(window.MutationObserver){
+   var obs=new MutationObserver(function(records){
+     var touched={platform:false,app:false};
+     records.forEach(function(r){var n=r.target&&r.target.nodeType===1?r.target:r.target&&r.target.parentElement;while(n&&n!==document){if(n.id==='hardPlatforms'){touched.platform=true;break;}if(n.id==='hardApps'){touched.app=true;break;}n=n.parentElement;}});
+     if(touched.platform)apply('platform');if(touched.app)apply('app');
+   });
+   function observe(){['hardPlatforms','hardApps'].forEach(function(id){var el=document.getElementById(id);if(el)obs.observe(el,{childList:true,subtree:true});});}
+   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',observe,{once:true});else observe();
+ }
+})();
+</script>
+
+
 
 
 <style id="baijid-home-anywhere-swipe-css">
@@ -17728,21 +18063,24 @@ setTimeout(init,0);
   if (window.__v3062PickerSearchInstalled) return;
   window.__v3062PickerSearchInstalled = true;
 
-  function applySearch() {
+  function norm(v) {
+    return String(v == null ? '' : v)
+      .normalize('NFKC')
+      .toLocaleLowerCase()
+      .replace(/\s+/g, ' ')
+      .trim();
+  }
+
+  function ensureSearch() {
     var panel = document.getElementById('v3057PickPanel');
     var head = document.getElementById('v3057PickHead');
-    var list = document.getElementById('v3057PickList');
-    if (!panel || !head || !list) return;
-
+    if (!panel || !head) return;
     var wrap = document.getElementById('v3057PickSearchWrap');
     if (!wrap) {
       wrap = document.createElement('div');
       wrap.id = 'v3057PickSearchWrap';
       wrap.innerHTML = '<input id="v3057PickSearch" type="search" placeholder="search tool" autocomplete="off" spellcheck="false" aria-label="Search tool">';
       panel.insertBefore(wrap, head);
-      var input = wrap.querySelector('input');
-      input.addEventListener('input', filterRows);
-      input.addEventListener('search', filterRows);
     }
   }
 
@@ -17750,16 +18088,28 @@ setTimeout(init,0);
     var input = document.getElementById('v3057PickSearch');
     var list = document.getElementById('v3057PickList');
     if (!input || !list) return;
-    var query = input.value.trim().toLocaleLowerCase();
-    var rows = Array.prototype.slice.call(list.querySelectorAll('.v3057-row'));
+    var query = norm(input.value);
+    var rows = list.querySelectorAll('.v3057-row');
     var matches = 0;
-    rows.forEach(function (row) {
-      var label = row.querySelector('span');
-      var name = label ? label.textContent.trim().toLocaleLowerCase() : '';
-      var show = !query || name.indexOf(query) !== -1;
-      row.style.display = show ? '' : 'none';
+
+    Array.prototype.forEach.call(rows, function (row) {
+      // The tool name is the direct child span after the icon.
+      var label = row.querySelector(':scope > span:not(.v3057-row-icon)');
+      if (!label) {
+        var spans = row.querySelectorAll(':scope > span');
+        for (var i = 0; i < spans.length; i++) {
+          if (!spans[i].classList.contains('v3057-row-icon')) {
+            label = spans[i];
+            break;
+          }
+        }
+      }
+      var name = norm(label ? label.textContent : '');
+      var show = query === '' || name.indexOf(query) !== -1;
+      row.style.setProperty('display', show ? 'flex' : 'none', 'important');
       if (show) matches++;
     });
+
     var empty = document.getElementById('v3057SearchNoMatch');
     if (!empty) {
       empty = document.createElement('div');
@@ -17768,20 +18118,23 @@ setTimeout(init,0);
       empty.style.cssText = 'display:none;padding:18px 12px;text-align:center;color:#ff1744;font:600 13px Rajdhani,sans-serif;letter-spacing:1.5px;';
       list.appendChild(empty);
     }
-    empty.style.display = (query && rows.length && matches === 0) ? 'block' : 'none';
+    empty.style.display = query && matches === 0 ? 'block' : 'none';
   }
 
+  // Delegated listeners survive if the picker panel/input is rebuilt.
+  document.addEventListener('input', function (e) {
+    if (e.target && e.target.id === 'v3057PickSearch') filterRows();
+  }, true);
+  document.addEventListener('keyup', function (e) {
+    if (e.target && e.target.id === 'v3057PickSearch') filterRows();
+  }, true);
+  document.addEventListener('search', function (e) {
+    if (e.target && e.target.id === 'v3057PickSearch') filterRows();
+  }, true);
+
   function watchPicker() {
-    var panel = document.getElementById('v3057PickPanel');
-    if (!panel) return;
-    applySearch();
-    var list = document.getElementById('v3057PickList');
-    if (list && !list.__v3062Observer && window.MutationObserver) {
-      list.__v3062Observer = new MutationObserver(function () {
-        filterRows();
-      });
-      list.__v3062Observer.observe(list, { childList: true, subtree: true });
-    }
+    ensureSearch();
+    filterRows();
   }
 
   if (document.readyState === 'loading') {
@@ -17789,19 +18142,285 @@ setTimeout(init,0);
   } else {
     watchPicker();
   }
+
   if (window.MutationObserver) {
-    new MutationObserver(function () {
-      if (document.getElementById('v3057PickOverlay')) watchPicker();
-    }).observe(document.documentElement, { childList: true, subtree: true });
+    var observer = new MutationObserver(function () {
+      if (document.getElementById('v3057PickOverlay')) {
+        ensureSearch();
+        filterRows();
+      }
+    });
+    observer.observe(document.documentElement, { childList: true, subtree: true });
   }
-  // Clear the previous query whenever the picker is opened again.
+
+  // Clear the old query only when the plus picker is opened.
   document.addEventListener('click', function (e) {
-    if (e.target && e.target.closest && e.target.closest('#mtGrid .mt-add-btn, #mtGrid .mt-page-add')) {
+    if (e.target && e.target.closest &&
+        e.target.closest('#mtGrid .mt-add-btn, #mtGrid .mt-page-add')) {
       setTimeout(function () {
         var input = document.getElementById('v3057PickSearch');
-        if (input) { input.value = ''; filterRows(); }
-      }, 80);
+        if (input) {
+          input.value = '';
+          filterRows();
+        }
+      }, 120);
     }
   }, true);
 })();
 </script>
+
+<style id="baijid-home-top-six-pins-responsive-fit">
+/* Keep all six Home top-row pins fully inside the available screen width. */
+html body #tab-home .pin-row-top {
+  display: grid !important;
+  grid-template-columns: repeat(6, minmax(0, 1fr)) !important;
+  column-gap: 4px !important;
+  width: 100% !important;
+  min-width: 0 !important;
+  box-sizing: border-box !important;
+  overflow: visible !important;
+}
+html body #tab-home .pin-row-top > .home-pin {
+  width: 100% !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+}
+html body #tab-home .pin-row-top > .home-pin > .home-pin-icon {
+  width: min(100%, 52px) !important;
+  height: auto !important;
+  aspect-ratio: 1 / 1 !important;
+  min-width: 0 !important;
+  min-height: 0 !important;
+  flex: 0 1 auto !important;
+  box-sizing: border-box !important;
+}
+html body #tab-home .pin-row-top > .home-pin > .home-pin-name {
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+  font-size: clamp(0.38rem, 2.1vw, 0.62rem) !important;
+  line-height: 1.1 !important;
+  text-align: center !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+}
+</style>
+
+
+<style id="baijid-toolbox-name-theme-color-final">
+  #v3070NewBox #v3070Name,
+  #baijidPlatformBoxRepair #bprName {
+    color:var(--a,#00e5ff) !important;
+    -webkit-text-fill-color:var(--a,#00e5ff) !important;
+    caret-color:var(--a,#00e5ff) !important;
+    font-weight:700 !important;
+  }
+  #v3070NewBox #v3070Name::placeholder,
+  #baijidPlatformBoxRepair #bprName::placeholder {
+    color:var(--a,#00e5ff) !important;
+    -webkit-text-fill-color:var(--a,#00e5ff) !important;
+    opacity:.58 !important;
+  }
+  #v3070NewBox #v3070Name:focus,
+  #baijidPlatformBoxRepair #bprName:focus {
+    border-color:var(--a,#00e5ff) !important;
+    outline:none !important;
+    box-shadow:0 0 0 2px color-mix(in srgb,var(--a,#00e5ff) 25%,transparent) !important;
+  }
+</style>
+
+<style id="baijid-page-toolbox-custom-icon-render-v5">
+  #hardPlatforms .plat-tool-card .plat-tool-icon,
+  #hardApps .plat-tool-card .plat-tool-icon {
+    display:flex !important; align-items:center !important; justify-content:center !important;
+  }
+  #hardPlatforms .plat-tool-card .plat-tool-icon > img,
+  #hardApps .plat-tool-card .plat-tool-icon > img {
+    display:block !important; width:36px !important; height:36px !important;
+    max-width:100% !important; max-height:100% !important; object-fit:contain !important;
+    border-radius:9px !important;
+  }
+  #hardPlatforms .plat-tool-card .plat-tool-icon > i,
+  #hardApps .plat-tool-card .plat-tool-icon > i {
+    display:block !important; font-size:34px !important; line-height:1 !important;
+  }
+</style>
+<script id="baijid-page-toolbox-custom-icon-render-v5">
+(function () {
+  'use strict';
+  if (window.__baijidPageToolboxCustomIconRenderV5) return;
+  window.__baijidPageToolboxCustomIconRenderV5 = true;
+
+  var ROOT = document.title || 'BAIJID';
+  var BOX_PREFIX = ROOT + '_v3007_';
+  var META_KEY = ROOT + '_page_tool_meta';
+
+  function read(key, fallback) {
+    try {
+      var value = JSON.parse(localStorage.getItem(key) || 'null');
+      return value == null ? fallback : value;
+    } catch (e) { return fallback; }
+  }
+  function esc(value) {
+    return String(value == null ? '' : value).replace(/[&<>"']/g, function (ch) {
+      return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch];
+    });
+  }
+  function normalizeTabler(value) {
+    var name = String(value || '').trim().replace(/\s+/g, ' ');
+    // Tabler's actual class pair is "ti ti-brand-...". Never strip its first "ti".
+    if (/^ti-[\w-]+$/i.test(name)) return 'ti ' + name;
+    if (/^ti\s+ti-[\w-]+$/i.test(name)) return name;
+    if (/^ti\s+[\w-]+$/i.test(name)) return name;
+    return '';
+  }
+  function iconMarkup(record) {
+    var logo = String(record && record.logo || '').trim();
+    if (logo && (/^data:image\//i.test(logo) || /^https?:\/\//i.test(logo))) {
+      return '<img src="' + esc(logo) + '" alt="">';
+    }
+    // Some older saves put the icon class in logo instead of icon.
+    var icon = normalizeTabler(record && record.icon) || normalizeTabler(logo);
+    if (!icon) icon = 'ti ti-apps';
+    return '<i class="' + esc(icon) + '"></i>';
+  }
+  function replaceIcon(host, record) {
+    if (!host || !record || !record.customIcon) return;
+    var html = iconMarkup(record);
+    if (host.getAttribute('data-bj-custom-icon') !== html) {
+      host.innerHTML = html;
+      host.setAttribute('data-bj-custom-icon', html);
+    }
+    host.style.setProperty('display', 'flex', 'important');
+    host.style.setProperty('align-items', 'center', 'important');
+    host.style.setProperty('justify-content', 'center', 'important');
+    host.style.setProperty('visibility', 'visible', 'important');
+  }
+  function applyCustomBoxes(pg, root) {
+    var boxes = read(BOX_PREFIX + 'boxes_' + pg, []);
+    if (!Array.isArray(boxes)) return;
+    root.querySelectorAll('.v3007-custom-box[data-v3007-box]').forEach(function (card) {
+      var id = card.getAttribute('data-v3007-box');
+      var record = boxes.find(function (item) { return String(item.id) === String(id); });
+      if (record) replaceIcon(card.querySelector('.plat-tool-icon'), record);
+    });
+  }
+  function applyBuiltInBoxes(pg, root) {
+    var meta = read(META_KEY, {});
+    if (!meta || typeof meta !== 'object') return;
+    root.querySelectorAll('.plat-tool-card[data-tool-page="' + pg + '"][data-tool-num]').forEach(function (card) {
+      var number = String(card.getAttribute('data-tool-num') || '');
+      var record = meta[pg + ':' + number];
+      if (record) replaceIcon(card.querySelector('.plat-tool-icon'), record);
+    });
+  }
+  function applyPage(pg) {
+    var root = document.getElementById(pg === 'platform' ? 'hardPlatforms' : 'hardApps');
+    if (!root) return;
+    applyCustomBoxes(pg, root);
+    applyBuiltInBoxes(pg, root);
+  }
+  function applyAll() { applyPage('platform'); applyPage('app'); }
+
+  // Ensure rendering occurs after the original page renderers have recreated cards.
+  ['renderHardPlatforms', 'renderHardApps', 'renderPageBoxes'].forEach(function (name) {
+    var original = window[name];
+    if (typeof original !== 'function' || original.__bjIconV5) return;
+    var wrapped = function () {
+      var result = original.apply(this, arguments);
+      var page = name === 'renderHardPlatforms' ? 'platform' :
+                 name === 'renderHardApps' ? 'app' : arguments[0];
+      if (page === 'platform' || page === 'app') applyPage(page);
+      else applyAll();
+      return result;
+    };
+    wrapped.__bjIconV5 = true;
+    window[name] = wrapped;
+  });
+
+  // The previous save handler stores built-in card icons in META_KEY and custom
+  // toolbox icons in BOX_PREFIX. Reapply after it finishes, without changing data.
+  var previousSave = window.saveEditMt;
+  if (typeof previousSave === 'function' && !previousSave.__bjIconV5) {
+    var save = function () {
+      var result = previousSave.apply(this, arguments);
+      applyAll();
+      setTimeout(applyAll, 80);
+      setTimeout(applyAll, 300);
+      return result;
+    };
+    save.__bjIconV5 = true;
+    window.saveEditMt = save;
+  }
+
+  function observeRoots() {
+    if (!window.MutationObserver) return;
+    ['hardPlatforms', 'hardApps'].forEach(function (id) {
+      var root = document.getElementById(id);
+      if (!root || root.__bjIconV5Observed) return;
+      root.__bjIconV5Observed = true;
+      var page = id === 'hardPlatforms' ? 'platform' : 'app';
+      var pending = false;
+      var observer = new MutationObserver(function () {
+        if (pending) return;
+        pending = true;
+        Promise.resolve().then(function () { pending = false; applyPage(page); });
+      });
+      observer.observe(root, { childList: true, subtree: true });
+    });
+  }
+  function init() { observeRoots(); applyAll(); }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init, {once:true});
+  else init();
+})();
+</script>
+
+<!-- BAIJID FINAL FIX: Platform/App toolbox 2x2 mini icons + full-bleed custom image -->
+<style id="baijid-platform-app-toolbox-icon-layout-final">
+  /* Four side icons stay in the same 2-by-2 layout as Home folder icons. */
+  html body #tab-platforms .plat-tool-card .plat-tool-icon:has(> .plat-tool-mini),
+  html body #tab-apps .plat-tool-card .plat-tool-icon:has(> .plat-tool-mini),
+  html body #hardPlatforms .plat-tool-card .plat-tool-icon:has(> .plat-tool-mini),
+  html body #hardApps .plat-tool-card .plat-tool-icon:has(> .plat-tool-mini) {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    grid-template-rows: repeat(2, minmax(0, 1fr)) !important;
+    gap: 2px !important;
+    padding: 4px !important;
+    align-items: stretch !important;
+    justify-items: stretch !important;
+    box-sizing: border-box !important;
+  }
+
+  /* A chosen image fills the small icon box edge-to-edge, without inner gaps. */
+  html body #tab-platforms .plat-tool-card .plat-tool-icon:has(> img),
+  html body #tab-apps .plat-tool-card .plat-tool-icon:has(> img),
+  html body #hardPlatforms .plat-tool-card .plat-tool-icon:has(> img),
+  html body #hardApps .plat-tool-card .plat-tool-icon:has(> img) {
+    display: flex !important;
+    padding: 0 !important;
+    gap: 0 !important;
+    overflow: hidden !important;
+    align-items: stretch !important;
+    justify-content: stretch !important;
+  }
+  html body #tab-platforms .plat-tool-card .plat-tool-icon > img,
+  html body #tab-apps .plat-tool-card .plat-tool-icon > img,
+  html body #hardPlatforms .plat-tool-card .plat-tool-icon > img,
+  html body #hardApps .plat-tool-card .plat-tool-icon > img {
+    display: block !important;
+    width: 100% !important;
+    height: 100% !important;
+    min-width: 0 !important;
+    min-height: 0 !important;
+    max-width: none !important;
+    max-height: none !important;
+    object-fit: cover !important;
+    border-radius: inherit !important;
+    flex: 1 1 100% !important;
+  }
+</style>
+</body>
+</html>
