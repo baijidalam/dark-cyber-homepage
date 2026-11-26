@@ -22894,3 +22894,25 @@ input.mt-pick-search,
   setTimeout(apply,500);setTimeout(apply,1500);
 })();
 </script>
+
+<!-- V3141: mobile-browser viewport fix for the Platform/App ADD NEW TOOL BOX picker (Brave) -->
+<style id="baijid-v3141-brave-toolbox-picker">
+  #v3105NewBox { align-items:center !important; padding:12px !important; overflow:hidden !important; }
+  #v3105NewBox > div { display:flex !important; flex-direction:column !important; width:min(100%,430px) !important; height:auto !important; max-height:calc(100vh - 24px) !important; max-height:calc(100dvh - 24px) !important; min-height:0 !important; overflow:hidden !important; }
+  #v3105NbList { flex:1 1 auto !important; height:auto !important; max-height:none !important; min-height:0 !important; overflow-y:auto !important; overscroll-behavior:contain !important; -webkit-overflow-scrolling:touch !important; }
+  #v3105NewBox > div > div:first-child, #v3105NewBox > div > div:nth-child(2), #v3105NewBox > div > div:nth-child(3), #v3105NewBox > div > div:last-child { flex-shrink:0 !important; }
+  #v3105NewBox > div > div:last-child { padding-bottom:max(14px, env(safe-area-inset-bottom)) !important; }
+  #v3105NbCreate { display:block !important; width:100% !important; }
+  @media (max-height:650px) { #v3105NewBox > div { max-height:calc(100vh - 16px) !important; max-height:calc(100dvh - 16px) !important; } }
+</style>
+<script id="baijid-v3141-brave-toolbox-picker-js">
+(function(){
+ 'use strict'; if(window.__baijidV3141)return; window.__baijidV3141=true;
+ function fix(){var ov=document.getElementById('v3105NewBox'); if(!ov)return; var inner=ov.firstElementChild,list=document.getElementById('v3105NbList');
+  ov.style.alignItems='center';ov.style.padding='12px';ov.style.overflow='hidden';
+  if(inner){inner.style.display='flex';inner.style.flexDirection='column';inner.style.maxHeight='calc(100dvh - 24px)';inner.style.maxHeight='calc(100vh - 24px)';inner.style.minHeight='0';inner.style.overflow='hidden';}
+  if(list){list.style.flex='1 1 auto';list.style.height='auto';list.style.maxHeight='none';list.style.minHeight='0';list.style.overflowY='auto';list.style.webkitOverflowScrolling='touch';}
+ }
+ var mo=new MutationObserver(fix);mo.observe(document.body,{childList:true,subtree:true});setTimeout(fix,300);setTimeout(fix,1000);setTimeout(fix,2000);
+})();
+</script>
