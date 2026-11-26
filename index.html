@@ -22867,3 +22867,30 @@ input.mt-pick-search,
   window.__bj3139ForceShowDefaults = forceShowDefaults;
 })();
 </script>
+
+<!-- V3140: keep ADD NEW TOOL BOX list limited to a 7-item scroll window; pin create button -->
+<style id="baijid-v3140-toolbox-picker-layout">
+#bjHomeNewBox > div { display:flex !important; flex-direction:column !important; max-height:84vh !important; min-height:0 !important; overflow:hidden !important; }
+#bjHnbList { flex:0 1 auto !important; height:min(560px, 58vh) !important; max-height:min(560px, 58vh) !important; min-height:0 !important; overflow-y:auto !important; overscroll-behavior:contain !important; }
+#bjHomeNewBox > div > div:first-child,
+#bjHomeNewBox > div > div:nth-child(2),
+#bjHomeNewBox > div > div:nth-child(3),
+#bjHomeNewBox > div > div:last-child { flex-shrink:0 !important; }
+#bjHnbCreate { display:block !important; position:relative !important; }
+@media (max-height:650px) { #bjHnbList { height:48vh !important; max-height:48vh !important; } }
+</style>
+<script id="baijid-v3140-toolbox-picker-layout-js">
+(function(){
+  'use strict';
+  if(window.__baijidV3140)return; window.__baijidV3140=true;
+  function apply(){
+    var ov=document.getElementById('bjHomeNewBox'); if(!ov)return;
+    var inner=ov.firstElementChild, list=document.getElementById('bjHnbList');
+    if(inner){inner.style.display='flex';inner.style.flexDirection='column';inner.style.maxHeight='84vh';inner.style.minHeight='0';inner.style.overflow='hidden';}
+    if(list){list.style.flex='0 1 auto';list.style.height='min(560px, 58vh)';list.style.maxHeight='min(560px, 58vh)';list.style.minHeight='0';list.style.overflowY='auto';}
+  }
+  var mo=new MutationObserver(apply);
+  mo.observe(document.body,{childList:true,subtree:true});
+  setTimeout(apply,500);setTimeout(apply,1500);
+})();
+</script>
