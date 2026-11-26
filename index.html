@@ -4434,22 +4434,6 @@ function copyTxt(){
 @-webkit-keyframes baijidUltraThinTitleLine { from { -webkit-transform: translateX(0); } to { -webkit-transform: translateX(350%); } }
 </style>
 
-
-<style id="v3142-exact-six-picker-fix">
-/* Fix the actual v3007 ADD NEW TOOL BOX dialog: keep the dialog in view and make only the picker list scroll. */
-#v3007NewBoxModal.v3007-modal.open{align-items:flex-start!important;justify-content:center!important;padding:8px 10px!important;overflow:hidden!important;}
-#v3007NewBoxModal .v3007-modal-panel{box-sizing:border-box!important;width:min(440px,100%)!important;max-height:calc(100dvh - 16px)!important;max-height:calc(100vh - 16px)!important;overflow:hidden!important;display:flex!important;flex-direction:column!important;gap:4px!important;margin:0 auto!important;}
-#v3007NewBoxModal .v3007-modal-panel h3,#v3007NewBoxModal .v3007-modal-panel label,#v3007NewBoxModal .v3007-modal-panel input,#v3007NewBoxModal #v3007ChooseItems{flex-shrink:0!important;}
-#v3007NewBoxModal #v3007BoxItems{box-sizing:border-box!important;display:block!important;flex:0 1 auto!important;height:auto!important;min-height:0!important;max-height:min(492px,calc(100dvh - 300px))!important;max-height:min(492px,calc(100vh - 300px))!important;overflow-y:auto!important;overscroll-behavior:contain!important;-webkit-overflow-scrolling:touch!important;margin:6px 0!important;padding:0!important;}
-#v3007NewBoxModal #v3007BoxItems .v3007-choice{box-sizing:border-box!important;min-height:82px!important;height:82px!important;margin:0!important;padding:10px 12px!important;}
-#v3007NewBoxModal .v3007-actions{flex-shrink:0!important;position:sticky!important;bottom:0!important;display:flex!important;gap:10px!important;background:#071321!important;padding-top:8px!important;margin-top:auto!important;z-index:2!important;}
-#v3007NewBoxModal .v3007-actions button{flex:1 1 0!important;margin-top:0!important;min-height:48px!important;}
-@media(max-height:650px){#v3007NewBoxModal .v3007-modal-panel{max-height:calc(100dvh - 12px)!important;max-height:calc(100vh - 12px)!important;}#v3007NewBoxModal #v3007BoxItems{max-height:calc(100dvh - 260px)!important;max-height:calc(100vh - 260px)!important;}}
-</style>
-<script id="v3142-picker-state-fix">
-(function(){function sync(){var m=document.getElementById('v3007NewBoxModal');if(!m)return;var p=m.querySelector('.v3007-modal-panel'),a=m.querySelector('#v3007BoxItems');if(p&&a)p.classList.toggle('list-open',a.dataset.open==='1'&&a.children.length>0);}var old=window.openNewPageToolBox; if(typeof old==='function'&&!old._v3142){window.openNewPageToolBox=function(){old.apply(this,arguments);sync();};window.openNewPageToolBox._v3142=true;}document.addEventListener('click',function(e){if(e.target.closest('#v3007ChooseItems'))setTimeout(sync,0);});})();
-</script>
-
 </body>
 </html>`, icon: "ti ti-copy" }, // #11
       { name: "QR", icon: "ti ti-qrcode", html: `<!DOCTYPE html>
@@ -4810,22 +4794,6 @@ async function shareQR() {
 @keyframes baijidUltraThinTitleLine { from { transform: translateX(0); } to { transform: translateX(350%); } }
 @-webkit-keyframes baijidUltraThinTitleLine { from { -webkit-transform: translateX(0); } to { -webkit-transform: translateX(350%); } }
 </style>
-
-
-<style id="v3142-exact-six-picker-fix">
-/* Fix the actual v3007 ADD NEW TOOL BOX dialog: keep the dialog in view and make only the picker list scroll. */
-#v3007NewBoxModal.v3007-modal.open{align-items:flex-start!important;justify-content:center!important;padding:8px 10px!important;overflow:hidden!important;}
-#v3007NewBoxModal .v3007-modal-panel{box-sizing:border-box!important;width:min(440px,100%)!important;max-height:calc(100dvh - 16px)!important;max-height:calc(100vh - 16px)!important;overflow:hidden!important;display:flex!important;flex-direction:column!important;gap:4px!important;margin:0 auto!important;}
-#v3007NewBoxModal .v3007-modal-panel h3,#v3007NewBoxModal .v3007-modal-panel label,#v3007NewBoxModal .v3007-modal-panel input,#v3007NewBoxModal #v3007ChooseItems{flex-shrink:0!important;}
-#v3007NewBoxModal #v3007BoxItems{box-sizing:border-box!important;display:block!important;flex:0 1 auto!important;height:auto!important;min-height:0!important;max-height:min(492px,calc(100dvh - 300px))!important;max-height:min(492px,calc(100vh - 300px))!important;overflow-y:auto!important;overscroll-behavior:contain!important;-webkit-overflow-scrolling:touch!important;margin:6px 0!important;padding:0!important;}
-#v3007NewBoxModal #v3007BoxItems .v3007-choice{box-sizing:border-box!important;min-height:82px!important;height:82px!important;margin:0!important;padding:10px 12px!important;}
-#v3007NewBoxModal .v3007-actions{flex-shrink:0!important;position:sticky!important;bottom:0!important;display:flex!important;gap:10px!important;background:#071321!important;padding-top:8px!important;margin-top:auto!important;z-index:2!important;}
-#v3007NewBoxModal .v3007-actions button{flex:1 1 0!important;margin-top:0!important;min-height:48px!important;}
-@media(max-height:650px){#v3007NewBoxModal .v3007-modal-panel{max-height:calc(100dvh - 12px)!important;max-height:calc(100vh - 12px)!important;}#v3007NewBoxModal #v3007BoxItems{max-height:calc(100dvh - 260px)!important;max-height:calc(100vh - 260px)!important;}}
-</style>
-<script id="v3142-picker-state-fix">
-(function(){function sync(){var m=document.getElementById('v3007NewBoxModal');if(!m)return;var p=m.querySelector('.v3007-modal-panel'),a=m.querySelector('#v3007BoxItems');if(p&&a)p.classList.toggle('list-open',a.dataset.open==='1'&&a.children.length>0);}var old=window.openNewPageToolBox; if(typeof old==='function'&&!old._v3142){window.openNewPageToolBox=function(){old.apply(this,arguments);sync();};window.openNewPageToolBox._v3142=true;}document.addEventListener('click',function(e){if(e.target.closest('#v3007ChooseItems'))setTimeout(sync,0);});})();
-</script>
 
 </body>
 </html>` }, // #12
@@ -10062,22 +10030,6 @@ if(typeof oldHomePick==='function'&&!oldHomePick._v3020Wrapped){var hp=function(
 
 
 
-
-<style id="v3142-exact-six-picker-fix">
-/* Fix the actual v3007 ADD NEW TOOL BOX dialog: keep the dialog in view and make only the picker list scroll. */
-#v3007NewBoxModal.v3007-modal.open{align-items:flex-start!important;justify-content:center!important;padding:8px 10px!important;overflow:hidden!important;}
-#v3007NewBoxModal .v3007-modal-panel{box-sizing:border-box!important;width:min(440px,100%)!important;max-height:calc(100dvh - 16px)!important;max-height:calc(100vh - 16px)!important;overflow:hidden!important;display:flex!important;flex-direction:column!important;gap:4px!important;margin:0 auto!important;}
-#v3007NewBoxModal .v3007-modal-panel h3,#v3007NewBoxModal .v3007-modal-panel label,#v3007NewBoxModal .v3007-modal-panel input,#v3007NewBoxModal #v3007ChooseItems{flex-shrink:0!important;}
-#v3007NewBoxModal #v3007BoxItems{box-sizing:border-box!important;display:block!important;flex:0 1 auto!important;height:auto!important;min-height:0!important;max-height:min(492px,calc(100dvh - 300px))!important;max-height:min(492px,calc(100vh - 300px))!important;overflow-y:auto!important;overscroll-behavior:contain!important;-webkit-overflow-scrolling:touch!important;margin:6px 0!important;padding:0!important;}
-#v3007NewBoxModal #v3007BoxItems .v3007-choice{box-sizing:border-box!important;min-height:82px!important;height:82px!important;margin:0!important;padding:10px 12px!important;}
-#v3007NewBoxModal .v3007-actions{flex-shrink:0!important;position:sticky!important;bottom:0!important;display:flex!important;gap:10px!important;background:#071321!important;padding-top:8px!important;margin-top:auto!important;z-index:2!important;}
-#v3007NewBoxModal .v3007-actions button{flex:1 1 0!important;margin-top:0!important;min-height:48px!important;}
-@media(max-height:650px){#v3007NewBoxModal .v3007-modal-panel{max-height:calc(100dvh - 12px)!important;max-height:calc(100vh - 12px)!important;}#v3007NewBoxModal #v3007BoxItems{max-height:calc(100dvh - 260px)!important;max-height:calc(100vh - 260px)!important;}}
-</style>
-<script id="v3142-picker-state-fix">
-(function(){function sync(){var m=document.getElementById('v3007NewBoxModal');if(!m)return;var p=m.querySelector('.v3007-modal-panel'),a=m.querySelector('#v3007BoxItems');if(p&&a)p.classList.toggle('list-open',a.dataset.open==='1'&&a.children.length>0);}var old=window.openNewPageToolBox; if(typeof old==='function'&&!old._v3142){window.openNewPageToolBox=function(){old.apply(this,arguments);sync();};window.openNewPageToolBox._v3142=true;}document.addEventListener('click',function(e){if(e.target.closest('#v3007ChooseItems'))setTimeout(sync,0);});})();
-</script>
-
 </body>
 
 </html>
@@ -14445,22 +14397,6 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
 })();
 </script>
 
-
-<style id="v3142-exact-six-picker-fix">
-/* Fix the actual v3007 ADD NEW TOOL BOX dialog: keep the dialog in view and make only the picker list scroll. */
-#v3007NewBoxModal.v3007-modal.open{align-items:flex-start!important;justify-content:center!important;padding:8px 10px!important;overflow:hidden!important;}
-#v3007NewBoxModal .v3007-modal-panel{box-sizing:border-box!important;width:min(440px,100%)!important;max-height:calc(100dvh - 16px)!important;max-height:calc(100vh - 16px)!important;overflow:hidden!important;display:flex!important;flex-direction:column!important;gap:4px!important;margin:0 auto!important;}
-#v3007NewBoxModal .v3007-modal-panel h3,#v3007NewBoxModal .v3007-modal-panel label,#v3007NewBoxModal .v3007-modal-panel input,#v3007NewBoxModal #v3007ChooseItems{flex-shrink:0!important;}
-#v3007NewBoxModal #v3007BoxItems{box-sizing:border-box!important;display:block!important;flex:0 1 auto!important;height:auto!important;min-height:0!important;max-height:min(492px,calc(100dvh - 300px))!important;max-height:min(492px,calc(100vh - 300px))!important;overflow-y:auto!important;overscroll-behavior:contain!important;-webkit-overflow-scrolling:touch!important;margin:6px 0!important;padding:0!important;}
-#v3007NewBoxModal #v3007BoxItems .v3007-choice{box-sizing:border-box!important;min-height:82px!important;height:82px!important;margin:0!important;padding:10px 12px!important;}
-#v3007NewBoxModal .v3007-actions{flex-shrink:0!important;position:sticky!important;bottom:0!important;display:flex!important;gap:10px!important;background:#071321!important;padding-top:8px!important;margin-top:auto!important;z-index:2!important;}
-#v3007NewBoxModal .v3007-actions button{flex:1 1 0!important;margin-top:0!important;min-height:48px!important;}
-@media(max-height:650px){#v3007NewBoxModal .v3007-modal-panel{max-height:calc(100dvh - 12px)!important;max-height:calc(100vh - 12px)!important;}#v3007NewBoxModal #v3007BoxItems{max-height:calc(100dvh - 260px)!important;max-height:calc(100vh - 260px)!important;}}
-</style>
-<script id="v3142-picker-state-fix">
-(function(){function sync(){var m=document.getElementById('v3007NewBoxModal');if(!m)return;var p=m.querySelector('.v3007-modal-panel'),a=m.querySelector('#v3007BoxItems');if(p&&a)p.classList.toggle('list-open',a.dataset.open==='1'&&a.children.length>0);}var old=window.openNewPageToolBox; if(typeof old==='function'&&!old._v3142){window.openNewPageToolBox=function(){old.apply(this,arguments);sync();};window.openNewPageToolBox._v3142=true;}document.addEventListener('click',function(e){if(e.target.closest('#v3007ChooseItems'))setTimeout(sync,0);});})();
-</script>
-
 </body>
 </html>
 <style id="baijid-music-controls-final-fix">
@@ -15711,22 +15647,6 @@ html body #tab-home .pin-row-top > .home-pin > .home-pin-name {
  var observer=new MutationObserver(function(){var overlay=document.getElementById('mtPickOverlay');if(overlay&&overlay.classList.contains('open')){ensurePicker();filterRows();}});
  if(document.documentElement)observer.observe(document.documentElement,{childList:true,subtree:true});
 })();
-</script>
-
-
-<style id="v3142-exact-six-picker-fix">
-/* Fix the actual v3007 ADD NEW TOOL BOX dialog: keep the dialog in view and make only the picker list scroll. */
-#v3007NewBoxModal.v3007-modal.open{align-items:flex-start!important;justify-content:center!important;padding:8px 10px!important;overflow:hidden!important;}
-#v3007NewBoxModal .v3007-modal-panel{box-sizing:border-box!important;width:min(440px,100%)!important;max-height:calc(100dvh - 16px)!important;max-height:calc(100vh - 16px)!important;overflow:hidden!important;display:flex!important;flex-direction:column!important;gap:4px!important;margin:0 auto!important;}
-#v3007NewBoxModal .v3007-modal-panel h3,#v3007NewBoxModal .v3007-modal-panel label,#v3007NewBoxModal .v3007-modal-panel input,#v3007NewBoxModal #v3007ChooseItems{flex-shrink:0!important;}
-#v3007NewBoxModal #v3007BoxItems{box-sizing:border-box!important;display:block!important;flex:0 1 auto!important;height:auto!important;min-height:0!important;max-height:min(492px,calc(100dvh - 300px))!important;max-height:min(492px,calc(100vh - 300px))!important;overflow-y:auto!important;overscroll-behavior:contain!important;-webkit-overflow-scrolling:touch!important;margin:6px 0!important;padding:0!important;}
-#v3007NewBoxModal #v3007BoxItems .v3007-choice{box-sizing:border-box!important;min-height:82px!important;height:82px!important;margin:0!important;padding:10px 12px!important;}
-#v3007NewBoxModal .v3007-actions{flex-shrink:0!important;position:sticky!important;bottom:0!important;display:flex!important;gap:10px!important;background:#071321!important;padding-top:8px!important;margin-top:auto!important;z-index:2!important;}
-#v3007NewBoxModal .v3007-actions button{flex:1 1 0!important;margin-top:0!important;min-height:48px!important;}
-@media(max-height:650px){#v3007NewBoxModal .v3007-modal-panel{max-height:calc(100dvh - 12px)!important;max-height:calc(100vh - 12px)!important;}#v3007NewBoxModal #v3007BoxItems{max-height:calc(100dvh - 260px)!important;max-height:calc(100vh - 260px)!important;}}
-</style>
-<script id="v3142-picker-state-fix">
-(function(){function sync(){var m=document.getElementById('v3007NewBoxModal');if(!m)return;var p=m.querySelector('.v3007-modal-panel'),a=m.querySelector('#v3007BoxItems');if(p&&a)p.classList.toggle('list-open',a.dataset.open==='1'&&a.children.length>0);}var old=window.openNewPageToolBox; if(typeof old==='function'&&!old._v3142){window.openNewPageToolBox=function(){old.apply(this,arguments);sync();};window.openNewPageToolBox._v3142=true;}document.addEventListener('click',function(e){if(e.target.closest('#v3007ChooseItems'))setTimeout(sync,0);});})();
 </script>
 
 </body>
@@ -17940,7 +17860,7 @@ html body #tab-home .pin-row-top > .home-pin > .home-pin-name {
     ov.id = 'v3105NewBox';
     ov.style.cssText = 'display:none;position:fixed;inset:0;z-index:2147483600;background:rgba(0,0,0,.72);backdrop-filter:blur(10px);align-items:flex-start;justify-content:center;padding:max(6vh,20px) 12px 18px;box-sizing:border-box;';
     ov.innerHTML =
-      '<div style="width:min(100%,430px);max-height:84vh;overflow:hidden;display:flex;flex-direction:column;background:rgba(12,14,22,.97);border:1px solid rgba(255,255,255,.12);border-radius:20px;box-shadow:0 20px 60px rgba(0,0,0,.7);">' +
+      '<div style="width:min(100%,430px);max-height:70vh;overflow:hidden;display:flex;flex-direction:column;background:rgba(12,14,22,.97);border:1px solid rgba(255,255,255,.12);border-radius:20px;box-shadow:0 20px 60px rgba(0,0,0,.7);">' +
         '<div style="display:flex;align-items:center;justify-content:space-between;padding:14px 14px 8px;gap:8px;">' +
           '<span style="font-family:Orbitron,monospace;font-size:.68rem;letter-spacing:1.5px;color:var(--a,#ff0033);">ADD NEW TOOL BOX</span>' +
           '<button type="button" id="v3105NbClose" style="width:34px;height:34px;border-radius:10px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.08);color:#fff;font-size:18px;cursor:pointer;">×</button>' +
@@ -19149,7 +19069,7 @@ html body .home-pin.bj-assigned-hidden {
     ov.id = 'bjHomeNewBox';
     ov.style.cssText = 'display:none;position:fixed;inset:0;z-index:2147483645;background:rgba(0,0,0,.72);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);align-items:flex-start;justify-content:center;padding:max(6vh,20px) 12px 18px;box-sizing:border-box;';
     ov.innerHTML =
-      '<div style="width:min(100%,430px);max-height:84vh;overflow:hidden;display:flex;flex-direction:column;background:rgba(12,14,22,.97);border:1px solid rgba(255,255,255,.12);border-radius:20px;box-shadow:0 20px 60px rgba(0,0,0,.7);">' +
+      '<div style="width:min(100%,430px);max-height:70vh;overflow:hidden;display:flex;flex-direction:column;background:rgba(12,14,22,.97);border:1px solid rgba(255,255,255,.12);border-radius:20px;box-shadow:0 20px 60px rgba(0,0,0,.7);">' +
         '<div style="display:flex;align-items:center;justify-content:space-between;padding:14px 14px 8px;gap:8px;">' +
           '<span style="font-family:Orbitron,monospace;font-size:.68rem;letter-spacing:1.5px;color:var(--a,#ff0033);">ADD NEW TOOL BOX</span>' +
           '<button type="button" id="bjHnbClose" style="width:34px;height:34px;border-radius:10px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.08);color:#fff;font-size:18px;cursor:pointer;">×</button>' +
@@ -22950,7 +22870,7 @@ input.mt-pick-search,
 
 <!-- V3140: keep ADD NEW TOOL BOX list limited to a 7-item scroll window; pin create button -->
 <style id="baijid-v3140-toolbox-picker-layout">
-#bjHomeNewBox > div { display:flex !important; flex-direction:column !important; max-height:84vh !important; min-height:0 !important; overflow:hidden !important; }
+#bjHomeNewBox > div { display:flex !important; flex-direction:column !important; max-height:70vh !important; min-height:0 !important; overflow:hidden !important; }
 #bjHnbList { flex:0 1 auto !important; height:min(560px, 58vh) !important; max-height:min(560px, 58vh) !important; min-height:0 !important; overflow-y:auto !important; overscroll-behavior:contain !important; }
 #bjHomeNewBox > div > div:first-child,
 #bjHomeNewBox > div > div:nth-child(2),
@@ -22972,62 +22892,5 @@ input.mt-pick-search,
   var mo=new MutationObserver(apply);
   mo.observe(document.body,{childList:true,subtree:true});
   setTimeout(apply,500);setTimeout(apply,1500);
-})();
-</script>
-
-<!-- V3142: six-item picker window, create button pinned, top-aligned for mobile browsers -->
-<style id="baijid-v3142-toolbox-picker">
-  #v3105NewBox { align-items:flex-start !important; justify-content:center !important; padding:4px 8px 8px !important; overflow:hidden !important; }
-  #v3105NewBox > div { display:flex !important; flex-direction:column !important; width:min(100%,430px) !important; max-height:calc(100vh - 12px) !important; max-height:calc(100dvh - 12px) !important; min-height:0 !important; overflow:hidden !important; margin:0 auto !important; }
-  #v3105NbList { flex:0 1 auto !important; height:min(600px, 60vh) !important; max-height:min(600px, 60vh) !important; min-height:0 !important; overflow-y:auto !important; overscroll-behavior:contain !important; -webkit-overflow-scrolling:touch !important; }
-  #v3105NewBox > div > div:first-child, #v3105NewBox > div > div:nth-child(2), #v3105NewBox > div > div:nth-child(3), #v3105NewBox > div > div:last-child { flex-shrink:0 !important; }
-  #v3105NewBox > div > div:last-child { padding-bottom:max(10px, env(safe-area-inset-bottom)) !important; }
-  #v3105NbCreate { display:block !important; width:100% !important; flex-shrink:0 !important; }
-  @media (max-height:700px) { #v3105NewBox > div { max-height:calc(100dvh - 8px) !important; max-height:calc(100vh - 8px) !important; } #v3105NbList { height:52vh !important; max-height:52vh !important; } }
-</style>
-<script id="baijid-v3142-toolbox-picker-js">
-(function(){
- 'use strict'; if(window.__baijidV3142)return; window.__baijidV3142=true;
- function fix(){var ov=document.getElementById('v3105NewBox'); if(!ov)return; var inner=ov.firstElementChild,list=document.getElementById('v3105NbList');
-  ov.style.alignItems='flex-start';ov.style.justifyContent='center';ov.style.padding='4px 8px 8px';ov.style.overflow='hidden';
-  if(inner){inner.style.display='flex';inner.style.flexDirection='column';inner.style.maxHeight='calc(100vh - 12px)';inner.style.maxHeight='calc(100dvh - 12px)';inner.style.minHeight='0';inner.style.overflow='hidden';inner.style.margin='0 auto';}
-  if(list){list.style.flex='0 1 auto';list.style.height='min(600px, 60vh)';list.style.maxHeight='min(600px, 60vh)';list.style.minHeight='0';list.style.overflowY='auto';list.style.webkitOverflowScrolling='touch';}
- }
- var mo=new MutationObserver(fix);mo.observe(document.body,{childList:true,subtree:true});setTimeout(fix,300);setTimeout(fix,1000);setTimeout(fix,2000);
-})();
-</script>
-
-<!-- V3143: fixed viewport picker, exactly six visible rows then pinned create button -->
-<style id="baijid-v3143-six-row-picker">
- #v3105NewBox{align-items:flex-start!important;justify-content:center!important;padding:2px 8px max(6px,env(safe-area-inset-bottom))!important;overflow:hidden!important;}
- #v3105NewBox > div{box-sizing:border-box!important;width:min(100%,430px)!important;max-height:calc(100vh - 4px)!important;max-height:calc(100dvh - 4px)!important;min-height:0!important;overflow:hidden!important;margin:0 auto!important;border-radius:20px!important;}
- #v3105NbList{box-sizing:border-box!important;flex:0 1 auto!important;height:504px!important;max-height:504px!important;min-height:0!important;overflow-y:auto!important;overscroll-behavior:contain!important;-webkit-overflow-scrolling:touch!important;}
- #v3105NbList .v3105-nb-row{box-sizing:border-box!important;height:76px!important;min-height:76px!important;max-height:76px!important;flex:0 0 76px!important;padding:9px 10px!important;}
- #v3105NbCreate{width:100%!important;display:block!important;flex-shrink:0!important;}
- #v3105NewBox > div > div:last-child{flex-shrink:0!important;padding-bottom:max(10px,env(safe-area-inset-bottom))!important;}
-</style>
-<script id="baijid-v3143-six-row-picker-js">
-(function(){'use strict';if(window.__baijidV3143)return;window.__baijidV3143=true;
- function fix(){
-  var ov=document.getElementById('v3105NewBox');if(!ov)return;
-  var panel=ov.firstElementChild,list=document.getElementById('v3105NbList');if(!panel||!list)return;
-  var vv=window.visualViewport, vh=vv&&vv.height?vv.height:window.innerHeight;
-  ov.style.position='fixed';ov.style.inset='0';ov.style.padding='2px 8px max(6px,env(safe-area-inset-bottom))';ov.style.alignItems='flex-start';ov.style.justifyContent='center';ov.style.overflow='hidden';
-  panel.style.boxSizing='border-box';panel.style.width='min(100%,430px)';panel.style.maxHeight=Math.max(180,vh-4)+'px';panel.style.minHeight='0';panel.style.overflow='hidden';panel.style.display='flex';panel.style.flexDirection='column';panel.style.margin='0 auto';
-  list.style.flex='0 1 auto';list.style.height='auto';list.style.maxHeight='540px';list.style.minHeight='0';list.style.overflowY='auto';list.style.webkitOverflowScrolling='touch';
-  // Limit list viewport to six rows, but shrink it if the keyboard reduces the visible viewport.
-  var rows=list.querySelectorAll('.v3105-nb-row');var rowH=76,gap=6;
-  if(rows.length&&rows[0].offsetHeight>0)rowH=Math.max(70,Math.min(76,rows[0].offsetHeight));
-  var sixH=6*76+5*6+18; // exactly six row slots: 504px including gaps and list padding
-  var fixed=0;Array.prototype.forEach.call(panel.children,function(el){if(el!==list)fixed+=el.getBoundingClientRect().height;});
-  var available=Math.max(100,vh-fixed-8);
-  list.style.maxHeight=Math.min(sixH,available)+'px';list.style.height=Math.min(sixH,available)+'px';
-  // Ensure footer is not pushed off-screen by long content or keyboard.
-  var footer=panel.lastElementChild;if(footer){footer.style.flexShrink='0';}
- }
- var mo=new MutationObserver(fix);mo.observe(document.body,{childList:true,subtree:true});
- window.addEventListener('resize',fix,{passive:true});window.addEventListener('orientationchange',fix,{passive:true});
- if(window.visualViewport){window.visualViewport.addEventListener('resize',fix,{passive:true});window.visualViewport.addEventListener('scroll',fix,{passive:true});}
- setTimeout(fix,100);setTimeout(fix,350);setTimeout(fix,900);setTimeout(fix,1800);
 })();
 </script>
